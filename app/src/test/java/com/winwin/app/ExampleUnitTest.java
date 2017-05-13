@@ -1,4 +1,4 @@
-package com.winwin.winwin;
+package com.winwin.app;
 
 import org.junit.Test;
 

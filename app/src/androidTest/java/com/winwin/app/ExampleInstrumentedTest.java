@@ -1,4 +1,4 @@
-package com.winwin.winwin;
+package com.winwin.app;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
