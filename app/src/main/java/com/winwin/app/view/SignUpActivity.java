@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,17 +24,22 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.winwin.app.R;
+import com.winwin.app.util.PhoneUtils;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -59,17 +66,47 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     private UserSignUpTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
+    private ImageView mBackgroundImageView;
+    private AutoCompleteTextView mPhoneView;
     private EditText mPasswordView;
+    private TextView mCodeView;
     private View mProgressView;
     private View mLoginFormView;
+
+    // timer
+    CountDownTimer timer = new CountDownTimer(60000, 1000) {
+        @Override
+        public void onTick(long l) {
+            mCodeView.setEnabled(false );
+            mCodeView.setText("剩余" + l / 1000 + "秒");
+        }
+
+        @Override
+        public void onFinish() {
+            mCodeView.setEnabled(true);
+            mCodeView.setText("获取验证码");
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);// 设置全屏
+
+        mBackgroundImageView = (ImageView) findViewById(R.id.login_background_image);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation animation= AnimationUtils.loadAnimation(SignUpActivity.this, R.anim.login_background_translate_anim);
+                mBackgroundImageView.startAnimation(animation);
+            }
+        },1000);
+
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.phone);
+        mPhoneView = (AutoCompleteTextView) findViewById(R.id.phone);
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -81,6 +118,14 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
                     return true;
                 }
                 return false;
+            }
+        });
+
+        mCodeView = (TextView) findViewById(R.id.get_code_textview);
+        mCodeView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timer.start();
             }
         });
 
@@ -112,7 +157,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(mPhoneView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
@@ -151,31 +196,37 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         }
 
         // Reset errors.
-        mEmailView.setError(null);
+        mPhoneView.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        String phone = mPhoneView.getText().toString();
+        String code = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (!TextUtils.isEmpty(code) && !isPasswordValid(code)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
         }
 
         // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+        if (TextUtils.isEmpty(phone)) {
+            mPhoneView.setError(getString(R.string.error_field_required));
+            focusView = mPhoneView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+        } else if (!isPhoneValid(phone)) {
+            mPhoneView.setError(getString(R.string.error_invalid_phone));
+            focusView = mPhoneView;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(code)) {
+            mPasswordView.setError(getString(R.string.error_field_required_code));
+            focusView = mPasswordView;
             cancel = true;
         }
 
@@ -187,14 +238,13 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserSignUpTask(email, password);
+            mAuthTask = new UserSignUpTask(phone, code);
             mAuthTask.execute((Void) null);
         }
     }
 
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
+    private boolean isPhoneValid(String phone) {
+        return PhoneUtils.isMobile(phone);
     }
 
     private boolean isPasswordValid(String password) {
@@ -278,7 +328,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
                 new ArrayAdapter<>(SignUpActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
-        mEmailView.setAdapter(adapter);
+        mPhoneView.setAdapter(adapter);
     }
 
 
@@ -298,11 +348,11 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
      */
     public class UserSignUpTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
+        private final String mPhone;
         private final String mPassword;
 
         UserSignUpTask(String email, String password) {
-            mEmail = email;
+            mPhone = email;
             mPassword = password;
         }
 
@@ -319,7 +369,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
 
             for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
+                if (pieces[0].equals(mPhone)) {
                     // Account exists, return true if the password matches.
                     return pieces[1].equals(mPassword);
                 }
