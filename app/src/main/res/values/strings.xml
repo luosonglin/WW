@@ -18,5 +18,6 @@
     <string name="error_invalid_phone">手机号格式不正确</string>
 
     <string name="confirm">确定</string>
+    <string name="title_activity_sign_up">Sign up</string>
 
 </resources>
