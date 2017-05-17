@@ -25,7 +25,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -74,6 +73,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     private TextView mSignUpView;
+    private TextView mForgetPasswordView;
 
     /**
      * print some tag in log.
@@ -134,7 +134,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mSignUpView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+//                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
                 startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+            }
+        });
+
+        mForgetPasswordView = (TextView) findViewById(R.id.forget_password_textview);
+        mForgetPasswordView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, ForgetPasswordActivity.class));
             }
         });
     }
