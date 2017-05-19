@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="28dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="40dp"
             android:text="设置"
             android:textColor="@color/black"
             android:textSize="40sp"
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="28dp"
-            android:layout_marginTop="136dp"
+            android:layout_marginTop="106dp"
             android:text="请设置头像和姓名\n进行登陆"
             android:textColor="@color/black"
             android:textSize="14sp" />
@@ -45,7 +45,7 @@
                 android:id="@+id/email_login_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="76dp"
+                android:layout_marginTop="36dp"
                 android:orientation="vertical">
 
                 <ImageView

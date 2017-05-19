@@ -91,8 +91,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         setContentView(R.layout.activity_login);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);// 设置全屏
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);// 设置全屏
 
         mBackgroundImageView = (ImageView) findViewById(R.id.login_background_image);
         new Handler().postDelayed(new Runnable() {
