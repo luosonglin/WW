@@ -66,8 +66,12 @@ public class ListvViewActivity extends AppCompatActivity implements BaseQuickAda
         //设置下拉刷新监听
         springView.setListener(this);
         //设置下拉刷新样式
-        springView.setHeader(new RotationHeader(this));
-        //springView.setFooter(new RotationFooter(this));mRecyclerView内部集成的自动加载  上啦加载用不上   在其他View使用
+        springView.setType(SpringView.Type.FOLLOW);
+        springView.setHeader(new DefaultHeader(this));
+//        springView.setFooter(new DefaultFooter(this));
+//        springView.setHeader(new RotationHeader(this));
+//        springView.setFooter(new RotationFooter(this)); //mRecyclerView内部集成的自动加载  上啦加载用不上   在其他View使用
+
         progress = (ProgressActivity) findViewById(R.id.progress);
         //设置RecyclerView的显示模式  当前List模式
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));

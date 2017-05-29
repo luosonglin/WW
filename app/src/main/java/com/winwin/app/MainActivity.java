@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.winwin.app.UI.ListvView.ListvViewActivity;
+import com.winwin.app.UI.MineView.MineFragment;
 import com.winwin.app.UI.entity.BookListDto;
 import com.winwin.app.view.BlankFragment;
 import com.winwin.app.view.IndexFragment;
@@ -28,7 +29,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
-        implements IndexFragment.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener{
+        implements IndexFragment.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, MineFragment.OnFragmentInteractionListener{
 
     @Bind(R.id.container)
     FrameLayout container;
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity
     private IndexFragment mIndexFragment;
     private BlankFragment mMeetingFragment;
     private BlankFragment mcustomerFragment;
-    private BlankFragment mMineFragment;
+    private MineFragment mMineFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity
             mIndexFragment = (IndexFragment) mFragmentManager.findFragmentByTag(TAB_INDEX_TAG);
             mMeetingFragment = (BlankFragment) mFragmentManager.findFragmentByTag(TAB_ROOM_TAG);
             mcustomerFragment = (BlankFragment) mFragmentManager.findFragmentByTag(TAB_CUSTOMER_TAG);
-            mMineFragment = (BlankFragment) mFragmentManager.findFragmentByTag(TAB_MINE_TAG);
+            mMineFragment = (MineFragment) mFragmentManager.findFragmentByTag(TAB_MINE_TAG);
         }
         setTabSelection(tabIndex);
     }
@@ -194,7 +195,7 @@ public class MainActivity extends AppCompatActivity
                 tabMineImg.setImageResource(R.mipmap.tab5_b);
                 tabMineTitle.setTextColor(activeColorRecourse);
                 if (mMineFragment == null) {
-                    mMineFragment = new BlankFragment();
+                    mMineFragment = new MineFragment();
                     fragmentTransaction.add(R.id.container, mMineFragment, TAB_MINE_TAG);
                 } else {
                     fragmentTransaction.show(mMineFragment);
@@ -251,39 +252,16 @@ public class MainActivity extends AppCompatActivity
         Intent intent;
         switch (position) {
             case 0:
-                intent = new Intent(MainActivity.this, ListvViewActivity.class);
-                startActivity(intent);
                 break;
             case 1:
+                break;
+            case 2:
+                intent = new Intent(MainActivity.this, ListvViewActivity.class);
+                startActivity(intent);break;
+            case 3:
                 // 唤出RecoveryActivity
                 BookListDto bookListDto=null;
                 Toast.makeText(MainActivity.this, bookListDto.getBookName(), Toast.LENGTH_SHORT).show();
-
-//                String confirmNumber = "";
-//                final String TAG_CARD = "002";
-//                try {
-//                    if (!DBUtils.isSet(MainActivity.this, "tokenId") && !DBUtils.isSet(MainActivity.this, "openId")) {
-//                        Intent loginIntent = new Intent(MainActivity.this, SignUpByPhoneCodeActivity.class);
-//                        int requestCode = 2;
-//                        startActivityForResult(loginIntent, requestCode);
-//                        return;
-//                    }
-//                    confirmNumber = DBUtils.get(MainActivity.this, "confirmNumber");
-//                } catch (SnappydbException e) {
-//                    e.printStackTrace();
-//                }
-//                Intent intent2 = new Intent(MainActivity.this, MyBusinessCardActivity.class);
-//                Bundle bundle2 = new Bundle();
-//                bundle2.putString("confirmNumber", confirmNumber);
-//                bundle2.putString("card_type", TAG_CARD);
-//                intent2.putExtras(bundle2);
-//                startActivity(intent2);
-                break;
-            case 2:
-//                startActivity(new Intent(MainActivity.this, SendBlogActivity.class));
-                break;
-            case 3:
-//                startActivity(new Intent(MainActivity.this, SendAidsCaseActivity.class));
                 break;
             case 4:
 //                startActivity(new Intent(MainActivity.this, WalletActivity.class));
