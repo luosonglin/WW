@@ -4,11 +4,25 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.winwin.app.R;
+import com.winwin.app.UI.Adapter.LatestRecommendationAdapter;
+import com.winwin.app.UI.Adapter.SelectedParkAdapter;
+import com.winwin.app.widget.GlideImageLoader;
+import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerClickListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +41,13 @@ public class IndexFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private Banner mBanner;
+    private RecyclerView mRecyclerView;
+    private List<String> bannerImages = new ArrayList<>();
+    private SelectedParkAdapter mSelectedParkAdapter;
+    private RecyclerView mRecyclerView2;
+    private LatestRecommendationAdapter mLatestRecommendationAdapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -67,8 +88,53 @@ public class IndexFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_index, container, false);
 
+        mBanner = (Banner) view.findViewById(R.id.banner);
+        //test data
+        bannerImages.add("http://wx1.sinaimg.cn/mw1024/a601622bgy1fdl511w7f5j20dv0aqgm1.jpg");
+        bannerImages.add("http://wx1.sinaimg.cn/mw1024/a601622bly1fbdk9hstbmj20qo0qodja.jpg");
+        bannerImages.add("http://ww4.sinaimg.cn/mw1024/a601622bgw1f8xr5r8n2gj20ku0go0tu.jpg");
+        bannerImages.add("http://ww4.sinaimg.cn/mw1024/a601622bgw1f8ro576rmkj20qy0zktb4.jpg");
+        mBanner.setImages(bannerImages != null ? bannerImages : null)
+                .setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
+//                .setBannerTitles(bannerTitles)
+                .setBannerAnimation(Transformer.Tablet)
+                .setImageLoader(new GlideImageLoader()).start();
+        mBanner.setOnBannerClickListener(new OnBannerClickListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Log.e("--", "点击：" + position + "");
+            }
+        });
 
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
+        //设置布局管理器
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        //如果Item高度固定  增加该属性能够提高效率
+        mRecyclerView.setHasFixedSize(true);
+        // test data
+        mSelectedParkAdapter = new SelectedParkAdapter(R.layout.item_index_fragment_selected_park, bannerImages);
+        //设置加载动画
+        mSelectedParkAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
+        //设置是否自动加载以及加载个数
+        mSelectedParkAdapter.openLoadMore(6,true);
+        //将适配器添加到RecyclerView
+        mRecyclerView.setAdapter(mSelectedParkAdapter);
 
+        mRecyclerView2 = (RecyclerView) view.findViewById(R.id.rv_list2);
+        //设置布局管理器
+        mRecyclerView2.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //如果Item高度固定  增加该属性能够提高效率
+        mRecyclerView2.setHasFixedSize(true);
+        // test data
+        mLatestRecommendationAdapter = new LatestRecommendationAdapter(R.layout.item_index_fragment_latest_recommendation, bannerImages);
+        //设置加载动画
+        mLatestRecommendationAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_CUSTOM);
+        //设置是否自动加载以及加载个数
+        mLatestRecommendationAdapter.openLoadMore(6,true);
+        //将适配器添加到RecyclerView
+        mRecyclerView2.setAdapter(mLatestRecommendationAdapter);
 
         return view;
     }

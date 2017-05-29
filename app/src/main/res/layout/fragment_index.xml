@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="com.winwin.app.view.IndexFragment">
 
@@ -14,7 +15,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/plus"
+            android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -28,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@mipmap/index_search_btn"/>
+            android:src="@mipmap/index_search_btn" />
 
         <ImageView
             android:layout_width="22dp"
@@ -36,26 +37,311 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="12dp"
-            android:src="@mipmap/index_community_btn"/>
+            android:src="@mipmap/index_community_btn" />
     </RelativeLayout>
 
     <View
-        android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="#cccbcc" />
 
-    <!--<com.shizhefei.view.coolrefreshview.CoolRefreshView-->
-        <!--android:id="@+id/recyclerview_funnyRefreshView"-->
-        <!--android:background="@color/white"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-        <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:id="@+id/recyclerview_recyclerView"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="#fff" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <!--</com.shizhefei.view.coolrefreshview.CoolRefreshView>-->
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:delay_time="5000"
+                app:image_scale_type="fit_xy" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="168dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="-40dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="10sp"
+                app:cardElevation="4dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@mipmap/ic_launcher" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="地图找房"
+                                android:textColor="@color/black"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@mipmap/ic_launcher" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="赚钱快车"
+                                android:textColor="@color/black"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@mipmap/ic_launcher" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="我的winwin"
+                                android:textColor="@color/black"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@mipmap/ic_launcher" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="我的佣金"
+                                android:textColor="@color/black"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="当前项目"
+                                android:textColor="@color/grey"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="8dp"
+                                android:text="123"
+                                android:textColor="@color/deepskyblue"
+                                android:textSize="24sp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@color/grey1" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="最新空间"
+                                android:textColor="@color/grey"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="8dp"
+                                android:text="123"
+                                android:textColor="@color/deepskyblue"
+                                android:textSize="24sp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@color/grey1" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="转介成功"
+                                android:textColor="@color/grey"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="8dp"
+                                android:text="123"
+                                android:textColor="@color/deepskyblue"
+                                android:textSize="24sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:text="精选园区"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@color/grey1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Selected Park"
+                    android:textColor="@color/grey"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_list"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="6dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:text="最新推荐"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@color/grey1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Latest Recommendation"
+                    android:textColor="@color/grey"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_list2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
