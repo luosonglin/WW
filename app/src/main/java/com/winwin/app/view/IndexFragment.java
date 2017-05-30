@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.LatestRecommendationAdapter;
@@ -136,7 +137,40 @@ public class IndexFragment extends Fragment {
         //将适配器添加到RecyclerView
         mRecyclerView2.setAdapter(mLatestRecommendationAdapter);
 
+        initListener();
+
         return view;
+    }
+
+    private void initListener() {
+        mSelectedParkAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getActivity(), "点击了"+position, Toast.LENGTH_SHORT).show();
+            }
+        });
+        mSelectedParkAdapter.setOnRecyclerViewItemLongClickListener(new BaseQuickAdapter.OnRecyclerViewItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(View view, int position) {
+                Toast.makeText(getActivity(), "长按了"+position, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
+        mLatestRecommendationAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getActivity(), "点击了"+position, Toast.LENGTH_SHORT).show();
+            }
+        });
+        mLatestRecommendationAdapter.setOnRecyclerViewItemLongClickListener(new BaseQuickAdapter.OnRecyclerViewItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(View view, int position) {
+                Toast.makeText(getActivity(), "长按了"+position, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
