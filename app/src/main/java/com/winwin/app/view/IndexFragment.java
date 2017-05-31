@@ -1,6 +1,7 @@
 package com.winwin.app.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.LatestRecommendationAdapter;
 import com.winwin.app.UI.Adapter.SelectedParkAdapter;
+import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
 import com.winwin.app.widget.GlideImageLoader;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.youth.banner.Banner;
@@ -160,6 +162,7 @@ public class IndexFragment extends Fragment {
         mLatestRecommendationAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                startActivity(new Intent(getActivity(), ParkDetailActivity.class));
                 Toast.makeText(getActivity(), "点击了"+position, Toast.LENGTH_SHORT).show();
             }
         });

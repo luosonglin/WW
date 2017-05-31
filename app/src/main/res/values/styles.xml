@@ -18,13 +18,13 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!--首次进入无黑色-->
-    <style name="welcomeTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <style name="WelcomeTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:windowTranslucentStatus" tools:targetApi="19">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@mipmap/welcome</item>
+        <item name="android:windowBackground">@mipmap/hahahahhahahahha</item>
     </style>
 
     <!--bar-->
@@ -87,5 +87,12 @@
     <style name="TextStyle_gray">
         <item name="android:textSize">13dp</item>
         <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="ItemDetailTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <!-- 沉浸式状态栏 -->
+        <item name="colorPrimary">@color/transparent</item>    <!-- 状态栏 -->
+        <item name="colorPrimaryDark">@color/transparent</item> <!-- toolbar -->
+        <item name="colorAccent">@color/colorAccent</item>  <!-- 重点 -->
     </style>
 </resources>

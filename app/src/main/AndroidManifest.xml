@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".view.WelcomeActivity"
-            android:theme="@style/welcomeTheme">
+            android:theme="@style/WelcomeTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,18 +35,25 @@
         <activity
             android:name=".view.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+
         <activity
             android:name=".view.SignUpActivity"
             android:label="@string/title_activity_sign_up2"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".view.ForgetPasswordActivity"
             android:label="@string/title_activity_forget_password"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".UI.ListvView.ListvViewActivity"
             android:label="ListvView模式" />
+
+        <activity
+            android:name=".UI.ItemDetailView.ParkDetailActivity"
+            android:label=""
+            android:theme="@style/ItemDetailTheme"/>
     </application>
 </manifest>
