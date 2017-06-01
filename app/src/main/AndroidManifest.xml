@@ -27,15 +27,15 @@
         </activity>
         <activity android:name=".MainActivity">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".view.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
             android:name=".view.SignUpActivity"
@@ -54,22 +54,27 @@
         <activity
             android:name=".UI.ItemDetailView.ParkDetailActivity"
             android:label=""
-            android:theme="@style/ItemDetailTheme"/>
+            android:theme="@style/ItemDetailTheme" />
 
         <!--我的-->
         <activity
             android:name=".UI.MineView.MyInfoActivity"
-            android:label=""/>
+            android:label="" />
 
         <activity
             android:name=".UI.MineView.MyCreditActivity"
-            android:label=""/>
+            android:label="" />
 
         <activity
             android:name=".UI.MineView.MyRecommendActivity"
-            android:label=""/>
+            android:label="" />
+
         <activity
             android:name=".UI.MineView.MySendActivity"
-            android:label=""/>
+            android:label="" />
+
+        <activity
+            android:name=".UI.MineView.MyCollectActivity"
+            android:label="" />
     </application>
 </manifest>

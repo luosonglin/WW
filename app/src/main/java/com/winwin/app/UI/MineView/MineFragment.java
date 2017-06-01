@@ -134,6 +134,7 @@ public class MineFragment extends Fragment {
                 startActivity(new Intent(getActivity(), MyCreditActivity.class));
                 break;
             case R.id.my_winwin:
+                startActivity(new Intent(getActivity(), MyInfoActivity.class));
                 break;
             case R.id.customer_recommend:
                 startActivity(new Intent(getActivity(), MyRecommendActivity.class));
@@ -142,6 +143,7 @@ public class MineFragment extends Fragment {
                 startActivity(new Intent(getActivity(), MySendActivity.class));
                 break;
             case R.id.my_collect:
+                startActivity(new Intent(getActivity(), MyCollectActivity.class));
                 break;
         }
     }
