@@ -136,6 +136,7 @@ public class MineFragment extends Fragment {
             case R.id.my_winwin:
                 break;
             case R.id.customer_recommend:
+                startActivity(new Intent(getActivity(), MyRecommendActivity.class));
                 break;
             case R.id.my_send:
                 break;

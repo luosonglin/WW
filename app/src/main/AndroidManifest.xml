@@ -64,5 +64,9 @@
         <activity
             android:name=".UI.MineView.MyCreditActivity"
             android:label=""/>
+
+        <activity
+            android:name=".UI.MineView.MyRecommendActivity"
+            android:label=""/>
     </application>
 </manifest>

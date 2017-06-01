@@ -123,9 +123,8 @@ public abstract class BaseQuickAdapter<T> extends RecyclerView.Adapter<RecyclerV
     public void openLoadMore(int pageSize, boolean enable) {
         this.pageSize = pageSize;
         mNextLoadEnable = enable;
-
     }
-
+ 
     /**
      * call the method before you should call setPageSize() method to setting up the enablePagerSize value,whether it will  invalid
      * enable the loading more data function if enable's value is true,or disable

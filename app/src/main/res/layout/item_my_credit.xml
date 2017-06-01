@@ -6,8 +6,8 @@
     android:foreground="?attr/selectableItemBackground"
     app:cardBackgroundColor="@android:color/white"
     app:cardElevation="@null"
-    app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true">
+    app:cardPreventCornerOverlap="true" >
+    <!--app:cardUseCompatPadding="true"-->
 
     <RelativeLayout
         android:layout_width="match_parent"
