@@ -1,19 +1,27 @@
 package com.winwin.app.UI.MineView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.winwin.app.R;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MineFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link MineFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -23,6 +31,22 @@ public class MineFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    @Bind(R.id.name)
+    TextView name;
+    @Bind(R.id.avatar)
+    ImageView avatar;
+    @Bind(R.id.right_tip)
+    ImageView rightTip;
+    @Bind(R.id.credit)
+    RelativeLayout credit;
+    @Bind(R.id.my_winwin)
+    RelativeLayout myWinwin;
+    @Bind(R.id.customer_recommend)
+    RelativeLayout customerRecommend;
+    @Bind(R.id.my_send)
+    RelativeLayout mySend;
+    @Bind(R.id.my_collect)
+    RelativeLayout myCollect;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -65,7 +89,9 @@ public class MineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mine, container, false);
+        View view = inflater.inflate(R.layout.fragment_mine, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -90,6 +116,32 @@ public class MineFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    @OnClick({R.id.avatar, R.id.credit, R.id.my_winwin, R.id.customer_recommend, R.id.my_send, R.id.my_collect})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.avatar:
+                startActivity(new Intent(getActivity(), MyInfoActivity.class));
+                break;
+            case R.id.credit:
+                startActivity(new Intent(getActivity(), MyCreditActivity.class));
+                break;
+            case R.id.my_winwin:
+                break;
+            case R.id.customer_recommend:
+                break;
+            case R.id.my_send:
+                break;
+            case R.id.my_collect:
+                break;
+        }
     }
 
     /**

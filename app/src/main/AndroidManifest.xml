@@ -55,5 +55,14 @@
             android:name=".UI.ItemDetailView.ParkDetailActivity"
             android:label=""
             android:theme="@style/ItemDetailTheme"/>
+
+        <!--我的-->
+        <activity
+            android:name=".UI.MineView.MyInfoActivity"
+            android:label=""/>
+
+        <activity
+            android:name=".UI.MineView.MyCreditActivity"
+            android:label=""/>
     </application>
 </manifest>
