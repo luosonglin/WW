@@ -20,6 +20,7 @@ public class MyCollectActivity extends AppCompatActivity {
     Toolbar toolbar;
     ViewGroup tab;
     ViewPager viewpager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.winwin.app.UI.ListvView.ListvViewActivity;
 import com.winwin.app.UI.MineView.MineFragment;
 import com.winwin.app.UI.entity.BookListDto;
-import com.winwin.app.view.BlankFragment;
+import com.winwin.app.view.RoomFragment;
 import com.winwin.app.view.IndexFragment;
 import com.winwin.app.view.MessageFragment;
 import com.winwin.app.widget.popmenu.PopMenu;
@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
-        implements IndexFragment.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, MineFragment.OnFragmentInteractionListener{
+        implements IndexFragment.OnFragmentInteractionListener, RoomFragment.OnFragmentInteractionListener, MineFragment.OnFragmentInteractionListener{
 
     @Bind(R.id.container)
     FrameLayout container;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity
 
     private FragmentManager mFragmentManager;
     private IndexFragment mIndexFragment;
-    private BlankFragment mMeetingFragment;
+    private RoomFragment mMeetingFragment;
     private MessageFragment mMessageFragment;
     private MineFragment mMineFragment;
 
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity
         mFragmentManager = getSupportFragmentManager();
         if (savedInstanceState != null) {
             mIndexFragment = (IndexFragment) mFragmentManager.findFragmentByTag(TAB_INDEX_TAG);
-            mMeetingFragment = (BlankFragment) mFragmentManager.findFragmentByTag(TAB_ROOM_TAG);
+            mMeetingFragment = (RoomFragment) mFragmentManager.findFragmentByTag(TAB_ROOM_TAG);
             mMessageFragment = (MessageFragment) mFragmentManager.findFragmentByTag(TAB_MESSAGE_TAG);
             mMineFragment = (MineFragment) mFragmentManager.findFragmentByTag(TAB_MINE_TAG);
         }
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity
                 tabRoomImg.setImageResource(R.mipmap.tab2_b);
                 tabRoomTitle.setTextColor(activeColorRecourse);
                 if (mMeetingFragment == null) {
-                    mMeetingFragment = new BlankFragment();
+                    mMeetingFragment = new RoomFragment();
                     fragmentTransaction.add(R.id.container, mMeetingFragment, TAB_ROOM_TAG);
                 } else {
                     fragmentTransaction.show(mMeetingFragment);

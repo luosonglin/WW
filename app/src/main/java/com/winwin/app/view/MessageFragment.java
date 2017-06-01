@@ -29,7 +29,7 @@ public class MessageFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BlankFragment.
+     * @return A new instance of fragment RoomFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static MessageFragment newInstance(String param1, String param2) {

@@ -20,6 +20,6 @@ public class WelcomeActivity extends ListvViewActivity {
                 startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
                 finish();
             }
-        }, 1000);
+        }, 10);
     }
 }
