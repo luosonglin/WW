@@ -68,5 +68,8 @@
         <activity
             android:name=".UI.MineView.MyRecommendActivity"
             android:label=""/>
+        <activity
+            android:name=".UI.MineView.MySendActivity"
+            android:label=""/>
     </application>
 </manifest>

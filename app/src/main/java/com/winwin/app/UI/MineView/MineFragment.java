@@ -139,6 +139,7 @@ public class MineFragment extends Fragment {
                 startActivity(new Intent(getActivity(), MyRecommendActivity.class));
                 break;
             case R.id.my_send:
+                startActivity(new Intent(getActivity(), MySendActivity.class));
                 break;
             case R.id.my_collect:
                 break;
