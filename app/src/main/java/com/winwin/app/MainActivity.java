@@ -20,6 +20,7 @@ import com.winwin.app.UI.MineView.MineFragment;
 import com.winwin.app.UI.entity.BookListDto;
 import com.winwin.app.view.BlankFragment;
 import com.winwin.app.view.IndexFragment;
+import com.winwin.app.view.MessageFragment;
 import com.winwin.app.widget.popmenu.PopMenu;
 import com.winwin.app.widget.popmenu.PopMenuItem;
 import com.winwin.app.widget.popmenu.PopMenuItemListener;
@@ -55,12 +56,12 @@ public class MainActivity extends AppCompatActivity
     @Bind(R.id.tab_plus)
     LinearLayout tabPlus;
 
-    @Bind(R.id.tab_customer_img)
-    ImageView tabCustomerImg;
-    @Bind(R.id.tab_customer_title)
-    TextView tabCustomerTitle;
-    @Bind(R.id.tab_customer)
-    LinearLayout tabCustomer;
+    @Bind(R.id.tab_message_img)
+    ImageView tabMessageImg;
+    @Bind(R.id.tab_message_title)
+    TextView tabMessageTitle;
+    @Bind(R.id.tab_message)
+    LinearLayout tabMessage;
 
     @Bind(R.id.tab_mine_img)
     ImageView tabMineImg;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity
 
     private static final String TAB_INDEX_TAG = "TAB_INDEX_TAG";
     private static final String TAB_ROOM_TAG = "TAB_ROOM_TAG";
-    private static final String TAB_CUSTOMER_TAG = "TAB_CUSTOMER_TAG";
+    private static final String TAB_MESSAGE_TAG = "TAB_MESSAGE_TAG";
     private static final String TAB_MINE_TAG = "TAB_MINE_TAG";
 
     private PopMenu mPopMenu;
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity
     private FragmentManager mFragmentManager;
     private IndexFragment mIndexFragment;
     private BlankFragment mMeetingFragment;
-    private BlankFragment mcustomerFragment;
+    private MessageFragment mMessageFragment;
     private MineFragment mMineFragment;
 
     @Override
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState != null) {
             mIndexFragment = (IndexFragment) mFragmentManager.findFragmentByTag(TAB_INDEX_TAG);
             mMeetingFragment = (BlankFragment) mFragmentManager.findFragmentByTag(TAB_ROOM_TAG);
-            mcustomerFragment = (BlankFragment) mFragmentManager.findFragmentByTag(TAB_CUSTOMER_TAG);
+            mMessageFragment = (MessageFragment) mFragmentManager.findFragmentByTag(TAB_MESSAGE_TAG);
             mMineFragment = (MineFragment) mFragmentManager.findFragmentByTag(TAB_MINE_TAG);
         }
         setTabSelection(tabIndex);
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @OnClick({R.id.tab_index, R.id.tab_room, R.id.tab_plus, R.id.tab_customer, R.id.tab_mine})
+    @OnClick({R.id.tab_index, R.id.tab_room, R.id.tab_plus, R.id.tab_message, R.id.tab_mine})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tab_index:
@@ -121,8 +122,8 @@ public class MainActivity extends AppCompatActivity
             case R.id.tab_plus:
                 setTabSelection(tabPlus);
                 break;
-            case R.id.tab_customer:
-                setTabSelection(tabCustomer);
+            case R.id.tab_message:
+                setTabSelection(tabMessage);
                 break;
             case R.id.tab_mine:
                 setTabSelection(tabMine);
@@ -176,16 +177,16 @@ public class MainActivity extends AppCompatActivity
                 mPopMenu.show();
                 break;
 
-            case R.id.tab_customer:
+            case R.id.tab_message:
                 hideFragments(fragmentTransaction);
 
-                tabCustomerImg.setImageResource(R.mipmap.tab4_b);
-                tabCustomerTitle.setTextColor(activeColorRecourse);
-                if (mcustomerFragment == null) {
-                    mcustomerFragment = new BlankFragment();
-                    fragmentTransaction.add(R.id.container, mcustomerFragment, TAB_CUSTOMER_TAG);
+                tabMessageImg.setImageResource(R.mipmap.tab4_b);
+                tabMessageTitle.setTextColor(activeColorRecourse);
+                if (mMessageFragment == null) {
+                    mMessageFragment = new MessageFragment();
+                    fragmentTransaction.add(R.id.container, mMessageFragment, TAB_MESSAGE_TAG);
                 } else {
-                    fragmentTransaction.show(mcustomerFragment);
+                    fragmentTransaction.show(mMessageFragment);
                 }
                 break;
 
@@ -284,8 +285,8 @@ public class MainActivity extends AppCompatActivity
 
         tabPlusImg.setImageResource(R.mipmap.tab3_g);
 
-        tabCustomerImg.setImageResource(R.mipmap.tab4_g);
-        tabCustomerTitle.setTextColor(inactiveResources);
+        tabMessageImg.setImageResource(R.mipmap.tab4_g);
+        tabMessageTitle.setTextColor(inactiveResources);
 
         tabMineImg.setImageResource(R.mipmap.tab5_g);
         tabMineTitle.setTextColor(inactiveResources);
@@ -304,8 +305,8 @@ public class MainActivity extends AppCompatActivity
         if (mMeetingFragment != null) {
             transaction.hide(mMeetingFragment);
         }
-        if (mcustomerFragment != null) {
-            transaction.hide(mcustomerFragment);
+        if (mMessageFragment != null) {
+            transaction.hide(mMessageFragment);
         }
         if (mMineFragment != null) {
             transaction.hide(mMineFragment);
@@ -316,7 +317,7 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
 //        int id = getIntent().getIntExtra("ReturnToMiniSupplierActivity", 0);
 //        if (id == 1) {
-//            setTabSelection(tabCustomer);
+//            setTabSelection(tabmessage);
 //        } else if (id == 2) {
 //            setTabSelection(tabIndex);
 //        }

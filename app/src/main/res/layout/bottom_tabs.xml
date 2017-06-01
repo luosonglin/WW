@@ -65,20 +65,20 @@
 
 
     <LinearLayout
-        android:id="@+id/tab_customer"
+        android:id="@+id/tab_message"
         style="@style/TabBar">
 
         <ImageView
-            android:id="@+id/tab_customer_img"
+            android:id="@+id/tab_message_img"
             android:layout_height="24dp"
             android:layout_width="24dp"
             android:layout_marginTop="2dp"
             android:src="@mipmap/tab4_g" />
 
         <TextView
-            android:id="@+id/tab_customer_title"
+            android:id="@+id/tab_message_title"
             style="@style/TabBarTitle"
-            android:text="客户" />
+            android:text="消息" />
     </LinearLayout>
 
     <LinearLayout
