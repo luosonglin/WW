@@ -88,6 +88,7 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/map_llyt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -109,6 +110,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/earn_llyt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -130,6 +132,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/my_llyt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -151,6 +154,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/brokerage_llyt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

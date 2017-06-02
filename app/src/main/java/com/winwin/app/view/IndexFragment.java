@@ -11,11 +11,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.LatestRecommendationAdapter;
 import com.winwin.app.UI.Adapter.SelectedParkAdapter;
+import com.winwin.app.UI.EarnMoneyView.EarnMoneyActivity;
 import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
 import com.winwin.app.widget.GlideImageLoader;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
@@ -27,10 +30,14 @@ import com.youth.banner.listener.OnBannerClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link IndexFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link IndexFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -40,6 +47,22 @@ public class IndexFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    @Bind(R.id.location)
+    TextView location;
+    @Bind(R.id.banner)
+    Banner banner;
+    @Bind(R.id.map_llyt)
+    LinearLayout mapLlyt;
+    @Bind(R.id.earn_llyt)
+    LinearLayout earnLlyt;
+    @Bind(R.id.my_llyt)
+    LinearLayout myLlyt;
+    @Bind(R.id.brokerage_llyt)
+    LinearLayout brokerageLlyt;
+    @Bind(R.id.rv_list)
+    RecyclerView rvList;
+    @Bind(R.id.rv_list2)
+    RecyclerView rvList2;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -90,6 +113,7 @@ public class IndexFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_index, container, false);
+        ButterKnife.bind(this, view);
 
         mBanner = (Banner) view.findViewById(R.id.banner);
         //test data
@@ -121,7 +145,7 @@ public class IndexFragment extends Fragment {
         //设置加载动画
         mSelectedParkAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         //设置是否自动加载以及加载个数
-        mSelectedParkAdapter.openLoadMore(6,true);
+        mSelectedParkAdapter.openLoadMore(6, true);
         //将适配器添加到RecyclerView
         mRecyclerView.setAdapter(mSelectedParkAdapter);
 
@@ -135,12 +159,11 @@ public class IndexFragment extends Fragment {
         //设置加载动画
         mLatestRecommendationAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_CUSTOM);
         //设置是否自动加载以及加载个数
-        mLatestRecommendationAdapter.openLoadMore(6,true);
+        mLatestRecommendationAdapter.openLoadMore(6, true);
         //将适配器添加到RecyclerView
         mRecyclerView2.setAdapter(mLatestRecommendationAdapter);
 
         initListener();
-
         return view;
     }
 
@@ -148,13 +171,13 @@ public class IndexFragment extends Fragment {
         mSelectedParkAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(), "点击了"+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "点击了" + position, Toast.LENGTH_SHORT).show();
             }
         });
         mSelectedParkAdapter.setOnRecyclerViewItemLongClickListener(new BaseQuickAdapter.OnRecyclerViewItemLongClickListener() {
             @Override
             public boolean onItemLongClick(View view, int position) {
-                Toast.makeText(getActivity(), "长按了"+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "长按了" + position, Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -163,13 +186,13 @@ public class IndexFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 startActivity(new Intent(getActivity(), ParkDetailActivity.class));
-                Toast.makeText(getActivity(), "点击了"+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "点击了" + position, Toast.LENGTH_SHORT).show();
             }
         });
         mLatestRecommendationAdapter.setOnRecyclerViewItemLongClickListener(new BaseQuickAdapter.OnRecyclerViewItemLongClickListener() {
             @Override
             public boolean onItemLongClick(View view, int position) {
-                Toast.makeText(getActivity(), "长按了"+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "长按了" + position, Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -198,6 +221,30 @@ public class IndexFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    @OnClick({R.id.map_llyt, R.id.earn_llyt, R.id.my_llyt, R.id.brokerage_llyt})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.map_llyt:
+                startActivity(new Intent(getActivity(), ParkDetailActivity.class));
+                break;
+            case R.id.earn_llyt:
+                startActivity(new Intent(getActivity(), EarnMoneyActivity.class));
+                break;
+            case R.id.my_llyt:
+                startActivity(new Intent(getActivity(), ParkDetailActivity.class));
+                break;
+            case R.id.brokerage_llyt:
+                startActivity(new Intent(getActivity(), ParkDetailActivity.class));
+                break;
+        }
     }
 
     /**
