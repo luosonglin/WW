@@ -1,5 +1,6 @@
 package com.winwin.app.UI.EarnMoneyView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import com.winwin.app.MVP.Presenter.BannerListPresent;
 import com.winwin.app.MVP.View.BannerListView;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.MyCollectDemandAdapter;
+import com.winwin.app.UI.ItemDetailView.DemandDetailActivity;
 import com.winwin.app.UI.entity.BannerDto;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.container.DefaultHeader;
@@ -42,6 +44,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
         setContentView(R.layout.activity_earn_money);
         toolBar();
         initView();
+        initListener();
     }
 
     private void toolBar() {
@@ -49,14 +52,13 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle("");
-        toolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.back_white));
+        toolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.back));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        toolbar.setOverflowIcon(getResources().getDrawable(R.mipmap.back));
     }
 
     private void initView() {
@@ -97,6 +99,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
         mQuickAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                startActivity(new Intent(EarnMoneyActivity.this, DemandDetailActivity.class));
                 Toast.makeText(EarnMoneyActivity.this, "点击了"+position, Toast.LENGTH_SHORT).show();
             }
         });

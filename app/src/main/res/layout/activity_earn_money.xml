@@ -22,6 +22,15 @@
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="赚钱快车"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
@@ -30,6 +39,11 @@
                 android:src="@mipmap/ic_launcher" />
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -148,7 +162,7 @@
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
-    <!--tang li -->
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -161,6 +175,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
             android:layout_toLeftOf="@+id/a2"
             android:text="发布时间 "
@@ -172,6 +187,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="28dp"
             android:text="关注度 "
             android:textColor="@color/grey"

@@ -76,5 +76,12 @@
         <activity
             android:name=".UI.MineView.MyCollectActivity"
             android:label="" />
+
+        <activity
+            android:name=".UI.EarnMoneyView.EarnMoneyActivity"
+            android:label="" />
+        <activity
+            android:name=".UI.ItemDetailView.DemandDetailActivity"
+            android:label="" />
     </application>
 </manifest>

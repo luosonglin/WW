@@ -15,8 +15,8 @@ import android.widget.ScrollView;
 
 import com.winwin.app.R;
 
-public class ParkDetailActivity extends AppCompatActivity {
-    private static final String TAG = ParkDetailActivity.class.getSimpleName();
+public class DemandDetailActivity extends AppCompatActivity {
+    private static final String TAG = DemandDetailActivity.class.getSimpleName();
     private Toolbar toolbar;
     private Context context = this;
     private ScrollView scrollView;
@@ -32,7 +32,7 @@ public class ParkDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_park_detail);
+        setContentView(R.layout.activity_demand_detail);
         toolBar();
         initView();
     }
@@ -130,3 +130,4 @@ public class ParkDetailActivity extends AppCompatActivity {
 
     }
 }
+
