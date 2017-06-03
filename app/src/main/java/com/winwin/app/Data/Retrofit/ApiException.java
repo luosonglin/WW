@@ -1,7 +1,7 @@
 package com.winwin.app.Data.Retrofit;
 
 
-import com.winwin.app.UI.entity.HttpResult;
+import com.winwin.app.UI.Entity.HttpResult;
 
 /**
  * 异常类

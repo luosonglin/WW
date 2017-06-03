@@ -16,7 +16,7 @@ import com.winwin.app.MVP.View.BannerListView;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.MyCollectDemandAdapter;
 import com.winwin.app.UI.ItemDetailView.DemandDetailActivity;
-import com.winwin.app.UI.entity.BannerDto;
+import com.winwin.app.UI.Entity.BannerDto;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.container.DefaultHeader;
 import com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity;

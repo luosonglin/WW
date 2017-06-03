@@ -3,8 +3,8 @@ package com.winwin.app.UI.Adapter;
 import android.view.View;
 
 import com.winwin.app.R;
-import com.winwin.app.UI.entity.BannerDto;
-import com.winwin.app.util.ToastUtils;
+import com.winwin.app.UI.Entity.BannerDto;
+import com.winwin.app.Util.ToastUtils;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.BaseViewHolder;
 

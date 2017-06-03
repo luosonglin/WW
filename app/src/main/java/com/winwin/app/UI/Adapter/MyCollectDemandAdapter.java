@@ -4,7 +4,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.winwin.app.R;
-import com.winwin.app.UI.entity.BannerDto;
+import com.winwin.app.UI.Entity.BannerDto;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.BaseViewHolder;
 import java.util.List;

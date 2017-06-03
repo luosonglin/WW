@@ -1,8 +1,8 @@
 package com.winwin.app.Constant;
 
 
-import com.winwin.app.UI.entity.ChatDto;
-import com.winwin.app.UI.entity.MainDateDto;
+import com.winwin.app.UI.Entity.ChatDto;
+import com.winwin.app.UI.Entity.MainDateDto;
 
 import java.util.ArrayList;
 import java.util.List;

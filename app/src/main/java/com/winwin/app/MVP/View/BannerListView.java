@@ -1,7 +1,7 @@
 package com.winwin.app.MVP.View;
 
 
-import com.winwin.app.UI.entity.BannerDto;
+import com.winwin.app.UI.Entity.BannerDto;
 
 import java.util.List;
 

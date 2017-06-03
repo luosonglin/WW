@@ -1,8 +1,8 @@
 package com.winwin.app.Constant;
 
 
-import com.winwin.app.UI.entity.BookListDto;
-import com.winwin.app.UI.entity.MySection;
+import com.winwin.app.UI.Entity.BookListDto;
+import com.winwin.app.UI.Entity.MySection;
 
 import java.util.ArrayList;
 import java.util.List;

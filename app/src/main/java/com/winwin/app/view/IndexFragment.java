@@ -20,7 +20,9 @@ import com.winwin.app.UI.Adapter.LatestRecommendationAdapter;
 import com.winwin.app.UI.Adapter.SelectedParkAdapter;
 import com.winwin.app.UI.EarnMoneyView.EarnMoneyActivity;
 import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
-import com.winwin.app.widget.GlideImageLoader;
+import com.winwin.app.UI.MineView.MyCreditActivity;
+import com.winwin.app.Util.ToastUtils;
+import com.winwin.app.Widget.GlideImageLoader;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -117,6 +119,7 @@ public class IndexFragment extends Fragment {
 
         mBanner = (Banner) view.findViewById(R.id.banner);
         //test data
+        bannerImages.add("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=485322380,1483671303&fm=26&gp=0.jpg");
         bannerImages.add("http://wx1.sinaimg.cn/mw1024/a601622bgy1fdl511w7f5j20dv0aqgm1.jpg");
         bannerImages.add("http://wx1.sinaimg.cn/mw1024/a601622bly1fbdk9hstbmj20qo0qodja.jpg");
         bannerImages.add("http://ww4.sinaimg.cn/mw1024/a601622bgw1f8xr5r8n2gj20ku0go0tu.jpg");
@@ -196,7 +199,6 @@ public class IndexFragment extends Fragment {
                 return true;
             }
         });
-
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -239,10 +241,10 @@ public class IndexFragment extends Fragment {
                 startActivity(new Intent(getActivity(), EarnMoneyActivity.class));
                 break;
             case R.id.my_llyt:
-                startActivity(new Intent(getActivity(), ParkDetailActivity.class));
+                ToastUtils.show(getActivity(), "turn to web page");
                 break;
             case R.id.brokerage_llyt:
-                startActivity(new Intent(getActivity(), ParkDetailActivity.class));
+                startActivity(new Intent(getActivity(), MyCreditActivity.class));
                 break;
         }
     }

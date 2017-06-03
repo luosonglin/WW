@@ -6,7 +6,7 @@ import android.util.Log;
 import com.winwin.app.MVP.Listener.OnLoadDataListListener;
 import com.winwin.app.MVP.Model.BannerListModel;
 import com.winwin.app.MVP.View.BannerListView;
-import com.winwin.app.UI.entity.BannerDto;
+import com.winwin.app.UI.Entity.BannerDto;
 
 import java.util.List;
 

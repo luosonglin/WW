@@ -16,7 +16,7 @@ import com.winwin.app.MVP.Presenter.BannerListPresent;
 import com.winwin.app.MVP.View.BannerListView;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.BannersAdapter;
-import com.winwin.app.UI.entity.BannerDto;
+import com.winwin.app.UI.Entity.BannerDto;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.container.AcFunHeader;
 import com.xiaochao.lcrapiddeveloplibrary.container.AliHeader;

@@ -28,16 +28,10 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@mipmap/index_search_btn" />
-
-        <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_alignParentRight="true"
+            android:src="@mipmap/index_search_btn"
             android:layout_centerVertical="true"
-            android:layout_marginRight="12dp"
-            android:src="@mipmap/index_community_btn" />
+            android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
 
     <View
@@ -98,12 +92,13 @@
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@mipmap/ic_launcher" />
+                                android:src="@mipmap/map_icon" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="8dp"
                                 android:text="地图找房"
                                 android:textColor="@color/black"
                                 android:textSize="13sp" />
@@ -120,12 +115,13 @@
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@mipmap/ic_launcher" />
+                                android:src="@mipmap/earn_icon" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="8dp"
                                 android:text="赚钱快车"
                                 android:textColor="@color/black"
                                 android:textSize="13sp" />
@@ -142,12 +138,13 @@
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@mipmap/ic_launcher" />
+                                android:src="@mipmap/my_winwin_icon" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="8dp"
                                 android:text="我的winwin"
                                 android:textColor="@color/black"
                                 android:textSize="13sp" />
@@ -164,13 +161,14 @@
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@mipmap/ic_launcher" />
+                                android:src="@mipmap/credit_icon" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="我的佣金"
+                                android:layout_marginTop="8dp"
+                                android:text="我的积分"
                                 android:textColor="@color/black"
                                 android:textSize="13sp" />
                         </LinearLayout>
@@ -179,6 +177,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="64dp"
+                        android:layout_marginTop="8dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
@@ -200,7 +199,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="2dp"
                                 android:text="123"
                                 android:textColor="@color/deepskyblue"
                                 android:textSize="24sp" />
@@ -231,7 +230,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="2dp"
                                 android:text="123"
                                 android:textColor="@color/deepskyblue"
                                 android:textSize="24sp" />
@@ -262,7 +261,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="2dp"
                                 android:text="123"
                                 android:textColor="@color/deepskyblue"
                                 android:textSize="24sp" />
@@ -307,7 +306,7 @@
                 android:id="@+id/rv_list"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginTop="6dp"/>
+                android:layout_marginTop="6dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -345,7 +344,7 @@
                 android:id="@+id/rv_list2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"/>
+                android:layout_marginTop="6dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

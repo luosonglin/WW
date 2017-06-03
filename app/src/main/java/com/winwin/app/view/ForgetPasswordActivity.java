@@ -24,7 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.winwin.app.R;
-import com.winwin.app.util.ToastUtils;
+import com.winwin.app.Util.ToastUtils;
 
 public class ForgetPasswordActivity extends AppCompatActivity {
 

@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.winwin.app.R;
+import com.winwin.app.Util.GlideCircleTransform;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -91,6 +93,15 @@ public class MineFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.bind(this, view);
+
+        //通过Glide显示图片
+        Glide.with(getActivity())
+                .load("http://ww2.sinaimg.cn/mw690/a601622bjw8e2ajzw6k5ej.jpg")
+                .crossFade()
+                .placeholder(R.mipmap.def_head)
+                .transform(new GlideCircleTransform(getActivity()))
+                .into(avatar);
+
         return view;
     }
 

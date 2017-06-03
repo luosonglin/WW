@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.MVP.Listener.OnLoadDataListListener;
-import com.winwin.app.UI.entity.BannerDto;
+import com.winwin.app.UI.Entity.BannerDto;
 
 import rx.Observer;
 

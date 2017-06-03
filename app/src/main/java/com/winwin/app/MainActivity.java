@@ -17,13 +17,13 @@ import android.widget.Toast;
 
 import com.winwin.app.UI.ListvView.ListvViewActivity;
 import com.winwin.app.UI.MineView.MineFragment;
-import com.winwin.app.UI.entity.BookListDto;
+import com.winwin.app.UI.Entity.BookListDto;
 import com.winwin.app.view.RoomFragment;
 import com.winwin.app.view.IndexFragment;
 import com.winwin.app.view.MessageFragment;
-import com.winwin.app.widget.popmenu.PopMenu;
-import com.winwin.app.widget.popmenu.PopMenuItem;
-import com.winwin.app.widget.popmenu.PopMenuItemListener;
+import com.winwin.app.Widget.popmenu.PopMenu;
+import com.winwin.app.Widget.popmenu.PopMenuItem;
+import com.winwin.app.Widget.popmenu.PopMenuItemListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

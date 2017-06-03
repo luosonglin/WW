@@ -7,9 +7,9 @@ import com.winwin.app.Data.APi.APIService;
 import com.winwin.app.Data.APi.CacheProviders;
 import com.winwin.app.Data.Retrofit.ApiException;
 import com.winwin.app.Data.Retrofit.RetrofitUtils;
-import com.winwin.app.UI.entity.BannerDto;
-import com.winwin.app.UI.entity.HttpResult;
-import com.winwin.app.util.FileUtil;
+import com.winwin.app.UI.Entity.BannerDto;
+import com.winwin.app.UI.Entity.HttpResult;
+import com.winwin.app.Util.FileUtil;
 
 import java.io.File;
 

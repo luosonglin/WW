@@ -1,7 +1,7 @@
 package com.winwin.app.Data.APi;
 
 
-import com.winwin.app.UI.entity.BannerDto;
+import com.winwin.app.UI.Entity.BannerDto;
 
 import java.util.List;
 
