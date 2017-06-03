@@ -12,15 +12,37 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.winwin.app.R;
+import com.winwin.app.Util.GlideCircleTransform;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class DemandDetailActivity extends AppCompatActivity {
     private static final String TAG = DemandDetailActivity.class.getSimpleName();
-    private Toolbar toolbar;
+    @Bind(R.id.img)
+    ImageView imageView;
+    @Bind(R.id.name)
+    TextView name;
+    @Bind(R.id.time)
+    TextView time;
+    @Bind(R.id.times)
+    TextView times;
+    @Bind(R.id.avatar)
+    ImageView avatar;
+    @Bind(R.id.a1)
+    ImageView a1;
+    @Bind(R.id.a2)
+    ImageView a2;
+    @Bind(R.id.scrollView)
+    ScrollView scrollView;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
     private Context context = this;
-    private ScrollView scrollView;
-    private ImageView imageView;
 
     // 记录首次按下位置
     private float mFirstPosition = 0;
@@ -33,12 +55,13 @@ public class DemandDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demand_detail);
+        ButterKnife.bind(this);
+
         toolBar();
         initView();
     }
 
     private void toolBar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle("");
@@ -56,10 +79,6 @@ public class DemandDetailActivity extends AppCompatActivity {
         // 获取屏幕宽高
         metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
-
-        // 获取控件
-        scrollView = (ScrollView) findViewById(R.id.scrollView);
-        imageView = (ImageView) findViewById(R.id.img);
 
         // 设置图片初始大小 这里我设为满屏的16:9
         ViewGroup.LayoutParams lp = imageView.getLayoutParams();
@@ -102,6 +121,14 @@ public class DemandDetailActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        //通过Glide显示图片
+        Glide.with(DemandDetailActivity.this)
+                .load("http://ww2.sinaimg.cn/mw690/a601622bjw8e2ajzw6k5ej.jpg")
+                .crossFade()
+                .placeholder(R.mipmap.def_head)
+                .transform(new GlideCircleTransform(DemandDetailActivity.this))
+                .into(avatar);
     }
 
     // 回弹动画 (使用了属性动画)

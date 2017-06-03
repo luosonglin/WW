@@ -34,7 +34,7 @@
                 android:layout_height="16dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="12dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/indexfragment_subway" />
 
             <TextView
                 android:id="@+id/recommendation_location"

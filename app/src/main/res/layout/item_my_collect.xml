@@ -71,7 +71,7 @@
                     <ImageView
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/item_status" />
 
                     <TextView
                         android:id="@+id/status"
@@ -126,7 +126,7 @@
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/item_location" />
 
                 <TextView
                     android:id="@+id/location"

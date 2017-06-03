@@ -130,7 +130,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16dp"
                     android:layout_toLeftOf="@+id/a2"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/demanddetail_favorite" />
 
                 <ImageView
                     android:id="@+id/a2"
@@ -139,7 +139,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/demanddetail_communication" />
             </RelativeLayout>
 
             <View
@@ -284,7 +284,7 @@
                 android:layout_height="22dp"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="10dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/parkdetailactivity_communication" />
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 </FrameLayout>

@@ -28,7 +28,7 @@
                 android:layout_height="12dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/roomfragment_search" />
 
             <EditText
                 android:id="@+id/search_edit"
@@ -36,7 +36,7 @@
                 android:layout_height="28dp"
                 android:layout_centerVertical="true"
                 android:layout_marginBottom="8dp"
-                android:layout_marginLeft="32dp"
+                android:layout_marginLeft="22dp"
                 android:layout_marginRight="6dp"
                 android:background="@drawable/search_bar_bg"
                 android:focusable="true"
@@ -54,8 +54,8 @@
             android:layout_height="22dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="6dp"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_marginRight="16dp"
+            android:src="@mipmap/roomfragment_location" />
     </RelativeLayout>
 
     <View
@@ -121,7 +121,7 @@
                     android:layout_height="@dimen/recovery_default_margin_8dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
-                    android:src="@mipmap/hahahahhahahahha" />
+                    android:src="@mipmap/roomfragment_downward_triangle" />
 
             </LinearLayout>
         </RelativeLayout>
@@ -161,7 +161,7 @@
                     android:layout_height="@dimen/recovery_default_margin_8dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
-                    android:src="@mipmap/hahahahhahahahha" />
+                    android:src="@mipmap/roomfragment_downward_triangle" />
 
             </LinearLayout>
         </RelativeLayout>
@@ -201,7 +201,7 @@
                     android:layout_height="@dimen/recovery_default_margin_8dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
-                    android:src="@mipmap/hahahahhahahahha" />
+                    android:src="@mipmap/roomfragment_downward_triangle" />
 
             </LinearLayout>
         </RelativeLayout>

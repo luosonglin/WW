@@ -49,6 +49,8 @@ public class MineFragment extends Fragment {
     RelativeLayout mySend;
     @Bind(R.id.my_collect)
     RelativeLayout myCollect;
+    @Bind(R.id.my_more)
+    RelativeLayout myMore;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -135,7 +137,7 @@ public class MineFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.avatar, R.id.credit, R.id.my_winwin, R.id.customer_recommend, R.id.my_send, R.id.my_collect})
+    @OnClick({R.id.avatar, R.id.credit, R.id.my_winwin, R.id.customer_recommend, R.id.my_send, R.id.my_collect, R.id.my_more})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.avatar:
@@ -155,6 +157,9 @@ public class MineFragment extends Fragment {
                 break;
             case R.id.my_collect:
                 startActivity(new Intent(getActivity(), MyCollectActivity.class));
+                break;
+            case R.id.my_more:
+                startActivity(new Intent(getActivity(), MyMoreActivity.class));
                 break;
         }
     }

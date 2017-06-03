@@ -35,7 +35,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp">
 
                 <TextView
                     android:id="@+id/amount_textview"
@@ -54,6 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="6dp"
+                    android:paddingTop="6dp"
                     android:layout_toRightOf="@+id/amount_textview"
                     android:text="元/平方/天 起"
                     android:textColor="@color/deepskyblue"
@@ -65,12 +67,11 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16dp"
-                    android:background="@drawable/textview_radius_blue"
+                    android:background="@drawable/textview_side_blue"
                     android:gravity="center"
                     android:text="自营"
                     android:textColor="@color/deepskyblue"
                     android:textSize="12sp" />
-
             </RelativeLayout>
 
             <TextView
@@ -85,19 +86,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="6dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/item_location" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_gravity="center_vertical"
                     android:text="距离9号线徐家汇站500米"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
@@ -128,12 +130,13 @@
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@mipmap/lease_icon" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
+                            android:layout_gravity="center_vertical"
                             android:text="租凭统计（28.42）"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
@@ -164,12 +167,13 @@
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@mipmap/company_icon" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
+                            android:layout_gravity="center_vertical"
                             android:text="入驻企业（18家）"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
@@ -352,7 +356,7 @@
                             android:layout_alignParentTop="true"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="6dp"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@mipmap/parkdetailactivity_fravorite" />
 
                         <TextView
                             android:layout_width="20dp"
@@ -377,7 +381,7 @@
                             android:layout_alignParentTop="true"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="6dp"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@mipmap/parkdetailactivity_share" />
 
                         <TextView
                             android:layout_width="20dp"
@@ -432,7 +436,7 @@
                 android:layout_height="22dp"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="10dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/parkdetailactivity_communication" />
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 </FrameLayout>

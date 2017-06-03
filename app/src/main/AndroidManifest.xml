@@ -78,6 +78,10 @@
             android:label="" />
 
         <activity
+            android:name=".UI.MineView.MyMoreActivity"
+            android:label="" />
+
+        <activity
             android:name=".UI.EarnMoneyView.EarnMoneyActivity"
             android:label="" />
         <activity
