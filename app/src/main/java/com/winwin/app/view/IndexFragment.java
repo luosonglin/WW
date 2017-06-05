@@ -21,7 +21,8 @@ import com.winwin.app.UI.Adapter.SelectedParkAdapter;
 import com.winwin.app.UI.EarnMoneyView.EarnMoneyActivity;
 import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
 import com.winwin.app.UI.MineView.MyCreditActivity;
-import com.winwin.app.Util.ToastUtils;
+import com.winwin.app.UI.SearchView.SearchParkActivity;
+import com.winwin.app.UI.WebView.MyWinwinActivity;
 import com.winwin.app.Widget.GlideImageLoader;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.youth.banner.Banner;
@@ -231,9 +232,12 @@ public class IndexFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.map_llyt, R.id.earn_llyt, R.id.my_llyt, R.id.brokerage_llyt})
+    @OnClick({R.id.search_iv, R.id.map_llyt, R.id.earn_llyt, R.id.my_llyt, R.id.brokerage_llyt})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.search_iv:
+                startActivity(new Intent(getActivity(), SearchParkActivity.class));
+                break;
             case R.id.map_llyt:
                 startActivity(new Intent(getActivity(), ParkDetailActivity.class));
                 break;
@@ -241,7 +245,7 @@ public class IndexFragment extends Fragment {
                 startActivity(new Intent(getActivity(), EarnMoneyActivity.class));
                 break;
             case R.id.my_llyt:
-                ToastUtils.show(getActivity(), "turn to web page");
+                startActivity(new Intent(getActivity(), MyWinwinActivity.class));
                 break;
             case R.id.brokerage_llyt:
                 startActivity(new Intent(getActivity(), MyCreditActivity.class));

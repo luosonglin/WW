@@ -84,8 +84,16 @@
         <activity
             android:name=".UI.EarnMoneyView.EarnMoneyActivity"
             android:label="" />
+
+        <activity
+            android:name=".UI.WebView.MyWinwinActivity"
+            android:label="" />
+
         <activity
             android:name=".UI.ItemDetailView.DemandDetailActivity"
+            android:label="" />
+        <activity
+            android:name=".UI.SearchView.SearchParkActivity"
             android:label="" />
     </application>
 </manifest>

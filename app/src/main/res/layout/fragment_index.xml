@@ -26,11 +26,12 @@
             android:textSize="16sp" />
 
         <ImageView
+            android:id="@+id/search_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/index_search_btn"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:src="@mipmap/index_search_btn" />
 
     </RelativeLayout>
 
