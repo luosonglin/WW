@@ -132,6 +132,7 @@ public class ListvViewActivity extends AppCompatActivity implements BaseQuickAda
     public void onLoadmore() {
 
     }
+
     /*
     * MVP模式的相关状态
     *

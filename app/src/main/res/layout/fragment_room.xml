@@ -50,6 +50,7 @@
         </RelativeLayout>
 
         <ImageView
+            android:id="@+id/map_image"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_alignParentRight="true"

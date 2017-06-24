@@ -15,6 +15,7 @@ public abstract class RetrofitUtils {
 
     private static Retrofit mRetrofit;
     private static OkHttpClient mOkHttpClient;
+
     /**
      * 获取Retrofit对象
      *

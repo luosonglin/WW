@@ -13,6 +13,7 @@ public class Constant {
     public static String EMPTY_CONTEXT="换个条件试试吧";
 
     //服务器路径
-    public static final String API_SERVER = "http://medmeeting.com:8080";
+    public static final String API_SERVER = "http://106.14.0.72:8888";
+
 
 }

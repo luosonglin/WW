@@ -8,456 +8,462 @@
     android:fitsSystemWindows="true"
     tools:context=".UI.ItemDetailView.ParkDetailActivity">
 
-    <FrameLayout
+    <com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity
+        android:id="@+id/progress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <ScrollView
-            android:id="@+id/scrollView"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <ScrollView
+                android:id="@+id/scrollView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/img"
-                        android:layout_width="match_parent"
-                        android:layout_height="240dp"
-                        android:layout_gravity="center"
-                        android:scaleType="centerCrop"
-                        android:src="@mipmap/banner" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginTop="4dp">
-
-                    <TextView
-                        android:id="@+id/amount_textview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="16dp"
-                        android:text="¥4.5"
-                        android:textColor="@color/dodgerblue"
-                        android:textSize="26sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="6dp"
-                        android:layout_toRightOf="@+id/amount_textview"
-                        android:paddingTop="6dp"
-                        android:text="元/平方/天 起"
-                        android:textColor="@color/deepskyblue"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="44dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="16dp"
-                        android:background="@drawable/textview_side_blue"
-                        android:gravity="center"
-                        android:text="自营"
-                        android:textColor="@color/deepskyblue"
-                        android:textSize="12sp" />
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="16dp"
-                    android:text="国贸商业大厦"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                android:layout_weight="1">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="6dp"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/item_location" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/img"
+                            android:layout_width="match_parent"
+                            android:layout_height="240dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/banner" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="4dp">
+
+                        <TextView
+                            android:id="@+id/amount_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="16dp"
+                            android:text="¥4.5"
+                            android:textColor="@color/dodgerblue"
+                            android:textSize="26sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="6dp"
+                            android:layout_toRightOf="@+id/amount_textview"
+                            android:paddingTop="6dp"
+                            android:text="元/平方/天 起"
+                            android:textColor="@color/deepskyblue"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="44dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="16dp"
+                            android:background="@drawable/textview_side_blue"
+                            android:gravity="center"
+                            android:text="自营"
+                            android:textColor="@color/deepskyblue"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="8dp"
-                        android:text="距离9号线徐家汇站500米"
-                        android:textColor="@color/grey"
-                        android:textSize="14sp" />
-                </LinearLayout>
+                        android:layout_marginLeft="16dp"
+                        android:text="国贸商业大厦"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/grey1" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="6dp"
+                        android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentLeft="true"
-                        android:layout_toLeftOf="@+id/line_item_detail">
-
-                        <LinearLayout
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:orientation="horizontal">
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/item_location" />
 
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:src="@mipmap/lease_icon" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="10dp"
-                                android:text="租凭统计（28.42）"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-                    </RelativeLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
+                            android:text="距离9号线徐家汇站500米"
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
                     <View
-                        android:id="@+id/line_item_detail"
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:layout_marginBottom="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
                         android:layout_marginTop="10dp"
                         android:background="@color/grey1" />
 
                     <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:layout_toRightOf="@+id/line_item_detail">
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp">
 
-                        <LinearLayout
+                        <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:orientation="horizontal">
+                            android:layout_height="match_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_toLeftOf="@+id/line_item_detail">
 
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:src="@mipmap/company_icon" />
-
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="10dp"
-                                android:text="入驻企业（18家）"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-                        </LinearLayout>
+                                android:layout_centerInParent="true"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:src="@mipmap/lease_icon" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="租凭统计（28.42）"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <View
+                            android:id="@+id/line_item_detail"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/grey1" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:layout_toRightOf="@+id/line_item_detail">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:src="@mipmap/company_icon" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="入驻企业（18家）"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                        </RelativeLayout>
                     </RelativeLayout>
-                </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/grey1" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="园区介绍"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="6dp"
-                    android:text="今日柳浪闻莺，经过近四十多年不断的开发和建设由当年帝王享受的御花园，演变为普通老百姓的大乐园。她仍以青翠柳色和婉啭莺鸣作为公园景观基调在沿湖长达千米的堤岸上和园路主干道路沿途栽种垂柳及狮柳，醉柳，浣沙柳等特色柳树。"
-                    android:textColor="@color/grey"
-                    android:textSize="14sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/grey1" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/grey1" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="物业标准"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="园区介绍"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="28dp"
-                        android:text="10元/平米/天"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="6dp"
+                        android:text="今日柳浪闻莺，经过近四十多年不断的开发和建设由当年帝王享受的御花园，演变为普通老百姓的大乐园。她仍以青翠柳色和婉啭莺鸣作为公园景观基调在沿湖长达千米的堤岸上和园路主干道路沿途栽种垂柳及狮柳，醉柳，浣沙柳等特色柳树。"
                         android:textColor="@color/grey"
                         android:textSize="14sp" />
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/grey1" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="物业标准"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="28dp"
+                            android:text="10元/平米/天"
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="电费标准"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="28dp"
+                            android:text="1.25元/度"
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="水费标准"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="28dp"
+                            android:text="5.5元/吨"
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="项目体量"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="28dp"
+                            android:text="145335.3平方米"
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/grey1" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="电费标准"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="周边配套"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="28dp"
-                        android:text="1.25元/度"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="6dp"
+                        android:text="徐家汇时代天街路233号，距离2号线、11号线200米"
                         android:textColor="@color/grey"
                         android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/grey1" />
+
+
                 </LinearLayout>
+            </ScrollView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="水费标准"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="28dp"
-                        android:text="5.5元/吨"
-                        android:textColor="@color/grey"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="项目体量"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="28dp"
-                        android:text="145335.3平方米"
-                        android:textColor="@color/grey"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/grey1" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="周边配套"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="6dp"
-                    android:text="徐家汇时代天街路233号，距离2号线、11号线200米"
-                    android:textColor="@color/grey"
-                    android:textSize="14sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/grey1" />
-
-
-            </LinearLayout>
-        </ScrollView>
-
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#00ffffff"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:elevation="0dp">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+            <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
+                android:layout_height="wrap_content"
+                android:background="#00ffffff"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:elevation="0dp">
 
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_gravity="right|center_vertical"
-                    android:layout_marginRight="10dp"
-                    android:src="@mipmap/parkdetailactivity_communication" />
-            </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.AppBarLayout>
-    </FrameLayout>
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:popupTheme="@style/AppTheme.PopupOverlay">
 
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:src="@mipmap/parkdetailactivity_communication" />
+                </android.support.v7.widget.Toolbar>
+            </android.support.design.widget.AppBarLayout>
+        </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        android:orientation="vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black" />
 
             <LinearLayout
-                android:layout_width="125dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="125dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="6dp"
-                        android:src="@mipmap/parkdetailactivity_fravorite" />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
-                    <TextView
-                        android:layout_width="20dp"
-                        android:layout_height="14dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="6dp"
-                        android:layout_marginLeft="16dp"
-                        android:text="收藏"
-                        android:textColor="@color/black"
-                        android:textSize="10sp" />
-                </RelativeLayout>
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="6dp"
+                            android:src="@mipmap/parkdetailactivity_fravorite" />
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="14dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="6dp"
+                            android:layout_marginLeft="16dp"
+                            android:text="收藏"
+                            android:textColor="@color/black"
+                            android:textSize="10sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="6dp"
+                            android:src="@mipmap/parkdetailactivity_share" />
+
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="14dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="6dp"
+                            android:layout_marginLeft="16dp"
+                            android:text="分享"
+                            android:textColor="@color/black"
+                            android:textSize="10sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="125dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="预约看房"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="6dp"
-                        android:src="@mipmap/parkdetailactivity_share" />
-
-                    <TextView
-                        android:layout_width="20dp"
-                        android:layout_height="14dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="6dp"
-                        android:layout_marginLeft="16dp"
-                        android:text="分享"
-                        android:textColor="@color/black"
-                        android:textSize="10sp" />
-                </RelativeLayout>
+                <TextView
+                    android:layout_width="125dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/deepskyblue"
+                    android:gravity="center"
+                    android:text="咨询经纪人"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
             </LinearLayout>
-
-            <TextView
-                android:layout_width="125dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="预约看房"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="125dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/deepskyblue"
-                android:gravity="center"
-                android:text="咨询经纪人"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
         </LinearLayout>
-    </LinearLayout>
+    </com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity>
 </RelativeLayout>

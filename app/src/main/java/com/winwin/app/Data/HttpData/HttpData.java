@@ -9,9 +9,14 @@ import com.winwin.app.Data.Retrofit.ApiException;
 import com.winwin.app.Data.Retrofit.RetrofitUtils;
 import com.winwin.app.UI.Entity.BannerDto;
 import com.winwin.app.UI.Entity.HttpResult;
+import com.winwin.app.UI.Entity.HttpResult2;
+import com.winwin.app.UI.Entity.IndexBannerDto;
+import com.winwin.app.UI.Entity.IndexRecommandParkDto;
+import com.winwin.app.UI.Entity.IndexStaticDateDto;
 import com.winwin.app.Util.FileUtil;
 
 import java.io.File;
+import java.util.List;
 
 import io.rx_cache.DynamicKey;
 import io.rx_cache.EvictDynamicKey;
@@ -49,14 +54,14 @@ public class HttpData extends RetrofitUtils {
 
 //    //Get请求  视频列表
 //    public void verfacationCodeGetCache(Observer<List<VideoListDto>> observer) {
-//        Observable observable=service.getVideoList().map(new HttpResultFunc<List<VideoListDto>>());
+//        Observable observable=service_t.getVideoList().map(new HttpResultFunc<List<VideoListDto>>());
 //        Observable observableCahce=providers.getVideoList(observable,new DynamicKey("视频列表"),new EvictDynamicKey(false)).map(new HttpResultFuncCcche<List<VideoListDto>>());
 //        setSubscribe(observableCahce,observer);
 //    }
 //
 //    //post请求 学校列表
 //    public void HttpDataToSchoolList(String type, int pageIndex, Observer<List<BookListDto>> observer){
-//        Observable observable=service.getBookList(type,pageIndex).map(new HttpResultFunc<List<BookListDto>>());
+//        Observable observable=service_t.getBookList(type,pageIndex).map(new HttpResultFunc<List<BookListDto>>());
 //        Observable observableCahce=providers.getBookList(observable,new DynamicKey("书籍列表"+pageIndex+type),new EvictDynamicKey(false)).map(new HttpResultFuncCcche<List<BookListDto>>());
 //        setSubscribe(observableCahce,observer);
 //    }
@@ -67,6 +72,22 @@ public class HttpData extends RetrofitUtils {
         Observable observableCache = providers.getBannerList(observable, new DynamicKey("banner测试"), new EvictDynamicKey(false)).map(new HttpResultFuncCcche<BannerDto>());
         Log.e("HttpData", "HttpDataGetBanner");
         setSubscribe(observableCache, observer);
+    }
+    public void HttpDataGetStaticDate(Observer<HttpResult<IndexStaticDateDto>> observer) {
+        Observable observable = service.getStaticDates();
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataGetBanners(Observer<HttpResult<List<IndexBannerDto>>> observer) {
+        Observable observable = service.getBanners();
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataGetParkBanners(Observer<HttpResult<List<IndexBannerDto>>> observer) {
+        Observable observable = service.getParksBanners();
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataGetNewRecommandParks(Observer<HttpResult<List<IndexRecommandParkDto>>> observer) {
+        Observable observable = service.getRecommandParks();
+        setSubscribe(observable, observer);
     }
 
     /**
@@ -88,16 +109,16 @@ public class HttpData extends RetrofitUtils {
      *
      * @param <T>   Subscriber真正需要的数据类型，也就是Data部分的数据类型
      */
-    private  class HttpResultFunc<T> implements Func1<HttpResult<T>, T> {
+    private  class HttpResultFunc<T> implements Func1<HttpResult2<T>, T> {
 
         @Override
-        public T call(HttpResult<T> httpResult) {
+        public T call(HttpResult2<T> httpResult2) {
 
-                if (httpResult.getCode() != 200) {
-                    throw new ApiException(httpResult);
+                if (httpResult2.getCode() != 200) {
+                    throw new ApiException(httpResult2);
                 }
 
-            return httpResult.getData();
+            return httpResult2.getData();
         }
     }
     /**

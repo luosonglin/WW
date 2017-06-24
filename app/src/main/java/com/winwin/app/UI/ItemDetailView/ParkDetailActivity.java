@@ -14,8 +14,9 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 
 import com.winwin.app.R;
+import com.xiaochao.lcrapiddeveloplibrary.widget.SpringView;
 
-public class ParkDetailActivity extends AppCompatActivity {
+public class ParkDetailActivity extends AppCompatActivity implements SpringView.OnFreshListener{
     private static final String TAG = ParkDetailActivity.class.getSimpleName();
     private Toolbar toolbar;
     private Context context = this;
@@ -127,6 +128,16 @@ public class ParkDetailActivity extends AppCompatActivity {
             }
         });
         anim.start();
+
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
+
+    @Override
+    public void onLoadmore() {
 
     }
 }

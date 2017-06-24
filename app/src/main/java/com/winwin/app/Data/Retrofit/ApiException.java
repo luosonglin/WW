@@ -1,7 +1,7 @@
 package com.winwin.app.Data.Retrofit;
 
 
-import com.winwin.app.UI.Entity.HttpResult;
+import com.winwin.app.UI.Entity.HttpResult2;
 
 /**
  * 异常类
@@ -12,8 +12,8 @@ import com.winwin.app.UI.Entity.HttpResult;
  */
 public class ApiException extends RuntimeException {
 
-    public ApiException(HttpResult httpResult) {
-        this(getApiExceptionMessage(httpResult));
+    public ApiException(HttpResult2 httpResult2) {
+        this(getApiExceptionMessage(httpResult2));
     }
 
     public ApiException(String detailMessage) {
@@ -24,11 +24,11 @@ public class ApiException extends RuntimeException {
      * 对服务器接口传过来的错误信息进行统一处理
      * 免除在Activity的过多的错误判断
      */
-    private static String getApiExceptionMessage(HttpResult httpResult){
+    private static String getApiExceptionMessage(HttpResult2 httpResult2){
         String message = "";
-        switch (httpResult.getCode()) {
+        switch (httpResult2.getCode()) {
             default:
-                message = "与服务端链接错误"+httpResult.getCode();
+                message = "与服务端链接错误"+ httpResult2.getCode();
 
         }
         return message;

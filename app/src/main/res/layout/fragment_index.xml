@@ -197,11 +197,12 @@
                                 android:textSize="16sp" />
 
                             <TextView
+                                android:id="@+id/currentProNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="2dp"
-                                android:text="123"
+                                android:text=""
                                 android:textColor="@color/deepskyblue"
                                 android:textSize="24sp" />
                         </LinearLayout>
@@ -228,11 +229,12 @@
                                 android:textSize="16sp" />
 
                             <TextView
+                                android:id="@+id/newBeraNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="2dp"
-                                android:text="123"
+                                android:text=""
                                 android:textColor="@color/deepskyblue"
                                 android:textSize="24sp" />
                         </LinearLayout>
@@ -259,11 +261,12 @@
                                 android:textSize="16sp" />
 
                             <TextView
+                                android:id="@+id/commendSuccessNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="2dp"
-                                android:text="123"
+                                android:text=""
                                 android:textColor="@color/deepskyblue"
                                 android:textSize="24sp" />
                         </LinearLayout>

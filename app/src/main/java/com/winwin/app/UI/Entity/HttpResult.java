@@ -1,35 +1,31 @@
 package com.winwin.app.UI.Entity;
 
-/**
- * Created by liukun on 16/3/5.
- */
 public class HttpResult<T> {
 
-
     /**
-     * data : []
-     * requestTime : 2016-11-02 14:00:25
-     * code : 1
+     * status : {"code":"0","msg":"ok"}
+     * data : [{"createId":null,"createTime":1497928061000,"isDel":0,"updaterId":null,"updateTime":null,"id":1,"bannerType":1,"bannerOrder":0,"bannerPath":"http://106.14.47.190:89/2017-02-28/481488291874917.jpg"}]
+     * totalRows : 0
      */
 
-//    private String requestTime;
-    private int code;
+    private StatusBean status;
+    private int totalRows;
     private T data;
 
-//    public String getRequestTime() {
-//        return requestTime;
-//    }
-//
-//    public void setRequestTime(String requestTime) {
-//        this.requestTime = requestTime;
-//    }
-
-    public int getCode() {
-        return code;
+    public StatusBean getStatus() {
+        return status;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setStatus(StatusBean status) {
+        this.status = status;
+    }
+
+    public int getTotalRows() {
+        return totalRows;
+    }
+
+    public void setTotalRows(int totalRows) {
+        this.totalRows = totalRows;
     }
 
     public T getData() {
@@ -39,4 +35,5 @@ public class HttpResult<T> {
     public void setData(T data) {
         this.data = data;
     }
+
 }

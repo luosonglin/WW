@@ -1,6 +1,7 @@
 package com.winwin.app.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,9 +13,11 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.winwin.app.R;
 import com.winwin.app.UI.MineView.MyCollectTabFragment;
+import com.winwin.app.UI.RoomView.MapActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +44,8 @@ public class RoomFragment extends Fragment {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
+    private ImageView mMapIv;
 
     public RoomFragment() {
         // Required empty public constructor
@@ -80,6 +85,14 @@ public class RoomFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_room, container, false);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+
+        mMapIv = (ImageView) view.findViewById(R.id.map_image);
+        mMapIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), MapActivity.class));
+            }
+        });
 
         setUpViewPager(viewPager);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

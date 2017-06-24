@@ -11,10 +11,23 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            keyPassword 'winwin123'
+            storeFile file('/Users/luosonglin/AndroidStudioProjects/winwin_android/Winwin/app/winwin.jks')
+            storePassword 'winwin123'
+        }
+    }
     buildTypes {
         release {
+            //是否混淆
             minifyEnabled false
+            //是否移除无用资源
+            zipAlignEnabled true
+            //混淆的配置文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -24,7 +37,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    //动画框架
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'
@@ -51,11 +63,12 @@ dependencies {
     testCompile 'junit:junit:4.12'
     //MVCHelper核心类库
     compile 'com.shizhefei:MVCHelper-Library:1.3.0'
-
     compile project(':lcrapiddeveloplibrary')
     compile 'com.github.VictorAlbertos.RxCache:core:1.4.6'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.netflix.feign:feign-gson:8.17.0'
-
     compile 'com.github.lzyzsd:jsbridge:1.0.4'
+
+//    compile 'com.amap.api:3dmap:latest.integration'
+//    compile 'com.amap.api:search:latest.integration'
 }

@@ -1,8 +1,6 @@
 package com.winwin.app.MVP.Presenter;
 
 
-import android.util.Log;
-
 import com.winwin.app.MVP.Listener.OnLoadDataListListener;
 import com.winwin.app.MVP.Model.BannerListModel;
 import com.winwin.app.MVP.View.BannerListView;
@@ -22,10 +20,7 @@ public class BannerListPresent implements OnLoadDataListListener<List<BannerDto.
 
     public void LoadData(boolean isjz){
         this.isjz=isjz;
-        Log.e("BannerListPresent1", "LoadData");
         mModel.LoadData(this);
-
-        Log.e("BannerListPresent2", "LoadData");
     }
 
     @Override

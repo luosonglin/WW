@@ -4,9 +4,11 @@ package com.winwin.app.Data.APi;
 import com.winwin.app.UI.Entity.BannerDto;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.rx_cache.DynamicKey;
 import io.rx_cache.EvictDynamicKey;
+import io.rx_cache.LifeCache;
 import io.rx_cache.Reply;
 import rx.Observable;
 
@@ -28,7 +30,8 @@ public interface CacheProviders {
 //    // 缓存时间 永久
 //    Observable<Reply<List<BookListDto>>> getBookList(Observable<List<BookListDto>> oRepos, DynamicKey userName, EvictDynamicKey evictDynamicKey);
 
-    // 缓存时间 永久
+    // 缓存时间
+    @LifeCache(duration = 1, timeUnit = TimeUnit.DAYS)
     Observable<Reply<List<BannerDto>>> getBannerList(Observable<List<BannerDto>> oRepos, DynamicKey userName, EvictDynamicKey evictDynamicKey);
 
 }

@@ -15,10 +15,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.LatestRecommendationAdapter;
 import com.winwin.app.UI.Adapter.SelectedParkAdapter;
 import com.winwin.app.UI.EarnMoneyView.EarnMoneyActivity;
+import com.winwin.app.UI.Entity.HttpResult;
+import com.winwin.app.UI.Entity.IndexBannerDto;
+import com.winwin.app.UI.Entity.IndexRecommandParkDto;
+import com.winwin.app.UI.Entity.IndexStaticDateDto;
 import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
 import com.winwin.app.UI.MineView.MyCreditActivity;
 import com.winwin.app.UI.SearchView.SearchParkActivity;
@@ -36,6 +41,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,9 +77,12 @@ public class IndexFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private static final String TAG = IndexFragment.class.getSimpleName();
     private Banner mBanner;
+    private TextView mCurrentProNum, mNewBeraNum, mCommendSuccessNum;
     private RecyclerView mRecyclerView;
     private List<String> bannerImages = new ArrayList<>();
+    private List<IndexBannerDto> parkBannerImages = new ArrayList<>();
     private SelectedParkAdapter mSelectedParkAdapter;
     private RecyclerView mRecyclerView2;
     private LatestRecommendationAdapter mLatestRecommendationAdapter;
@@ -119,21 +128,68 @@ public class IndexFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         mBanner = (Banner) view.findViewById(R.id.banner);
-        //test data
-        bannerImages.add("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=485322380,1483671303&fm=26&gp=0.jpg");
-        bannerImages.add("http://wx1.sinaimg.cn/mw1024/a601622bgy1fdl511w7f5j20dv0aqgm1.jpg");
-        bannerImages.add("http://wx1.sinaimg.cn/mw1024/a601622bly1fbdk9hstbmj20qo0qodja.jpg");
-        bannerImages.add("http://ww4.sinaimg.cn/mw1024/a601622bgw1f8xr5r8n2gj20ku0go0tu.jpg");
-        bannerImages.add("http://ww4.sinaimg.cn/mw1024/a601622bgw1f8ro576rmkj20qy0zktb4.jpg");
-        mBanner.setImages(bannerImages != null ? bannerImages : null)
-                .setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
-//                .setBannerTitles(bannerTitles)
-                .setBannerAnimation(Transformer.Tablet)
-                .setImageLoader(new GlideImageLoader()).start();
-        mBanner.setOnBannerClickListener(new OnBannerClickListener() {
+        HttpData.getInstance().HttpDataGetBanners(new Observer<HttpResult<List<IndexBannerDto>>>() {
             @Override
-            public void OnBannerClick(int position) {
-                Log.e("--", "点击：" + position + "");
+            public void onCompleted() {
+                Log.e(TAG, "onCompleted");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "onError: "+e.getMessage()
+                        +"\n"+e.getCause()
+                        +"\n"+e.getLocalizedMessage()
+                        +"\n"+e.getStackTrace());
+            }
+
+            @Override
+            public void onNext(HttpResult<List<IndexBannerDto>> indexBannerDto) {
+
+                for (IndexBannerDto i:indexBannerDto.getData()) {
+                    bannerImages.add(i.getBannerPath());
+                }
+                mBanner.setImages(bannerImages != null ? bannerImages : null)
+                        .setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
+                        .setBannerAnimation(Transformer.Tablet)
+                        .setImageLoader(new GlideImageLoader()).start();
+                mBanner.setOnBannerClickListener(new OnBannerClickListener() {
+                    @Override
+                    public void OnBannerClick(int position) {
+                        Log.e("--", "点击：" + position + "");
+                    }
+                });
+
+                Log.e(TAG, "onNext");
+            }
+        });
+
+        mCurrentProNum = (TextView) view.findViewById(R.id.currentProNum);
+        mNewBeraNum = (TextView) view.findViewById(R.id.newBeraNum);
+        mCommendSuccessNum = (TextView) view.findViewById(R.id.commendSuccessNum);
+        HttpData.getInstance().HttpDataGetStaticDate(new Observer<HttpResult<IndexStaticDateDto>>() {
+            @Override
+            public void onCompleted() {
+                Log.e(TAG, "indexStaticDateDtoHttpResult onCompleted");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "indexStaticDateDtoHttpResult onError: "+e.getMessage()
+                        +"\n"+e.getCause()
+                        +"\n"+e.getLocalizedMessage()
+                        +"\n"+e.getStackTrace());
+            }
+
+            @Override
+            public void onNext(HttpResult<IndexStaticDateDto> indexStaticDateDtoHttpResult) {
+                mCurrentProNum.setText(indexStaticDateDtoHttpResult.getData().getCurrentProNum()+"");
+                mNewBeraNum.setText(indexStaticDateDtoHttpResult.getData().getNewBeraNum()+"");
+                mCommendSuccessNum.setText(indexStaticDateDtoHttpResult.getData().getCommendSuccessNum()+"");
+
+                Log.e(TAG, "indexStaticDateDtoHttpResult onNext"
+                        + indexStaticDateDtoHttpResult.getData().getCommendSuccessNum()
+                        +" "+indexStaticDateDtoHttpResult.getData().getNewBeraNum()
+                        +" "+indexStaticDateDtoHttpResult.getData().getCurrentProNum());
             }
         });
 
@@ -144,8 +200,7 @@ public class IndexFragment extends Fragment {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         //如果Item高度固定  增加该属性能够提高效率
         mRecyclerView.setHasFixedSize(true);
-        // test data
-        mSelectedParkAdapter = new SelectedParkAdapter(R.layout.item_index_fragment_selected_park, bannerImages);
+        mSelectedParkAdapter = new SelectedParkAdapter(R.layout.item_index_fragment_selected_park, null);
         //设置加载动画
         mSelectedParkAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         //设置是否自动加载以及加载个数
@@ -153,19 +208,64 @@ public class IndexFragment extends Fragment {
         //将适配器添加到RecyclerView
         mRecyclerView.setAdapter(mSelectedParkAdapter);
 
+        HttpData.getInstance().HttpDataGetParkBanners(new Observer<HttpResult<List<IndexBannerDto>>>() {
+            @Override
+            public void onCompleted() {
+                Log.e(TAG, "onCompleted");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "onError: "+e.getMessage()
+                        +"\n"+e.getCause()
+                        +"\n"+e.getLocalizedMessage()
+                        +"\n"+e.getStackTrace());
+            }
+
+            @Override
+            public void onNext(HttpResult<List<IndexBannerDto>> indexBannerDto) {
+                parkBannerImages.addAll(indexBannerDto.getData());
+                mSelectedParkAdapter.addData(parkBannerImages);
+
+                Log.e(TAG, "onNext");
+            }
+        });
+
+
         mRecyclerView2 = (RecyclerView) view.findViewById(R.id.rv_list2);
         //设置布局管理器
         mRecyclerView2.setLayoutManager(new LinearLayoutManager(getActivity()));
         //如果Item高度固定  增加该属性能够提高效率
         mRecyclerView2.setHasFixedSize(true);
         // test data
-        mLatestRecommendationAdapter = new LatestRecommendationAdapter(R.layout.item_index_fragment_latest_recommendation, bannerImages);
+        mLatestRecommendationAdapter = new LatestRecommendationAdapter(R.layout.item_index_fragment_latest_recommendation, null);
         //设置加载动画
         mLatestRecommendationAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_CUSTOM);
         //设置是否自动加载以及加载个数
         mLatestRecommendationAdapter.openLoadMore(6, true);
         //将适配器添加到RecyclerView
         mRecyclerView2.setAdapter(mLatestRecommendationAdapter);
+
+        HttpData.getInstance().HttpDataGetNewRecommandParks(new Observer<HttpResult<List<IndexRecommandParkDto>>>() {
+            @Override
+            public void onCompleted() {
+                Log.e(TAG, "onCompleted");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "onError: "+e.getMessage()
+                        +"\n"+e.getCause()
+                        +"\n"+e.getLocalizedMessage()
+                        +"\n"+e.getStackTrace());
+            }
+
+            @Override
+            public void onNext(HttpResult<List<IndexRecommandParkDto>> indexRecommandParkDtoHttpResult) {
+                mLatestRecommendationAdapter.addData(indexRecommandParkDtoHttpResult.getData());
+                Log.e(TAG, "onNext");
+            }
+        });
 
         initListener();
         return view;

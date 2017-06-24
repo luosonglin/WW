@@ -73,7 +73,7 @@ public class MyCollectTabFragment extends Fragment implements BaseQuickAdapter.R
         //设置适配器
         mQuickAdapter = new MyCollectAdapter(R.layout.item_my_collect, null);
         //设置加载动画
-        mQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
+        mQuickAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         //设置是否自动加载以及加载个数
         mQuickAdapter.openLoadMore(6,true);
         //将适配器添加到RecyclerView
