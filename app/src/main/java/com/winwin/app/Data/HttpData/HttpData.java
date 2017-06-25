@@ -8,11 +8,12 @@ import com.winwin.app.Data.APi.CacheProviders;
 import com.winwin.app.Data.Retrofit.ApiException;
 import com.winwin.app.Data.Retrofit.RetrofitUtils;
 import com.winwin.app.UI.Entity.BannerDto;
+import com.winwin.app.UI.Entity.BrokerDto;
 import com.winwin.app.UI.Entity.HttpResult;
-import com.winwin.app.UI.Entity.HttpResult2;
 import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.Entity.IndexStaticDateDto;
+import com.winwin.app.UI.Entity.ParkDetailDto;
 import com.winwin.app.Util.FileUtil;
 
 import java.io.File;
@@ -68,8 +69,8 @@ public class HttpData extends RetrofitUtils {
 
     //get test banner
     public void HttpDataGetBanner(Observer<BannerDto> observer) {
-        Observable observable = service.getBannerList().map(new HttpResultFunc<BannerDto>());
-        Observable observableCache = providers.getBannerList(observable, new DynamicKey("banner测试"), new EvictDynamicKey(false)).map(new HttpResultFuncCcche<BannerDto>());
+        Observable observable = service.getBannerList();//.map(new HttpResultFunc<BannerDto>());
+        Observable observableCache = providers.getBannerList(observable, new DynamicKey("banner测试"), new EvictDynamicKey(false)).map(new HttpResultFuncCache<BannerDto>());
         Log.e("HttpData", "HttpDataGetBanner");
         setSubscribe(observableCache, observer);
     }
@@ -87,6 +88,14 @@ public class HttpData extends RetrofitUtils {
     }
     public void HttpDataGetNewRecommandParks(Observer<HttpResult<List<IndexRecommandParkDto>>> observer) {
         Observable observable = service.getRecommandParks();
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataGetParkDetail(Observer<ParkDetailDto> observer, long parkId) {
+        Observable observable = service.getParkDetail(parkId).map(new HttpResultFunc<ParkDetailDto>());
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataGetBrokers(Observer<List<BrokerDto>> observer, long parkId) {
+        Observable observable = service.getBrokers(parkId).map(new HttpResultFunc<List<BrokerDto>>());
         setSubscribe(observable, observer);
     }
 
@@ -109,22 +118,22 @@ public class HttpData extends RetrofitUtils {
      *
      * @param <T>   Subscriber真正需要的数据类型，也就是Data部分的数据类型
      */
-    private  class HttpResultFunc<T> implements Func1<HttpResult2<T>, T> {
+    private class HttpResultFunc<T> implements Func1<HttpResult<T>, T> {
 
         @Override
-        public T call(HttpResult2<T> httpResult2) {
+        public T call(HttpResult<T> httpResult) {
 
-                if (httpResult2.getCode() != 200) {
-                    throw new ApiException(httpResult2);
+                if (!"0".equals(httpResult.getStatus().getCode())) {
+                    throw new ApiException(httpResult);
                 }
 
-            return httpResult2.getData();
+            return httpResult.getData();
         }
     }
     /**
-     * 用来统一处理RxCacha的结果
+     * 用来统一处理RxCacha的结
      */
-    private  class HttpResultFuncCcche<T> implements Func1<Reply<T>, T> {
+    private  class HttpResultFuncCache<T> implements Func1<Reply<T>, T> {
 
         @Override
         public T call(Reply<T> httpResult) {

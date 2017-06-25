@@ -47,7 +47,9 @@ public class OkHttpUtils {
         @Override public Response intercept(Chain chain) throws IOException {
             Request originalRequest = chain.request();
             Request authorised = originalRequest.newBuilder()
-                    .header("FromSource", "1.0")
+//                    .header("FromSource", "1.0")
+                    .header("Accept", "*/*")
+                    .header("X-Token", "845faaeb2b4c4dc58ddcf9b967c7779bApp#1")
                     .build();
             return chain.proceed(authorised);
         }

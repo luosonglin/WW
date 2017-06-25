@@ -1,0 +1,47 @@
+package com.winwin.app.UI.Adapter;
+
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.winwin.app.R;
+import com.winwin.app.UI.Entity.BrokerDto;
+import com.winwin.app.Util.GlideCircleTransform;
+import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
+import com.xiaochao.lcrapiddeveloplibrary.BaseViewHolder;
+
+import java.util.List;
+
+public class BrokerAdapter extends BaseQuickAdapter<BrokerDto> {
+    private static final String TAG = LatestRecommendationAdapter.class.getSimpleName();
+
+    public BrokerAdapter(int layoutResId, List<BrokerDto> data) {
+        super(layoutResId, data);
+    }
+
+    @Override
+    protected void convert(BaseViewHolder helper, final BrokerDto item) {
+        Glide.with(mContext)
+                .load(item.getImage())
+                .crossFade()
+                .transform(new GlideCircleTransform(mContext))
+                .placeholder(R.mipmap.emoji)
+                .into((ImageView) helper.getView(R.id.avatar));
+        helper.setText(R.id.name, item.getRealName())
+                .setText(R.id.attitude, "态度好，服务热情");
+
+        helper.getView(R.id.message).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e(TAG, item.getId() + "");
+            }
+        });
+        helper.getView(R.id.call).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e(TAG, item.getMobile() + "");
+            }
+        });
+    }
+}

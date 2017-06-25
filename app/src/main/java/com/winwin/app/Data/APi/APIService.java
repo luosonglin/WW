@@ -2,15 +2,18 @@ package com.winwin.app.Data.APi;
 
 
 import com.winwin.app.UI.Entity.BannerDto;
+import com.winwin.app.UI.Entity.BrokerDto;
 import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.HttpResult2;
 import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.Entity.IndexStaticDateDto;
+import com.winwin.app.UI.Entity.ParkDetailDto;
 
 import java.util.List;
 
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import rx.Observable;
 
 /**
@@ -39,5 +42,11 @@ public interface APIService {
     @GET("api/v1/parkapp/noLogin/newRecommandParks")
     Observable<HttpResult<List<IndexRecommandParkDto>>> getRecommandParks();
 
+    //app获取园区详情
+    @GET("api/v1/parkapp/getParkDetail/{parkId}")
+    Observable<HttpResult<ParkDetailDto>> getParkDetail(@Path("parkId") long parkId);
 
+    //app获取园区详情页面中的咨询经纪人列表
+    @GET("/api/v1/parkapp/noLogin/{parkId}/getBrokers")
+    Observable<HttpResult<List<BrokerDto>>> getBrokers(@Path("parkId") long parkId);
 }

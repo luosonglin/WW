@@ -37,8 +37,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="240dp"
                             android:layout_gravity="center"
-                            android:scaleType="centerCrop"
-                            android:src="@mipmap/banner" />
+                            android:scaleType="centerCrop" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -84,6 +83,7 @@
                     </RelativeLayout>
 
                     <TextView
+                        android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
                         android:layout_marginLeft="16dp"
@@ -105,6 +105,7 @@
                             android:src="@mipmap/item_location" />
 
                         <TextView
+                            android:id="@+id/location"
                             android:layout_width="match_parent"
                             android:layout_height="25dp"
                             android:layout_gravity="center_vertical"
@@ -142,11 +143,12 @@
                                     android:src="@mipmap/lease_icon" />
 
                                 <TextView
+                                    android:id="@+id/usingAreaPercent"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginLeft="10dp"
-                                    android:text="租凭统计（28.42）"
+                                    android:text="租赁统计（28.42）"
                                     android:textColor="@color/black"
                                     android:textSize="14sp" />
                             </LinearLayout>
@@ -179,6 +181,7 @@
                                     android:src="@mipmap/company_icon" />
 
                                 <TextView
+                                    android:id="@+id/checkInCustomers"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
@@ -205,6 +208,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/parkDesc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
@@ -235,10 +239,11 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/payDay"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="28dp"
-                            android:text="10元/平米/天"
+                            android:text="10 物业费／天"
                             android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -258,6 +263,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/proStand"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="28dp"
@@ -281,6 +287,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/watStand"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="28dp"
@@ -299,11 +306,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="项目体量"
+                            android:text="合同面积"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/proArea"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="28dp"
@@ -328,6 +336,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/peripheryDesc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
@@ -455,6 +464,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/broker"
                     android:layout_width="125dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
