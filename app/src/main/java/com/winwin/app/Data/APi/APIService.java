@@ -3,11 +3,13 @@ package com.winwin.app.Data.APi;
 
 import com.winwin.app.UI.Entity.BannerDto;
 import com.winwin.app.UI.Entity.BrokerDto;
+import com.winwin.app.UI.Entity.CreditDto;
 import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.HttpResult2;
 import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.Entity.IndexStaticDateDto;
+import com.winwin.app.UI.Entity.MyInfoDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
 
 import java.util.List;
@@ -26,6 +28,9 @@ public interface APIService {
     @GET("api/v1/banner/meeting")
     Observable<HttpResult2<BannerDto>> getBannerList();
 
+    /**
+     * 首页
+     */
     //app首页获取顶部banner图地址
     @GET("api/v1/parkapp/noLogin/appIndex/banners")
     Observable<HttpResult<List<IndexBannerDto>>> getBanners();
@@ -47,6 +52,17 @@ public interface APIService {
     Observable<HttpResult<ParkDetailDto>> getParkDetail(@Path("parkId") long parkId);
 
     //app获取园区详情页面中的咨询经纪人列表
-    @GET("/api/v1/parkapp/noLogin/{parkId}/getBrokers")
+    @GET("api/v1/parkapp/noLogin/{parkId}/getBrokers")
     Observable<HttpResult<List<BrokerDto>>> getBrokers(@Path("parkId") long parkId);
+
+    /**
+     * 个人页
+     */
+    //app获取我的积分包含用户的头像以及姓名等信息
+    @GET("api/v1/credits/info")
+    Observable<HttpResult<MyInfoDto>> getMyInformation();
+
+    //app获取我的积分列表
+    @GET("api/v1/credits/lists")
+    Observable<HttpResult<CreditDto>> getCredits();
 }

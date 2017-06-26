@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.winwin.app.Constant.Constant;
-import com.winwin.app.MVP.Presenter.BannerListPresent;
-import com.winwin.app.MVP.View.BannerListView;
+import com.winwin.app.MVP.Presenter.CreditParkListPresent;
+import com.winwin.app.MVP.View.CreditParkListView;
 import com.winwin.app.R;
-import com.winwin.app.UI.Adapter.MyCreditAdapter;
-import com.winwin.app.UI.Entity.BannerDto;
+import com.winwin.app.UI.Adapter.MyCreditParkAdapter;
+import com.winwin.app.UI.Entity.CreditDto;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.container.DefaultHeader;
 import com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity;
@@ -23,7 +23,7 @@ import com.xiaochao.lcrapiddeveloplibrary.widget.SpringView;
 
 import java.util.List;
 
-public class MyCreditTabFragment extends Fragment implements BaseQuickAdapter.RequestLoadMoreListener,SpringView.OnFreshListener,BannerListView {
+public class MyCreditParkTabFragment extends Fragment implements BaseQuickAdapter.RequestLoadMoreListener,SpringView.OnFreshListener,CreditParkListView {
 
     RecyclerView mRecyclerView;
     ProgressActivity progress;
@@ -31,7 +31,7 @@ public class MyCreditTabFragment extends Fragment implements BaseQuickAdapter.Re
     private BaseQuickAdapter mQuickAdapter;
     private int PageIndex=1;
     private SpringView springView;
-    private BannerListPresent present;
+    private CreditParkListPresent present;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,15 +73,14 @@ public class MyCreditTabFragment extends Fragment implements BaseQuickAdapter.Re
         //设置适配器
 //        mQuickAdapter = new ListViewAdapter(R.layout.list_view_item_layout,null);
 //        mQuickAdapter = new BannersAdapter(R.layout.list_view_item_layout, null);
-        mQuickAdapter = new MyCreditAdapter(R.layout.item_my_credit, null);
+        mQuickAdapter = new MyCreditParkAdapter(R.layout.item_my_credit, null);
         //设置加载动画
         mQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         //设置是否自动加载以及加载个数
         mQuickAdapter.openLoadMore(6,true);
         //将适配器添加到RecyclerView
         mRecyclerView.setAdapter(mQuickAdapter);
-//        present = new BookListPresent(this);
-        present = new BannerListPresent(this);
+        present = new CreditParkListPresent(this);
         //请求网络数据
 //        present.LoadData("1",PageIndex,false);
         present.LoadData(false);
@@ -139,7 +138,7 @@ public class MyCreditTabFragment extends Fragment implements BaseQuickAdapter.Re
     }
 
     @Override
-    public void newDatas(List<BannerDto.BannersBean> newsList) {
+    public void newDatas(List<CreditDto.PublishParkListBean> newsList) {
         //进入显示的初始数据或者下拉刷新显示的数据
         mQuickAdapter.setNewData(newsList);//新增数据
         mQuickAdapter.openLoadMore(10,true);//设置是否可以下拉加载  以及加载条数
@@ -147,7 +146,7 @@ public class MyCreditTabFragment extends Fragment implements BaseQuickAdapter.Re
     }
 
     @Override
-    public void addDatas(List<BannerDto.BannersBean> addList) {
+    public void addDatas(List<CreditDto.PublishParkListBean> addList) {
         //新增自动加载的的数据
         mQuickAdapter.notifyDataChangedAfterLoadMore(addList, true);
     }

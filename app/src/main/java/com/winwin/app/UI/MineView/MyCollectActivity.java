@@ -54,7 +54,7 @@ public class MyCollectActivity extends AppCompatActivity {
         SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
         FragmentPagerItems pages = new FragmentPagerItems(this);
 //        for (int i=0;i<4;i++) {
-//            pages.add(FragmentPagerItem.of("Tab"+i, MyCreditTabFragment.class));
+//            pages.add(FragmentPagerItem.of("Tab"+i, MyCreditParkTabFragment.class));
 //        }
         pages.add(FragmentPagerItem.of("园区", MyCollectTabFragment.class));
         pages.add(FragmentPagerItem.of("需求", MyCollectDemandTabFragment.class));

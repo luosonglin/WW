@@ -9,10 +9,12 @@ import com.winwin.app.Data.Retrofit.ApiException;
 import com.winwin.app.Data.Retrofit.RetrofitUtils;
 import com.winwin.app.UI.Entity.BannerDto;
 import com.winwin.app.UI.Entity.BrokerDto;
+import com.winwin.app.UI.Entity.CreditDto;
 import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.Entity.IndexStaticDateDto;
+import com.winwin.app.UI.Entity.MyInfoDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
 import com.winwin.app.Util.FileUtil;
 
@@ -96,6 +98,14 @@ public class HttpData extends RetrofitUtils {
     }
     public void HttpDataGetBrokers(Observer<List<BrokerDto>> observer, long parkId) {
         Observable observable = service.getBrokers(parkId).map(new HttpResultFunc<List<BrokerDto>>());
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataGetMyInformation(Observer<MyInfoDto> observer) {
+        Observable observable = service.getMyInformation().map(new HttpResultFunc<MyInfoDto>());
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataGetCredits(Observer<CreditDto> observer) {
+        Observable observable = service.getCredits().map(new HttpResultFunc<CreditDto>());
         setSubscribe(observable, observer);
     }
 

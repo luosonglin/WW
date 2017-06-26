@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
+import com.winwin.app.UI.Entity.MyInfoDto;
 import com.winwin.app.Util.GlideCircleTransform;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +41,8 @@ public class MineFragment extends Fragment {
     TextView name;
     @Bind(R.id.avatar)
     ImageView avatar;
+    @Bind(R.id.member_point)
+    TextView mMemberPoint;
     @Bind(R.id.right_tip)
     ImageView rightTip;
     @Bind(R.id.credit)
@@ -51,6 +57,8 @@ public class MineFragment extends Fragment {
     RelativeLayout myCollect;
     @Bind(R.id.my_more)
     RelativeLayout myMore;
+
+    private static final String TAG = MineFragment.class.getSimpleName();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -96,13 +104,32 @@ public class MineFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.bind(this, view);
 
-        //通过Glide显示图片
-        Glide.with(getActivity())
-                .load("http://ww2.sinaimg.cn/mw690/a601622bjw8e2ajzw6k5ej.jpg")
-                .crossFade()
-                .placeholder(R.mipmap.def_head)
-                .transform(new GlideCircleTransform(getActivity()))
-                .into(avatar);
+        HttpData.getInstance().HttpDataGetMyInformation(new Observer<MyInfoDto>() {
+            @Override
+            public void onCompleted() {
+                Log.e(TAG, "onCompleted");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "onError: "+e.getMessage()
+                        +"\n"+e.getCause()
+                        +"\n"+e.getLocalizedMessage()
+                        +"\n"+e.getStackTrace());
+            }
+
+            @Override
+            public void onNext(MyInfoDto myInfoDto) {
+                Glide.with(getActivity())
+                        .load(myInfoDto.getHeadPic())
+                        .crossFade()
+                        .placeholder(R.mipmap.emoji)
+                        .transform(new GlideCircleTransform(getActivity()))
+                        .into(avatar);
+                name.setText(myInfoDto.getUserName());
+                mMemberPoint.setText(myInfoDto.getTotalCredits()+" ");
+            }
+        });
 
         return view;
     }
