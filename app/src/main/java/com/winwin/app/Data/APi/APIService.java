@@ -4,6 +4,7 @@ package com.winwin.app.Data.APi;
 import com.winwin.app.UI.Entity.BannerDto;
 import com.winwin.app.UI.Entity.BrokerDto;
 import com.winwin.app.UI.Entity.CreditDto;
+import com.winwin.app.UI.Entity.HotAreaDto;
 import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.HttpResult2;
 import com.winwin.app.UI.Entity.IndexBannerDto;
@@ -54,6 +55,13 @@ public interface APIService {
     //app获取园区详情页面中的咨询经纪人列表
     @GET("api/v1/parkapp/noLogin/{parkId}/getBrokers")
     Observable<HttpResult<List<BrokerDto>>> getBrokers(@Path("parkId") long parkId);
+
+    /**
+     * 搜索页
+     */
+    //获取上海所有区域列表
+    @GET("v1/parkapp/search/shanghai/Areas")
+    Observable<HttpResult<List<HotAreaDto>>> getShanghaiHotAreas();
 
     /**
      * 个人页
