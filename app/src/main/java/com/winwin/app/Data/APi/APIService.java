@@ -10,6 +10,7 @@ import com.winwin.app.UI.Entity.HttpResult2;
 import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.Entity.IndexStaticDateDto;
+import com.winwin.app.UI.Entity.MapDto;
 import com.winwin.app.UI.Entity.MyInfoDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
 
@@ -17,6 +18,7 @@ import java.util.List;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -62,6 +64,10 @@ public interface APIService {
     //获取上海所有区域列表
     @GET("v1/parkapp/search/shanghai/Areas")
     Observable<HttpResult<List<HotAreaDto>>> getShanghaiHotAreas();
+
+    //根据名称搜索我要找的项目或园区
+    @GET("api/v1/parkapp/noLogin/searchParksByName")
+    Observable<HttpResult<List<MapDto>>> searchParkByName(@Query("parkName") String parkName);
 
     /**
      * 个人页

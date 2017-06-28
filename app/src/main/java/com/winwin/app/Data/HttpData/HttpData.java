@@ -15,6 +15,7 @@ import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.Entity.IndexStaticDateDto;
+import com.winwin.app.UI.Entity.MapDto;
 import com.winwin.app.UI.Entity.MyInfoDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
 import com.winwin.app.Util.FileUtil;
@@ -111,6 +112,10 @@ public class HttpData extends RetrofitUtils {
     }
     public void HttpDataGetShanghaiHotAreas(Observer<List<HotAreaDto>> observer) {
         Observable observable = service.getShanghaiHotAreas().map(new HttpResultFunc<List<HotAreaDto>>());
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataSearchParksByName(Observer<List<MapDto>> observer, String parkName) {
+        Observable observable = service.searchParkByName(parkName).map(new HttpResultFunc<List<MapDto>>());
         setSubscribe(observable, observer);
     }
 
