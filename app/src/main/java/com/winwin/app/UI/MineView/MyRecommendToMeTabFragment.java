@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.winwin.app.Constant.Constant;
-import com.winwin.app.MVP.Presenter.MyRecommendCustomerListPresent;
+import com.winwin.app.MVP.Presenter.MyRecommendCustomerToMeListPresent;
 import com.winwin.app.MVP.View.CustomerListView;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.MyRecommendAdapter;
@@ -23,7 +23,7 @@ import com.xiaochao.lcrapiddeveloplibrary.widget.SpringView;
 
 import java.util.List;
 
-public class MyRecommendTabFragment extends Fragment implements BaseQuickAdapter.RequestLoadMoreListener,SpringView.OnFreshListener, CustomerListView {
+public class MyRecommendToMeTabFragment extends Fragment implements BaseQuickAdapter.RequestLoadMoreListener,SpringView.OnFreshListener, CustomerListView {
 
     RecyclerView mRecyclerView;
     ProgressActivity progress;
@@ -31,13 +31,13 @@ public class MyRecommendTabFragment extends Fragment implements BaseQuickAdapter
     private BaseQuickAdapter mQuickAdapter;
     private int PageIndex=1;
     private SpringView springView;
-    private MyRecommendCustomerListPresent present;
+    private MyRecommendCustomerToMeListPresent present;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_recommend_tab, container, false);
+        return inflater.inflate(R.layout.fragment_my_recommend_to_me_tab, container, false);
     }
 
     @Override
@@ -48,9 +48,6 @@ public class MyRecommendTabFragment extends Fragment implements BaseQuickAdapter
     }
 
     private void initView(View root) {
-//        TextView tabfragmenttextview = (TextView) root.findViewById(R.id.tab_fragment_textview);
-//        int position = FragmentPagerItem.getPosition(getArguments());
-//        tabfragmenttextview.setText(String.valueOf(position));
 
         mRecyclerView = (RecyclerView) root.findViewById(R.id.rv_list);
         springView = (SpringView) root.findViewById(R.id.springview);
@@ -74,7 +71,7 @@ public class MyRecommendTabFragment extends Fragment implements BaseQuickAdapter
         mQuickAdapter.openLoadMore(6,true);
         //将适配器添加到RecyclerView
         mRecyclerView.setAdapter(mQuickAdapter);
-        present = new MyRecommendCustomerListPresent(this);
+        present = new MyRecommendCustomerToMeListPresent(this);
         //请求网络数据
 //        present.LoadData("1",PageIndex,false);
         present.LoadData(false);

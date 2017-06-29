@@ -4,6 +4,7 @@ package com.winwin.app.Data.APi;
 import com.winwin.app.UI.Entity.BannerDto;
 import com.winwin.app.UI.Entity.BrokerDto;
 import com.winwin.app.UI.Entity.CreditDto;
+import com.winwin.app.UI.Entity.CustomerDto;
 import com.winwin.app.UI.Entity.HotAreaDto;
 import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.HttpResult2;
@@ -79,4 +80,14 @@ public interface APIService {
     //app获取我的积分列表
     @GET("api/v1/credits/lists")
     Observable<HttpResult<CreditDto>> getCredits();
+
+    //根据当前登录人查询我推荐的客户列表 commendStatus推荐状态（0：待接受，1：已拒绝，2：已接受）
+    @GET("api/v1/recommendCustomer/queryMyRecommendList")
+    Observable<HttpResult<List<CustomerDto>>> queryMyRecommendList();
+
+    //查询(我收到的推荐) commendStatus推荐状态（0：待接受，1：已拒绝，2：已接受）
+    @GET("api/v1/recommendCustomer/queryRecommendToMeList")
+    Observable<HttpResult<List<CustomerDto>>> queryRecommendToMeList();
+
+
 }

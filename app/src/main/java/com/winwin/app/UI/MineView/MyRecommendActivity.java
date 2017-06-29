@@ -51,7 +51,7 @@ public class MyRecommendActivity extends AppCompatActivity {
         FragmentPagerItems pages = new FragmentPagerItems(this);
 
         pages.add(FragmentPagerItem.of("我推荐的", MyRecommendTabFragment.class));
-        pages.add(FragmentPagerItem.of("我收到的", MyRecommendTabFragment.class));
+        pages.add(FragmentPagerItem.of("我收到的", MyRecommendToMeTabFragment.class));
 
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), pages);

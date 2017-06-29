@@ -33,7 +33,6 @@ public class OkHttpUtils {
                     .writeTimeout(30, TimeUnit.SECONDS)
                     .readTimeout(30, TimeUnit.SECONDS)
                     .build();
-
         }
 
         return mOkHttpClient;

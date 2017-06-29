@@ -10,6 +10,7 @@ import com.winwin.app.Data.Retrofit.RetrofitUtils;
 import com.winwin.app.UI.Entity.BannerDto;
 import com.winwin.app.UI.Entity.BrokerDto;
 import com.winwin.app.UI.Entity.CreditDto;
+import com.winwin.app.UI.Entity.CustomerDto;
 import com.winwin.app.UI.Entity.HotAreaDto;
 import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.IndexBannerDto;
@@ -118,6 +119,15 @@ public class HttpData extends RetrofitUtils {
         Observable observable = service.searchParkByName(parkName).map(new HttpResultFunc<List<MapDto>>());
         setSubscribe(observable, observer);
     }
+    public void HttpDataQueryMyRecommendList(Observer<List<CustomerDto>> observer) {
+        Observable observable = service.queryMyRecommendList().map(new HttpResultFunc<List<CustomerDto>>());
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataQueryRecommendToMeList(Observer<List<CustomerDto>> observer) {
+        Observable observable = service.queryRecommendToMeList().map(new HttpResultFunc<List<CustomerDto>>());
+        setSubscribe(observable, observer);
+    }
+
 
     /**
      * 插入观察者

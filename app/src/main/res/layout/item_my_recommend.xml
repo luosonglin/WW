@@ -44,35 +44,58 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="95dp"
+
+        <TextView
+            android:id="@+id/accept_status_btn"
+            android:layout_width="85dp"
             android:layout_height="28dp"
-            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true">
+            android:layout_marginRight="16dp"
+            android:background="@drawable/textview_side_blue"
+            android:gravity="center"
+            android:text="对方已接受"
+            android:textColor="@color/deepskyblue"
+            android:textSize="14sp"/>
 
-            <TextView
-                android:id="@+id/accept_btn"
-                android:layout_width="45dp"
-                android:layout_height="28dp"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/textview_all_blue"
-                android:text="接受"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="14sp"/>
+        <TextView
+            android:id="@+id/reject_status_btn"
+            android:layout_width="85dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/textview_radius_grey"
+            android:gravity="center"
+            android:text="对方已拒绝"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/reject_btn"
-                android:layout_width="45dp"
-                android:layout_height="28dp"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/textview_radius_grey"
-                android:text="拒绝"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="14sp"/>
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/accept_btn"
+            android:layout_width="45dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@+id/reject_btn"
+            android:background="@drawable/textview_all_blue"
+            android:gravity="center"
+            android:text="接受"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/reject_btn"
+            android:layout_width="45dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/textview_radius_grey"
+            android:gravity="center"
+            android:text="拒绝"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

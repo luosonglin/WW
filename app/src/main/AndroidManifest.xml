@@ -25,20 +25,19 @@
         <activity
             android:name=".view.WelcomeActivity"
             android:theme="@style/WelcomeTheme">
-
         </activity>
         <activity android:name=".MainActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <!--服务参数配置-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="2709e9ecd629a94cbc6e81cc5e813677"/>
+            android:value="2709e9ecd629a94cbc6e81cc5e813677" />
 
         <activity
             android:name=".view.LoginActivity"
@@ -105,12 +104,6 @@
             android:label="" />
         <activity
             android:name=".UI.RoomView.MapActivity"
-            android:label="" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            </activity>
+            android:label=""></activity>
     </application>
 </manifest>
