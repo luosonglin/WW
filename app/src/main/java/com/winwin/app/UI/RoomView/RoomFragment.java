@@ -1,4 +1,4 @@
-package com.winwin.app.view;
+package com.winwin.app.UI.RoomView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +17,6 @@ import android.widget.ImageView;
 
 import com.winwin.app.R;
 import com.winwin.app.UI.MineView.MyCollectTabFragment;
-import com.winwin.app.UI.RoomView.MapActivity;
 
 import java.util.ArrayList;
 import java.util.List;

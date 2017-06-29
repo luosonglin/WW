@@ -1,6 +1,7 @@
 package com.winwin.app.Widget.popmenu;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -71,6 +72,7 @@ public class PopSubView extends LinearLayout {
         if (popMenuItem == null) return;
         icon.setImageDrawable(popMenuItem.getDrawable());
         textView.setText(popMenuItem.getTitle());
+        textView.setTextColor(Color.WHITE);
     }
 
     /**

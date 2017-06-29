@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.winwin.app.view.SignUpActivity">
+    tools:context="com.winwin.app.UI.SignView.SignUpActivity">
 
     <ImageView
         android:id="@+id/login_background_image"

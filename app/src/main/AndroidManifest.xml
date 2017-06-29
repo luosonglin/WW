@@ -40,17 +40,17 @@
             android:value="2709e9ecd629a94cbc6e81cc5e813677" />
 
         <activity
-            android:name=".view.LoginActivity"
+            android:name=".UI.SignView.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
-            android:name=".view.SignUpActivity"
+            android:name=".UI.SignView.SignUpActivity"
             android:label="@string/title_activity_sign_up2"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".view.ForgetPasswordActivity"
+            android:name=".UI.SignView.ForgetPasswordActivity"
             android:label="@string/title_activity_forget_password"
             android:theme="@style/AppTheme.NoActionBar" />
 

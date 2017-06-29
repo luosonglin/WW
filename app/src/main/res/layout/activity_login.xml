@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.winwin.app.view.LoginActivity">
+    tools:context="com.winwin.app.UI.SignView.LoginActivity">
 
     <ImageView
         android:id="@+id/login_background_image"

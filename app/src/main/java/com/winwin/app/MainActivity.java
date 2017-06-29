@@ -13,17 +13,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.winwin.app.UI.ListvView.ListvViewActivity;
+import com.winwin.app.UI.MessageView.MessageFragment;
 import com.winwin.app.UI.MineView.MineFragment;
-import com.winwin.app.UI.Entity.BookListDto;
-import com.winwin.app.view.RoomFragment;
-import com.winwin.app.view.IndexFragment;
-import com.winwin.app.view.MessageFragment;
+import com.winwin.app.UI.RoomView.RoomFragment;
 import com.winwin.app.Widget.popmenu.PopMenu;
 import com.winwin.app.Widget.popmenu.PopMenuItem;
 import com.winwin.app.Widget.popmenu.PopMenuItemListener;
+import com.winwin.app.view.IndexFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -215,12 +212,8 @@ public class MainActivity extends AppCompatActivity
     private void initPopMenu(boolean isProfessor){
         if (isProfessor) {
             mPopMenu = new PopMenu.Builder().attachToActivity(MainActivity.this)
-                    .addMenuItem(new PopMenuItem("大会签到", getResources().getDrawable(R.mipmap.tabbar_compose_idea)))
-                    .addMenuItem(new PopMenuItem("交换名片", getResources().getDrawable(R.mipmap.tabbar_compose_photo)))
-                    .addMenuItem(new PopMenuItem("发帖子", getResources().getDrawable(R.mipmap.tabbar_compose_headlines)))
-                    .addMenuItem(new PopMenuItem("发病例", getResources().getDrawable(R.mipmap.tabbar_compose_lbs)))
-                    .addMenuItem(new PopMenuItem("我的钱包", getResources().getDrawable(R.mipmap.tabbar_compose_review)))
-                    .addMenuItem(new PopMenuItem("发起直播", getResources().getDrawable(R.mipmap.tabbar_compose_more)))
+                    .addMenuItem(new PopMenuItem("发布项目", getResources().getDrawable(R.mipmap.tabbar_compose_idea)))
+                    .addMenuItem(new PopMenuItem("发布需求", getResources().getDrawable(R.mipmap.tabbar_compose_photo)))
                     .setOnItemClickListener(new PopMenuItemListener() {
                         @Override
                         public void onItemClick(PopMenu popMenu, int position) {
@@ -230,11 +223,8 @@ public class MainActivity extends AppCompatActivity
                     .build();
         } else {
             mPopMenu = new PopMenu.Builder().attachToActivity(MainActivity.this)
-                    .addMenuItem(new PopMenuItem("大会签到", getResources().getDrawable(R.mipmap.tabbar_compose_idea)))
-                    .addMenuItem(new PopMenuItem("交换名片", getResources().getDrawable(R.mipmap.tabbar_compose_photo)))
-                    .addMenuItem(new PopMenuItem("发帖子", getResources().getDrawable(R.mipmap.tabbar_compose_headlines)))
-                    .addMenuItem(new PopMenuItem("发病例", getResources().getDrawable(R.mipmap.tabbar_compose_lbs)))
-                    .addMenuItem(new PopMenuItem("我的钱包", getResources().getDrawable(R.mipmap.tabbar_compose_review)))
+                    .addMenuItem(new PopMenuItem("发布项目", getResources().getDrawable(R.mipmap.tabbar_compose_idea)))
+                    .addMenuItem(new PopMenuItem("发布需求", getResources().getDrawable(R.mipmap.tabbar_compose_photo)))
                     .setOnItemClickListener(new PopMenuItemListener() {
                         @Override
                         public void onItemClick(PopMenu popMenu, int position) {
@@ -256,20 +246,18 @@ public class MainActivity extends AppCompatActivity
                 break;
             case 1:
                 break;
-            case 2:
-                intent = new Intent(MainActivity.this, ListvViewActivity.class);
-                startActivity(intent);break;
-            case 3:
-                // 唤出RecoveryActivity
-                BookListDto bookListDto=null;
-                Toast.makeText(MainActivity.this, bookListDto.getBookName(), Toast.LENGTH_SHORT).show();
-                break;
-            case 4:
-//                startActivity(new Intent(MainActivity.this, WalletActivity.class));
-                break;
-            case 5:
-//                startActivity(new Intent(MainActivity.this, LiveBuildActivity.class));
-                break;
+//            case 2:
+//                intent = new Intent(MainActivity.this, ListvViewActivity.class);
+//                startActivity(intent);break;
+//            case 3:
+//                // 唤出RecoveryActivity
+//                BookListDto bookListDto=null;
+//                Toast.makeText(MainActivity.this, bookListDto.getBookName(), Toast.LENGTH_SHORT).show();
+//                break;
+//            case 4:
+//                break;
+//            case 5:
+//                break;
         }
     }
 

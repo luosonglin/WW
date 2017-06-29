@@ -1,4 +1,4 @@
-package com.winwin.app.view;
+package com.winwin.app.UI.MessageView;
 
 import android.content.Context;
 import android.os.Bundle;

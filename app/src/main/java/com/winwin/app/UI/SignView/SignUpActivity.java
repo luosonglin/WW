@@ -1,4 +1,4 @@
-package com.winwin.app.view;
+package com.winwin.app.UI.SignView;
 
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -24,9 +24,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.winwin.app.R;
-import com.winwin.app.Util.ToastUtils;
 
-public class ForgetPasswordActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -43,15 +42,13 @@ public class ForgetPasswordActivity extends AppCompatActivity {
      */
     private static ViewPager mViewPager;
 
-    // UI Refrences
+    // UI references.
     private ImageView mBackgroundImageView;
-
-    private static final String TAG = ForgetPasswordActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forget_password);
+        setContentView(R.layout.activity_sign_up);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -72,7 +69,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Animation animation= AnimationUtils.loadAnimation(ForgetPasswordActivity.this, R.anim.login_background_translate_anim);
+                Animation animation= AnimationUtils.loadAnimation(SignUpActivity.this,R.anim.login_background_translate_anim);
                 mBackgroundImageView.startAnimation(animation);
             }
         },1000);
@@ -91,7 +88,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_forget_password, menu);
+//        getMenuInflater().inflate(R.menu.menu_sign_up2, menu);
         return true;
     }
 
@@ -124,20 +121,19 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-//            return PlaceholderFragment.newInstance(position + 1);
             Fragment fragment;
             switch (position) {
                 case 0:
-                    fragment = PlaceholderFirstForgetPasswprdFragment.newInstance(position);
+                    fragment = SignUpPlaceholderFirstFragment.newInstance(position);
                     break;
                 case 1:
-                    fragment = PlaceholderSecondForgetPasswprdFragment.newInstance(position);
+                    fragment = SignUpPlaceholderSecondFragment.newInstance(position);
                     break;
                 case 2:
-                    fragment = PlaceholderThirdForgetPasswprdFragment.newInstance(position);
+                    fragment = SignUpPlaceholderThirdFragment.newInstance(position);
                     break;
                 default:
-                    fragment = PlaceholderFirstForgetPasswprdFragment.newInstance(position);
+                    fragment = SignUpPlaceholderFirstFragment.newInstance(position);
                     break;
             }
             return fragment;
@@ -164,9 +160,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     }
 
     /**
-     * The first placeholder fragment containing a simple view.
+     * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFirstForgetPasswprdFragment extends Fragment {
+    public static class SignUpPlaceholderFirstFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -194,15 +190,15 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             }
         };
 
-        public PlaceholderFirstForgetPasswprdFragment() {
+        public SignUpPlaceholderFirstFragment() {
         }
 
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFirstForgetPasswprdFragment newInstance(int sectionNumber) {
-            PlaceholderFirstForgetPasswprdFragment fragment = new PlaceholderFirstForgetPasswprdFragment();
+        public static SignUpPlaceholderFirstFragment newInstance(int sectionNumber) {
+            SignUpPlaceholderFirstFragment fragment = new SignUpPlaceholderFirstFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
@@ -212,7 +208,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_forget_password_frist, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_sign_up_first, container, false);
             mPhoneView = (TextView) rootView.findViewById(R.id.phone);
             mCodeView = (EditText) rootView.findViewById(R.id.code);
             mGetCodeView = (TextView) rootView.findViewById(R.id.get_code_textview);
@@ -234,9 +230,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     }
 
     /**
-     * The second placeholder fragment containing a simple view.
+     * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderSecondForgetPasswprdFragment extends Fragment {
+    public static class SignUpPlaceholderSecondFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -244,19 +240,20 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         // UI Refrence
-        private EditText mNewPasswordView;
-        private EditText mRepeatPasswordView;
+        private TextView mPhoneView;
+        private EditText mCodeView;
+        private TextView mGetCodeView;
         private Button mConfirmView;
 
-        public PlaceholderSecondForgetPasswprdFragment() {
+        public SignUpPlaceholderSecondFragment() {
         }
 
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderSecondForgetPasswprdFragment newInstance(int sectionNumber) {
-            PlaceholderSecondForgetPasswprdFragment fragment = new PlaceholderSecondForgetPasswprdFragment();
+        public static SignUpPlaceholderSecondFragment newInstance(int sectionNumber) {
+            SignUpPlaceholderSecondFragment fragment = new SignUpPlaceholderSecondFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
@@ -266,17 +263,13 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_forget_password_second, container, false);
-            mNewPasswordView = (EditText) rootView.findViewById(R.id.new_password);
-            mRepeatPasswordView = (EditText) rootView.findViewById(R.id.repeat_password);
+            View rootView = inflater.inflate(R.layout.fragment_sign_up_second, container, false);
+            mPhoneView = (TextView) rootView.findViewById(R.id.phone);
+            mCodeView = (EditText) rootView.findViewById(R.id.code);
             mConfirmView = (Button) rootView.findViewById(R.id.confirm_button);
             mConfirmView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (!mNewPasswordView.getText().toString().equals(mRepeatPasswordView.getText().toString())) {
-                        ToastUtils.show(getActivity(), "两次密码不一致");
-                        return;
-                    }
                     mViewPager.setCurrentItem(getArguments().getInt(ARG_SECTION_NUMBER) + 1, true);
                 }
             });
@@ -284,11 +277,10 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         }
     }
 
-
     /**
-     * The third placeholder fragment containing a simple view.
+     * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderThirdForgetPasswprdFragment extends Fragment {
+    public static class SignUpPlaceholderThirdFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -296,17 +288,20 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         // UI Refrence
+        private TextView mPhoneView;
+        private EditText mCodeView;
+        private TextView mGetCodeView;
         private Button mConfirmView;
 
-        public PlaceholderThirdForgetPasswprdFragment() {
+        public SignUpPlaceholderThirdFragment() {
         }
 
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderThirdForgetPasswprdFragment newInstance(int sectionNumber) {
-            PlaceholderThirdForgetPasswprdFragment fragment = new PlaceholderThirdForgetPasswprdFragment();
+        public static SignUpPlaceholderThirdFragment newInstance(int sectionNumber) {
+            SignUpPlaceholderThirdFragment fragment = new SignUpPlaceholderThirdFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
@@ -316,12 +311,14 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_forget_password_third, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_sign_up_third, container, false);
+            mPhoneView = (TextView) rootView.findViewById(R.id.phone);
+            mCodeView = (EditText) rootView.findViewById(R.id.code);
             mConfirmView = (Button) rootView.findViewById(R.id.confirm_button);
             mConfirmView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ToastUtils.show(getActivity(), "修改密码成功");
+                    mViewPager.setCurrentItem(getArguments().getInt(ARG_SECTION_NUMBER) + 1, true);
                 }
             });
             return rootView;
