@@ -28,12 +28,8 @@ import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
 import com.winwin.app.UI.MineView.MyCreditActivity;
 import com.winwin.app.UI.SearchView.SearchParkActivity;
 import com.winwin.app.UI.WebView.MyWinwinActivity;
-import com.winwin.app.Widget.GlideImageLoader;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
-import com.youth.banner.listener.OnBannerClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +37,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.Observer;
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -130,7 +128,7 @@ public class IndexFragment extends Fragment {
         mBanner = (Banner) view.findViewById(R.id.banner);
         HttpData.getInstance().HttpDataGetBanners(new Observer<HttpResult<List<IndexBannerDto>>>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 Log.e(TAG, "onCompleted");
             }
 
@@ -143,34 +141,61 @@ public class IndexFragment extends Fragment {
             }
 
             @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
             public void onNext(HttpResult<List<IndexBannerDto>> indexBannerDto) {
 
                 for (IndexBannerDto i:indexBannerDto.getData()) {
                     bannerImages.add(i.getBannerPath());
                 }
-                mBanner.setImages(bannerImages != null ? bannerImages : null)
-                        .setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
-                        .setBannerAnimation(Transformer.Tablet)
-                        .setImageLoader(new GlideImageLoader()).start();
-                mBanner.setOnBannerClickListener(new OnBannerClickListener() {
-                    @Override
-                    public void OnBannerClick(int position) {
-                        Log.e("--", "点击：" + position + "");
-                    }
-                });
-
-                Log.e(TAG, "onNext");
+//                mBanner.setImages(bannerImages != null ? bannerImages : null)
+//                        .setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
+//                        .setBannerAnimation(Transformer.Tablet)
+//                        .setImageLoader(new GlideImageLoader()).start();
+//                mBanner.setOnBannerClickListener(new OnBannerClickListener() {
+//                    @Override
+//                    public void OnBannerClick(int position) {
+//                        Log.e("--", "点击：" + position + "");
+//                    }
+//                });
+//
+//                Log.e(TAG, "onNext");
             }
         });
 
         mCurrentProNum = (TextView) view.findViewById(R.id.currentProNum);
         mNewBeraNum = (TextView) view.findViewById(R.id.newBeraNum);
         mCommendSuccessNum = (TextView) view.findViewById(R.id.commendSuccessNum);
+//        HttpData.getInstance().HttpDataGetStaticDate(new Observer<HttpResult<IndexStaticDateDto>>() {
+//            @Override
+//            public void onCompleted() {
+//                Log.e(TAG, "indexStaticDateDtoHttpResult onCompleted");
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                Log.e(TAG, "indexStaticDateDtoHttpResult onError: "+e.getMessage()
+//                        +"\n"+e.getCause()
+//                        +"\n"+e.getLocalizedMessage()
+//                        +"\n"+e.getStackTrace());
+//            }
+//
+//            @Override
+//            public void onNext(HttpResult<IndexStaticDateDto> indexStaticDateDtoHttpResult) {
+//                mCurrentProNum.setText(indexStaticDateDtoHttpResult.getData().getCurrentProNum()+"");
+//                mNewBeraNum.setText(indexStaticDateDtoHttpResult.getData().getNewBeraNum()+"");
+//                mCommendSuccessNum.setText(indexStaticDateDtoHttpResult.getData().getCommendSuccessNum()+"");
+//
+//                Log.e(TAG, "indexStaticDateDtoHttpResult onNext"
+//                        + indexStaticDateDtoHttpResult.getData().getCommendSuccessNum()
+//                        +" "+indexStaticDateDtoHttpResult.getData().getNewBeraNum()
+//                        +" "+indexStaticDateDtoHttpResult.getData().getCurrentProNum());
+//            }
+//        });
         HttpData.getInstance().HttpDataGetStaticDate(new Observer<HttpResult<IndexStaticDateDto>>() {
-            @Override
-            public void onCompleted() {
-                Log.e(TAG, "indexStaticDateDtoHttpResult onCompleted");
-            }
 
             @Override
             public void onError(Throwable e) {
@@ -178,6 +203,16 @@ public class IndexFragment extends Fragment {
                         +"\n"+e.getCause()
                         +"\n"+e.getLocalizedMessage()
                         +"\n"+e.getStackTrace());
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e(TAG, "indexStaticDateDtoHttpResult onCompleted");
+            }
+
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
             }
 
             @Override
@@ -210,7 +245,7 @@ public class IndexFragment extends Fragment {
 
         HttpData.getInstance().HttpDataGetParkBanners(new Observer<HttpResult<List<IndexBannerDto>>>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 Log.e(TAG, "onCompleted");
             }
 
@@ -220,6 +255,11 @@ public class IndexFragment extends Fragment {
                         +"\n"+e.getCause()
                         +"\n"+e.getLocalizedMessage()
                         +"\n"+e.getStackTrace());
+            }
+
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
             }
 
             @Override
@@ -248,7 +288,7 @@ public class IndexFragment extends Fragment {
 
         HttpData.getInstance().HttpDataGetNewRecommandParks(new Observer<HttpResult<List<IndexRecommandParkDto>>>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 Log.e(TAG, "onCompleted");
             }
 
@@ -258,6 +298,11 @@ public class IndexFragment extends Fragment {
                         +"\n"+e.getCause()
                         +"\n"+e.getLocalizedMessage()
                         +"\n"+e.getStackTrace());
+            }
+
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
             }
 
             @Override

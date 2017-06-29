@@ -3,6 +3,8 @@ package com.winwin.app.UI.Adapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.winwin.app.R;
 import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
@@ -17,10 +19,13 @@ public class SelectedParkAdapter extends BaseQuickAdapter<IndexBannerDto> {
 
     @Override
     protected void convert(BaseViewHolder helper, IndexBannerDto item) {
+
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
         Glide.with(mContext)
                 .load(item.getBannerPath())
-                .crossFade()
-//                .placeholder(R.mipmap.ic_launcher)
+                .apply(options)
                 .into((ImageView) helper.getView(R.id.selected_park_iv));
     }
 }

@@ -8,7 +8,10 @@ import com.winwin.app.UI.Entity.HotAreaDto;
 
 import java.util.List;
 
-import rx.Observer;
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+
 
 public class HotAreaListModel {
     private static final String TAG = HotAreaListModel.class.getSimpleName();
@@ -16,7 +19,7 @@ public class HotAreaListModel {
     public void LoadData(final OnLoadDataListListener listener){
         HttpData.getInstance().HttpDataGetShanghaiHotAreas(new Observer<List<HotAreaDto>>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 Log.e(TAG, "onCompleted");
             }
 
@@ -28,6 +31,11 @@ public class HotAreaListModel {
                         +"\n"+e.getCause()
                         +"\n"+e.getLocalizedMessage()
                         +"\n"+e.getStackTrace());
+            }
+
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
             }
 
             @Override

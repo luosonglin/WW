@@ -38,7 +38,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-import rx.Observer;
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 
 public class MapActivity extends AppCompatActivity implements PoiSearch.OnPoiSearchListener{
 
@@ -101,7 +103,7 @@ public class MapActivity extends AppCompatActivity implements PoiSearch.OnPoiSea
 
         HttpData.getInstance().HttpDataSearchParksByName(new Observer<List<MapDto>>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 Log.e(TAG, "onCompleted");
             }
 
@@ -111,6 +113,11 @@ public class MapActivity extends AppCompatActivity implements PoiSearch.OnPoiSea
                         +"\n"+e.getCause()
                         +"\n"+e.getLocalizedMessage()
                         +"\n"+e.getStackTrace());
+            }
+
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
             }
 
             @Override

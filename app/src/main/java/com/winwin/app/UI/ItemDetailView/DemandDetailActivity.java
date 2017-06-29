@@ -15,6 +15,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.winwin.app.R;
 import com.winwin.app.Util.GlideCircleTransform;
 
@@ -123,11 +125,14 @@ public class DemandDetailActivity extends AppCompatActivity {
         });
 
         //通过Glide显示图片
-        Glide.with(DemandDetailActivity.this)
-                .load("http://ww2.sinaimg.cn/mw690/a601622bjw8e2ajzw6k5ej.jpg")
-                .crossFade()
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
                 .placeholder(R.mipmap.def_head)
                 .transform(new GlideCircleTransform(DemandDetailActivity.this))
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
+        Glide.with(DemandDetailActivity.this)
+                .load("http://ww2.sinaimg.cn/mw690/a601622bjw8e2ajzw6k5ej.jpg")
+                .apply(options)
                 .into(avatar);
     }
 

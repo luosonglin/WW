@@ -33,7 +33,9 @@ import com.xiaochao.lcrapiddeveloplibrary.widget.SpringView;
 
 import java.util.List;
 
-import rx.Observer;
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 
 public class ParkDetailActivity extends AppCompatActivity implements SpringView.OnFreshListener{
     private static final String TAG = ParkDetailActivity.class.getSimpleName();
@@ -95,7 +97,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
         proArea = (TextView) findViewById(R.id.proArea);
         HttpData.getInstance().HttpDataGetParkDetail(new Observer<ParkDetailDto>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 Log.e(TAG, "onCompleted");
             }
 
@@ -108,10 +110,15 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
             }
 
             @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
             public void onNext(ParkDetailDto parkDetailDtoHttpResult) {
                 Glide.with(ParkDetailActivity.this)
                         .load(parkDetailDtoHttpResult.getParkVo().getHomeImage())
-                        .crossFade()
+//                        .crossFade()
                         .into((ImageView) findViewById(R.id.img));
                 amount_textview.setText("¥"+parkDetailDtoHttpResult.getParkVo().getDayRentStartPi());
                 name.setText(parkDetailDtoHttpResult.getParkVo().getName());
@@ -144,7 +151,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 
                 HttpData.getInstance().HttpDataGetBrokers(new Observer<List<BrokerDto>>() {
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
                         Log.e(TAG, "onCompleted");
                     }
 
@@ -154,6 +161,11 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                                 +"\n"+e.getCause()
                                 +"\n"+e.getLocalizedMessage()
                                 +"\n"+e.getStackTrace());
+                    }
+
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
                     }
 
                     @Override

@@ -10,7 +10,7 @@ import io.rx_cache.DynamicKey;
 import io.rx_cache.EvictDynamicKey;
 import io.rx_cache.LifeCache;
 import io.rx_cache.Reply;
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * 缓存API接口

@@ -5,7 +5,7 @@ import com.winwin.app.Constant.Constant;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -36,7 +36,7 @@ public abstract class RetrofitUtils {
                     //添加转化库，默认是Gson
                     .addConverterFactory(GsonConverterFactory.create())
                     //添加回调库，采用RxJava
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     //设置使用okhttp网络请求
                     .client(mOkHttpClient)
                     .build();

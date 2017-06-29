@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.winwin.app.UI.MessageView.MessageFragment;
 import com.winwin.app.UI.MineView.MineFragment;
 import com.winwin.app.UI.RoomView.RoomFragment;
+import com.winwin.app.UI.SendView.SendParkActivity;
 import com.winwin.app.Widget.popmenu.PopMenu;
 import com.winwin.app.Widget.popmenu.PopMenuItem;
 import com.winwin.app.Widget.popmenu.PopMenuItemListener;
@@ -212,8 +213,8 @@ public class MainActivity extends AppCompatActivity
     private void initPopMenu(boolean isProfessor){
         if (isProfessor) {
             mPopMenu = new PopMenu.Builder().attachToActivity(MainActivity.this)
-                    .addMenuItem(new PopMenuItem("发布项目", getResources().getDrawable(R.mipmap.tabbar_compose_idea)))
-                    .addMenuItem(new PopMenuItem("发布需求", getResources().getDrawable(R.mipmap.tabbar_compose_photo)))
+                    .addMenuItem(new PopMenuItem("发布项目", getResources().getDrawable(R.mipmap.tab_btn_project_nor)))
+                    .addMenuItem(new PopMenuItem("发布需求", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
                     .setOnItemClickListener(new PopMenuItemListener() {
                         @Override
                         public void onItemClick(PopMenu popMenu, int position) {
@@ -223,8 +224,8 @@ public class MainActivity extends AppCompatActivity
                     .build();
         } else {
             mPopMenu = new PopMenu.Builder().attachToActivity(MainActivity.this)
-                    .addMenuItem(new PopMenuItem("发布项目", getResources().getDrawable(R.mipmap.tabbar_compose_idea)))
-                    .addMenuItem(new PopMenuItem("发布需求", getResources().getDrawable(R.mipmap.tabbar_compose_photo)))
+                    .addMenuItem(new PopMenuItem("发布项目", getResources().getDrawable(R.mipmap.tab_btn_project_nor)))
+                    .addMenuItem(new PopMenuItem("发布需求", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
                     .setOnItemClickListener(new PopMenuItemListener() {
                         @Override
                         public void onItemClick(PopMenu popMenu, int position) {
@@ -243,6 +244,8 @@ public class MainActivity extends AppCompatActivity
         Intent intent;
         switch (position) {
             case 0:
+                intent = new Intent(MainActivity.this, SendParkActivity.class);
+                startActivity(intent);
                 break;
             case 1:
                 break;

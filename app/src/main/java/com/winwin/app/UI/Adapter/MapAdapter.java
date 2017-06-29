@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.winwin.app.R;
 import com.winwin.app.UI.Entity.MapDto;
 import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
@@ -22,11 +24,15 @@ public class MapAdapter extends BaseQuickAdapter<MapDto> {
 
     @Override
     protected void convert(BaseViewHolder helper, final MapDto item) {
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.mipmap.haha)
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
         Glide.with(mContext)
                 .load(item.getCoverImgs())
-                .crossFade()
-                .placeholder(R.mipmap.haha)
+                .apply(options)
                 .into((ImageView) helper.getView(R.id.image));
+
         helper.setText(R.id.location, item.getDistanceMetroDesc())
                 .setText(R.id.type, "自营")
                 .setText(R.id.name, item.getName())

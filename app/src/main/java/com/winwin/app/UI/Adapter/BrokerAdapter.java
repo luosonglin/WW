@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.winwin.app.R;
 import com.winwin.app.UI.Entity.BrokerDto;
 import com.winwin.app.Util.GlideCircleTransform;
@@ -22,12 +24,16 @@ public class BrokerAdapter extends BaseQuickAdapter<BrokerDto> {
 
     @Override
     protected void convert(BaseViewHolder helper, final BrokerDto item) {
-        Glide.with(mContext)
-                .load(item.getImage())
-                .crossFade()
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
                 .transform(new GlideCircleTransform(mContext))
                 .placeholder(R.mipmap.emoji)
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
+        Glide.with(mContext)
+                .load(item.getImage())
+                .apply(options)
                 .into((ImageView) helper.getView(R.id.avatar));
+
         helper.setText(R.id.name, item.getRealName())
                 .setText(R.id.attitude, "态度好，服务热情");
 

@@ -8,7 +8,10 @@ import com.winwin.app.UI.Entity.CustomerDto;
 
 import java.util.List;
 
-import rx.Observer;
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+
 
 public class MyRecommendCustomerToMeListModel {
     private static final String TAG = MyRecommendCustomerToMeListModel.class.getSimpleName();
@@ -16,7 +19,7 @@ public class MyRecommendCustomerToMeListModel {
     public void LoadData(final OnLoadDataListListener listener){
         HttpData.getInstance().HttpDataQueryRecommendToMeList(new Observer<List<CustomerDto>>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 Log.e(TAG, "onCompleted");
             }
 
@@ -28,6 +31,11 @@ public class MyRecommendCustomerToMeListModel {
                         +"\n"+e.getCause()
                         +"\n"+e.getLocalizedMessage()
                         +"\n"+e.getStackTrace());
+            }
+
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
             }
 
             @Override

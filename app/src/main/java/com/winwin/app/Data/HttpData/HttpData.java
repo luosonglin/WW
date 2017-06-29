@@ -24,15 +24,37 @@ import com.winwin.app.Util.FileUtil;
 import java.io.File;
 import java.util.List;
 
-import io.rx_cache.DynamicKey;
-import io.rx_cache.EvictDynamicKey;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import io.rx_cache.Reply;
 import io.rx_cache.internal.RxCache;
-import rx.Observable;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+//import rx.Observable;
+//import rx.functions.Func1;
+//import rx.Observable;
+//import rx.Observer;
+//import rx.functions.Func1;
+//import rx.schedulers.Schedulers;
+
+////1.X
+//import rx.Observable;
+//import rx.Subscription;
+//import rx.android.schedulers.AndroidSchedulers;
+//import rx.schedulers.Schedulers;
+//import rx.functions.Action1;
+//
+////2.X
+//import io.reactivex.Observable;
+//import io.reactivex.ObservableSource;
+//import io.reactivex.ObservableTransformer;
+//import io.reactivex.disposables.Disposable;
+//import io.reactivex.android.schedulers.AndroidSchedulers;
+//import io.reactivex.schedulers.Schedulers;
+//import io.reactivex.functions.Consumer;
+
 
 /*
  *所有的请求数据的方法集中地
@@ -75,9 +97,10 @@ public class HttpData extends RetrofitUtils {
     //get test banner
     public void HttpDataGetBanner(Observer<BannerDto> observer) {
         Observable observable = service.getBannerList();//.map(new HttpResultFunc<BannerDto>());
-        Observable observableCache = providers.getBannerList(observable, new DynamicKey("banner测试"), new EvictDynamicKey(false)).map(new HttpResultFuncCache<BannerDto>());
-        Log.e("HttpData", "HttpDataGetBanner");
-        setSubscribe(observableCache, observer);
+        setSubscribe(observable, observer);
+//        Observable observableCache = providers.getBannerList(observable, new DynamicKey("banner测试"), new EvictDynamicKey(false)).map(new HttpResultFuncCache<BannerDto>());
+//        Log.e("HttpData", "HttpDataGetBanner");
+//        setSubscribe(observableCache, observer);
     }
     public void HttpDataGetStaticDate(Observer<HttpResult<IndexStaticDateDto>> observer) {
         Observable observable = service.getStaticDates();
@@ -139,7 +162,8 @@ public class HttpData extends RetrofitUtils {
         Log.e("HttpData", "setSubscribe");
         observable.subscribeOn(Schedulers.io())
                 .subscribeOn(Schedulers.newThread())//子线程访问网络
-                .observeOn(AndroidSchedulers.mainThread())//回调到主线程
+//                .observeOn(AndroidSchedulers.mainThread())//回调到主线程
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
     }
 
@@ -148,26 +172,26 @@ public class HttpData extends RetrofitUtils {
      *
      * @param <T>   Subscriber真正需要的数据类型，也就是Data部分的数据类型
      */
-    private class HttpResultFunc<T> implements Func1<HttpResult<T>, T> {
+    private class HttpResultFunc<T> implements Function<HttpResult<T>, T> {
 
         @Override
-        public T call(HttpResult<T> httpResult) {
+        public T apply(@NonNull HttpResult<T> tHttpResult) throws Exception {
 
-                if (!"0".equals(httpResult.getStatus().getCode())) {
-                    throw new ApiException(httpResult);
-                }
+            if (!"0".equals(tHttpResult.getStatus().getCode())) {
+                throw new ApiException(tHttpResult);
+            }
 
-            return httpResult.getData();
+            return tHttpResult.getData();
         }
     }
     /**
      * 用来统一处理RxCacha的结
      */
-    private  class HttpResultFuncCache<T> implements Func1<Reply<T>, T> {
+    private  class HttpResultFuncCache<T> implements Function<Reply<T>, T> {
 
         @Override
-        public T call(Reply<T> httpResult) {
-            return httpResult.getData();
+        public T apply(@NonNull Reply<T> tReply) throws Exception {
+            return tReply.getData();
         }
     }
 }

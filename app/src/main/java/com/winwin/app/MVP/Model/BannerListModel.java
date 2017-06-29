@@ -7,7 +7,9 @@ import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.MVP.Listener.OnLoadDataListListener;
 import com.winwin.app.UI.Entity.BannerDto;
 
-import rx.Observer;
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 
 public class BannerListModel {
     private static final String TAG = BannerListModel.class.getSimpleName();
@@ -15,7 +17,7 @@ public class BannerListModel {
     public void LoadData(final OnLoadDataListListener listener){
         HttpData.getInstance().HttpDataGetBanner(new Observer<BannerDto>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 Log.e(TAG, "onCompleted");
             }
 
@@ -27,6 +29,11 @@ public class BannerListModel {
                         +"\n"+e.getCause()
                         +"\n"+e.getLocalizedMessage()
                         +"\n"+e.getStackTrace());
+            }
+
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
             }
 
             @Override

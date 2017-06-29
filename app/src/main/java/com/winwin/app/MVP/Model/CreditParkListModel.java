@@ -6,7 +6,9 @@ import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.MVP.Listener.OnLoadDataListListener;
 import com.winwin.app.UI.Entity.CreditDto;
 
-import rx.Observer;
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 
 public class CreditParkListModel {
     private static final String TAG = CreditParkListModel.class.getSimpleName();
@@ -14,7 +16,7 @@ public class CreditParkListModel {
     public void LoadData(final OnLoadDataListListener listener){
         HttpData.getInstance().HttpDataGetCredits(new Observer<CreditDto>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 Log.e(TAG, "onCompleted");
             }
 
@@ -26,6 +28,11 @@ public class CreditParkListModel {
                         +"\n"+e.getCause()
                         +"\n"+e.getLocalizedMessage()
                         +"\n"+e.getStackTrace());
+            }
+
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
             }
 
             @Override

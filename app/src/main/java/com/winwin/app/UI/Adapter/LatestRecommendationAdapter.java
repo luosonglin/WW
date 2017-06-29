@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.winwin.app.R;
 import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
@@ -23,10 +25,14 @@ public class LatestRecommendationAdapter extends BaseQuickAdapter<IndexRecommand
 
     @Override
     protected void convert(BaseViewHolder helper, final IndexRecommandParkDto item) {
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
         Glide.with(mContext)
                 .load(item.getHomeImage())
-                .crossFade()
+                .apply(options)
                 .into((ImageView) helper.getView(R.id.recommendation_iv));
+
         helper.setText(R.id.recommendation_location, item.getDistanceMetroDesc())
                 .setText(R.id.recommendation_name, item.getName())
                 .setText(R.id.recommendation_money, "¥"+item.getDayRentStartPi()+"元/平米/天 起")

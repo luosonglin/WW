@@ -14,15 +14,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
 import com.winwin.app.UI.Entity.MyInfoDto;
-import com.winwin.app.Util.GlideCircleTransform;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.Observer;
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -106,7 +109,7 @@ public class MineFragment extends Fragment {
 
         HttpData.getInstance().HttpDataGetMyInformation(new Observer<MyInfoDto>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 Log.e(TAG, "onCompleted");
             }
 
@@ -119,13 +122,22 @@ public class MineFragment extends Fragment {
             }
 
             @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
             public void onNext(MyInfoDto myInfoDto) {
+
+                RequestOptions options = new RequestOptions()
+                        .centerCrop()
+                        .placeholder(R.mipmap.emoji)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL);
                 Glide.with(getActivity())
                         .load(myInfoDto.getHeadPic())
-                        .crossFade()
-                        .placeholder(R.mipmap.emoji)
-                        .transform(new GlideCircleTransform(getActivity()))
+                        .apply(options)
                         .into(avatar);
+
                 name.setText(myInfoDto.getUserName());
                 mMemberPoint.setText(myInfoDto.getTotalCredits()+" ");
             }
