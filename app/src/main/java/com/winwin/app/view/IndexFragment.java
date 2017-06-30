@@ -28,8 +28,12 @@ import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
 import com.winwin.app.UI.MineView.MyCreditActivity;
 import com.winwin.app.UI.SearchView.SearchParkActivity;
 import com.winwin.app.UI.WebView.MyWinwinActivity;
+import com.winwin.app.Widget.GlideImageLoader;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -151,18 +155,18 @@ public class IndexFragment extends Fragment {
                 for (IndexBannerDto i:indexBannerDto.getData()) {
                     bannerImages.add(i.getBannerPath());
                 }
-//                mBanner.setImages(bannerImages != null ? bannerImages : null)
-//                        .setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
-//                        .setBannerAnimation(Transformer.Tablet)
-//                        .setImageLoader(new GlideImageLoader()).start();
-//                mBanner.setOnBannerClickListener(new OnBannerClickListener() {
-//                    @Override
-//                    public void OnBannerClick(int position) {
-//                        Log.e("--", "点击：" + position + "");
-//                    }
-//                });
-//
-//                Log.e(TAG, "onNext");
+                mBanner.setImages(bannerImages != null ? bannerImages : null)
+                        .setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
+                        .setBannerAnimation(Transformer.Tablet)
+                        .setImageLoader(new GlideImageLoader()).start();
+                mBanner.setOnBannerClickListener(new OnBannerClickListener() {
+                    @Override
+                    public void OnBannerClick(int position) {
+                        Log.e("--", "点击：" + position + "");
+                    }
+                });
+
+                Log.e(TAG, "onNext");
             }
         });
 

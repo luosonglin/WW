@@ -117,7 +117,9 @@
         <activity
             android:name=".UI.RoomView.MapActivity"
             android:label=""/>
-        <activity android:name=".UI.SendView.SendParkActivity"
-            android:label=""/>
+        <activity
+            android:name=".UI.SendView.SendParkActivity"
+            android:label=""
+            android:screenOrientation="portrait" />
     </application>
 </manifest>
