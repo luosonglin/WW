@@ -5,6 +5,7 @@ import com.winwin.app.UI.Entity.BannerDto;
 import com.winwin.app.UI.Entity.BrokerDto;
 import com.winwin.app.UI.Entity.CreditDto;
 import com.winwin.app.UI.Entity.CustomerDto;
+import com.winwin.app.UI.Entity.FileDto;
 import com.winwin.app.UI.Entity.HotAreaDto;
 import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.HttpResult2;
@@ -12,13 +13,18 @@ import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.Entity.IndexStaticDateDto;
 import com.winwin.app.UI.Entity.MapDto;
+import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.Entity.MyInfoDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 //import rx.Observable;
@@ -89,6 +95,22 @@ public interface APIService {
     //查询(我收到的推荐) commendStatus推荐状态（0：待接受，1：已拒绝，2：已接受）
     @GET("api/v1/recommendCustomer/queryRecommendToMeList")
     Observable<HttpResult<List<CustomerDto>>> queryRecommendToMeList();
+
+    /**
+     * 发布页
+     */
+    //单张图片（此处配合后端，暂无批量上传API）
+    @Multipart
+    @POST("api/v1/image/uploadFile")
+//    Observable<HttpResult<FileDto>> uploadFile(@Part() RequestBody file);
+    Observable<HttpResult<FileDto>> uploadFile(@Part MultipartBody.Part file);
+
+    /**
+     * 挣钱快车
+     */
+    //app获取平台元数据信息接口
+    @GET("api/v1/requirements/commonMetaData/{metaType}")
+    Observable<HttpResult<List<MetaDataDto>>> getMetaDatas(@Path("metaType") Integer metaType);
 
 
 }

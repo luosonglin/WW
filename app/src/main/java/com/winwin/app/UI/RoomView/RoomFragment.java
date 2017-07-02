@@ -10,16 +10,28 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
+import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
+import com.winwin.app.UI.Adapter.MetaDataAdapter;
+import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.MineView.MyCollectTabFragment;
+import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,6 +57,14 @@ public class RoomFragment extends Fragment {
     private ViewPager viewPager;
 
     private ImageView mMapIv;
+
+    private static final String TAG = RoomFragment.class.getSimpleName();
+
+    private RelativeLayout districtRlyt;
+    private RelativeLayout areaRlyt;
+    private RelativeLayout dayRentRlyt;
+    private RecyclerView mCoreRecyclerView;
+    private BaseQuickAdapter mCoreQuickAdapter;
 
     public RoomFragment() {
         // Required empty public constructor
@@ -98,6 +118,33 @@ public class RoomFragment extends Fragment {
             tabLayout.setTabMode(TabLayout.SCROLL_AXIS_HORIZONTAL);//tablayout设置可以滑动
         }
         tabLayout.setupWithViewPager(viewPager);
+
+        mCoreRecyclerView = (RecyclerView) view.findViewById(R.id.core_rv_list);
+        //设置RecyclerView的显示模式  当前List模式
+        mCoreRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //如果Item高度固定  增加该属性能够提高效率
+        mCoreRecyclerView.setHasFixedSize(true);
+        districtRlyt = (RelativeLayout) view.findViewById(R.id.district_rlyt);
+        districtRlyt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initCoreView(1);
+            }
+        });
+        areaRlyt = (RelativeLayout) view.findViewById(R.id.area_rlyt);
+        areaRlyt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initCoreView(3);
+            }
+        });
+        dayRentRlyt = (RelativeLayout) view.findViewById(R.id.day_rent_rlyt);
+        dayRentRlyt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initCoreView(2);
+            }
+        });
 
         return view;
     }
@@ -191,4 +238,51 @@ public class RoomFragment extends Fragment {
             return mFragmentTitles.get(position);
         }
     }
+
+
+    private void initCoreView(int type) {
+
+
+        if (mCoreRecyclerView.getVisibility() == View.GONE) {
+            mCoreRecyclerView.setVisibility(View.VISIBLE);
+            //get data
+            //设置适配器
+            mCoreQuickAdapter = new MetaDataAdapter(R.layout.item_meta_data, null);
+            //设置加载动画
+            mCoreQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
+            //设置是否自动加载以及加载个数
+            mCoreQuickAdapter.openLoadMore(6, true);
+            //将适配器添加到RecyclerView
+            mCoreRecyclerView.setAdapter(mCoreQuickAdapter);
+            HttpData.getInstance().HttpDataGetMetaDataList(new Observer<List<MetaDataDto>>() {
+                @Override
+                public void onSubscribe(@NonNull Disposable d) {
+                    Log.e(TAG, "onSubscribe");
+                }
+
+                @Override
+                public void onNext(@NonNull List<MetaDataDto> metaDataDtos) {
+                    mCoreQuickAdapter.addData(metaDataDtos);
+                    Log.e(TAG, "onNext");
+                }
+
+                @Override
+                public void onError(@NonNull Throwable e) {
+                    Log.e(TAG, "onError: "+e.getMessage()
+                            +"\n"+e.getCause()
+                            +"\n"+e.getLocalizedMessage()
+                            +"\n"+e.getStackTrace());
+                }
+
+                @Override
+                public void onComplete() {
+                    Log.e(TAG, "onComplete");
+                }
+            }, type);
+        } else {
+            mCoreRecyclerView.setVisibility(View.GONE);
+        }
+
+    }
+
 }

@@ -70,8 +70,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:overScrollMode="never" />
 
         <View
@@ -84,7 +86,6 @@
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:background="@color/white"
-            android:elevation="2dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
 
@@ -102,6 +103,9 @@
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:hint="输入公司名称"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 android:background="@null" />
         </RelativeLayout>
 
@@ -114,7 +118,6 @@
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:background="@color/white"
-            android:elevation="2dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
 
@@ -127,12 +130,21 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <EditText
+            <TextView
                 android:layout_width="250dp"
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 android:background="@null" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/turn_right"/>
         </RelativeLayout>
 
         <View
@@ -156,12 +168,21 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <EditText
+            <TextView
                 android:layout_width="250dp"
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 android:background="@null" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/turn_right"/>
         </RelativeLayout>
 
         <View
@@ -185,12 +206,21 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <EditText
+            <TextView
                 android:layout_width="250dp"
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 android:background="@null" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/turn_right"/>
         </RelativeLayout>
 
         <View
@@ -219,14 +249,17 @@
                 android:text="其他说明"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
-
-            <EditText
-                android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@null" />
         </RelativeLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:hint="简单描述一下"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:background="@color/white" />
 
     </LinearLayout>
 </LinearLayout>

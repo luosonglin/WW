@@ -20,15 +20,22 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.luck.picture.lib.tools.DebugUtil;
 import com.luck.picture.lib.tools.PictureFileUtils;
+import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
+import com.winwin.app.UI.Entity.FileDto;
 import com.winwin.app.Widget.gridimage.FullyGridLayoutManager;
 import com.winwin.app.Widget.gridimage.GridImageAdapter;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class SendParkActivity extends AppCompatActivity {
 
@@ -37,6 +44,7 @@ public class SendParkActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GridImageAdapter adapter;
     private List<LocalMedia> selectList = new ArrayList<>();
+    private List<String> compressPathList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,10 +193,47 @@ public class SendParkActivity extends AppCompatActivity {
                     adapter.setList(selectList);
                     adapter.notifyDataSetChanged();
                     DebugUtil.i(TAG, "onActivityResult:" + selectList.size());
-                    for (LocalMedia i : selectList)
+                    for (LocalMedia i : selectList) {
                         Log.e(TAG, i.getPath());
+                        File file = new File(i.getPath());
+                        RequestBody requestBody = MultipartBody.create(MediaType.parse("multipart/form-data"), file);
+                        MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+                        uploadFile(part);
+                    }
                     break;
             }
         }
+    }
+
+    private void uploadFile(final MultipartBody.Part file) {
+
+        HttpData.getInstance().HttpDataUploadFile(new Observer<FileDto>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                Log.e(TAG, "uploadFile onSubscribe");
+            }
+
+            @Override
+            public void onNext(@NonNull FileDto fileDto) {
+                compressPathList.add(fileDto.getCompressPath());
+                Log.e(TAG, "uploadFile onNext");
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.e(TAG, "uploadFile onError: " + e.getMessage()
+                        + "\n" + e.getCause()
+                        + "\n" + e.getLocalizedMessage()
+                        + "\n" + e.getStackTrace());
+            }
+
+            @Override
+            public void onComplete() {
+                for (String i: compressPathList) {
+                    Log.e(TAG, "hhhh " +i);
+                }
+                Log.e(TAG, "uploadFile onComplete");
+            }
+        }, file);
     }
 }

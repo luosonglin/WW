@@ -11,12 +11,14 @@ import com.winwin.app.UI.Entity.BannerDto;
 import com.winwin.app.UI.Entity.BrokerDto;
 import com.winwin.app.UI.Entity.CreditDto;
 import com.winwin.app.UI.Entity.CustomerDto;
+import com.winwin.app.UI.Entity.FileDto;
 import com.winwin.app.UI.Entity.HotAreaDto;
 import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.Entity.IndexStaticDateDto;
 import com.winwin.app.UI.Entity.MapDto;
+import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.Entity.MyInfoDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
 import com.winwin.app.Util.FileUtil;
@@ -32,6 +34,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.rx_cache.Reply;
 import io.rx_cache.internal.RxCache;
+import okhttp3.MultipartBody;
 //import rx.Observable;
 //import rx.functions.Func1;
 //import rx.Observable;
@@ -150,6 +153,16 @@ public class HttpData extends RetrofitUtils {
         Observable observable = service.queryRecommendToMeList().map(new HttpResultFunc<List<CustomerDto>>());
         setSubscribe(observable, observer);
     }
+    public void HttpDataUploadFile(Observer<FileDto> observer, MultipartBody.Part file) {
+//    public void HttpDataUploadFile(Observer<FileDto> observer, RequestBody file) {
+        Observable observable = service.uploadFile(file);
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataGetMetaDataList(Observer<List<MetaDataDto>> observer, Integer type) {
+        Observable observable = service.getMetaDatas(type).map(new HttpResultFunc<List<MetaDataDto>>());
+        setSubscribe(observable, observer);
+    }
+
 
 
     /**

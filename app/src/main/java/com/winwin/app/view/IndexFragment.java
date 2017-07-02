@@ -26,6 +26,7 @@ import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.Entity.IndexStaticDateDto;
 import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
 import com.winwin.app.UI.MineView.MyCreditActivity;
+import com.winwin.app.UI.RoomView.MapActivity;
 import com.winwin.app.UI.SearchView.SearchParkActivity;
 import com.winwin.app.UI.WebView.MyWinwinActivity;
 import com.winwin.app.Widget.GlideImageLoader;
@@ -388,7 +389,7 @@ public class IndexFragment extends Fragment {
                 startActivity(new Intent(getActivity(), SearchParkActivity.class));
                 break;
             case R.id.map_llyt:
-                startActivity(new Intent(getActivity(), ParkDetailActivity.class));
+                startActivity(new Intent(getActivity(), MapActivity.class));
                 break;
             case R.id.earn_llyt:
                 startActivity(new Intent(getActivity(), EarnMoneyActivity.class));
