@@ -58,6 +58,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/versionTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -102,7 +103,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="12dp"
-            android:text="23.4 M"
+            android:text=""
             android:textColor="@color/grey"
             android:textSize="16sp"/>
     </RelativeLayout>

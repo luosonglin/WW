@@ -3,13 +3,21 @@ package com.winwin.app.UI.SendView;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.NumberPicker;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.luck.picture.lib.PictureSelector;
@@ -23,13 +31,21 @@ import com.luck.picture.lib.tools.PictureFileUtils;
 import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
 import com.winwin.app.UI.Entity.FileDto;
+import com.winwin.app.UI.Entity.HotAreaDto;
+import com.winwin.app.UI.Entity.MetaDataDto;
+import com.winwin.app.Util.StringUtils;
+import com.winwin.app.Util.ToastUtils;
 import com.winwin.app.Widget.gridimage.FullyGridLayoutManager;
 import com.winwin.app.Widget.gridimage.GridImageAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -41,6 +57,14 @@ public class SendParkActivity extends AppCompatActivity {
 
     private static final String TAG = SendParkActivity.class.getSimpleName();
     Toolbar toolbar;
+    @Bind(R.id.target_area)
+    TextView targetArea;
+    @Bind(R.id.industry)
+    TextView industry;
+    @Bind(R.id.request_area)
+    TextView requestArea;
+    @Bind(R.id.description)
+    EditText description;
     private RecyclerView recyclerView;
     private GridImageAdapter adapter;
     private List<LocalMedia> selectList = new ArrayList<>();
@@ -50,6 +74,7 @@ public class SendParkActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_park);
+        ButterKnife.bind(this);
         toolBar();
         initFindView();
     }
@@ -136,7 +161,8 @@ public class SendParkActivity extends AppCompatActivity {
             // 进入相册 以下是例子：不需要的api可以不写
             PictureSelector.create(SendParkActivity.this)
                     .openGallery(PictureMimeType.ofAll())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
-                    .theme(R.style.picture_Sina_style)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style
+//                    .theme(R.style.picture_Sina_style)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style
+                    .theme(R.style.picture_default_style)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style
                     .maxSelectNum(9)// 最大图片选择数量
                     .minSelectNum(1)// 最小选择数量
                     .imageSpanCount(4)// 每行显示个数
@@ -229,11 +255,235 @@ public class SendParkActivity extends AppCompatActivity {
 
             @Override
             public void onComplete() {
-                for (String i: compressPathList) {
-                    Log.e(TAG, "hhhh " +i);
+                for (String i : compressPathList) {
+                    Log.e(TAG, "hhhh " + i);
                 }
                 Log.e(TAG, "uploadFile onComplete");
             }
         }, file);
     }
+
+    @OnClick({R.id.target_area_rlyt, R.id.industry_rlyt, R.id.request_area_rlyt, R.id.other_rlyt})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.target_area_rlyt:
+                HttpData.getInstance().HttpDataGetShanghaiHotAreas(new Observer<List<HotAreaDto>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull List<HotAreaDto> hotAreaDtos) {
+                        List<String> h = new ArrayList<String>();
+                        for (HotAreaDto i : hotAreaDtos) {
+                            h.add(i.getName());
+                        }
+                        String[] ha = h.toArray(new String[h.size()]);
+                        ;
+                        showCoresPopupWindow(ha, 1);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(TAG, "onError: " + e.getMessage()
+                                + "\n" + e.getCause()
+                                + "\n" + e.getLocalizedMessage()
+                                + "\n" + e.getStackTrace());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+                break;
+            case R.id.industry_rlyt:
+                HttpData.getInstance().HttpDataGetMetaDataList(new Observer<List<MetaDataDto>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.e(TAG, "onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull List<MetaDataDto> metaDataDtos) {
+                        List<String> h = new ArrayList<String>();
+                        for (MetaDataDto i : metaDataDtos) {
+                            h.add(i.getDataDisplay());
+                        }
+                        String[] ha = h.toArray(new String[h.size()]);
+                        ;
+                        showCoresPopupWindow(ha, 2);
+                        Log.e(TAG, "onNext");
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(TAG, "onError: " + e.getMessage()
+                                + "\n" + e.getCause()
+                                + "\n" + e.getLocalizedMessage()
+                                + "\n" + e.getStackTrace());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "onComplete");
+                    }
+                }, 1);
+                break;
+            case R.id.request_area_rlyt:
+                HttpData.getInstance().HttpDataGetMetaDataList(new Observer<List<MetaDataDto>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.e(TAG, "onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull List<MetaDataDto> metaDataDtos) {
+                        List<String> h = new ArrayList<String>();
+                        for (MetaDataDto i : metaDataDtos) {
+                            h.add(i.getDataDisplay() + " 平方米");
+                        }
+                        String[] ha = h.toArray(new String[h.size()]);
+                        ;
+                        showCoresPopupWindow(ha, 3);
+                        Log.e(TAG, "onNext");
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(TAG, "onError: " + e.getMessage()
+                                + "\n" + e.getCause()
+                                + "\n" + e.getLocalizedMessage()
+                                + "\n" + e.getStackTrace());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "onComplete");
+                    }
+                }, 2);
+                break;
+            case R.id.other_rlyt:
+
+                break;
+        }
+    }
+
+    /**
+     * 筛选之区域弹出窗
+     */
+    private PopupWindow mSearchPopupWindow;
+    private String mChooseCore;
+    private String mChooseCoreId;
+
+    /**
+     *
+     * @param cores
+     * @param type  1：目标区域；2：所属行业；3：需求面积
+     */
+    private void showCoresPopupWindow(final String[] cores, final int type) {
+        View coresPopupwindowView = LayoutInflater.from(this).inflate(R.layout.popupwindow_core, null);
+        mSearchPopupWindow = new PopupWindow(coresPopupwindowView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
+
+
+        final TextView mCancelTv = (TextView) coresPopupwindowView.findViewById(R.id.cancel);
+        final TextView mConfirmTv = (TextView) coresPopupwindowView.findViewById(R.id.purchase_time_confirm);
+        NumberPicker schoolNumberPicker = (NumberPicker) coresPopupwindowView.findViewById(R.id.schools_picker);
+
+
+        if (!StringUtils.isEmpty(Arrays.toString(cores))) {
+
+            schoolNumberPicker.setDisplayedValues(cores);
+
+            schoolNumberPicker.setMinValue(0);
+            if (cores.length <= 1) {
+                schoolNumberPicker.setMaxValue(1);
+            } else {
+                schoolNumberPicker.setMaxValue(cores.length - 1);
+            }
+        } else {
+            schoolNumberPicker.setMinValue(0);
+            schoolNumberPicker.setDisplayedValues(new String[]{"暂无数据"});
+            schoolNumberPicker.setMaxValue(0);
+        }
+
+        schoolNumberPicker.setValue(2);
+
+        schoolNumberPicker.setWrapSelectorWheel(false); //防止NumberPicker无限滚动
+        schoolNumberPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS); //禁止NumberPicker输入
+
+        schoolNumberPicker.setFocusable(true);
+        schoolNumberPicker.setFocusableInTouchMode(true);
+
+        if (cores == null) {
+            ToastUtils.show(SendParkActivity.this, "cores is null");
+        } else {
+            if (!StringUtils.isEmpty(Arrays.toString(cores))) {
+                mChooseCore = cores[0];
+            } else {
+                mChooseCore = "暂无数据";
+            }
+        }
+
+        mChooseCore = cores[0];
+        mChooseCoreId = null;
+        schoolNumberPicker.setOnScrollListener(new NumberPicker.OnScrollListener() {
+            @Override
+            public void onScrollStateChange(NumberPicker numberPicker, int scrollState) {
+                if (scrollState == NumberPicker.OnScrollListener.SCROLL_STATE_IDLE) {
+                    if (numberPicker.getValue() > cores.length) {
+                        mChooseCore = cores[cores.length];
+                        mChooseCoreId = null;
+                    } else {
+                        mChooseCore = cores[numberPicker.getValue()];
+                        mChooseCoreId = null;
+                    }
+                }
+            }
+        });
+
+        LinearLayout popupParentLayout2 = (LinearLayout) coresPopupwindowView.findViewById(R.id.popup_parent);
+        popupParentLayout2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mSearchPopupWindow != null && mSearchPopupWindow.isShowing()) {
+                    mChooseCore = null;
+                    mChooseCoreId = null;
+                    mSearchPopupWindow.dismiss();
+                }
+            }
+        });
+
+        mSearchPopupWindow.setOutsideTouchable(false);
+        ColorDrawable dw = new ColorDrawable(0x00000000);
+        mSearchPopupWindow.setBackgroundDrawable(dw);
+        mSearchPopupWindow.showAtLocation(coresPopupwindowView, Gravity.BOTTOM, 0, 0);
+
+        mCancelTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSearchPopupWindow.dismiss();
+            }
+        });
+        mConfirmTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (type) {
+                    case 1:
+                        targetArea.setText(mChooseCore);
+                        break;
+                    case 2:
+                        industry.setText(mChooseCore);
+                        break;
+                    case 3:
+                        requestArea.setText(mChooseCore);
+                        break;
+                }
+                mSearchPopupWindow.dismiss();
+            }
+        });
+    }
+
 }

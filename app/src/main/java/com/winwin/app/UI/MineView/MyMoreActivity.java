@@ -11,10 +11,12 @@ import android.widget.Toast;
 
 import com.winwin.app.R;
 import com.winwin.app.Util.CleanUtils;
+import com.winwin.app.Util.CustomUtils;
 
 public class MyMoreActivity extends AppCompatActivity {
     private static final String TAG = MyInfoActivity.class.getSimpleName();
     private Toolbar toolbar;
+    private TextView versionTv;
     private RelativeLayout clean;
     private TextView cache;
 
@@ -42,6 +44,9 @@ public class MyMoreActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        versionTv = (TextView) findViewById(R.id.versionTv);
+        versionTv.setText(CustomUtils.getVersion(this)+"");
+
         cache = (TextView) findViewById(R.id.cacheTv);
         try {
             cache.setText(CleanUtils.getTotalCacheSize(this));
@@ -53,7 +58,6 @@ public class MyMoreActivity extends AppCompatActivity {
         clean.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MyMoreActivity.this,"开始清理",Toast.LENGTH_SHORT).show();
                 new clearCacheRunnable().run();
             }
         });
@@ -63,6 +67,7 @@ public class MyMoreActivity extends AppCompatActivity {
         @Override
         public void run() {
             try {
+                Toast.makeText(MyMoreActivity.this,"开始清理",Toast.LENGTH_SHORT).show();
                 CleanUtils.clearAllCache(MyMoreActivity.this);
                 Thread.sleep(3000);
                 if (CleanUtils.getTotalCacheSize(MyMoreActivity.this).startsWith("0")) {
