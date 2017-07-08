@@ -33,6 +33,14 @@
             android:layout_centerVertical="true"
             android:src="@mipmap/index_search_btn" />
 
+        <ImageView
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/index_community_btn"
+            android:scaleType="fitXY"
+            android:padding="12dp"/>
     </RelativeLayout>
 
     <View

@@ -1,5 +1,6 @@
 package com.winwin.app.UI.SearchView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.winwin.app.MVP.Presenter.HotAreaListPresent;
 import com.winwin.app.MVP.View.HotAreaListView;
@@ -15,6 +17,7 @@ import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.HotAreaAdapter;
 import com.winwin.app.UI.Entity.HotAreaDto;
 import com.winwin.app.UI.MineView.MyInfoActivity;
+import com.winwin.app.Util.ToastUtils;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 
 import java.util.List;
@@ -29,10 +32,12 @@ public class SearchParkActivity extends AppCompatActivity implements HotAreaList
     ImageView back;
     @Bind(R.id.search_edit)
     EditText searchEdit;
+    @Bind(R.id.search_btn)
+    TextView searchBtn;
 
     RecyclerView mRecyclerView;
     private BaseQuickAdapter mQuickAdapter;
-    private int PageIndex=1;
+    private int PageIndex = 1;
     private HotAreaListPresent present;
 
     @Override
@@ -54,17 +59,12 @@ public class SearchParkActivity extends AppCompatActivity implements HotAreaList
         //设置加载动画
         mQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         //设置是否自动加载以及加载个数
-        mQuickAdapter.openLoadMore(6,true);
+        mQuickAdapter.openLoadMore(6, true);
         //将适配器添加到RecyclerView
         mRecyclerView.setAdapter(mQuickAdapter);
         present = new HotAreaListPresent(this);
         //请求网络数据
         present.LoadData(false);
-    }
-
-    @OnClick(R.id.back)
-    public void onClick() {
-        finish();
     }
 
     @Override
@@ -81,7 +81,7 @@ public class SearchParkActivity extends AppCompatActivity implements HotAreaList
     public void newDatas(List<HotAreaDto> newsList) {
         //进入显示的初始数据或者下拉刷新显示的数据
         mQuickAdapter.setNewData(newsList);//新增数据
-        mQuickAdapter.openLoadMore(10,true);//设置是否可以下拉加载  以及加载条数
+        mQuickAdapter.openLoadMore(10, true);//设置是否可以下拉加载  以及加载条数
     }
 
     @Override
@@ -108,5 +108,24 @@ public class SearchParkActivity extends AppCompatActivity implements HotAreaList
 
     }
 
-
+    @OnClick({R.id.back, R.id.search_btn, R.id.card_view})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.back:
+                finish();
+                break;
+            case R.id.search_btn:
+                Intent intent = new Intent(SearchParkActivity.this, ParkListActivity.class);
+                intent.putExtra("type", 0);
+                if (!searchEdit.getText().toString().trim().equals("")) {
+                    intent.putExtra("type", 2);
+                    intent.putExtra("searchValue", searchEdit.getText().toString().trim());
+                }
+                startActivity(intent);
+                break;
+            case R.id.card_view:
+                ToastUtils.show(SearchParkActivity.this, "创建");
+                break;
+        }
+    }
 }

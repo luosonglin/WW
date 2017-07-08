@@ -16,10 +16,13 @@ import com.winwin.app.UI.Entity.LoginUserDto;
 import com.winwin.app.UI.Entity.MapDto;
 import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.Entity.MyInfoDto;
+import com.winwin.app.UI.Entity.PageDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
+import com.winwin.app.UI.Entity.ParkDto;
 import com.winwin.app.UI.Entity.UserLoginVo;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -30,6 +33,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 //import rx.Observable;
 
 /**
@@ -122,4 +126,10 @@ public interface APIService {
     @POST("/v1/sessions/applogin")
     Observable<HttpResult<LoginUserDto>> login(@Body UserLoginVo userLoginVo);
 
+    /**
+     * 园区列表
+     */
+    //综合条件筛选园区信息
+    @GET("api/v1/park/getParkByConditions")
+    Observable<HttpResult<PageDto<ParkDto>>> getParkByConditions(@QueryMap Map<String, Object> map);
 }

@@ -21,12 +21,15 @@ import com.winwin.app.UI.Entity.LoginUserDto;
 import com.winwin.app.UI.Entity.MapDto;
 import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.Entity.MyInfoDto;
+import com.winwin.app.UI.Entity.PageDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
+import com.winwin.app.UI.Entity.ParkDto;
 import com.winwin.app.UI.Entity.UserLoginVo;
 import com.winwin.app.Util.FileUtil;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -168,8 +171,10 @@ public class HttpData extends RetrofitUtils {
         Observable observable = service.login(userLoginVo).map(new HttpResultFunc<LoginUserDto>());
         setSubscribe(observable, observer);
     }
-
-
+    public void HttpDataGetParkByConditions(Observer<PageDto<ParkDto>> observer, Map<String, Object> map) {
+        Observable observable = service.getParkByConditions(map).map(new HttpResultFunc<PageDto<ParkDto>>());
+        setSubscribe(observable, observer);
+    }
 
     /**
      * 插入观察者

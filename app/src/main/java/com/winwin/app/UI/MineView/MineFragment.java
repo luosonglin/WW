@@ -131,7 +131,7 @@ public class MineFragment extends Fragment {
 
                 RequestOptions options = new RequestOptions()
                         .centerCrop()
-                        .placeholder(R.mipmap.emoji)
+//                        .placeholder(R.mipmap.emoji)
                         .diskCacheStrategy(DiskCacheStrategy.ALL);
                 Glide.with(getActivity())
                         .load(myInfoDto.getHeadPic())

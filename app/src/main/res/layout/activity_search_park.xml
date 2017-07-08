@@ -55,7 +55,7 @@
                 android:focusable="true"
                 android:hint="请输入楼盘名称"
                 android:imeOptions="actionSearch"
-                android:lines="1"
+                android:singleLine="true"
                 android:paddingLeft="8dp"
                 android:paddingRight="0dp"
                 android:textColor="@color/grey"
@@ -63,6 +63,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/search_btn"
             android:layout_width="40dp"
             android:layout_height="22dp"
             android:layout_alignParentRight="true"
