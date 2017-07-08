@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/tab_index_img"
-            android:layout_height="24dp"
             android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginTop="2dp"
             android:src="@mipmap/tab1_b" />
 
@@ -33,15 +33,15 @@
 
         <ImageView
             android:id="@+id/tab_room_img"
-            android:layout_height="24dp"
             android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginTop="2dp"
             android:src="@mipmap/tab2_g" />
 
         <TextView
             android:id="@+id/tab_room_title"
             style="@style/TabBarTitle"
-            android:text="空间" />
+            android:text="推荐" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:src="@mipmap/tab3_g"/>
+            android:src="@mipmap/tab3_g" />
     </LinearLayout>
 
 
@@ -70,15 +70,15 @@
 
         <ImageView
             android:id="@+id/tab_message_img"
-            android:layout_height="24dp"
             android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginTop="2dp"
             android:src="@mipmap/tab4_g" />
 
         <TextView
             android:id="@+id/tab_message_title"
             style="@style/TabBarTitle"
-            android:text="消息" />
+            android:text="空间" />
     </LinearLayout>
 
     <LinearLayout
@@ -87,8 +87,8 @@
 
         <ImageView
             android:id="@+id/tab_mine_img"
-            android:layout_height="24dp"
             android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginTop="2dp"
             android:src="@mipmap/tab5_g" />
 

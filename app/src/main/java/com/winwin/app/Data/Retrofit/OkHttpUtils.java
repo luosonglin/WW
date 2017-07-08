@@ -1,5 +1,7 @@
 package com.winwin.app.Data.Retrofit;
 
+import com.winwin.app.Constant.Data;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -48,7 +50,7 @@ public class OkHttpUtils {
             Request authorised = originalRequest.newBuilder()
 //                    .header("FromSource", "1.0")
                     .header("Accept", "*/*")
-                    .header("X-Token", "845faaeb2b4c4dc58ddcf9b967c7779bApp#1")
+                    .header("X-Token", Data.getUserToken())
                     .build();
             return chain.proceed(authorised);
         }

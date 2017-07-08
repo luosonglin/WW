@@ -5,7 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
-import com.winwin.app.view.WelcomeActivity;
+import com.winwin.app.UI.OtherView.WelcomeActivity;
 import com.xiaochao.lcrapiddeveloplibrary.Exception.core.Recovery;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class BaseApplication extends Application{
         context = this;
         instance = this;
 
-        //初始化异常管理工具
+//        //初始化异常管理工具
         Recovery.getInstance()
                 .debug(true)//关闭后 在错误统一管理页面不显示异常数据
                 .recoverInBackground(false)

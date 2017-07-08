@@ -1,4 +1,4 @@
-package com.winwin.app.view;
+package com.winwin.app.UI.RecommendView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -51,10 +51,10 @@ import io.reactivex.disposables.Disposable;
  * Activities that contain this fragment must implement the
  * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link IndexFragment#newInstance} factory method to
+ * Use the {@link RecommendFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class IndexFragment extends Fragment {
+public class RecommendFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -80,7 +80,7 @@ public class IndexFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private static final String TAG = IndexFragment.class.getSimpleName();
+    private static final String TAG = RecommendFragment.class.getSimpleName();
     private Banner mBanner;
     private TextView mCurrentProNum, mNewBeraNum, mCommendSuccessNum;
     private RecyclerView mRecyclerView;
@@ -92,7 +92,7 @@ public class IndexFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public IndexFragment() {
+    public RecommendFragment() {
         // Required empty public constructor
     }
 
@@ -102,11 +102,11 @@ public class IndexFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment IndexFragment.
+     * @return A new instance of fragment RecommendFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static IndexFragment newInstance(String param1, String param2) {
-        IndexFragment fragment = new IndexFragment();
+    public static RecommendFragment newInstance(String param1, String param2) {
+        RecommendFragment fragment = new RecommendFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -127,7 +127,7 @@ public class IndexFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_index, container, false);
+        View view = inflater.inflate(R.layout.fragment_recommend, container, false);
         ButterKnife.bind(this, view);
 
         mBanner = (Banner) view.findViewById(R.id.banner);

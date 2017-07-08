@@ -12,15 +12,18 @@ import com.winwin.app.UI.Entity.HttpResult2;
 import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.Entity.IndexStaticDateDto;
+import com.winwin.app.UI.Entity.LoginUserDto;
 import com.winwin.app.UI.Entity.MapDto;
 import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.Entity.MyInfoDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
+import com.winwin.app.UI.Entity.UserLoginVo;
 
 import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -112,5 +115,11 @@ public interface APIService {
     @GET("api/v1/requirements/commonMetaData/{metaType}")
     Observable<HttpResult<List<MetaDataDto>>> getMetaDatas(@Path("metaType") Integer metaType);
 
+    /**
+     * login
+     */
+    //POST /v1/sessions/applogin (新App)创建会话，用户登录
+    @POST("/v1/sessions/applogin")
+    Observable<HttpResult<LoginUserDto>> login(@Body UserLoginVo userLoginVo);
 
 }

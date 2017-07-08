@@ -223,8 +223,15 @@ public class SendParkActivity extends AppCompatActivity {
                         Log.e(TAG, i.getPath());
                         File file = new File(i.getPath());
                         RequestBody requestBody = MultipartBody.create(MediaType.parse("multipart/form-data"), file);
-                        MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
-                        uploadFile(part);
+                        final MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                // 更新UI
+                                uploadFile(part);
+                            }
+                        }.start();
+
                     }
                     break;
             }

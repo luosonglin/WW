@@ -33,12 +33,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.snappydb.SnappydbException;
+import com.winwin.app.Constant.Data;
+import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.MainActivity;
 import com.winwin.app.R;
+import com.winwin.app.UI.Entity.LoginUserDto;
+import com.winwin.app.UI.Entity.UserLoginVo;
+import com.winwin.app.Util.DBUtils;
 import com.winwin.app.Util.PhoneUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -103,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Set up the login form.
         mPhoneView = (AutoCompleteTextView) findViewById(R.id.phone);
-        populateAutoComplete();
+//        populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -116,6 +125,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
         });
+
+        /**
+         * test
+         *
+         */
+        mPhoneView.setText("admin");
+        mPasswordView.setText("winwin123");
+
+
 
         Button mPhoneSignInButton = (Button) findViewById(R.id.phone_sign_in_button);
         mPhoneSignInButton.setOnClickListener(new OnClickListener() {
@@ -189,7 +207,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid phone, missing fields, etc.), the
@@ -212,22 +229,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
+//        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+//            mPasswordView.setError(getString(R.string.error_invalid_password));
+//            focusView = mPasswordView;
+//            cancel = true;
+//        }
 
         // Check for a valid phone address.
         if (TextUtils.isEmpty(phone)) {
             mPhoneView.setError(getString(R.string.error_field_required));
             focusView = mPhoneView;
             cancel = true;
-        } else if (!isPhoneValid(phone)) {
-            mPhoneView.setError(getString(R.string.error_invalid_phone));
-            focusView = mPhoneView;
-            cancel = true;
         }
+//        else if (!isPhoneValid(phone)) {
+//            mPhoneView.setError(getString(R.string.error_invalid_phone));
+//            focusView = mPhoneView;
+//            cancel = true;
+//        }
 
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required_password));
@@ -394,14 +412,41 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
 
-            if (success) {
-                Log.d(TAG, "Login succeed!");
-                finish();
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
+            UserLoginVo userLoginVo = new UserLoginVo(mPassword, mPhone);
+            HttpData.getInstance().HttpDataLogin(new Observer<LoginUserDto>() {
+                @Override
+                public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+
+                }
+
+                @Override
+                public void onNext(@io.reactivex.annotations.NonNull LoginUserDto loginUserDto) {
+                    try {
+                        DBUtils.put(LoginActivity.this, "userToken", loginUserDto.getToken());
+                    } catch (SnappydbException e) {
+                        e.printStackTrace();
+                    }
+                    Data.setUserToken(loginUserDto.getToken());
+                }
+
+                @Override
+                public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+                    mPasswordView.setError(getString(R.string.error_incorrect_password));
+                    mPasswordView.requestFocus();
+                }
+
+                @Override
+                public void onComplete() {
+                    Log.d(TAG, "Login succeed!");
+                    finish();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                }
+            }, userLoginVo);
+//            if (success) {
+//
+//            } else {
+//
+//            }
         }
 
         @Override

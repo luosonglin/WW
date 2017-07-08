@@ -17,10 +17,12 @@ import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.Entity.IndexStaticDateDto;
+import com.winwin.app.UI.Entity.LoginUserDto;
 import com.winwin.app.UI.Entity.MapDto;
 import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.Entity.MyInfoDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
+import com.winwin.app.UI.Entity.UserLoginVo;
 import com.winwin.app.Util.FileUtil;
 
 import java.io.File;
@@ -155,11 +157,15 @@ public class HttpData extends RetrofitUtils {
     }
     public void HttpDataUploadFile(Observer<FileDto> observer, MultipartBody.Part file) {
 //    public void HttpDataUploadFile(Observer<FileDto> observer, RequestBody file) {
-        Observable observable = service.uploadFile(file);
+        Observable observable = service.uploadFile(file).map(new HttpResultFunc<FileDto>());
         setSubscribe(observable, observer);
     }
     public void HttpDataGetMetaDataList(Observer<List<MetaDataDto>> observer, Integer type) {
         Observable observable = service.getMetaDatas(type).map(new HttpResultFunc<List<MetaDataDto>>());
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataLogin(Observer<LoginUserDto> observer, UserLoginVo userLoginVo) {
+        Observable observable = service.login(userLoginVo).map(new HttpResultFunc<LoginUserDto>());
         setSubscribe(observable, observer);
     }
 

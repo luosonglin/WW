@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.winwin.app.view.IndexFragment">
+    tools:context="com.winwin.app.UI.RecommendView.RecommendFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
@@ -37,7 +37,7 @@
                     android:layout_height="30dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="16dp"
-                    android:text="松林"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="22sp" />
 
@@ -110,7 +110,7 @@
                     android:layout_marginRight="11dp"
                     android:layout_toLeftOf="@+id/right_tip"
                     android:gravity="center_vertical"
-                    android:text="769"
+                    android:text=""
                     android:textColor="@color/grey1"
                     android:textSize="16sp" />
 

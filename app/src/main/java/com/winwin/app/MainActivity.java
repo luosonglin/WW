@@ -13,22 +13,30 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.winwin.app.UI.MessageView.MessageFragment;
+import com.snappydb.SnappydbException;
+import com.winwin.app.Constant.Data;
+import com.winwin.app.UI.Entity.BookListDto;
 import com.winwin.app.UI.MineView.MineFragment;
+import com.winwin.app.UI.OtherView.IndexFragment;
+import com.winwin.app.UI.RecommendView.RecommendFragment;
 import com.winwin.app.UI.RoomView.RoomFragment;
 import com.winwin.app.UI.SendView.SendParkActivity;
+import com.winwin.app.Util.DBUtils;
 import com.winwin.app.Widget.popmenu.PopMenu;
 import com.winwin.app.Widget.popmenu.PopMenuItem;
 import com.winwin.app.Widget.popmenu.PopMenuItemListener;
-import com.winwin.app.view.IndexFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
-        implements IndexFragment.OnFragmentInteractionListener, RoomFragment.OnFragmentInteractionListener, MineFragment.OnFragmentInteractionListener{
+        implements IndexFragment.OnFragmentInteractionListener,
+                RecommendFragment.OnFragmentInteractionListener,
+                RoomFragment.OnFragmentInteractionListener,
+                MineFragment.OnFragmentInteractionListener{
 
     @Bind(R.id.container)
     FrameLayout container;
@@ -43,11 +51,11 @@ public class MainActivity extends AppCompatActivity
     LinearLayout tabIndex;
 
     @Bind(R.id.tab_room_img)
-    ImageView tabRoomImg;
+    ImageView tabRecommendImg;
     @Bind(R.id.tab_room_title)
-    TextView tabRoomTitle;
+    TextView tabRecommendTitle;
     @Bind(R.id.tab_room)
-    LinearLayout tabRoom;
+    LinearLayout tabRecommend;
 
     @Bind(R.id.tab_plus_img)
     ImageView tabPlusImg;
@@ -55,11 +63,11 @@ public class MainActivity extends AppCompatActivity
     LinearLayout tabPlus;
 
     @Bind(R.id.tab_message_img)
-    ImageView tabMessageImg;
+    ImageView tabRoomImg;
     @Bind(R.id.tab_message_title)
-    TextView tabMessageTitle;
+    TextView tabRoomTitle;
     @Bind(R.id.tab_message)
-    LinearLayout tabMessage;
+    LinearLayout tabRoom;
 
     @Bind(R.id.tab_mine_img)
     ImageView tabMineImg;
@@ -69,16 +77,16 @@ public class MainActivity extends AppCompatActivity
     LinearLayout tabMine;
 
     private static final String TAB_INDEX_TAG = "TAB_INDEX_TAG";
+    private static final String TAB_RECOMMEND_TAG = "TAB_RECOMMEND_TAG";
     private static final String TAB_ROOM_TAG = "TAB_ROOM_TAG";
-    private static final String TAB_MESSAGE_TAG = "TAB_MESSAGE_TAG";
     private static final String TAB_MINE_TAG = "TAB_MINE_TAG";
 
     private PopMenu mPopMenu;
 
     private FragmentManager mFragmentManager;
     private IndexFragment mIndexFragment;
-    private RoomFragment mMeetingFragment;
-    private MessageFragment mMessageFragment;
+    private RecommendFragment mRecommendFragment;
+    private RoomFragment mRoomFragment;
     private MineFragment mMineFragment;
 
     @Override
@@ -93,11 +101,23 @@ public class MainActivity extends AppCompatActivity
         mFragmentManager = getSupportFragmentManager();
         if (savedInstanceState != null) {
             mIndexFragment = (IndexFragment) mFragmentManager.findFragmentByTag(TAB_INDEX_TAG);
-            mMeetingFragment = (RoomFragment) mFragmentManager.findFragmentByTag(TAB_ROOM_TAG);
-            mMessageFragment = (MessageFragment) mFragmentManager.findFragmentByTag(TAB_MESSAGE_TAG);
+            mRecommendFragment = (RecommendFragment) mFragmentManager.findFragmentByTag(TAB_RECOMMEND_TAG);
+            mRoomFragment = (RoomFragment) mFragmentManager.findFragmentByTag(TAB_ROOM_TAG);
             mMineFragment = (MineFragment) mFragmentManager.findFragmentByTag(TAB_MINE_TAG);
         }
         setTabSelection(tabIndex);
+
+        initUserToken();
+    }
+
+    private void initUserToken() {
+        if ("".equals(Data.getUserToken())) {
+            try {
+                Data.setUserToken(DBUtils.get(MainActivity.this, "userToken"));
+            } catch (SnappydbException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     //版本  大于等于 19  才会生效
@@ -115,13 +135,13 @@ public class MainActivity extends AppCompatActivity
                 setTabSelection(tabIndex);
                 break;
             case R.id.tab_room:
-                setTabSelection(tabRoom);
+                setTabSelection(tabRecommend);
                 break;
             case R.id.tab_plus:
                 setTabSelection(tabPlus);
                 break;
             case R.id.tab_message:
-                setTabSelection(tabMessage);
+                setTabSelection(tabRoom);
                 break;
             case R.id.tab_mine:
                 setTabSelection(tabMine);
@@ -159,13 +179,13 @@ public class MainActivity extends AppCompatActivity
             case R.id.tab_room:
                 hideFragments(fragmentTransaction);
 
-                tabRoomImg.setImageResource(R.mipmap.tab2_b);
-                tabRoomTitle.setTextColor(activeColorRecourse);
-                if (mMeetingFragment == null) {
-                    mMeetingFragment = new RoomFragment();
-                    fragmentTransaction.add(R.id.container, mMeetingFragment, TAB_ROOM_TAG);
+                tabRecommendImg.setImageResource(R.mipmap.tab2_b);
+                tabRecommendTitle.setTextColor(activeColorRecourse);
+                if (mRecommendFragment == null) {
+                    mRecommendFragment = new RecommendFragment();
+                    fragmentTransaction.add(R.id.container, mRecommendFragment, TAB_RECOMMEND_TAG);
                 } else {
-                    fragmentTransaction.show(mMeetingFragment);
+                    fragmentTransaction.show(mRecommendFragment);
                 }
                 break;
 
@@ -178,13 +198,13 @@ public class MainActivity extends AppCompatActivity
             case R.id.tab_message:
                 hideFragments(fragmentTransaction);
 
-                tabMessageImg.setImageResource(R.mipmap.tab4_b);
-                tabMessageTitle.setTextColor(activeColorRecourse);
-                if (mMessageFragment == null) {
-                    mMessageFragment = new MessageFragment();
-                    fragmentTransaction.add(R.id.container, mMessageFragment, TAB_MESSAGE_TAG);
+                tabRoomImg.setImageResource(R.mipmap.tab4_b);
+                tabRoomTitle.setTextColor(activeColorRecourse);
+                if (mRoomFragment == null) {
+                    mRoomFragment = new RoomFragment();
+                    fragmentTransaction.add(R.id.container, mRoomFragment, TAB_ROOM_TAG);
                 } else {
-                    fragmentTransaction.show(mMessageFragment);
+                    fragmentTransaction.show(mRoomFragment);
                 }
                 break;
 
@@ -215,6 +235,7 @@ public class MainActivity extends AppCompatActivity
             mPopMenu = new PopMenu.Builder().attachToActivity(MainActivity.this)
                     .addMenuItem(new PopMenuItem("发布项目", getResources().getDrawable(R.mipmap.tab_btn_project_nor)))
                     .addMenuItem(new PopMenuItem("发布需求", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
+                    .addMenuItem(new PopMenuItem("test", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
                     .setOnItemClickListener(new PopMenuItemListener() {
                         @Override
                         public void onItemClick(PopMenu popMenu, int position) {
@@ -226,6 +247,7 @@ public class MainActivity extends AppCompatActivity
             mPopMenu = new PopMenu.Builder().attachToActivity(MainActivity.this)
                     .addMenuItem(new PopMenuItem("发布项目", getResources().getDrawable(R.mipmap.tab_btn_project_nor)))
                     .addMenuItem(new PopMenuItem("发布需求", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
+                    .addMenuItem(new PopMenuItem("test", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
                     .setOnItemClickListener(new PopMenuItemListener() {
                         @Override
                         public void onItemClick(PopMenu popMenu, int position) {
@@ -252,11 +274,11 @@ public class MainActivity extends AppCompatActivity
 //            case 2:
 //                intent = new Intent(MainActivity.this, ListvViewActivity.class);
 //                startActivity(intent);break;
-//            case 3:
-//                // 唤出RecoveryActivity
-//                BookListDto bookListDto=null;
-//                Toast.makeText(MainActivity.this, bookListDto.getBookName(), Toast.LENGTH_SHORT).show();
-//                break;
+            case 2:
+                // 唤出RecoveryActivity
+                BookListDto bookListDto=null;
+                Toast.makeText(MainActivity.this, bookListDto.getBookName(), Toast.LENGTH_SHORT).show();
+                break;
 //            case 4:
 //                break;
 //            case 5:
@@ -271,13 +293,13 @@ public class MainActivity extends AppCompatActivity
         tabIndexImg.setImageResource(R.mipmap.tab1_g);
         tabIndexTitle.setTextColor(inactiveResources);
 
-        tabRoomImg.setImageResource(R.mipmap.tab2_g);
-        tabRoomTitle.setTextColor(inactiveResources);
+        tabRecommendImg.setImageResource(R.mipmap.tab2_g);
+        tabRecommendTitle.setTextColor(inactiveResources);
 
         tabPlusImg.setImageResource(R.mipmap.tab3_g);
 
-        tabMessageImg.setImageResource(R.mipmap.tab4_g);
-        tabMessageTitle.setTextColor(inactiveResources);
+        tabRoomImg.setImageResource(R.mipmap.tab4_g);
+        tabRoomTitle.setTextColor(inactiveResources);
 
         tabMineImg.setImageResource(R.mipmap.tab5_g);
         tabMineTitle.setTextColor(inactiveResources);
@@ -293,11 +315,11 @@ public class MainActivity extends AppCompatActivity
         if (mIndexFragment != null) {
             transaction.hide(mIndexFragment);
         }
-        if (mMeetingFragment != null) {
-            transaction.hide(mMeetingFragment);
+        if (mRecommendFragment != null) {
+            transaction.hide(mRecommendFragment);
         }
-        if (mMessageFragment != null) {
-            transaction.hide(mMessageFragment);
+        if (mRoomFragment != null) {
+            transaction.hide(mRoomFragment);
         }
         if (mMineFragment != null) {
             transaction.hide(mMineFragment);
@@ -308,7 +330,7 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
 //        int id = getIntent().getIntExtra("ReturnToMiniSupplierActivity", 0);
 //        if (id == 1) {
-//            setTabSelection(tabmessage);
+//            setTabSelection(tabRoom);
 //        } else if (id == 2) {
 //            setTabSelection(tabIndex);
 //        }

@@ -25,16 +25,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".view.WelcomeActivity"
+            android:name=".UI.OtherView.WelcomeActivity"
             android:theme="@style/WelcomeTheme">
-        </activity>
-        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
+
+        <activity
+            android:name=".UI.OtherView.WelcomeGuideActivity"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" />
 
         <!--服务参数配置-->
         <meta-data
