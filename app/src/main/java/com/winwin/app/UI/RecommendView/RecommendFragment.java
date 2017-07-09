@@ -275,6 +275,18 @@ public class RecommendFragment extends Fragment {
                 Log.e(TAG, "onNext");
             }
         });
+        mSelectedParkAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+//                Intent intent = new Intent(getActivity(), ParkListActivity.class);
+//                intent.putExtra("type", 0);
+//                if (!searchEdit.getText().toString().trim().equals("")) {
+//                    intent.putExtra("type", 2);
+//                    intent.putExtra("searchValue", searchEdit.getText().toString().trim());
+//                }
+//                startActivity(intent);
+            }
+        });
 
 
         mRecyclerView2 = (RecyclerView) view.findViewById(R.id.rv_list2);

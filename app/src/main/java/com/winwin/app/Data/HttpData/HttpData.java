@@ -24,6 +24,7 @@ import com.winwin.app.UI.Entity.MyInfoDto;
 import com.winwin.app.UI.Entity.PageDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
 import com.winwin.app.UI.Entity.ParkDto;
+import com.winwin.app.UI.Entity.SelectAppParksVo;
 import com.winwin.app.UI.Entity.UserLoginVo;
 import com.winwin.app.Util.FileUtil;
 
@@ -173,6 +174,10 @@ public class HttpData extends RetrofitUtils {
     }
     public void HttpDataGetParkByConditions(Observer<PageDto<ParkDto>> observer, Map<String, Object> map) {
         Observable observable = service.getParkByConditions(map).map(new HttpResultFunc<PageDto<ParkDto>>());
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataGetParksByConditions(Observer<List<ParkDto>> observer, SelectAppParksVo selectAppParksVo) {
+        Observable observable = service.getParksByConditions(selectAppParksVo).map(new HttpResultFunc<List<ParkDto>>());
         setSubscribe(observable, observer);
     }
 

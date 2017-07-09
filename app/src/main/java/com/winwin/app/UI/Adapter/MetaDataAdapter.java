@@ -19,10 +19,10 @@ public class MetaDataAdapter extends BaseQuickAdapter<MetaDataDto> {
                 helper.setText(R.id.name,item.getDataDisplay());
                 break;
             case 2:
-                helper.setText(R.id.name,item.getDataDisplay());
+                helper.setText(R.id.name,item.getDataDisplay() + " 平方米");
                 break;
             case 3:
-                helper.setText(R.id.name,item.getDataDisplay() + " 平方米");
+                helper.setText(R.id.name,item.getDataDisplay());
                 break;
         }
     }

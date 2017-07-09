@@ -80,7 +80,7 @@ public class ParkDto {
     private int houseNum;
     private Object reviewInfo;
     private Object createName;
-    private Object homeImage;
+    private String homeImage;
     private int type;
     private double longitude;
     private double latitude;
@@ -310,11 +310,11 @@ public class ParkDto {
         this.createName = createName;
     }
 
-    public Object getHomeImage() {
+    public String getHomeImage() {
         return homeImage;
     }
 
-    public void setHomeImage(Object homeImage) {
+    public void setHomeImage(String homeImage) {
         this.homeImage = homeImage;
     }
 

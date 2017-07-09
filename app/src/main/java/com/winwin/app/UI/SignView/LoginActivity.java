@@ -410,7 +410,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-            showProgress(false);
+//            showProgress(false);
 
             UserLoginVo userLoginVo = new UserLoginVo(mPassword, mPhone);
             HttpData.getInstance().HttpDataLogin(new Observer<LoginUserDto>() {
@@ -433,6 +433,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 public void onError(@io.reactivex.annotations.NonNull Throwable e) {
                     mPasswordView.setError(getString(R.string.error_incorrect_password));
                     mPasswordView.requestFocus();
+                    showProgress(false);
                 }
 
                 @Override

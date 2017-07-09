@@ -17,7 +17,6 @@
             android:id="@+id/selected_park_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/welcome"
             android:scaleType="fitXY" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

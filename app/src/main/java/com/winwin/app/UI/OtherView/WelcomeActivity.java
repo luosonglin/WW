@@ -20,12 +20,12 @@ public class WelcomeActivity extends ListvViewActivity {
         boolean isFirstOpen = SpUtils.getBoolean(this, Constant.FIRST_OPEN);
         // 如果是第一次启动，则先进入功能引导页
         if (!isFirstOpen) {
-            Intent intent = new Intent(this, WelcomeGuideActivity.class);
+//            Intent intent = new Intent(this, WelcomeGuideActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
             return;
         }
-
 
         setContentView(R.layout.activity_welcome);
         new Handler().postDelayed(new Runnable() {

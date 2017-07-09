@@ -8,28 +8,28 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.winwin.app.R;
-import com.winwin.app.UI.Entity.MapDto;
+import com.winwin.app.UI.Entity.ParkDto;
 import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.BaseViewHolder;
 
 import java.util.List;
 
-public class MapAdapter extends BaseQuickAdapter<MapDto> {
+public class MapAdapter extends BaseQuickAdapter<ParkDto> {
     private static final String TAG = MapAdapter.class.getSimpleName();
 
-    public MapAdapter(int layoutResId, List<MapDto> data) {
+    public MapAdapter(int layoutResId, List<ParkDto> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, final MapDto item) {
+    protected void convert(BaseViewHolder helper, final ParkDto item) {
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .placeholder(R.mipmap.haha)
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
         Glide.with(mContext)
-                .load(item.getCoverImgs())
+                .load(item.getHomeImage())
                 .apply(options)
                 .into((ImageView) helper.getView(R.id.image));
 

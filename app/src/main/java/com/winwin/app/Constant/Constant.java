@@ -13,9 +13,8 @@ public class Constant {
     public static String EMPTY_CONTEXT="换个条件试试吧";
 
     //服务器路径
-    public static final String API_SERVER = "http://106.14.0.72:8888";
+    public static final String API_SERVER_TEST = "http://106.14.0.72:8888";
+    public static final String API_SERVER_RELEASE = "http://106.15.198.247:8888";
 
     public static final String FIRST_OPEN = "first_open";
-
-
 }

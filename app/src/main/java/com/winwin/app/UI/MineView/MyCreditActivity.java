@@ -55,9 +55,7 @@ public class MyCreditActivity extends AppCompatActivity {
 
         SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
         FragmentPagerItems pages = new FragmentPagerItems(this);
-//        for (int i=0;i<4;i++) {
-//            pages.add(FragmentPagerItem.of("Tab"+i, MyCreditParkTabFragment.class));
-//        }
+
         pages.add(FragmentPagerItem.of("发布需求", MyCreditParkTabFragment.class));
         pages.add(FragmentPagerItem.of("发布园区", MyCreditParkTabFragment.class));
         pages.add(FragmentPagerItem.of("推荐积分", MyCreditCommendTagFragment.class));

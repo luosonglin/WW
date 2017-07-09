@@ -13,10 +13,10 @@ import com.xiaochao.lcrapiddeveloplibrary.BaseViewHolder;
 import java.util.List;
 
 /**
- * 搜索页进去的园区列表页用
+ * 空间页用
  */
-public class ParkAdapter extends BaseQuickAdapter<ParkDto> {
-    public ParkAdapter(int layoutResId, List<ParkDto> data) {
+public class ParksAdapter extends BaseQuickAdapter<ParkDto> {
+    public ParksAdapter(int layoutResId, List<ParkDto> data) {
         super(layoutResId, data);
     }
 
@@ -28,14 +28,13 @@ public class ParkAdapter extends BaseQuickAdapter<ParkDto> {
 //                .placeholder(R.mipmap.ic_launcher)
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
         Glide.with(mContext)
-                .load(item.getCoverImgs().get(0).getImagePath())
+                .load(item.getHomeImage())
                 .apply(options)
                 .into((ImageView) helper.getView(R.id.image));
 
         helper.setText(R.id.name, item.getName())
-            .setText(R.id.status, item.getCurrentRentNum() + "套在租")
-            .setText(R.id.money, item.getDayRentStartPi() + "")
-            .setText(R.id.location, item.getDistanceMetroDesc());
+                .setText(R.id.status, item.getCurrentRentNum() + "套在租")
+                .setText(R.id.money, item.getDayRentStartPi() + "")
+                .setText(R.id.location, item.getDistanceMetroDesc());
     }
 }
-

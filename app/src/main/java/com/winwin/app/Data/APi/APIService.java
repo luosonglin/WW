@@ -19,6 +19,7 @@ import com.winwin.app.UI.Entity.MyInfoDto;
 import com.winwin.app.UI.Entity.PageDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
 import com.winwin.app.UI.Entity.ParkDto;
+import com.winwin.app.UI.Entity.SelectAppParksVo;
 import com.winwin.app.UI.Entity.UserLoginVo;
 
 import java.util.List;
@@ -132,4 +133,11 @@ public interface APIService {
     //综合条件筛选园区信息
     @GET("api/v1/park/getParkByConditions")
     Observable<HttpResult<PageDto<ParkDto>>> getParkByConditions(@QueryMap Map<String, Object> map);
+
+    /**
+     * 空间页
+     */
+    //POST /api/v1/parkapp/noLogin/getParksByConditions （**App**）多条件搜索项目或园区列表
+    @POST("api/v1/parkapp/noLogin/getParksByConditions")
+    Observable<HttpResult<List<ParkDto>>> getParksByConditions(@Body SelectAppParksVo selectAppParksVo);
 }
