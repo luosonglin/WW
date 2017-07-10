@@ -15,6 +15,9 @@ import com.xiaochao.lcrapiddeveloplibrary.BaseViewHolder;
 
 import java.util.List;
 
+/**
+ * 精选园区
+ */
 public class SelectedParkAdapter extends BaseQuickAdapter<IndexBannerDto> {
     public SelectedParkAdapter(int layoutResId, List<IndexBannerDto> data) {
         super(layoutResId, data);

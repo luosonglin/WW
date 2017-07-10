@@ -94,7 +94,6 @@ public class ParkListActivity extends AppCompatActivity implements BaseQuickAdap
 //        present = new BookListPresent(this);
         present = new ParkListPresent(this);
         //请求网络数据
-//        present.LoadData("1",PageIndex,false);
         type = getIntent().getExtras().getInt("type");
         if (type == 0) {
             map.clear();

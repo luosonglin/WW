@@ -18,7 +18,7 @@ import com.xiaochao.lcrapiddeveloplibrary.BaseViewHolder;
 import java.util.List;
 
 /**
- * 精选园区
+ * 精选园区-园区列表
  */
 public class SelectParkListAdapter extends BaseQuickAdapter<ParkDto> {
     public SelectParkListAdapter(int layoutResId, List<ParkDto> data) {

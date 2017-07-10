@@ -43,7 +43,6 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
 
     private static final String TAG = EarnMoneyActivity.class.getSimpleName();
 
-
     @Bind(R.id.district_rlyt)
     RelativeLayout districtRlyt;
     @Bind(R.id.line1)
