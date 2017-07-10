@@ -334,19 +334,6 @@ public class RecommendFragment extends Fragment {
     }
 
     private void initListener() {
-        mSelectedParkAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(), "点击了" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-        mSelectedParkAdapter.setOnRecyclerViewItemLongClickListener(new BaseQuickAdapter.OnRecyclerViewItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(View view, int position) {
-                Toast.makeText(getActivity(), "长按了" + position, Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
 
         mLatestRecommendationAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override

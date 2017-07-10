@@ -69,6 +69,10 @@ public interface APIService {
     @GET("api/v1/parkapp/noLogin/newRecommandParks")
     Observable<HttpResult<List<IndexRecommandParkDto>>> getRecommandParks();
 
+    //首页精选园区列表获取 传值1：文化创意园区；2：互联网创意园区；3：物流园区；4：科技园区；5：金融商务园区；6：工业园区
+    @GET("/api/v1/parkapp/noLogin/goodParks")
+    Observable<HttpResult<List<ParkDto>>> getRecommandParkList(@QueryMap Map<String, Object> map);
+
     //app获取园区详情页面中的咨询经纪人列表
     @GET("api/v1/parkapp/noLogin/{parkId}/getBrokers")
     Observable<HttpResult<List<BrokerDto>>> getBrokers(@Path("parkId") long parkId);

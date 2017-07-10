@@ -134,6 +134,10 @@ public class HttpData extends RetrofitUtils {
         Observable observable = service.getRecommandParks();
         setSubscribe(observable, observer);
     }
+    public void HttpDataGetRecommandParkList(Observer<List<ParkDto>> observer, Map<String, Object> map) {
+        Observable observable = service.getRecommandParkList(map).map(new HttpResultFunc<List<ParkDto>>());
+        setSubscribe(observable, observer);
+    }
 
     public void HttpDataGetParkDetail(Observer<ParkDetailDto> observer, long parkId) {
         Observable observable = service.getParkDetail(parkId).map(new HttpResultFunc<ParkDetailDto>());

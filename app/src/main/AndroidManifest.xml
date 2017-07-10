@@ -129,5 +129,8 @@
         <activity
             android:name=".UI.SearchView.ParkListActivity"
             android:label="" />
+        <activity
+            android:name=".UI.RecommendView.SelectedParkActivity"
+            android:label="" />
     </application>
 </manifest>

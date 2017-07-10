@@ -136,8 +136,8 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                 isCollect = parkDetailDtoHttpResult.getParkVo().isCollection();
                 if (isCollect) {
                     collectIv.setTag("collected");
-                    collectIv.setImageResource(R.mipmap.ic_launcher);
-                } else  {
+                    collectIv.setImageResource(R.mipmap.parkdetailactivity_fravorite_red);
+                } else {
                     collectIv.setTag("not_collected");
                     collectIv.setImageResource(R.mipmap.parkdetailactivity_fravorite);
                 }
@@ -281,15 +281,15 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                         @Override
                         public void onNext(@NonNull HttpResult httpResult) {
                             collectIv.setTag("collected");
-                            collectIv.setImageResource(R.mipmap.ic_launcher);
+                            collectIv.setImageResource(R.mipmap.parkdetailactivity_fravorite_red);
                         }
 
                         @Override
                         public void onError(@NonNull Throwable e) {
-                            Log.e(TAG, "onError: "+e.getMessage()
-                                    +"\n"+e.getCause()
-                                    +"\n"+e.getLocalizedMessage()
-                                    +"\n"+e.getStackTrace());
+                            Log.e(TAG, "onError: " + e.getMessage()
+                                    + "\n" + e.getCause()
+                                    + "\n" + e.getLocalizedMessage()
+                                    + "\n" + e.getStackTrace());
                         }
 
                         @Override
@@ -312,10 +312,10 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 
                         @Override
                         public void onError(@NonNull Throwable e) {
-                            Log.e(TAG, "onError: "+e.getMessage()
-                                    +"\n"+e.getCause()
-                                    +"\n"+e.getLocalizedMessage()
-                                    +"\n"+e.getStackTrace());
+                            Log.e(TAG, "onError: " + e.getMessage()
+                                    + "\n" + e.getCause()
+                                    + "\n" + e.getLocalizedMessage()
+                                    + "\n" + e.getStackTrace());
                         }
 
                         @Override
