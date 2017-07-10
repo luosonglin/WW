@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.winwin.app.Constant.Constant;
-import com.winwin.app.MVP.Presenter.CreditParkListPresent;
-import com.winwin.app.MVP.View.CreditParkListView;
+import com.winwin.app.MVP.Presenter.CreditCommendListPresent;
+import com.winwin.app.MVP.View.CreditCommendListView;
 import com.winwin.app.R;
-import com.winwin.app.UI.Adapter.MyCreditParkAdapter;
+import com.winwin.app.UI.Adapter.MyCreditCommendAdapter;
 import com.winwin.app.UI.Entity.CreditDto;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.container.DefaultHeader;
@@ -23,7 +23,7 @@ import com.xiaochao.lcrapiddeveloplibrary.widget.SpringView;
 
 import java.util.List;
 
-public class MyCreditParkTabFragment extends Fragment implements BaseQuickAdapter.RequestLoadMoreListener,SpringView.OnFreshListener,CreditParkListView {
+public class MyCreditCommendTabFragment extends Fragment implements BaseQuickAdapter.RequestLoadMoreListener,SpringView.OnFreshListener,CreditCommendListView {
 
     RecyclerView mRecyclerView;
     ProgressActivity progress;
@@ -31,7 +31,7 @@ public class MyCreditParkTabFragment extends Fragment implements BaseQuickAdapte
     private BaseQuickAdapter mQuickAdapter;
     private int PageIndex=1;
     private SpringView springView;
-    private CreditParkListPresent present;
+    private CreditCommendListPresent present;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +48,9 @@ public class MyCreditParkTabFragment extends Fragment implements BaseQuickAdapte
     }
 
     private void initView(View root) {
+//        TextView tabfragmenttextview = (TextView) root.findViewById(R.id.tab_fragment_textview);
+//        int position = FragmentPagerItem.getPosition(getArguments());
+//        tabfragmenttextview.setText(String.valueOf(position));
 
         mRecyclerView = (RecyclerView) root.findViewById(R.id.rv_list);
         springView = (SpringView) root.findViewById(R.id.springview);
@@ -56,6 +59,9 @@ public class MyCreditParkTabFragment extends Fragment implements BaseQuickAdapte
         //设置下拉刷新样式
         springView.setType(SpringView.Type.FOLLOW);
         springView.setHeader(new DefaultHeader(getActivity()));
+//        springView.setFooter(new DefaultFooter(this));
+//        springView.setHeader(new RotationHeader(this));
+//        springView.setFooter(new RotationFooter(this)); //mRecyclerView内部集成的自动加载  上啦加载用不上   在其他View使用
 
         progress = (ProgressActivity) root.findViewById(R.id.progress);
         //设置RecyclerView的显示模式  当前List模式
@@ -65,16 +71,14 @@ public class MyCreditParkTabFragment extends Fragment implements BaseQuickAdapte
         //设置页面为加载中..
         progress.showLoading();
         //设置适配器
-//        mQuickAdapter = new ListViewAdapter(R.layout.list_view_item_layout,null);
-//        mQuickAdapter = new BannersAdapter(R.layout.list_view_item_layout, null);
-        mQuickAdapter = new MyCreditParkAdapter(R.layout.item_my_credit, null);
+        mQuickAdapter = new MyCreditCommendAdapter(R.layout.item_my_credit, null);
         //设置加载动画
         mQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         //设置是否自动加载以及加载个数
         mQuickAdapter.openLoadMore(6,true);
         //将适配器添加到RecyclerView
         mRecyclerView.setAdapter(mQuickAdapter);
-        present = new CreditParkListPresent(this);
+        present = new CreditCommendListPresent(this);
         //请求网络数据
 //        present.LoadData("1",PageIndex,false);
         present.LoadData(false);
@@ -132,7 +136,7 @@ public class MyCreditParkTabFragment extends Fragment implements BaseQuickAdapte
     }
 
     @Override
-    public void newDatas(List<CreditDto.PublishParkListBean> newsList) {
+    public void newDatas(List<CreditDto.CommendsListBean> newsList) {
         //进入显示的初始数据或者下拉刷新显示的数据
         mQuickAdapter.setNewData(newsList);//新增数据
         mQuickAdapter.openLoadMore(10,true);//设置是否可以下拉加载  以及加载条数
@@ -140,7 +144,7 @@ public class MyCreditParkTabFragment extends Fragment implements BaseQuickAdapte
     }
 
     @Override
-    public void addDatas(List<CreditDto.PublishParkListBean> addList) {
+    public void addDatas(List<CreditDto.CommendsListBean> addList) {
         //新增自动加载的的数据
         mQuickAdapter.notifyDataChangedAfterLoadMore(addList, true);
     }
@@ -173,4 +177,5 @@ public class MyCreditParkTabFragment extends Fragment implements BaseQuickAdapte
     }
 
 }
+
 

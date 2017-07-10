@@ -73,6 +73,9 @@ public class MineFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private String UserName;
+    private String UserAvatar;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -140,6 +143,9 @@ public class MineFragment extends Fragment {
 
                 name.setText(myInfoDto.getUserName());
                 mMemberPoint.setText(myInfoDto.getTotalCredits()+" ");
+
+                UserName = myInfoDto.getUserName();
+                UserAvatar = myInfoDto.getHeadPic();
             }
         });
 
@@ -178,6 +184,7 @@ public class MineFragment extends Fragment {
 
     @OnClick({R.id.avatar, R.id.credit, R.id.my_winwin, R.id.customer_recommend, R.id.my_send, R.id.my_collect, R.id.my_more})
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.avatar:
                 startActivity(new Intent(getActivity(), MyInfoActivity.class));
@@ -186,7 +193,10 @@ public class MineFragment extends Fragment {
                 startActivity(new Intent(getActivity(), MyCreditActivity.class));
                 break;
             case R.id.my_winwin:
-                startActivity(new Intent(getActivity(), MyInfoActivity.class));
+                intent = new Intent(getActivity(), MyInfoActivity.class);
+                intent.putExtra("UserName", UserName);
+                intent.putExtra("UserAvatar", UserAvatar);
+                startActivity(intent);
                 break;
             case R.id.customer_recommend:
                 startActivity(new Intent(getActivity(), MyRecommendActivity.class));

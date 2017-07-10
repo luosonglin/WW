@@ -1,7 +1,9 @@
 package com.winwin.app.UI.MineView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -45,7 +47,7 @@ public class MyMoreActivity extends AppCompatActivity {
 
     private void initView() {
         versionTv = (TextView) findViewById(R.id.versionTv);
-        versionTv.setText(CustomUtils.getVersion(this)+"");
+        versionTv.setText(CustomUtils.getVersion(this) + "");
 
         cache = (TextView) findViewById(R.id.cacheTv);
         try {
@@ -58,7 +60,7 @@ public class MyMoreActivity extends AppCompatActivity {
         clean.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new clearCacheRunnable().run();
+                dialog();
             }
         });
     }
@@ -67,7 +69,7 @@ public class MyMoreActivity extends AppCompatActivity {
         @Override
         public void run() {
             try {
-                Toast.makeText(MyMoreActivity.this,"开始清理",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyMoreActivity.this, "开始清理", Toast.LENGTH_SHORT).show();
                 CleanUtils.clearAllCache(MyMoreActivity.this);
                 Thread.sleep(3000);
                 if (CleanUtils.getTotalCacheSize(MyMoreActivity.this).startsWith("0")) {
@@ -83,14 +85,36 @@ public class MyMoreActivity extends AppCompatActivity {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 0:
-                    Toast.makeText(MyMoreActivity.this,"清理完成",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyMoreActivity.this, "清理完成", Toast.LENGTH_SHORT).show();
                     try {
                         cache.setText(CleanUtils.getTotalCacheSize(MyMoreActivity.this));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
             }
-        };
+        }
+
+        ;
     };
+
+    protected void dialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MyMoreActivity.this);
+        builder.setMessage("确认清理缓存吗？");
+        builder.setTitle("提示");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                new clearCacheRunnable().run();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
 }
 

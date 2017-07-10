@@ -27,7 +27,9 @@ import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.BrokerAdapter;
 import com.winwin.app.UI.Entity.BrokerDto;
+import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.ParkDetailDto;
+import com.winwin.app.Util.ToastUtils;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.widget.SpringView;
 
@@ -37,7 +39,7 @@ import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
-public class ParkDetailActivity extends AppCompatActivity implements SpringView.OnFreshListener{
+public class ParkDetailActivity extends AppCompatActivity implements SpringView.OnFreshListener {
     private static final String TAG = ParkDetailActivity.class.getSimpleName();
     private Toolbar toolbar;
     private Context context = this;
@@ -58,6 +60,8 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
             payDay, proStand, watStand, proArea,
             broker;
     private BaseQuickAdapter mBaseQuickAdapter;
+    private ImageView collectIv;
+    private boolean isCollect = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +85,6 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
         });
     }
 
-    private String[] datas = {"选项1", "选项2", "选项3", "选项4", "选项5"};
-
     private void initView(final long parkId) {
         amount_textview = (TextView) findViewById(R.id.amount_textview);
         name = (TextView) findViewById(R.id.name);
@@ -103,10 +105,10 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 
             @Override
             public void onError(Throwable e) {
-                Log.e(TAG, "onError: "+e.getMessage()
-                        +"\n"+e.getCause()
-                        +"\n"+e.getLocalizedMessage()
-                        +"\n"+e.getStackTrace());
+                Log.e(TAG, "onError: " + e.getMessage()
+                        + "\n" + e.getCause()
+                        + "\n" + e.getLocalizedMessage()
+                        + "\n" + e.getStackTrace());
             }
 
             @Override
@@ -118,19 +120,27 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
             public void onNext(ParkDetailDto parkDetailDtoHttpResult) {
                 Glide.with(ParkDetailActivity.this)
                         .load(parkDetailDtoHttpResult.getParkVo().getHomeImage())
-//                        .crossFade()
                         .into((ImageView) findViewById(R.id.img));
-                amount_textview.setText("¥"+parkDetailDtoHttpResult.getParkVo().getDayRentStartPi());
+                amount_textview.setText("¥" + parkDetailDtoHttpResult.getParkVo().getDayRentStartPi());
                 name.setText(parkDetailDtoHttpResult.getParkVo().getName());
                 location.setText(parkDetailDtoHttpResult.getParkVo().getDistanceMetroDesc());
-                usingAreaPercent.setText("租赁统计（"+ parkDetailDtoHttpResult.getUsingAreaPercent()+"）");
-                checkInCustomers.setText("入驻企业（"+ parkDetailDtoHttpResult.getCheckInCustomers()+"家）");
+                usingAreaPercent.setText("租赁统计（" + parkDetailDtoHttpResult.getUsingAreaPercent() + "）");
+                checkInCustomers.setText("入驻企业（" + parkDetailDtoHttpResult.getCheckInCustomers() + "家）");
                 parkDesc.setText(parkDetailDtoHttpResult.getParkVo().getParkDesc());
                 peripheryDesc.setText(parkDetailDtoHttpResult.getParkVo().getPeripheryDesc());
-                payDay.setText(parkDetailDtoHttpResult.getParkVo().getPayDay()+"元/天 或 " +parkDetailDtoHttpResult.getParkVo().getPayMon()+"元/月");
-                proStand.setText(parkDetailDtoHttpResult.getParkVo().getProStand()+"元/度");
-                watStand.setText(parkDetailDtoHttpResult.getParkVo().getWatStand()+"元/吨");
-                proArea.setText(parkDetailDtoHttpResult.getParkVo().getProArea()+"平方米");
+                payDay.setText(parkDetailDtoHttpResult.getParkVo().getPayDay() + "元/天 或 " + parkDetailDtoHttpResult.getParkVo().getPayMon() + "元/月");
+                proStand.setText(parkDetailDtoHttpResult.getParkVo().getProStand() + "元/度");
+                watStand.setText(parkDetailDtoHttpResult.getParkVo().getWatStand() + "元/吨");
+                proArea.setText(parkDetailDtoHttpResult.getParkVo().getProArea() + "平方米");
+
+                isCollect = parkDetailDtoHttpResult.getParkVo().isCollection();
+                if (isCollect) {
+                    collectIv.setTag("collected");
+                    collectIv.setImageResource(R.mipmap.ic_launcher);
+                } else  {
+                    collectIv.setTag("not_collected");
+                    collectIv.setImageResource(R.mipmap.parkdetailactivity_fravorite);
+                }
                 Log.e(TAG, "onNext");
             }
         }, parkId);
@@ -157,10 +167,10 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e(TAG, "onError: "+e.getMessage()
-                                +"\n"+e.getCause()
-                                +"\n"+e.getLocalizedMessage()
-                                +"\n"+e.getStackTrace());
+                        Log.e(TAG, "onError: " + e.getMessage()
+                                + "\n" + e.getCause()
+                                + "\n" + e.getLocalizedMessage()
+                                + "\n" + e.getStackTrace());
                     }
 
                     @Override
@@ -251,6 +261,69 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                         return true; // 返回true表示已经完成触摸事件，不再处理
                 }
                 return false;
+            }
+        });
+
+        /**
+         * 收藏
+         */
+        collectIv = (ImageView) findViewById(R.id.collect_iv);
+        collectIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (collectIv.getTag().equals("not_collected")) {
+                    HttpData.getInstance().HttpDataCollectPark(new Observer<HttpResult>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(@NonNull HttpResult httpResult) {
+                            collectIv.setTag("collected");
+                            collectIv.setImageResource(R.mipmap.ic_launcher);
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            Log.e(TAG, "onError: "+e.getMessage()
+                                    +"\n"+e.getCause()
+                                    +"\n"+e.getLocalizedMessage()
+                                    +"\n"+e.getStackTrace());
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            ToastUtils.show(ParkDetailActivity.this, "收藏成功");
+                        }
+                    }, getIntent().getExtras().getInt("parkId"), 2);
+                } else {
+                    HttpData.getInstance().HttpDataCancelCollectPark(new Observer<HttpResult>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(@NonNull HttpResult httpResult) {
+                            collectIv.setTag("not_collected");
+                            collectIv.setImageResource(R.mipmap.parkdetailactivity_fravorite);
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            Log.e(TAG, "onError: "+e.getMessage()
+                                    +"\n"+e.getCause()
+                                    +"\n"+e.getLocalizedMessage()
+                                    +"\n"+e.getStackTrace());
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            ToastUtils.show(ParkDetailActivity.this, "取消收藏");
+                        }
+                    }, getIntent().getExtras().getInt("parkId"), 2);
+                }
             }
         });
     }

@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.winwin.app.Constant.Constant;
-import com.winwin.app.MVP.Presenter.BannerListPresent;
-import com.winwin.app.MVP.View.BannerListView;
+import com.winwin.app.MVP.Presenter.MyCollectParkListPresent;
+import com.winwin.app.MVP.View.ParkListView;
 import com.winwin.app.R;
-import com.winwin.app.UI.Adapter.ParkAdapter;
-import com.winwin.app.UI.Entity.BannerDto;
+import com.winwin.app.UI.Adapter.ParksAdapter;
+import com.winwin.app.UI.Entity.ParkDto;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.container.DefaultHeader;
 import com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity;
@@ -23,7 +23,7 @@ import com.xiaochao.lcrapiddeveloplibrary.widget.SpringView;
 
 import java.util.List;
 
-public class MyCollectTabFragment extends Fragment implements BaseQuickAdapter.RequestLoadMoreListener,SpringView.OnFreshListener,BannerListView {
+public class MyCollectParkTabFragment extends Fragment implements BaseQuickAdapter.RequestLoadMoreListener,SpringView.OnFreshListener,ParkListView {
 
     RecyclerView mRecyclerView;
     ProgressActivity progress;
@@ -31,7 +31,7 @@ public class MyCollectTabFragment extends Fragment implements BaseQuickAdapter.R
     private BaseQuickAdapter mQuickAdapter;
     private int PageIndex=1;
     private SpringView springView;
-    private BannerListPresent present;
+    private MyCollectParkListPresent present;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,10 +48,6 @@ public class MyCollectTabFragment extends Fragment implements BaseQuickAdapter.R
     }
 
     private void initView(View root) {
-//        TextView tabfragmenttextview = (TextView) root.findViewById(R.id.tab_fragment_textview);
-//        int position = FragmentPagerItem.getPosition(getArguments());
-//        tabfragmenttextview.setText(String.valueOf(position));
-
         mRecyclerView = (RecyclerView) root.findViewById(R.id.rv_list);
         springView = (SpringView) root.findViewById(R.id.springview);
         //设置下拉刷新监听
@@ -59,9 +55,6 @@ public class MyCollectTabFragment extends Fragment implements BaseQuickAdapter.R
         //设置下拉刷新样式
         springView.setType(SpringView.Type.FOLLOW);
         springView.setHeader(new DefaultHeader(getActivity()));
-//        springView.setFooter(new DefaultFooter(this));
-//        springView.setHeader(new RotationHeader(this));
-//        springView.setFooter(new RotationFooter(this)); //mRecyclerView内部集成的自动加载  上啦加载用不上   在其他View使用
 
         progress = (ProgressActivity) root.findViewById(R.id.progress);
         //设置RecyclerView的显示模式  当前List模式
@@ -71,17 +64,15 @@ public class MyCollectTabFragment extends Fragment implements BaseQuickAdapter.R
         //设置页面为加载中..
         progress.showLoading();
         //设置适配器
-        mQuickAdapter = new ParkAdapter(R.layout.item_park, null);
+        mQuickAdapter = new ParksAdapter(R.layout.item_park, null);
         //设置加载动画
         mQuickAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         //设置是否自动加载以及加载个数
         mQuickAdapter.openLoadMore(6,true);
         //将适配器添加到RecyclerView
         mRecyclerView.setAdapter(mQuickAdapter);
-//        present = new BookListPresent(this);
-        present = new BannerListPresent(this);
+        present = new MyCollectParkListPresent(this);
         //请求网络数据
-//        present.LoadData("1",PageIndex,false);
         present.LoadData(false);
     }
 
@@ -137,7 +128,7 @@ public class MyCollectTabFragment extends Fragment implements BaseQuickAdapter.R
     }
 
     @Override
-    public void newDatas(List<BannerDto.BannersBean> newsList) {
+    public void newDatas(List<ParkDto> newsList) {
         //进入显示的初始数据或者下拉刷新显示的数据
         mQuickAdapter.setNewData(newsList);//新增数据
         mQuickAdapter.openLoadMore(10,true);//设置是否可以下拉加载  以及加载条数
@@ -145,7 +136,7 @@ public class MyCollectTabFragment extends Fragment implements BaseQuickAdapter.R
     }
 
     @Override
-    public void addDatas(List<BannerDto.BannersBean> addList) {
+    public void addDatas(List<ParkDto> addList) {
         //新增自动加载的的数据
         mQuickAdapter.notifyDataChangedAfterLoadMore(addList, true);
     }

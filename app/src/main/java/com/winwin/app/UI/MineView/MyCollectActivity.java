@@ -45,7 +45,6 @@ public class MyCollectActivity extends AppCompatActivity {
     }
 
     private void initFindView() {
-
         tab = (ViewGroup) findViewById(R.id.tab);
         viewpager = (ViewPager) findViewById(R.id.viewpager);
 
@@ -53,11 +52,8 @@ public class MyCollectActivity extends AppCompatActivity {
 
         SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
         FragmentPagerItems pages = new FragmentPagerItems(this);
-//        for (int i=0;i<4;i++) {
-//            pages.add(FragmentPagerItem.of("Tab"+i, MyCreditParkTabFragment.class));
-//        }
-        pages.add(FragmentPagerItem.of("园区", MyCollectTabFragment.class));
-        pages.add(FragmentPagerItem.of("需求", MyCollectDemandTabFragment.class));
+        pages.add(FragmentPagerItem.of("园区", MyCollectParkTabFragment.class));
+        pages.add(FragmentPagerItem.of("需求", MyCollectRequireTabFragment.class));
 
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), pages);

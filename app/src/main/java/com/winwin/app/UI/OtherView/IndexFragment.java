@@ -51,7 +51,7 @@ public class IndexFragment extends Fragment {
 
     private static final String TAG = IndexFragment.class.getSimpleName();
     private Toolbar toolbar;
-    private static final String URL = "http://winwin.jidichong.com/#/workbench?token="+ Data.getUserToken() +"&parkId=4";
+    private static final String URL = "http://winwin.jidichong.com/#/workbench?token="+ Data.getUserToken();
 
     public IndexFragment() {
         // Required empty public constructor

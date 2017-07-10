@@ -17,7 +17,7 @@ public class CreditDto {
     private Object userName;
     private Object headPic;
     private List<PublishParkListBean> publishParkList;
-    private List<?> publishRequirementList;
+    private List<PublishRequirementList> publishRequirementList;
     private List<CommendsListBean> commendsList;
 
     public int getTotalCredits() {
@@ -52,11 +52,11 @@ public class CreditDto {
         this.publishParkList = publishParkList;
     }
 
-    public List<?> getPublishRequirementList() {
+    public List<PublishRequirementList> getPublishRequirementList() {
         return publishRequirementList;
     }
 
-    public void setPublishRequirementList(List<?> publishRequirementList) {
+    public void setPublishRequirementList(List<PublishRequirementList> publishRequirementList) {
         this.publishRequirementList = publishRequirementList;
     }
 
@@ -544,6 +544,272 @@ public class CreditDto {
         }
     }
 
+    public static class PublishRequirementList {
+
+        /**
+         * createId : null
+         * createTime : 1498603721000
+         * isDel : 0
+         * updaterId : null
+         * updateTime : null
+         * id : 1
+         * pubRequireId : 1
+         * pubRequireName : 发布需求人姓名不可为空
+         * pubRequireHeaderPic : null
+         * pubRequireCompany : 发布需求人公司名称不可为空
+         * belongIndustryId : 2
+         * belongIndustryDisPlay : null
+         * requireAreaRangId : 12
+         * requireAreaRangDisplay : null
+         * requireAreaIds : ;310104;;310105;
+         * requireAreaIdArray : null
+         * requireAreaName : 徐汇区;长宁区
+         * otherInfo : string
+         * browseNum : 45
+         * pubReqManDesc : 22
+         * pubReqManDescInfo : null
+         * followNum : 1
+         * requireTitle : 测试发布需求标题
+         * effectImgs : null
+         * requireBanner : null
+         * collect : null
+         */
+
+        private Object createId;
+        private long createTime;
+        private int isDel;
+        private Object updaterId;
+        private Object updateTime;
+        private int id;
+        private int pubRequireId;
+        private String pubRequireName;
+        private Object pubRequireHeaderPic;
+        private String pubRequireCompany;
+        private int belongIndustryId;
+        private Object belongIndustryDisPlay;
+        private int requireAreaRangId;
+        private Object requireAreaRangDisplay;
+        private String requireAreaIds;
+        private Object requireAreaIdArray;
+        private String requireAreaName;
+        private String otherInfo;
+        private int browseNum;
+        private int pubReqManDesc;
+        private Object pubReqManDescInfo;
+        private int followNum;
+        private String requireTitle;
+        private Object effectImgs;
+        private Object requireBanner;
+        private Object collect;
+
+        public Object getCreateId() {
+            return createId;
+        }
+
+        public void setCreateId(Object createId) {
+            this.createId = createId;
+        }
+
+        public long getCreateTime() {
+            return createTime;
+        }
+
+        public void setCreateTime(long createTime) {
+            this.createTime = createTime;
+        }
+
+        public int getIsDel() {
+            return isDel;
+        }
+
+        public void setIsDel(int isDel) {
+            this.isDel = isDel;
+        }
+
+        public Object getUpdaterId() {
+            return updaterId;
+        }
+
+        public void setUpdaterId(Object updaterId) {
+            this.updaterId = updaterId;
+        }
+
+        public Object getUpdateTime() {
+            return updateTime;
+        }
+
+        public void setUpdateTime(Object updateTime) {
+            this.updateTime = updateTime;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getPubRequireId() {
+            return pubRequireId;
+        }
+
+        public void setPubRequireId(int pubRequireId) {
+            this.pubRequireId = pubRequireId;
+        }
+
+        public String getPubRequireName() {
+            return pubRequireName;
+        }
+
+        public void setPubRequireName(String pubRequireName) {
+            this.pubRequireName = pubRequireName;
+        }
+
+        public Object getPubRequireHeaderPic() {
+            return pubRequireHeaderPic;
+        }
+
+        public void setPubRequireHeaderPic(Object pubRequireHeaderPic) {
+            this.pubRequireHeaderPic = pubRequireHeaderPic;
+        }
+
+        public String getPubRequireCompany() {
+            return pubRequireCompany;
+        }
+
+        public void setPubRequireCompany(String pubRequireCompany) {
+            this.pubRequireCompany = pubRequireCompany;
+        }
+
+        public int getBelongIndustryId() {
+            return belongIndustryId;
+        }
+
+        public void setBelongIndustryId(int belongIndustryId) {
+            this.belongIndustryId = belongIndustryId;
+        }
+
+        public Object getBelongIndustryDisPlay() {
+            return belongIndustryDisPlay;
+        }
+
+        public void setBelongIndustryDisPlay(Object belongIndustryDisPlay) {
+            this.belongIndustryDisPlay = belongIndustryDisPlay;
+        }
+
+        public int getRequireAreaRangId() {
+            return requireAreaRangId;
+        }
+
+        public void setRequireAreaRangId(int requireAreaRangId) {
+            this.requireAreaRangId = requireAreaRangId;
+        }
+
+        public Object getRequireAreaRangDisplay() {
+            return requireAreaRangDisplay;
+        }
+
+        public void setRequireAreaRangDisplay(Object requireAreaRangDisplay) {
+            this.requireAreaRangDisplay = requireAreaRangDisplay;
+        }
+
+        public String getRequireAreaIds() {
+            return requireAreaIds;
+        }
+
+        public void setRequireAreaIds(String requireAreaIds) {
+            this.requireAreaIds = requireAreaIds;
+        }
+
+        public Object getRequireAreaIdArray() {
+            return requireAreaIdArray;
+        }
+
+        public void setRequireAreaIdArray(Object requireAreaIdArray) {
+            this.requireAreaIdArray = requireAreaIdArray;
+        }
+
+        public String getRequireAreaName() {
+            return requireAreaName;
+        }
+
+        public void setRequireAreaName(String requireAreaName) {
+            this.requireAreaName = requireAreaName;
+        }
+
+        public String getOtherInfo() {
+            return otherInfo;
+        }
+
+        public void setOtherInfo(String otherInfo) {
+            this.otherInfo = otherInfo;
+        }
+
+        public int getBrowseNum() {
+            return browseNum;
+        }
+
+        public void setBrowseNum(int browseNum) {
+            this.browseNum = browseNum;
+        }
+
+        public int getPubReqManDesc() {
+            return pubReqManDesc;
+        }
+
+        public void setPubReqManDesc(int pubReqManDesc) {
+            this.pubReqManDesc = pubReqManDesc;
+        }
+
+        public Object getPubReqManDescInfo() {
+            return pubReqManDescInfo;
+        }
+
+        public void setPubReqManDescInfo(Object pubReqManDescInfo) {
+            this.pubReqManDescInfo = pubReqManDescInfo;
+        }
+
+        public int getFollowNum() {
+            return followNum;
+        }
+
+        public void setFollowNum(int followNum) {
+            this.followNum = followNum;
+        }
+
+        public String getRequireTitle() {
+            return requireTitle;
+        }
+
+        public void setRequireTitle(String requireTitle) {
+            this.requireTitle = requireTitle;
+        }
+
+        public Object getEffectImgs() {
+            return effectImgs;
+        }
+
+        public void setEffectImgs(Object effectImgs) {
+            this.effectImgs = effectImgs;
+        }
+
+        public Object getRequireBanner() {
+            return requireBanner;
+        }
+
+        public void setRequireBanner(Object requireBanner) {
+            this.requireBanner = requireBanner;
+        }
+
+        public Object getCollect() {
+            return collect;
+        }
+
+        public void setCollect(Object collect) {
+            this.collect = collect;
+        }
+    }
     public static class CommendsListBean {
         /**
          * createId : 1

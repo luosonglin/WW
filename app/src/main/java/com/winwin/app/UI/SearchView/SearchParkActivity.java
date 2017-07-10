@@ -11,11 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.winwin.app.MVP.Presenter.HotAreaListPresent;
-import com.winwin.app.MVP.View.HotAreaListView;
+import com.winwin.app.MVP.Presenter.AreaListPresent;
+import com.winwin.app.MVP.View.AreaListView;
 import com.winwin.app.R;
-import com.winwin.app.UI.Adapter.HotAreaAdapter;
-import com.winwin.app.UI.Entity.HotAreaDto;
+import com.winwin.app.UI.Adapter.AreaAdapter;
+import com.winwin.app.UI.Entity.AreaDto;
 import com.winwin.app.UI.MineView.MyInfoActivity;
 import com.winwin.app.Util.ToastUtils;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
@@ -26,7 +26,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SearchParkActivity extends AppCompatActivity implements HotAreaListView {
+public class SearchParkActivity extends AppCompatActivity implements AreaListView {
     private static final String TAG = MyInfoActivity.class.getSimpleName();
     @Bind(R.id.back)
     ImageView back;
@@ -38,7 +38,7 @@ public class SearchParkActivity extends AppCompatActivity implements HotAreaList
     RecyclerView mRecyclerView;
     private BaseQuickAdapter mQuickAdapter;
     private int PageIndex = 1;
-    private HotAreaListPresent present;
+    private AreaListPresent present;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,14 +55,14 @@ public class SearchParkActivity extends AppCompatActivity implements HotAreaList
         //如果Item高度固定  增加该属性能够提高效率
         mRecyclerView.setHasFixedSize(true);
         //设置适配器
-        mQuickAdapter = new HotAreaAdapter(R.layout.item_hot_area, null);
+        mQuickAdapter = new AreaAdapter(R.layout.item_hot_area, null);
         //设置加载动画
         mQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         //设置是否自动加载以及加载个数
         mQuickAdapter.openLoadMore(6, true);
         //将适配器添加到RecyclerView
         mRecyclerView.setAdapter(mQuickAdapter);
-        present = new HotAreaListPresent(this);
+        present = new AreaListPresent(this);
         //请求网络数据
         present.LoadData(false);
     }
@@ -78,14 +78,14 @@ public class SearchParkActivity extends AppCompatActivity implements HotAreaList
     }
 
     @Override
-    public void newDatas(List<HotAreaDto> newsList) {
+    public void newDatas(List<AreaDto> newsList) {
         //进入显示的初始数据或者下拉刷新显示的数据
         mQuickAdapter.setNewData(newsList);//新增数据
         mQuickAdapter.openLoadMore(10, true);//设置是否可以下拉加载  以及加载条数
     }
 
     @Override
-    public void addDatas(List<HotAreaDto> addList) {
+    public void addDatas(List<AreaDto> addList) {
         //新增自动加载的的数据
         mQuickAdapter.notifyDataChangedAfterLoadMore(addList, true);
     }

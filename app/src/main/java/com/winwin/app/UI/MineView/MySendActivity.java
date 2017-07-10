@@ -52,11 +52,8 @@ public class MySendActivity extends AppCompatActivity {
 
         SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
         FragmentPagerItems pages = new FragmentPagerItems(this);
-//        for (int i=0;i<4;i++) {
-//            pages.add(FragmentPagerItem.of("Tab"+i, MyCreditParkTabFragment.class));
-//        }
-        pages.add(FragmentPagerItem.of("园区", MySendTabFragment.class));
-        pages.add(FragmentPagerItem.of("需求", MySendTabFragment.class));
+        pages.add(FragmentPagerItem.of("园区", MySendParkTabFragment.class));
+        pages.add(FragmentPagerItem.of("需求", MySendRequireTabFragment.class));
 
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), pages);

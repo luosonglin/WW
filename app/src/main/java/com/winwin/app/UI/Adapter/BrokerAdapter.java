@@ -1,5 +1,7 @@
 package com.winwin.app.UI.Adapter;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -46,7 +48,9 @@ public class BrokerAdapter extends BaseQuickAdapter<BrokerDto> {
         helper.getView(R.id.call).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e(TAG, item.getMobile() + "");
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+ item.getMobile()));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
             }
         });
     }

@@ -48,10 +48,6 @@ public class MyRecommendTabFragment extends Fragment implements BaseQuickAdapter
     }
 
     private void initView(View root) {
-//        TextView tabfragmenttextview = (TextView) root.findViewById(R.id.tab_fragment_textview);
-//        int position = FragmentPagerItem.getPosition(getArguments());
-//        tabfragmenttextview.setText(String.valueOf(position));
-
         mRecyclerView = (RecyclerView) root.findViewById(R.id.rv_list);
         springView = (SpringView) root.findViewById(R.id.springview);
         //设置下拉刷新监听
@@ -76,7 +72,6 @@ public class MyRecommendTabFragment extends Fragment implements BaseQuickAdapter
         mRecyclerView.setAdapter(mQuickAdapter);
         present = new MyRecommendCustomerListPresent(this);
         //请求网络数据
-//        present.LoadData("1",PageIndex,false);
         present.LoadData(false);
     }
 
@@ -90,13 +85,13 @@ public class MyRecommendTabFragment extends Fragment implements BaseQuickAdapter
                 Toast.makeText(getActivity(), "点击了"+position, Toast.LENGTH_SHORT).show();
             }
         });
-        mQuickAdapter.setOnRecyclerViewItemLongClickListener(new BaseQuickAdapter.OnRecyclerViewItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(View view, int position) {
-                Toast.makeText(getActivity(), "长按了"+position, Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
+//        mQuickAdapter.setOnRecyclerViewItemLongClickListener(new BaseQuickAdapter.OnRecyclerViewItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(View view, int position) {
+//                Toast.makeText(getActivity(), "长按了"+position, Toast.LENGTH_SHORT).show();
+//                return true;
+//            }
+//        });
     }
     //自动加载
     @Override

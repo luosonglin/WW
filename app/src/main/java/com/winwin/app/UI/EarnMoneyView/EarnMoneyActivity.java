@@ -18,7 +18,7 @@ import com.winwin.app.MVP.Presenter.BannerListPresent;
 import com.winwin.app.MVP.View.BannerListView;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.MetaDataAdapter;
-import com.winwin.app.UI.Adapter.MyCollectDemandAdapter;
+import com.winwin.app.UI.Adapter.RequireAdapter;
 import com.winwin.app.UI.Entity.BannerDto;
 import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.ItemDetailView.DemandDetailActivity;
@@ -107,7 +107,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
         //设置页面为加载中..
         progress.showLoading();
         //设置适配器
-        mQuickAdapter = new MyCollectDemandAdapter(R.layout.item_my_collect_demand, null);
+        mQuickAdapter = new RequireAdapter(R.layout.item_require, null);
         //设置加载动画
         mQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         //设置是否自动加载以及加载个数

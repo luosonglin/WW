@@ -31,7 +31,7 @@ import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.services.core.LatLonPoint;
 import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
-import com.winwin.app.UI.Adapter.AreaAdapter;
+import com.winwin.app.UI.Adapter.HotArea2Adapter;
 import com.winwin.app.UI.Adapter.MapAdapter;
 import com.winwin.app.UI.Adapter.MetaDataAdapter;
 import com.winwin.app.UI.Entity.HotAreaDto;
@@ -321,7 +321,7 @@ public class RoomFragment extends Fragment {
             if (type == 1) {
                 mCoreRecyclerView.setVisibility(View.VISIBLE);
                 //设置适配器
-                mCoreQuickAdapter = new AreaAdapter(R.layout.item_meta_data, null);
+                mCoreQuickAdapter = new HotArea2Adapter(R.layout.item_meta_data, null);
                 //设置加载动画
                 mCoreQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
                 //设置是否自动加载以及加载个数

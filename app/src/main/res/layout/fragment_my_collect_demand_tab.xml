@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".UI.MineView.MyCollectDemandTabFragment">
+    tools:context=".UI.MineView.MyCollectRequireTabFragment">
 
     <com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity
         android:id="@+id/progress"

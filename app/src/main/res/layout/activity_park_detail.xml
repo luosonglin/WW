@@ -331,7 +331,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
-                        android:text="周边配套"
+                        android:text="位置及周边"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -409,6 +409,7 @@
                         android:layout_weight="1">
 
                         <ImageView
+                            android:id="@+id/collect_iv"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_alignParentTop="true"

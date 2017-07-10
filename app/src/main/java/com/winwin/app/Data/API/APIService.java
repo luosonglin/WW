@@ -1,8 +1,10 @@
-package com.winwin.app.Data.APi;
+package com.winwin.app.Data.API;
 
 
+import com.winwin.app.UI.Entity.AreaDto;
 import com.winwin.app.UI.Entity.BannerDto;
 import com.winwin.app.UI.Entity.BrokerDto;
+import com.winwin.app.UI.Entity.CommendCustomerVo;
 import com.winwin.app.UI.Entity.CreditDto;
 import com.winwin.app.UI.Entity.CustomerDto;
 import com.winwin.app.UI.Entity.FileDto;
@@ -19,6 +21,7 @@ import com.winwin.app.UI.Entity.MyInfoDto;
 import com.winwin.app.UI.Entity.PageDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
 import com.winwin.app.UI.Entity.ParkDto;
+import com.winwin.app.UI.Entity.RequireDto;
 import com.winwin.app.UI.Entity.SelectAppParksVo;
 import com.winwin.app.UI.Entity.UserLoginVo;
 
@@ -66,10 +69,6 @@ public interface APIService {
     @GET("api/v1/parkapp/noLogin/newRecommandParks")
     Observable<HttpResult<List<IndexRecommandParkDto>>> getRecommandParks();
 
-    //app获取园区详情
-    @GET("api/v1/parkapp/getParkDetail/{parkId}")
-    Observable<HttpResult<ParkDetailDto>> getParkDetail(@Path("parkId") long parkId);
-
     //app获取园区详情页面中的咨询经纪人列表
     @GET("api/v1/parkapp/noLogin/{parkId}/getBrokers")
     Observable<HttpResult<List<BrokerDto>>> getBrokers(@Path("parkId") long parkId);
@@ -77,6 +76,11 @@ public interface APIService {
     /**
      * 搜索页
      */
+    //app获取热门区域列表
+    @GET("v1/parkapp/search/hotAreas")
+    Observable<HttpResult<List<AreaDto>>> getHotArea();
+
+
     //获取上海所有区域列表
     @GET("v1/parkapp/search/shanghai/Areas")
     Observable<HttpResult<List<HotAreaDto>>> getShanghaiHotAreas();
@@ -84,6 +88,23 @@ public interface APIService {
     //根据名称搜索我要找的项目或园区
     @GET("api/v1/parkapp/noLogin/searchParksByName")
     Observable<HttpResult<List<MapDto>>> searchParkByName(@Query("parkName") String parkName);
+
+    /**
+     * 园区详情
+     */
+    //app获取园区详情
+    @GET("api/v1/parkapp/getParkDetail/{parkId}")
+    Observable<HttpResult<ParkDetailDto>> getParkDetail(@Path("parkId") long parkId);
+
+    //此处分为收藏园区还是收藏需求，收藏数据类型（1：收藏的需求，2：收藏的项目）
+    @POST("api/v1/app/stores/{dataId}/{dataType}")
+    Observable<HttpResult> collectPark(@Path("dataId") long dataId, @Path("dataType") Integer dataType);
+
+    //此处分为取消收藏园区还是取消收藏需求，取消收藏数据类型（1：取消收藏需求，2：取消收藏项目）
+    @POST("api/v1/app/stores/del/{dataId}/{dataType}")
+    Observable<HttpResult> cancelCollectPark(@Path("dataId") long dataId, @Path("dataType") Integer dataType);
+
+
 
     /**
      * 个人页
@@ -103,6 +124,25 @@ public interface APIService {
     //查询(我收到的推荐) commendStatus推荐状态（0：待接受，1：已拒绝，2：已接受）
     @GET("api/v1/recommendCustomer/queryRecommendToMeList")
     Observable<HttpResult<List<CustomerDto>>> queryRecommendToMeList();
+
+    //app修改推荐的消息，传递值时取消息中的dataId传递给我
+    @POST("api/v1/recommendCustomer/updateRecommendNews")
+    Observable<HttpResult> updateRecommendNews(@Body CommendCustomerVo commendCustomerVo);
+
+    //app我的发布需求列表
+    @GET("api/v1/requirements/myPubRequires")
+    Observable<HttpResult<List<RequireDto>>> getMyPubRequires();
+
+    //app我的发布园区列表 需要根据项目审核状态查询 0 : 查询所有状态 ；1=未审核（审核中）；2=已审核（默认展示）；3=审核不通过
+
+    //app中获取我的收藏园区列表
+    @GET("api/v1/app/stores/parks")
+    Observable<HttpResult<List<ParkDto>>> getMyCollectPark();
+
+    //app中获取我的收藏需求列表
+    @GET("api/v1/app/stores/requires")
+    Observable<HttpResult<List<RequireDto>>> getMyCollectRequire();
+
 
     /**
      * 发布页

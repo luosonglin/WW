@@ -26,16 +26,18 @@
                 android:layout_gravity="center"
                 android:text="个人资料"
                 android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textSize="18sp"/>
 
             <TextView
+                android:id="@+id/confirm"
                 android:layout_width="37dp"
                 android:layout_height="25dp"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="10dp"
+                android:gravity="center"
                 android:text="保存"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="12sp" />
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
@@ -45,7 +47,6 @@
         android:background="@color/grey1" />
 
     <RelativeLayout
-        android:id="@+id/credit"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
@@ -67,6 +68,7 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/avatar"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
@@ -111,7 +113,8 @@
         </LinearLayout>
 
         <TextView
-            android:layout_width="40dp"
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginRight="11dp"
