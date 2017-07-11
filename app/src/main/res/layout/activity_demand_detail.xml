@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:fitsSystemWindows="true"
-    tools:context=".UI.ItemDetailView.DemandDetailActivity">
+    tools:context=".UI.ItemDetailView.RequireDetailActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -28,8 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/banner" />
+                    android:scaleType="centerCrop"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -43,7 +42,7 @@
                     android:layout_height="25dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    android:text="需要100平方米的场地"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -55,7 +54,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_toLeftOf="@+id/times"
                     android:gravity="center_vertical"
-                    android:text="3天前发布"
+                    android:text=""
                     android:textColor="@color/grey"
                     android:textSize="12sp" />
 
@@ -68,7 +67,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="16dp"
                     android:gravity="center_vertical"
-                    android:text="141次浏览"
+                    android:text="次浏览"
                     android:textColor="@color/grey"
                     android:textSize="12sp" />
             </RelativeLayout>
@@ -108,17 +107,19 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/author"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="陈凯"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/pubReqManDescInfo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="态度好，服务热情"
+                        android:text=""
                         android:textColor="@color/grey"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -129,8 +130,7 @@
                     android:layout_height="24dp"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16dp"
-                    android:layout_toLeftOf="@+id/a2"
-                    android:src="@mipmap/demanddetail_favorite" />
+                    android:layout_toLeftOf="@+id/a2" />
 
                 <ImageView
                     android:id="@+id/a2"
@@ -163,10 +163,11 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/pubRequireCompany"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="28dp"
-                    android:text="客户未透露/填写的公司名称"
+                    android:text=""
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -186,10 +187,11 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/belongIndustryDisPlay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="28dp"
-                    android:text="文化产业"
+                    android:text=""
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -209,10 +211,11 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/requireAreaRangDisplay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="28dp"
-                    android:text="800-1000平方米"
+                    android:text="平方米"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -232,10 +235,11 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/requireAreaName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="28dp"
-                    android:text="长宁、闵行"
+                    android:text=""
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -255,10 +259,11 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/otherInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="28dp"
-                    android:text="客户填写的其他需求，也可以不填写"
+                    android:text=""
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>

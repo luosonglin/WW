@@ -139,6 +139,8 @@ public interface APIService {
     Observable<HttpResult<List<RequireDto>>> getMyPubRequires();
 
     //app我的发布园区列表 需要根据项目审核状态查询 0 : 查询所有状态 ；1=未审核（审核中）；2=已审核（默认展示）；3=审核不通过
+    @GET("/api/v1/requirements/myPubParks/{state}")
+    Observable<HttpResult<List<ParkDto>>> getMyPubParks(@Path("state") Integer state);
 
     //app中获取我的收藏园区列表
     @GET("api/v1/app/stores/parks")
@@ -173,6 +175,12 @@ public interface APIService {
     //app获取平台元数据信息接口
     @GET("api/v1/requirements/commonMetaData/{metaType}")
     Observable<HttpResult<List<MetaDataDto>>> getMetaDatas(@Path("metaType") Integer metaType);
+
+    //赚钱快车详情、需求详情
+    @GET("api/v1/makeMoney/{id}")
+    Observable<HttpResult<RequireDto>> getRequireDetail(@Path("id") long id);
+
+
 
     /**
      * login

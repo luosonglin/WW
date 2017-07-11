@@ -174,32 +174,6 @@ public class RecommendFragment extends Fragment {
         mCurrentProNum = (TextView) view.findViewById(R.id.currentProNum);
         mNewBeraNum = (TextView) view.findViewById(R.id.newBeraNum);
         mCommendSuccessNum = (TextView) view.findViewById(R.id.commendSuccessNum);
-//        HttpData.getInstance().HttpDataGetStaticDate(new Observer<HttpResult<IndexStaticDateDto>>() {
-//            @Override
-//            public void onCompleted() {
-//                Log.e(TAG, "indexStaticDateDtoHttpResult onCompleted");
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                Log.e(TAG, "indexStaticDateDtoHttpResult onError: "+e.getMessage()
-//                        +"\n"+e.getCause()
-//                        +"\n"+e.getLocalizedMessage()
-//                        +"\n"+e.getStackTrace());
-//            }
-//
-//            @Override
-//            public void onNext(HttpResult<IndexStaticDateDto> indexStaticDateDtoHttpResult) {
-//                mCurrentProNum.setText(indexStaticDateDtoHttpResult.getData().getCurrentProNum()+"");
-//                mNewBeraNum.setText(indexStaticDateDtoHttpResult.getData().getNewBeraNum()+"");
-//                mCommendSuccessNum.setText(indexStaticDateDtoHttpResult.getData().getCommendSuccessNum()+"");
-//
-//                Log.e(TAG, "indexStaticDateDtoHttpResult onNext"
-//                        + indexStaticDateDtoHttpResult.getData().getCommendSuccessNum()
-//                        +" "+indexStaticDateDtoHttpResult.getData().getNewBeraNum()
-//                        +" "+indexStaticDateDtoHttpResult.getData().getCurrentProNum());
-//            }
-//        });
         HttpData.getInstance().HttpDataGetStaticDate(new Observer<HttpResult<IndexStaticDateDto>>() {
 
             @Override
@@ -275,19 +249,6 @@ public class RecommendFragment extends Fragment {
                 Log.e(TAG, "onNext");
             }
         });
-        mSelectedParkAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-//                Intent intent = new Intent(getActivity(), ParkListActivity.class);
-//                intent.putExtra("type", 0);
-//                if (!searchEdit.getText().toString().trim().equals("")) {
-//                    intent.putExtra("type", 2);
-//                    intent.putExtra("searchValue", searchEdit.getText().toString().trim());
-//                }
-//                startActivity(intent);
-            }
-        });
-
 
         mRecyclerView2 = (RecyclerView) view.findViewById(R.id.rv_list2);
         //设置布局管理器

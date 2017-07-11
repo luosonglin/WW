@@ -21,7 +21,7 @@ import com.winwin.app.UI.Adapter.MetaDataAdapter;
 import com.winwin.app.UI.Adapter.RequireAdapter;
 import com.winwin.app.UI.Entity.BannerDto;
 import com.winwin.app.UI.Entity.MetaDataDto;
-import com.winwin.app.UI.ItemDetailView.DemandDetailActivity;
+import com.winwin.app.UI.ItemDetailView.RequireDetailActivity;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.container.DefaultHeader;
 import com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity;
@@ -127,7 +127,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
         mQuickAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                startActivity(new Intent(EarnMoneyActivity.this, DemandDetailActivity.class));
+                startActivity(new Intent(EarnMoneyActivity.this, RequireDetailActivity.class));
                 Toast.makeText(EarnMoneyActivity.this, "点击了" + position, Toast.LENGTH_SHORT).show();
             }
         });

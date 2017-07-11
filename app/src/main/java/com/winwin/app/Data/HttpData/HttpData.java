@@ -220,6 +220,10 @@ public class HttpData extends RetrofitUtils {
         Observable observable = service.getMyPubRequires().map(new HttpResultFunc<List<RequireDto>>());
         setSubscribe(observable, observer);
     }
+    public void HttpDataGetMyPubParks(Observer<List<ParkDto>> observer, Integer state) {
+        Observable observable = service.getMyPubParks(state).map(new HttpResultFunc<List<ParkDto>>());
+        setSubscribe(observable, observer);
+    }
 
     public void HttpDataGetMyCollectPark(Observer<List<ParkDto>> observer) {
         Observable observable = service.getMyCollectPark().map(new HttpResultFunc<List<ParkDto>>());
@@ -245,6 +249,10 @@ public class HttpData extends RetrofitUtils {
     }
     public void HttpDataSendPark(Observer<HttpResult> observer, ParkAppVo parkAppVo) {
         Observable observable = service.sendPark(parkAppVo);
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataGetRequireDetail(Observer<RequireDto> observer, long id) {
+        Observable observable = service.getRequireDetail(id).map(new HttpResultFunc<RequireDto>());
         setSubscribe(observable, observer);
     }
     /**

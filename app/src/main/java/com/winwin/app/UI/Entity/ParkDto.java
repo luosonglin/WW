@@ -55,7 +55,7 @@ public class ParkDto {
      */
 
     private Object createId;
-    private Object createTime;
+    private long createTime;
     private int isDel;
     private Object updaterId;
     private Object updateTime;
@@ -110,11 +110,11 @@ public class ParkDto {
         this.createId = createId;
     }
 
-    public Object getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Object createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 

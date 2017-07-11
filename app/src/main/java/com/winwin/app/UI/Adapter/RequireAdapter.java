@@ -1,5 +1,7 @@
 package com.winwin.app.UI.Adapter;
 
+import android.content.Intent;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -7,6 +9,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.winwin.app.R;
 import com.winwin.app.UI.Entity.RequireDto;
+import com.winwin.app.UI.ItemDetailView.RequireDetailActivity;
 import com.winwin.app.Util.DateUtils;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.BaseViewHolder;
@@ -19,7 +22,7 @@ public class RequireAdapter extends BaseQuickAdapter<RequireDto> {
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, RequireDto item) {
+    protected void convert(BaseViewHolder helper, final RequireDto item) {
 
         RequestOptions options = new RequestOptions()
                 .centerCrop()
@@ -35,6 +38,15 @@ public class RequireAdapter extends BaseQuickAdapter<RequireDto> {
                 .setText(R.id.developer, item.getPubRequireCompany())
                 .setText(R.id.time, DateUtils.formatDate(item.getCreateTime(), DateUtils.TYPE_04))
                 .setText(R.id.times, item.getBrowseNum() + "次浏览");
+
+        helper.getView(R.id.cv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, RequireDetailActivity.class);
+                intent.putExtra("id", item.getId());
+                mContext.startActivity(intent);
+            }
+        });
     }
 }
 

@@ -346,6 +346,14 @@
                         android:textColor="@color/grey"
                         android:textSize="14sp" />
 
+                    <com.amap.api.maps.MapView
+                        android:id="@+id/map"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="6dp" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="50dp"

@@ -113,7 +113,7 @@
             android:label="" />
 
         <activity
-            android:name=".UI.ItemDetailView.DemandDetailActivity"
+            android:name=".UI.ItemDetailView.RequireDetailActivity"
             android:label="" />
         <activity
             android:name=".UI.SearchView.SearchParkActivity"

@@ -10,11 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.winwin.app.Constant.Constant;
-import com.winwin.app.MVP.Presenter.MyPubRequireListPresent;
-import com.winwin.app.MVP.View.RequireListView;
+import com.winwin.app.MVP.Presenter.MyPubParkListPresent;
+import com.winwin.app.MVP.View.ParkListView;
 import com.winwin.app.R;
-import com.winwin.app.UI.Adapter.MyPubRequireAdapter;
-import com.winwin.app.UI.Entity.RequireDto;
+import com.winwin.app.UI.Adapter.MyPubParkAdapter;
+import com.winwin.app.UI.Entity.ParkDto;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.container.DefaultHeader;
 import com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity;
@@ -22,7 +22,7 @@ import com.xiaochao.lcrapiddeveloplibrary.widget.SpringView;
 
 import java.util.List;
 
-public class MySendParkTabFragment extends Fragment implements BaseQuickAdapter.RequestLoadMoreListener, SpringView.OnFreshListener, RequireListView {
+public class MySendParkTabFragment extends Fragment implements BaseQuickAdapter.RequestLoadMoreListener, SpringView.OnFreshListener, ParkListView {
 
     RecyclerView mRecyclerView;
     ProgressActivity progress;
@@ -30,7 +30,7 @@ public class MySendParkTabFragment extends Fragment implements BaseQuickAdapter.
     private BaseQuickAdapter mQuickAdapter;
     private int PageIndex = 1;
     private SpringView springView;
-    private MyPubRequireListPresent present;
+    private MyPubParkListPresent present;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,16 +63,16 @@ public class MySendParkTabFragment extends Fragment implements BaseQuickAdapter.
         //设置页面为加载中..
         progress.showLoading();
         //设置适配器
-        mQuickAdapter = new MyPubRequireAdapter(R.layout.item_my_send, null);
+        mQuickAdapter = new MyPubParkAdapter(R.layout.item_my_send, null);
         //设置加载动画
         mQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         //设置是否自动加载以及加载个数
         mQuickAdapter.openLoadMore(6, true);
         //将适配器添加到RecyclerView
         mRecyclerView.setAdapter(mQuickAdapter);
-        present = new MyPubRequireListPresent(this);
+        present = new MyPubParkListPresent(this);
         //请求网络数据
-        present.LoadData(false);
+        present.LoadData(false, 0);//需要根据项目审核状态查询 0 : 查询所有状态 ；1=未审核（审核中）；2=已审核（默认展示）；3=审核不通过
     }
 
     private void initListener() {
@@ -85,7 +85,7 @@ public class MySendParkTabFragment extends Fragment implements BaseQuickAdapter.
     public void onLoadMoreRequested() {
         PageIndex++;
 //        present.LoadData("1",PageIndex,true);
-        present.LoadData(true);
+        present.LoadData(true, 0);
     }
 
     //下拉刷新
@@ -93,7 +93,7 @@ public class MySendParkTabFragment extends Fragment implements BaseQuickAdapter.
     public void onRefresh() {
         PageIndex = 1;
 //        present.LoadData("1",PageIndex,false);
-        present.LoadData(false);
+        present.LoadData(false, 0);
     }
 
     //上啦加载  mRecyclerView内部集成的自动加载  上啦加载用不上   在其他View使用
@@ -117,7 +117,7 @@ public class MySendParkTabFragment extends Fragment implements BaseQuickAdapter.
     }
 
     @Override
-    public void newDatas(List<RequireDto> newsList) {
+    public void newDatas(List<ParkDto> newsList) {
         //进入显示的初始数据或者下拉刷新显示的数据
         mQuickAdapter.setNewData(newsList);//新增数据
         mQuickAdapter.openLoadMore(10, true);//设置是否可以下拉加载  以及加载条数
@@ -125,7 +125,7 @@ public class MySendParkTabFragment extends Fragment implements BaseQuickAdapter.
     }
 
     @Override
-    public void addDatas(List<RequireDto> addList) {
+    public void addDatas(List<ParkDto> addList) {
         //新增自动加载的的数据
         mQuickAdapter.notifyDataChangedAfterLoadMore(addList, true);
     }
@@ -138,7 +138,7 @@ public class MySendParkTabFragment extends Fragment implements BaseQuickAdapter.
             public void onClick(View v) {
                 PageIndex = 1;
 //                present.LoadData("1",PageIndex,false);
-                present.LoadData(false);
+                present.LoadData(false, 0);
             }
         });
     }

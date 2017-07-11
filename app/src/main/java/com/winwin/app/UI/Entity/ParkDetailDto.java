@@ -110,7 +110,7 @@ public class ParkDetailDto {
         private Object parkRemark;
         private String proName;
         private double payDay;
-        private int payMon;
+        private double payMon;
         private double proStand;
         private double watStand;
         private int proArea;
@@ -249,11 +249,11 @@ public class ParkDetailDto {
             this.payDay = payDay;
         }
 
-        public int getPayMon() {
+        public double getPayMon() {
             return payMon;
         }
 
-        public void setPayMon(int payMon) {
+        public void setPayMon(double payMon) {
             this.payMon = payMon;
         }
 

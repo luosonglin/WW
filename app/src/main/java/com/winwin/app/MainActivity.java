@@ -274,18 +274,11 @@ public class MainActivity extends AppCompatActivity
                 intent = new Intent(MainActivity.this, SendRequireActivity.class);
                 startActivity(intent);
                 break;
-//            case 2:
-//                intent = new Intent(MainActivity.this, ListvViewActivity.class);
-//                startActivity(intent);break;
             case 2:
                 // 唤出RecoveryActivity
                 BookListDto bookListDto=null;
                 Toast.makeText(MainActivity.this, bookListDto.getBookName(), Toast.LENGTH_SHORT).show();
                 break;
-//            case 4:
-//                break;
-//            case 5:
-//                break;
         }
     }
 

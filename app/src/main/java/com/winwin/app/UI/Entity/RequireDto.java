@@ -44,20 +44,20 @@ public class RequireDto {
     private Object pubRequireHeaderPic;
     private String pubRequireCompany;
     private int belongIndustryId;
-    private Object belongIndustryDisPlay;
+    private String belongIndustryDisPlay;
     private int requireAreaRangId;
-    private Object requireAreaRangDisplay;
+    private String requireAreaRangDisplay;
     private String requireAreaIds;
     private Object requireAreaIdArray;
     private String requireAreaName;
     private String otherInfo;
     private int browseNum;
     private int pubReqManDesc;
-    private Object pubReqManDescInfo;
+    private String pubReqManDescInfo;
     private int followNum;
     private String requireTitle;
     private Object requireBanner;
-    private Object collect;
+    private Boolean collect;
     private List<FileDto> effectImgs;
 
     public Object getCreateId() {
@@ -148,11 +148,11 @@ public class RequireDto {
         this.belongIndustryId = belongIndustryId;
     }
 
-    public Object getBelongIndustryDisPlay() {
+    public String getBelongIndustryDisPlay() {
         return belongIndustryDisPlay;
     }
 
-    public void setBelongIndustryDisPlay(Object belongIndustryDisPlay) {
+    public void setBelongIndustryDisPlay(String belongIndustryDisPlay) {
         this.belongIndustryDisPlay = belongIndustryDisPlay;
     }
 
@@ -164,11 +164,11 @@ public class RequireDto {
         this.requireAreaRangId = requireAreaRangId;
     }
 
-    public Object getRequireAreaRangDisplay() {
+    public String getRequireAreaRangDisplay() {
         return requireAreaRangDisplay;
     }
 
-    public void setRequireAreaRangDisplay(Object requireAreaRangDisplay) {
+    public void setRequireAreaRangDisplay(String requireAreaRangDisplay) {
         this.requireAreaRangDisplay = requireAreaRangDisplay;
     }
 
@@ -220,11 +220,11 @@ public class RequireDto {
         this.pubReqManDesc = pubReqManDesc;
     }
 
-    public Object getPubReqManDescInfo() {
+    public String getPubReqManDescInfo() {
         return pubReqManDescInfo;
     }
 
-    public void setPubReqManDescInfo(Object pubReqManDescInfo) {
+    public void setPubReqManDescInfo(String pubReqManDescInfo) {
         this.pubReqManDescInfo = pubReqManDescInfo;
     }
 
@@ -252,11 +252,11 @@ public class RequireDto {
         this.requireBanner = requireBanner;
     }
 
-    public Object getCollect() {
+    public Boolean getCollect() {
         return collect;
     }
 
-    public void setCollect(Object collect) {
+    public void setCollect(Boolean collect) {
         this.collect = collect;
     }
 
