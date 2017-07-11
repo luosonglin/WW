@@ -23,6 +23,7 @@ import com.winwin.app.UI.OtherView.IndexFragment;
 import com.winwin.app.UI.RecommendView.RecommendFragment;
 import com.winwin.app.UI.RoomView.RoomFragment;
 import com.winwin.app.UI.SendView.SendParkActivity;
+import com.winwin.app.UI.SendView.SendRequireActivity;
 import com.winwin.app.Util.DBUtils;
 import com.winwin.app.Widget.popmenu.PopMenu;
 import com.winwin.app.Widget.popmenu.PopMenuItem;
@@ -270,6 +271,8 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
                 break;
             case 1:
+                intent = new Intent(MainActivity.this, SendRequireActivity.class);
+                startActivity(intent);
                 break;
 //            case 2:
 //                intent = new Intent(MainActivity.this, ListvViewActivity.class);

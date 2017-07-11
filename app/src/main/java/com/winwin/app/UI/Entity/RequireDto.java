@@ -58,7 +58,7 @@ public class RequireDto {
     private String requireTitle;
     private Object requireBanner;
     private Object collect;
-    private List<EffectImgsBean> effectImgs;
+    private List<FileDto> effectImgs;
 
     public Object getCreateId() {
         return createId;
@@ -260,187 +260,12 @@ public class RequireDto {
         this.collect = collect;
     }
 
-    public List<EffectImgsBean> getEffectImgs() {
+    public List<FileDto> getEffectImgs() {
         return effectImgs;
     }
 
-    public void setEffectImgs(List<EffectImgsBean> effectImgs) {
+    public void setEffectImgs(List<FileDto> effectImgs) {
         this.effectImgs = effectImgs;
     }
 
-    public static class EffectImgsBean {
-        /**
-         * createId : 1
-         * createTime : 1498632497000
-         * isDel : 0
-         * updaterId : null
-         * updateTime : null
-         * id : 513
-         * dataType : 8
-         * dataId : 1
-         * imagePath : http://106.14.0.72:8887/2017-06-27/431498557470227.png
-         * compressPath : http://106.14.0.72:8887/2017-06-27/431498557470227SM.png
-         * width : 950
-         * height : 480
-         * suffix : png
-         * size : 41957
-         * sortno : null
-         * type : null
-         * coord : null
-         */
-
-        private int createId;
-        private long createTime;
-        private int isDel;
-        private Object updaterId;
-        private Object updateTime;
-        private int id;
-        private int dataType;
-        private int dataId;
-        private String imagePath;
-        private String compressPath;
-        private int width;
-        private int height;
-        private String suffix;
-        private int size;
-        private Object sortno;
-        private Object type;
-        private Object coord;
-
-        public int getCreateId() {
-            return createId;
-        }
-
-        public void setCreateId(int createId) {
-            this.createId = createId;
-        }
-
-        public long getCreateTime() {
-            return createTime;
-        }
-
-        public void setCreateTime(long createTime) {
-            this.createTime = createTime;
-        }
-
-        public int getIsDel() {
-            return isDel;
-        }
-
-        public void setIsDel(int isDel) {
-            this.isDel = isDel;
-        }
-
-        public Object getUpdaterId() {
-            return updaterId;
-        }
-
-        public void setUpdaterId(Object updaterId) {
-            this.updaterId = updaterId;
-        }
-
-        public Object getUpdateTime() {
-            return updateTime;
-        }
-
-        public void setUpdateTime(Object updateTime) {
-            this.updateTime = updateTime;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public int getDataType() {
-            return dataType;
-        }
-
-        public void setDataType(int dataType) {
-            this.dataType = dataType;
-        }
-
-        public int getDataId() {
-            return dataId;
-        }
-
-        public void setDataId(int dataId) {
-            this.dataId = dataId;
-        }
-
-        public String getImagePath() {
-            return imagePath;
-        }
-
-        public void setImagePath(String imagePath) {
-            this.imagePath = imagePath;
-        }
-
-        public String getCompressPath() {
-            return compressPath;
-        }
-
-        public void setCompressPath(String compressPath) {
-            this.compressPath = compressPath;
-        }
-
-        public int getWidth() {
-            return width;
-        }
-
-        public void setWidth(int width) {
-            this.width = width;
-        }
-
-        public int getHeight() {
-            return height;
-        }
-
-        public void setHeight(int height) {
-            this.height = height;
-        }
-
-        public String getSuffix() {
-            return suffix;
-        }
-
-        public void setSuffix(String suffix) {
-            this.suffix = suffix;
-        }
-
-        public int getSize() {
-            return size;
-        }
-
-        public void setSize(int size) {
-            this.size = size;
-        }
-
-        public Object getSortno() {
-            return sortno;
-        }
-
-        public void setSortno(Object sortno) {
-            this.sortno = sortno;
-        }
-
-        public Object getType() {
-            return type;
-        }
-
-        public void setType(Object type) {
-            this.type = type;
-        }
-
-        public Object getCoord() {
-            return coord;
-        }
-
-        public void setCoord(Object coord) {
-            this.coord = coord;
-        }
-    }
 }

@@ -32,9 +32,9 @@ import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
 import com.winwin.app.UI.Entity.FileDto;
 import com.winwin.app.UI.Entity.HotAreaDto;
-import com.winwin.app.UI.Entity.HttpResult;
-import com.winwin.app.UI.Entity.ParkAppVo;
-import com.winwin.app.UI.Entity.ReginVo;
+import com.winwin.app.UI.Entity.MetaDataDto;
+import com.winwin.app.UI.Entity.RequireDto;
+import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
 import com.winwin.app.Util.StringUtils;
 import com.winwin.app.Util.ToastUtils;
 import com.winwin.app.Widget.gridimage.FullyGridLayoutManager;
@@ -55,42 +55,45 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class SendParkActivity extends AppCompatActivity {
+public class SendRequireActivity extends AppCompatActivity {
 
-    private static final String TAG = SendParkActivity.class.getSimpleName();
-    @Bind(R.id.toolbar)
+    private static final String TAG = SendRequireActivity.class.getSimpleName();
     Toolbar toolbar;
-    @Bind(R.id.proName)
-    EditText proName;
-    @Bind(R.id.parkDesc)
-    EditText parkDesc;
-    @Bind(R.id.proStand)
-    EditText proStand;
-    @Bind(R.id.watStand)
-    EditText watStand;
-    @Bind(R.id.payDay)
-    EditText payDay;
-    @Bind(R.id.area)
-    TextView area;
+    @Bind(R.id.requireAreaName)
+    TextView requireAreaName;
+    @Bind(R.id.belongIndustryDisPlay)
+    TextView belongIndustryDisPlay;
+    @Bind(R.id.requireAreaRangDisplay)
+    TextView requireAreaRangDisplay;
+    @Bind(R.id.requireTitle)
+    EditText requireTitle;
+    @Bind(R.id.pubRequireCompany)
+    EditText pubRequireCompany;
+    @Bind(R.id.description)
+    EditText description;
     private RecyclerView recyclerView;
     private GridImageAdapter adapter;
     private List<LocalMedia> selectList = new ArrayList<>();
     private List<String> compressPathList = new ArrayList<>();
     private List<FileDto> files = new ArrayList<>();
-    private ParkAppVo parkAppVo = new ParkAppVo();
-    private ReginVo reginVo = new ReginVo();
+    private RequireDto requireDto = new RequireDto();
+    private int belongIndustryId = 0;
+    private int requireAreaRangId = 0;
     private List<HotAreaDto> requireAreaNames = new ArrayList<>();
+    private List<MetaDataDto> belongIndustryDisPlays = new ArrayList<>();
+    private List<MetaDataDto> requireAreaRangDisplays = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send_park);
+        setContentView(R.layout.activity_send_require);
         ButterKnife.bind(this);
         toolBar();
         initFindView();
     }
 
     private void toolBar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle("");
@@ -106,9 +109,9 @@ public class SendParkActivity extends AppCompatActivity {
 
     private void initFindView() {
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
-        FullyGridLayoutManager manager = new FullyGridLayoutManager(SendParkActivity.this, 4, GridLayoutManager.VERTICAL, false);
+        FullyGridLayoutManager manager = new FullyGridLayoutManager(SendRequireActivity.this, 4, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
-        adapter = new GridImageAdapter(SendParkActivity.this, onAddPicClickListener);
+        adapter = new GridImageAdapter(SendRequireActivity.this, onAddPicClickListener);
         adapter.setList(selectList);
         adapter.setSelectMax(9);
         recyclerView.setAdapter(adapter);
@@ -122,16 +125,16 @@ public class SendParkActivity extends AppCompatActivity {
                     switch (mediaType) {
                         case 1:
                             // 预览图片 可自定长按保存路径
-                            //PictureSelector.create(SendParkActivity.this).externalPicturePreview(position, "/custom_file", selectList);
-                            PictureSelector.create(SendParkActivity.this).externalPicturePreview(position, selectList);
+                            //PictureSelector.create(SendRequireActivity.this).externalPicturePreview(position, "/custom_file", selectList);
+                            PictureSelector.create(SendRequireActivity.this).externalPicturePreview(position, selectList);
                             break;
                         case 2:
                             // 预览视频
-                            PictureSelector.create(SendParkActivity.this).externalPictureVideo(media.getPath());
+                            PictureSelector.create(SendRequireActivity.this).externalPictureVideo(media.getPath());
                             break;
                         case 3:
                             // 预览音频
-                            PictureSelector.create(SendParkActivity.this).externalPictureAudio(media.getPath());
+                            PictureSelector.create(SendRequireActivity.this).externalPictureAudio(media.getPath());
                             break;
                     }
                 }
@@ -148,9 +151,9 @@ public class SendParkActivity extends AppCompatActivity {
             @Override
             public void onNext(Boolean aBoolean) {
                 if (aBoolean) {
-                    PictureFileUtils.deleteCacheDirFile(SendParkActivity.this);
+                    PictureFileUtils.deleteCacheDirFile(SendRequireActivity.this);
                 } else {
-                    Toast.makeText(SendParkActivity.this,
+                    Toast.makeText(SendRequireActivity.this,
                             getString(R.string.picture_jurisdiction), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -169,7 +172,7 @@ public class SendParkActivity extends AppCompatActivity {
         @Override
         public void onAddPicClick() {
             // 进入相册 以下是例子：不需要的api可以不写
-            PictureSelector.create(SendParkActivity.this)
+            PictureSelector.create(SendRequireActivity.this)
                     .openGallery(PictureMimeType.ofAll())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
 //                    .theme(R.style.picture_Sina_style)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style
                     .theme(R.style.picture_default_style)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style
@@ -281,15 +284,14 @@ public class SendParkActivity extends AppCompatActivity {
         }, file);
     }
 
-
-    @OnClick({R.id.target_area_rlyt, R.id.buildllyt})
+    @OnClick({R.id.target_area_rlyt, R.id.industry_rlyt, R.id.request_area_rlyt, R.id.other_rlyt, R.id.buildllyt})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.target_area_rlyt:
                 HttpData.getInstance().HttpDataGetShanghaiHotAreas(new Observer<List<HotAreaDto>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        Log.e(TAG, "onSubscribe");
+
                     }
 
                     @Override
@@ -302,7 +304,7 @@ public class SendParkActivity extends AppCompatActivity {
                         }
                         String[] ha = h.toArray(new String[h.size()]);
 
-                        showCoresPopupWindow(ha);
+                        showCoresPopupWindow(ha, 1);
                     }
 
                     @Override
@@ -318,45 +320,128 @@ public class SendParkActivity extends AppCompatActivity {
 
                     }
                 });
+
+                break;
+            case R.id.industry_rlyt:
+                HttpData.getInstance().HttpDataGetMetaDataList(new Observer<List<MetaDataDto>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.e(TAG, "onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull List<MetaDataDto> metaDataDtos) {
+                        belongIndustryDisPlays.addAll(metaDataDtos);
+
+                        List<String> h = new ArrayList<String>();
+                        for (MetaDataDto i : metaDataDtos) {
+                            h.add(i.getDataDisplay());
+                        }
+                        String[] ha = h.toArray(new String[h.size()]);
+
+                        showCoresPopupWindow(ha, 2);
+                        Log.e(TAG, "onNext");
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(TAG, "onError: " + e.getMessage()
+                                + "\n" + e.getCause()
+                                + "\n" + e.getLocalizedMessage()
+                                + "\n" + e.getStackTrace());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "onComplete");
+                    }
+                }, 1);
+                break;
+            case R.id.request_area_rlyt:
+                HttpData.getInstance().HttpDataGetMetaDataList(new Observer<List<MetaDataDto>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.e(TAG, "onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull List<MetaDataDto> metaDataDtos) {
+                        requireAreaRangDisplays.addAll(metaDataDtos);
+
+                        List<String> h = new ArrayList<String>();
+                        for (MetaDataDto i : metaDataDtos) {
+                            h.add(i.getDataDisplay());
+                        }
+                        String[] ha = h.toArray(new String[h.size()]);
+
+                        showCoresPopupWindow(ha, 3);
+                        Log.e(TAG, "onNext");
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(TAG, "onError: " + e.getMessage()
+                                + "\n" + e.getCause()
+                                + "\n" + e.getLocalizedMessage()
+                                + "\n" + e.getStackTrace());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "onComplete");
+                    }
+                }, 2);
+                break;
+            case R.id.other_rlyt:
+
                 break;
             case R.id.buildllyt:
-                parkAppVo.setProName(proName.getText().toString().trim());
-                parkAppVo.setParkDesc(parkDesc.getText().toString().trim());
-                parkAppVo.setAppCoverImgs(files);
-                //项目名称
-                for (HotAreaDto i :requireAreaNames) {
-                    if (reginVo.getName().equals(i.getName())) {
-                        reginVo.setId(i.getId());
+                for (HotAreaDto i : requireAreaNames) {
+                    if (requireDto.getRequireAreaName().equals(i.getName())) {
+                        requireDto.setRequireAreaIdArray(new String[]{i.getId() + ""});
                     }
                 }
-                parkAppVo.setArea(reginVo);
-                parkAppVo.setPayDay(Integer.parseInt(payDay.getText().toString().trim()));//物业标准
-                parkAppVo.setPayMon(parkAppVo.getPayDay() * 30);    //月收费
-                parkAppVo.setProStand(Integer.parseInt(proStand.getText().toString().trim()));//电费标准
-                parkAppVo.setWatStand(Integer.parseInt(watStand.getText().toString().trim()));//水费标准
-                parkAppVo.setCity(new ReginVo(310300, "上海市"));
-
-                HttpData.getInstance().HttpDataSendPark(new Observer<HttpResult>() {
+                for (MetaDataDto i : belongIndustryDisPlays) {
+                    if (requireDto.getBelongIndustryDisPlay().equals(i.getDataDisplay())) {
+                        requireDto.setBelongIndustryId(i.getId());
+                    }
+                }
+                for (MetaDataDto j : requireAreaRangDisplays) {
+                    if (requireDto.getRequireAreaRangDisplay().equals(j.getDataDisplay())) {
+                        requireDto.setRequireAreaRangId(j.getId());
+                    }
+                }
+                requireDto.setRequireTitle(requireTitle.getText().toString().trim());
+                requireDto.setPubRequireCompany(pubRequireCompany.getText().toString().trim());
+                requireDto.setOtherInfo(description.getText().toString().trim());
+                requireDto.setEffectImgs(files);
+                HttpData.getInstance().HttpDataSendRequirement(new Observer<RequireDto>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull HttpResult httpResult) {
-                        ToastUtils.show(SendParkActivity.this, httpResult.getStatus().getMsg());
+                    public void onNext(@NonNull RequireDto requireDto) {
+                        Intent intent = new Intent(SendRequireActivity.this, ParkDetailActivity.class);
+                        intent.putExtra("parkId", requireDto.getId());
+                        startActivity(intent);
+                        finish();
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        Log.e(TAG, "onError: " + e.getMessage()
+                                + "\n" + e.getCause()
+                                + "\n" + e.getLocalizedMessage()
+                                + "\n" + e.getStackTrace());
                     }
 
                     @Override
                     public void onComplete() {
 
                     }
-                }, parkAppVo);
+                }, requireDto);
                 break;
         }
     }
@@ -370,8 +455,9 @@ public class SendParkActivity extends AppCompatActivity {
 
     /**
      * @param cores
+     * @param type  1：目标区域；2：所属行业；3：需求面积
      */
-    private void showCoresPopupWindow(final String[] cores) {
+    private void showCoresPopupWindow(final String[] cores, final int type) {
         View coresPopupwindowView = LayoutInflater.from(this).inflate(R.layout.popupwindow_core, null);
         mSearchPopupWindow = new PopupWindow(coresPopupwindowView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
 
@@ -406,7 +492,7 @@ public class SendParkActivity extends AppCompatActivity {
         schoolNumberPicker.setFocusableInTouchMode(true);
 
         if (cores == null) {
-            ToastUtils.show(SendParkActivity.this, "cores is null");
+            ToastUtils.show(SendRequireActivity.this, "cores is null");
         } else {
             if (!StringUtils.isEmpty(Arrays.toString(cores))) {
                 mChooseCore = cores[0];
@@ -458,10 +544,24 @@ public class SendParkActivity extends AppCompatActivity {
         mConfirmTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                area.setText(mChooseCore);
-                reginVo.setName(mChooseCore);
+                switch (type) {
+                    case 1:
+                        requireAreaName.setText(mChooseCore);
+                        requireDto.setRequireAreaName(mChooseCore);
+                        break;
+                    case 2:
+                        belongIndustryDisPlay.setText(mChooseCore);
+                        requireDto.setBelongIndustryDisPlay(mChooseCore);
+
+                        break;
+                    case 3:
+                        requireAreaRangDisplay.setText(mChooseCore + " 平方米");
+                        requireDto.setRequireAreaRangDisplay(mChooseCore);
+                        break;
+                }
                 mSearchPopupWindow.dismiss();
             }
         });
     }
+
 }

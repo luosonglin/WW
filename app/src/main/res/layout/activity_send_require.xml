@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightgray"
     android:orientation="vertical"
-    tools:context=".UI.SendView.SendParkActivity">
+    tools:context=".UI.SendView.SendRequireActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -27,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="发布园区"
+                android:text="发布需求"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
         </android.support.v7.widget.Toolbar>
@@ -48,7 +47,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lightgray" />
+                android:background="@color/grey1" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -62,18 +61,18 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="项目名称"
+                    android:text="需求标题"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <EditText
-                    android:id="@+id/proName"
+                    android:id="@+id/requireTitle"
                     android:layout_width="250dp"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:background="@null"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
             </RelativeLayout>
 
             <View
@@ -81,19 +80,6 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="10dp"
                 android:background="@color/lightgray" />
-
-            <EditText
-                android:id="@+id/parkDesc"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@color/white"
-                android:gravity="top"
-                android:hint="简单描述一下项目"
-                android:padding="8dp"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler"
@@ -113,6 +99,41 @@
                 android:background="@color/lightgray" />
 
             <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="@color/white"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="公司名称"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/pubRequireCompany"
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="输入公司名称"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lightgray"
+                android:paddingLeft="10dp" />
+
+            <RelativeLayout
                 android:id="@+id/target_area_rlyt"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
@@ -125,12 +146,12 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="项目地址"
+                    android:text="目标区域"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/area"
+                    android:id="@+id/requireAreaName"
                     android:layout_width="250dp"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
@@ -155,6 +176,7 @@
                 android:paddingLeft="10dp" />
 
             <RelativeLayout
+                android:id="@+id/industry_rlyt"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:background="@color/white"
@@ -166,123 +188,118 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="物业标准"
+                    android:text="所属行业"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/payDay"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/belongIndustryDisPlay"
+                    android:layout_width="250dp"
                     android:layout_height="40dp"
-                    android:layout_centerInParent="true"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:background="@null"
-                    android:minWidth="200dp"
-                    android:inputType="numberDecimal"
-                    android:textSize="16sp"
-                    android:paddingLeft="20dp"/>
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="元/天/平方"
-                    android:textColor="@color/grey"
-                    android:textSize="12sp" />
+                    android:src="@mipmap/turn_right" />
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lightgray" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:background="@color/white"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:text="电费标准"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/proStand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:layout_centerVertical="true"
-                    android:background="@null"
-                    android:inputType="numberDecimal"
-                    android:minWidth="200dp"
-                    android:textSize="16sp"
-                    android:paddingLeft="20dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:text="元/度"
-                    android:textColor="@color/grey"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/lightgray" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:background="@color/white"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:text="水费标准"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/watStand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:layout_centerVertical="true"
-                    android:background="@null"
-                    android:inputType="numberDecimal"
-                    android:minWidth="200dp"
-                    android:textSize="16sp"
-                    android:paddingLeft="20dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:text="元/吨"
-                    android:textColor="@color/grey"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
                 android:background="@color/lightgray"
-                android:layout_marginBottom="120dp"/>
+                android:paddingLeft="10dp" />
+
+            <RelativeLayout
+                android:id="@+id/request_area_rlyt"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="@color/white"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="需求面积"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/requireAreaRangDisplay"
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/turn_right" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lightgray" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/lightgray" />
+
+            <RelativeLayout
+                android:id="@+id/other_rlyt"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="@color/white"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="其他说明"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lightgray" />
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@color/white"
+                android:gravity="top"
+                android:hint="简单描述一下"
+                android:padding="6dp"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
         </LinearLayout>
     </ScrollView>
 

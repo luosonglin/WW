@@ -89,8 +89,8 @@ public class ParkDto {
     private Object adImg;
     private Object commercialId;
     private Object commercialName;
-    private Object city;
-    private Object area;
+    private ReginVo city;
+    private ReginVo area;
     private int officeSuperType;
     private int officeSecondType;
     private Object userLists;
@@ -382,19 +382,19 @@ public class ParkDto {
         this.commercialName = commercialName;
     }
 
-    public Object getCity() {
+    public ReginVo getCity() {
         return city;
     }
 
-    public void setCity(Object city) {
+    public void setCity(ReginVo city) {
         this.city = city;
     }
 
-    public Object getArea() {
+    public ReginVo getArea() {
         return area;
     }
 
-    public void setArea(Object area) {
+    public void setArea(ReginVo area) {
         this.area = area;
     }
 

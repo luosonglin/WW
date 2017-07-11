@@ -23,6 +23,7 @@ import com.winwin.app.UI.Entity.LoginUserDto;
 import com.winwin.app.UI.Entity.MapDto;
 import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.Entity.MyInfoDto;
+import com.winwin.app.UI.Entity.ParkAppVo;
 import com.winwin.app.UI.Entity.RequireDto;
 import com.winwin.app.UI.Entity.PageDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
@@ -236,6 +237,14 @@ public class HttpData extends RetrofitUtils {
     }
     public void HttpDataCancelCollectPark(Observer<HttpResult> observer, int dataId, Integer dataType) {
         Observable observable = service.cancelCollectPark(dataId, dataType);
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataSendRequirement(Observer<RequireDto> observer, RequireDto requireDto) {
+        Observable observable = service.sendRequirement(requireDto).map(new HttpResultFunc<RequireDto>());
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataSendPark(Observer<HttpResult> observer, ParkAppVo parkAppVo) {
+        Observable observable = service.sendPark(parkAppVo);
         setSubscribe(observable, observer);
     }
     /**

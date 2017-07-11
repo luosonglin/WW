@@ -34,7 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
 
         <activity
             android:name=".UI.OtherView.WelcomeGuideActivity"
@@ -120,12 +120,17 @@
             android:label="" />
         <activity
             android:name=".UI.RoomView.MapActivity"
-            android:label=""/>
+            android:label="" />
+        <activity
+            android:name=".UI.SendView.SendRequireActivity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".UI.SendView.SendParkActivity"
             android:label=""
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".UI.SearchView.ParkListActivity"
             android:label="" />

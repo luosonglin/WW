@@ -19,6 +19,7 @@ import com.winwin.app.UI.Entity.MapDto;
 import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.Entity.MyInfoDto;
 import com.winwin.app.UI.Entity.PageDto;
+import com.winwin.app.UI.Entity.ParkAppVo;
 import com.winwin.app.UI.Entity.ParkDetailDto;
 import com.winwin.app.UI.Entity.ParkDto;
 import com.winwin.app.UI.Entity.RequireDto;
@@ -156,6 +157,15 @@ public interface APIService {
     @POST("api/v1/image/uploadFile")
 //    Observable<HttpResult<FileDto>> uploadFile(@Part() RequestBody file);
     Observable<HttpResult<FileDto>> uploadFile(@Part MultipartBody.Part file);
+
+    //发布需求接口
+    @POST("api/v1/requirements")
+    Observable<HttpResult<RequireDto>> sendRequirement(@Body RequireDto requireDto);
+
+    //发布园区项目
+    @POST("/api/v1/requirements/publishPark")
+    Observable<HttpResult> sendPark(@Body ParkAppVo parkAppVo);
+
 
     /**
      * 挣钱快车
