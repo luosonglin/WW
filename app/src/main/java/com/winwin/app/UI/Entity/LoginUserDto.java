@@ -32,6 +32,7 @@ public class LoginUserDto {
      * parkRolesVoList : null
      * token : 443500e23c62450797d2104e3f44e9f8App#1
      * parkIds : null
+     * "userSig": "eJxtj82OgjAYRd*lW43TFkEwcYF1IkYcw-jXsGkqFKc1I03pGH-iuw*i7lx*59zk3u8KlvGiw7WWOeOWOSYHfYC6EELHRQ4G7caLk5ZGMF5YYe7edV1cR55W5uJgZSEf7gkruauv2WdCJqSlJhuCzHyDt9*xomEZnQIyigvrUZrQiH-tiI78FO3HoQwJ-Eh9D01RZY-zMl5hFdItNrM1v-yo45lXcL0cjtNWppLB4FWW71nzw7vxVv6KhgeBjz2v9*I8y8q-g2X2rB8e4i64-QMt*VAQ"
      */
 
     private Object createId;
@@ -61,6 +62,15 @@ public class LoginUserDto {
     private String token;
     private Object parkIds;
     private List<UserRoleSBean> userRoleS;
+    private String userSig;
+
+    public String getUserSig() {
+        return userSig;
+    }
+
+    public void setUserSig(String userSig) {
+        this.userSig = userSig;
+    }
 
     public Object getCreateId() {
         return createId;
