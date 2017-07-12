@@ -28,7 +28,6 @@ import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
 import com.winwin.app.UI.MineView.MyCreditActivity;
 import com.winwin.app.UI.RoomView.MapActivity;
 import com.winwin.app.UI.SearchView.SearchParkActivity;
-import com.winwin.app.UI.WebView.MyWinwinActivity;
 import com.winwin.app.Widget.GlideImageLoader;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.youth.banner.Banner;
@@ -355,7 +354,8 @@ public class RecommendFragment extends Fragment {
                 startActivity(new Intent(getActivity(), EarnMoneyActivity.class));
                 break;
             case R.id.my_llyt:
-                startActivity(new Intent(getActivity(), MyWinwinActivity.class));
+//                MainActivity.toMyWinwinPage();
+//                startActivity(new Intent(getActivity(), MyWinwinActivity.class));
                 break;
             case R.id.brokerage_llyt:
                 startActivity(new Intent(getActivity(), MyCreditActivity.class));

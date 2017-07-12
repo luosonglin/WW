@@ -5,7 +5,6 @@ import android.util.Log;
 import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.MVP.Listener.OnLoadDataListListener;
 import com.winwin.app.UI.Entity.RequireDto;
-import com.winwin.app.UI.Entity.SelectRequirementVo;
 
 import java.util.List;
 
@@ -13,12 +12,12 @@ import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
-public class RequireListModel {
-    private static final String TAG = RequireListModel.class.getSimpleName();
+public class MyCollectRequireListModel {
+    private static final String TAG = MyCollectRequireListModel.class.getSimpleName();
 
-    public void LoadData(final OnLoadDataListListener listener, SelectRequirementVo selectRequirementVo) {
+    public void LoadData(final OnLoadDataListListener listener) {
 
-        HttpData.getInstance().HttpDataGetRequireList(new Observer<List<RequireDto>>() {
+        HttpData.getInstance().HttpDataGetMyCollectRequire(new Observer<List<RequireDto>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
@@ -44,6 +43,6 @@ public class RequireListModel {
             public void onComplete() {
                 Log.e(TAG, "onCompleted");
             }
-        }, selectRequirementVo);
+        });
     }
 }

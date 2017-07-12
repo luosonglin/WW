@@ -119,7 +119,6 @@ public class RequireDetailActivity extends AppCompatActivity {
                 RequestOptions options = new RequestOptions()
                         .centerCrop()
                         .transform(new GlideCircleTransform(RequireDetailActivity.this))
-                        .placeholder(R.mipmap.emoji)
                         .diskCacheStrategy(DiskCacheStrategy.ALL);
                 Glide.with(RequireDetailActivity.this)
                         .load(requireDto.getPubRequireHeaderPic())
@@ -168,8 +167,10 @@ public class RequireDetailActivity extends AppCompatActivity {
 
                         @Override
                         public void onNext(@NonNull HttpResult httpResult) {
-                            a1.setTag("collected");
-                            a1.setImageResource(R.mipmap.parkdetailactivity_fravorite_red);
+                            if (httpResult.getStatus().getMsg().equals("ok")) {
+                                a1.setTag("collected");
+                                a1.setImageResource(R.mipmap.parkdetailactivity_fravorite_red);
+                            }
                         }
 
                         @Override
@@ -194,8 +195,10 @@ public class RequireDetailActivity extends AppCompatActivity {
 
                         @Override
                         public void onNext(@NonNull HttpResult httpResult) {
-                            a1.setTag("not_collected");
-                            a1.setImageResource(R.mipmap.parkdetailactivity_fravorite);
+                            if (httpResult.getStatus().getMsg().equals("ok")) {
+                                a1.setTag("not_collected");
+                                a1.setImageResource(R.mipmap.parkdetailactivity_fravorite);
+                            }
                         }
 
                         @Override
@@ -261,17 +264,6 @@ public class RequireDetailActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        //通过Glide显示图片
-        RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.mipmap.def_head)
-                .transform(new GlideCircleTransform(RequireDetailActivity.this))
-                .diskCacheStrategy(DiskCacheStrategy.ALL);
-        Glide.with(RequireDetailActivity.this)
-                .load("http://ww2.sinaimg.cn/mw690/a601622bjw8e2ajzw6k5ej.jpg")
-                .apply(options)
-                .into(avatar);
     }
 
     // 回弹动画 (使用了属性动画)

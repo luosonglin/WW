@@ -1,6 +1,7 @@
 package com.winwin.app.UI.EarnMoneyView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,23 +11,28 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.winwin.app.Constant.Constant;
 import com.winwin.app.Data.HttpData.HttpData;
-import com.winwin.app.MVP.Presenter.BannerListPresent;
-import com.winwin.app.MVP.View.BannerListView;
+import com.winwin.app.MVP.Presenter.RequireListPresent;
+import com.winwin.app.MVP.View.RequireListView;
 import com.winwin.app.R;
+import com.winwin.app.UI.Adapter.HotArea2Adapter;
 import com.winwin.app.UI.Adapter.MetaDataAdapter;
 import com.winwin.app.UI.Adapter.RequireAdapter;
-import com.winwin.app.UI.Entity.BannerDto;
+import com.winwin.app.UI.Entity.HotAreaDto;
 import com.winwin.app.UI.Entity.MetaDataDto;
+import com.winwin.app.UI.Entity.RequireDto;
+import com.winwin.app.UI.Entity.SelectRequirementVo;
 import com.winwin.app.UI.ItemDetailView.RequireDetailActivity;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.container.DefaultHeader;
 import com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity;
 import com.xiaochao.lcrapiddeveloplibrary.widget.SpringView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -39,7 +45,7 @@ import io.reactivex.disposables.Disposable;
 /**
  * 挣钱快车页
  */
-public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAdapter.RequestLoadMoreListener, SpringView.OnFreshListener, BannerListView {
+public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAdapter.RequestLoadMoreListener, SpringView.OnFreshListener, RequireListView {
 
     private static final String TAG = EarnMoneyActivity.class.getSimpleName();
 
@@ -53,17 +59,37 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
     View line2;
     @Bind(R.id.day_rent_rlyt)
     RelativeLayout dayRentRlyt;
+    @Bind(R.id.district_tv)
+    TextView districtTv;
+    @Bind(R.id.area_tv)
+    TextView areaTv;
+    @Bind(R.id.day_rent_tv)
+    TextView dayRentTv;
+    @Bind(R.id.followDesc)
+    TextView followDesc;
+    @Bind(R.id.springview)
+    SpringView springview;
+    @Bind(R.id.core_rv_list)
+    RecyclerView coreRvList;
+    @Bind(R.id.publicDateDesc)
+    TextView publicDateDesc;
+    @Bind(R.id.progress)
+    ProgressActivity progress;
 
     private Toolbar toolbar;
     private RecyclerView mRecyclerView;
-    private ProgressActivity progress;
     private BaseQuickAdapter mQuickAdapter;
     private int PageIndex = 1;
     private SpringView springView;
-    private BannerListPresent present;
+    private RequireListPresent present;
 
     private RecyclerView mCoreRecyclerView;
     private BaseQuickAdapter mCoreQuickAdapter;
+    private SelectRequirementVo selectRequirementVo = new SelectRequirementVo();
+
+    private List<Integer> districts = new ArrayList<>();
+    private List<Integer> areas = new ArrayList<>();
+    private List<Integer> dayRents = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +124,6 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
         springView.setType(SpringView.Type.FOLLOW);
         springView.setHeader(new DefaultHeader(this));
 
-        progress = (ProgressActivity) findViewById(R.id.progress);
         //设置RecyclerView的显示模式  当前List模式
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         //如果Item高度固定  增加该属性能够提高效率
@@ -114,10 +139,19 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
         //将适配器添加到RecyclerView
         mRecyclerView.setAdapter(mQuickAdapter);
 //        present = new BookListPresent(this);
-        present = new BannerListPresent(this);
+        present = new RequireListPresent(this);
         //请求网络数据
 //        present.LoadData("1",PageIndex,false);
-        present.LoadData(false);
+
+        present.LoadData(false, selectRequirementVo);
+
+
+        mCoreRecyclerView = (RecyclerView) findViewById(R.id.core_rv_list);
+        //设置RecyclerView的显示模式  当前List模式
+        mCoreRecyclerView.setLayoutManager(new LinearLayoutManager(EarnMoneyActivity.this));
+        //如果Item高度固定  增加该属性能够提高效率
+        mCoreRecyclerView.setHasFixedSize(true);
+
     }
 
     private void initListener() {
@@ -145,7 +179,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
     public void onLoadMoreRequested() {
         PageIndex++;
 //        present.LoadData("1",PageIndex,true);
-        present.LoadData(true);
+        present.LoadData(true, selectRequirementVo);
     }
 
     //下拉刷新
@@ -153,7 +187,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
     public void onRefresh() {
         PageIndex = 1;
 //        present.LoadData("1",PageIndex,false);
-        present.LoadData(false);
+        present.LoadData(false, selectRequirementVo);
     }
 
     //上啦加载  mRecyclerView内部集成的自动加载  上啦加载用不上   在其他View使用
@@ -177,7 +211,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
     }
 
     @Override
-    public void newDatas(List<BannerDto.BannersBean> newsList) {
+    public void newDatas(List<RequireDto> newsList) {
         //进入显示的初始数据或者下拉刷新显示的数据
         mQuickAdapter.setNewData(newsList);//新增数据
         mQuickAdapter.openLoadMore(10, true);//设置是否可以下拉加载  以及加载条数
@@ -185,7 +219,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
     }
 
     @Override
-    public void addDatas(List<BannerDto.BannersBean> addList) {
+    public void addDatas(List<RequireDto> addList) {
         //新增自动加载的的数据
         mQuickAdapter.notifyDataChangedAfterLoadMore(addList, true);
     }
@@ -198,7 +232,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
             public void onClick(View v) {
                 PageIndex = 1;
 //                present.LoadData("1",PageIndex,false);
-                present.LoadData(false);
+                present.LoadData(false, selectRequirementVo);
             }
         });
     }
@@ -217,69 +251,172 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
         progress.showEmpty(getResources().getDrawable(R.mipmap.monkey_nodata), Constant.EMPTY_TITLE, Constant.EMPTY_CONTEXT);
     }
 
-    @OnClick({R.id.district_rlyt, R.id.area_rlyt, R.id.day_rent_rlyt})
+    @OnClick({R.id.publicDateDesc, R.id.followDesc, R.id.district_rlyt, R.id.area_rlyt, R.id.day_rent_rlyt})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.publicDateDesc:
+                if (publicDateDesc.getText().toString().equals("发布时间 ↓")) {
+                    publicDateDesc.setText("发布时间 ↑");
+                    selectRequirementVo.setPublicDateDesc(false);
+                    present.LoadData(false, selectRequirementVo);
+                } else if (publicDateDesc.getText().toString().equals("发布时间 ↑")) {
+                    publicDateDesc.setText("发布时间 ↓");
+                    selectRequirementVo.setPublicDateDesc(true);
+                    present.LoadData(false, selectRequirementVo);
+                }
+                break;
+            case R.id.followDesc:
+                if (followDesc.getText().toString().equals("关注度 ↓")) {
+                    followDesc.setText("关注度 ↑");
+                    selectRequirementVo.setFollowDesc(false);
+                    present.LoadData(false, selectRequirementVo);
+                } else if (followDesc.getText().toString().equals("关注度 ↑")) {
+                    followDesc.setText("关注度 ↓");
+                    selectRequirementVo.setFollowDesc(true);
+                    present.LoadData(false, selectRequirementVo);
+                }
+                break;
             case R.id.district_rlyt:
-                initCoreVIew(1);
+                districtTv.setTextColor(Color.BLACK);
+                initCoreVIew(3);
                 break;
             case R.id.area_rlyt:
-                initCoreVIew(2);
+                areaTv.setTextColor(Color.BLACK);
+                initCoreVIew(1);
                 break;
             case R.id.day_rent_rlyt:
-                initCoreVIew(3);
+                dayRentTv.setTextColor(Color.BLACK);
+                initCoreVIew(2);
                 break;
         }
     }
 
-    private void initCoreVIew(int type) {
-
-        mCoreRecyclerView = (RecyclerView) findViewById(R.id.core_rv_list);
-        //设置RecyclerView的显示模式  当前List模式
-        mCoreRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //如果Item高度固定  增加该属性能够提高效率
-        mCoreRecyclerView.setHasFixedSize(true);
-//        mCoreRecyclerView.addItemDecoration(new DividerItemDecoration(EarnMoneyActivity.this, DividerItemDecoration.VERTICAL));
-
-        //设置适配器
-        mCoreQuickAdapter = new MetaDataAdapter(R.layout.item_meta_data, null);
-        //设置加载动画
-        mCoreQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
-        //设置是否自动加载以及加载个数
-        mCoreQuickAdapter.openLoadMore(6, true);
-        //将适配器添加到RecyclerView
-        mCoreRecyclerView.setAdapter(mCoreQuickAdapter);
+    /**
+     * @param type 1行业；2需求面积；3区域
+     */
+    private void initCoreVIew(final int type) {
         if (mCoreRecyclerView.getVisibility() == View.GONE) {
-            mCoreRecyclerView.setVisibility(View.VISIBLE);
+            if (type == 3) {
+                mCoreRecyclerView.setVisibility(View.VISIBLE);
+                //设置适配器
+                mCoreQuickAdapter = new HotArea2Adapter(R.layout.item_meta_data, null);
+                //设置加载动画
+                mCoreQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
+                //设置是否自动加载以及加载个数
+                mCoreQuickAdapter.openLoadMore(6, true);
+                //将适配器添加到RecyclerView
+                mCoreRecyclerView.setAdapter(mCoreQuickAdapter);
+                HttpData.getInstance().HttpDataGetShanghaiHotAreas(new Observer<List<HotAreaDto>>() {
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "onCompleted");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: " + e.getMessage()
+                                + "\n" + e.getCause()
+                                + "\n" + e.getLocalizedMessage()
+                                + "\n" + e.getStackTrace());
+                    }
+
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<HotAreaDto> data) {
+                        mCoreQuickAdapter.addData(data);
+                        for (HotAreaDto i : data) {
+                            districts.add(i.getId());
+                        }
+                        Log.e(TAG, "onNext");
+                    }
+                });
+                mCoreQuickAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        selectRequirementVo.setAreaId(districts.get(position));
+//                        setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
+                        mCoreRecyclerView.setVisibility(View.GONE);
+                        districtTv.setTextColor(Color.LTGRAY);
+                        present.LoadData(true, selectRequirementVo);
+                    }
+                });
+            } else {
+                mCoreRecyclerView = (RecyclerView) findViewById(R.id.core_rv_list);
+                //设置RecyclerView的显示模式  当前List模式
+                mCoreRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+                //如果Item高度固定  增加该属性能够提高效率
+                mCoreRecyclerView.setHasFixedSize(true);
+                //设置适配器
+                mCoreQuickAdapter = new MetaDataAdapter(R.layout.item_meta_data, null);
+                //设置加载动画
+                mCoreQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
+                //设置是否自动加载以及加载个数
+                mCoreQuickAdapter.openLoadMore(6, true);
+                //将适配器添加到RecyclerView
+                mCoreRecyclerView.setAdapter(mCoreQuickAdapter);
+                if (mCoreRecyclerView.getVisibility() == View.GONE) {
+                    mCoreRecyclerView.setVisibility(View.VISIBLE);
+                } else {
+                    mCoreRecyclerView.setVisibility(View.GONE);
+                }
+                //get data
+                HttpData.getInstance().HttpDataGetMetaDataList(new Observer<List<MetaDataDto>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.e(TAG, "onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull List<MetaDataDto> metaDataDtos) {
+                        mCoreQuickAdapter.addData(metaDataDtos);
+                        for (MetaDataDto i : metaDataDtos) {
+                            if (type == 1) {
+                                areas.add(i.getId());
+                            } else if (type == 2) {
+                                dayRents.add(i.getId());
+                            }
+                        }
+
+                        Log.e(TAG, "onNext");
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(TAG, "onError: " + e.getMessage()
+                                + "\n" + e.getCause()
+                                + "\n" + e.getLocalizedMessage()
+                                + "\n" + e.getStackTrace());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "onComplete");
+                    }
+                }, type);
+                mCoreQuickAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        if (type == 1) {
+                            selectRequirementVo.setBelongNetId(areas.get(position));
+                            areaTv.setTextColor(Color.LTGRAY);
+                        } else if (type == 2) {
+                            selectRequirementVo.setRequireAreaRangId(dayRents.get(position));
+                            dayRentTv.setTextColor(Color.LTGRAY);
+                        }
+                        mCoreRecyclerView.setVisibility(View.GONE);
+
+                        present.LoadData(true, selectRequirementVo);
+                    }
+                });
+            }
         } else {
             mCoreRecyclerView.setVisibility(View.GONE);
         }
-        //get data
-        HttpData.getInstance().HttpDataGetMetaDataList(new Observer<List<MetaDataDto>>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-                Log.e(TAG, "onSubscribe");
-            }
-
-            @Override
-            public void onNext(@NonNull List<MetaDataDto> metaDataDtos) {
-                mCoreQuickAdapter.addData(metaDataDtos);
-                Log.e(TAG, "onNext");
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-                Log.e(TAG, "onError: "+e.getMessage()
-                        +"\n"+e.getCause()
-                        +"\n"+e.getLocalizedMessage()
-                        +"\n"+e.getStackTrace());
-            }
-
-            @Override
-            public void onComplete() {
-                Log.e(TAG, "onComplete");
-            }
-        }, type);
     }
+
 }
 

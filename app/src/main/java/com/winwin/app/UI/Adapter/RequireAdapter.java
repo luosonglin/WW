@@ -28,7 +28,7 @@ public class RequireAdapter extends BaseQuickAdapter<RequireDto> {
                 .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
         Glide.with(mContext)
-                .load(item.getRequireBanner())
+                .load(item.getEffectImgs().get(0).getImagePath())
                 .apply(options)
                 .into((ImageView) helper.getView(R.id.image));
 

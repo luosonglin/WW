@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.winwin.app.Constant.Constant;
-import com.winwin.app.MVP.Presenter.RequireListPresent;
+import com.winwin.app.MVP.Presenter.MyCollectRequireListPresent;
 import com.winwin.app.MVP.View.RequireListView;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.RequireAdapter;
@@ -30,7 +30,7 @@ public class MyCollectRequireTabFragment extends Fragment implements BaseQuickAd
     private BaseQuickAdapter mQuickAdapter;
     private int PageIndex = 1;
     private SpringView springView;
-    private RequireListPresent present;
+    private MyCollectRequireListPresent present;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,7 +71,7 @@ public class MyCollectRequireTabFragment extends Fragment implements BaseQuickAd
         mQuickAdapter.openLoadMore(6, true);
         //将适配器添加到RecyclerView
         mRecyclerView.setAdapter(mQuickAdapter);
-        present = new RequireListPresent(this);
+        present = new MyCollectRequireListPresent(this);
         //请求网络数据
         present.LoadData(false);
     }

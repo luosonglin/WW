@@ -1,26 +1,25 @@
 package com.winwin.app.MVP.Presenter;
 
 import com.winwin.app.MVP.Listener.OnLoadDataListListener;
-import com.winwin.app.MVP.Model.RequireListModel;
+import com.winwin.app.MVP.Model.MyCollectRequireListModel;
 import com.winwin.app.MVP.View.RequireListView;
 import com.winwin.app.UI.Entity.RequireDto;
-import com.winwin.app.UI.Entity.SelectRequirementVo;
 
 import java.util.List;
 
-public class RequireListPresent implements OnLoadDataListListener<List<RequireDto>> {
+public class MyCollectRequireListPresent implements OnLoadDataListListener<List<RequireDto>> {
     private RequireListView mView;
-    private RequireListModel mModel;
+    private MyCollectRequireListModel mModel;
     private boolean isjz;
-    public RequireListPresent(RequireListView mView) {
+    public MyCollectRequireListPresent(RequireListView mView) {
         this.mView = mView;
-        this.mModel=new RequireListModel();
+        this.mModel=new MyCollectRequireListModel();
         mView.showProgress();
     }
 
-    public void LoadData(boolean isjz, SelectRequirementVo selectRequirementVo){
+    public void LoadData(boolean isjz){
         this.isjz=isjz;
-        mModel.LoadData(this, selectRequirementVo);
+        mModel.LoadData(this);
     }
 
     @Override

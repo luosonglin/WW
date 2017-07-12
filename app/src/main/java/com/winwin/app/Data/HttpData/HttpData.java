@@ -29,6 +29,7 @@ import com.winwin.app.UI.Entity.PageDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
 import com.winwin.app.UI.Entity.ParkDto;
 import com.winwin.app.UI.Entity.SelectAppParksVo;
+import com.winwin.app.UI.Entity.SelectRequirementVo;
 import com.winwin.app.UI.Entity.UserLoginVo;
 import com.winwin.app.Util.FileUtil;
 
@@ -253,6 +254,10 @@ public class HttpData extends RetrofitUtils {
     }
     public void HttpDataGetRequireDetail(Observer<RequireDto> observer, long id) {
         Observable observable = service.getRequireDetail(id).map(new HttpResultFunc<RequireDto>());
+        setSubscribe(observable, observer);
+    }
+    public void HttpDataGetRequireList(Observer<List<RequireDto>> observer, SelectRequirementVo selectRequirementVo) {
+        Observable observable = service.getRequireList(selectRequirementVo).map(new HttpResultFunc<List<RequireDto>>());
         setSubscribe(observable, observer);
     }
     /**

@@ -28,7 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -95,8 +95,7 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="16dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:layout_marginLeft="16dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"

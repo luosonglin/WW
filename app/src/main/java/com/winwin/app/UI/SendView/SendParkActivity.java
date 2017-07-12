@@ -344,7 +344,9 @@ public class SendParkActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(@NonNull HttpResult httpResult) {
-                        ToastUtils.show(SendParkActivity.this, httpResult.getStatus().getMsg());
+                        if (httpResult.getStatus().getMsg().equals("ok")){
+                            ToastUtils.show(SendParkActivity.this, "发布成功");
+                        }
                     }
 
                     @Override

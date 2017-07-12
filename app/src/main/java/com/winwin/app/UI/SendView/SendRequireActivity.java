@@ -34,7 +34,7 @@ import com.winwin.app.UI.Entity.FileDto;
 import com.winwin.app.UI.Entity.HotAreaDto;
 import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.Entity.RequireDto;
-import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
+import com.winwin.app.UI.ItemDetailView.RequireDetailActivity;
 import com.winwin.app.Util.StringUtils;
 import com.winwin.app.Util.ToastUtils;
 import com.winwin.app.Widget.gridimage.FullyGridLayoutManager;
@@ -423,8 +423,8 @@ public class SendRequireActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(@NonNull RequireDto requireDto) {
-                        Intent intent = new Intent(SendRequireActivity.this, ParkDetailActivity.class);
-                        intent.putExtra("parkId", requireDto.getId());
+                        Intent intent = new Intent(SendRequireActivity.this, RequireDetailActivity.class);
+                        intent.putExtra("id", requireDto.getId());
                         startActivity(intent);
                         finish();
                     }

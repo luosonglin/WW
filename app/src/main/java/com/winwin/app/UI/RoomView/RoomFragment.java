@@ -162,6 +162,7 @@ public class RoomFragment extends Fragment {
         mCoreRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //如果Item高度固定  增加该属性能够提高效率
         mCoreRecyclerView.setHasFixedSize(true);
+
         districtRlyt = (RelativeLayout) view.findViewById(R.id.district_rlyt);
         districtTv = (TextView) view.findViewById(R.id.district_tv);
         districtRlyt.setOnClickListener(new View.OnClickListener() {
@@ -363,10 +364,8 @@ public class RoomFragment extends Fragment {
                         setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
                         mCoreRecyclerView.setVisibility(View.GONE);
                         districtTv.setTextColor(Color.LTGRAY);
-//                        districtTv.setTextColor(getResources().getColor(R.color.grey));
                     }
                 });
-
             } else {
                 mCoreRecyclerView.setVisibility(View.VISIBLE);
                 //设置适配器

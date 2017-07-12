@@ -24,6 +24,7 @@ import com.winwin.app.UI.Entity.ParkDetailDto;
 import com.winwin.app.UI.Entity.ParkDto;
 import com.winwin.app.UI.Entity.RequireDto;
 import com.winwin.app.UI.Entity.SelectAppParksVo;
+import com.winwin.app.UI.Entity.SelectRequirementVo;
 import com.winwin.app.UI.Entity.UserLoginVo;
 
 import java.util.List;
@@ -175,6 +176,10 @@ public interface APIService {
     //app获取平台元数据信息接口
     @GET("api/v1/requirements/commonMetaData/{metaType}")
     Observable<HttpResult<List<MetaDataDto>>> getMetaDatas(@Path("metaType") Integer metaType);
+
+    //获取赚钱快车列表接口---一期不分页
+    @POST("api/v1/makeMoney")
+    Observable<HttpResult<List<RequireDto>>> getRequireList(@Body SelectRequirementVo selectRequirementVo);
 
     //赚钱快车详情、需求详情
     @GET("api/v1/makeMoney/{id}")

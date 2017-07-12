@@ -66,11 +66,11 @@ public class ParkDto {
     private Object parkDesc;
     private Object parkRemark;
     private String proName;
-    private Object payDay;
-    private Object payMon;
+    private double payDay;
+    private double payMon;
     private Object proStand;
     private Object watStand;
-    private Object proArea;
+    private double proArea;
     private double rentArea;
     private Object planImage;
     private Object noteDay;
@@ -198,19 +198,19 @@ public class ParkDto {
         this.proName = proName;
     }
 
-    public Object getPayDay() {
+    public double getPayDay() {
         return payDay;
     }
 
-    public void setPayDay(Object payDay) {
+    public void setPayDay(double payDay) {
         this.payDay = payDay;
     }
 
-    public Object getPayMon() {
+    public double getPayMon() {
         return payMon;
     }
 
-    public void setPayMon(Object payMon) {
+    public void setPayMon(double payMon) {
         this.payMon = payMon;
     }
 
@@ -230,11 +230,11 @@ public class ParkDto {
         this.watStand = watStand;
     }
 
-    public Object getProArea() {
+    public double getProArea() {
         return proArea;
     }
 
-    public void setProArea(Object proArea) {
+    public void setProArea(double proArea) {
         this.proArea = proArea;
     }
 
