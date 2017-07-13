@@ -1,6 +1,7 @@
 package com.winwin.app.UI.MineView;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -11,7 +12,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.medmeeting.m.zhiyi.im.business.LoginBusiness;
+import com.medmeeting.m.zhiyi.im.event.MessageEvent;
+import com.medmeeting.m.zhiyi.im.model.UserInfo;
+import com.tencent.imsdk.TIMCallBack;
 import com.winwin.app.R;
+import com.winwin.app.UI.OtherView.SplashActivity;
 import com.winwin.app.Util.CleanUtils;
 import com.winwin.app.Util.CustomUtils;
 
@@ -21,6 +27,7 @@ public class MyMoreActivity extends AppCompatActivity {
     private TextView versionTv;
     private RelativeLayout clean;
     private TextView cache;
+    private TextView logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,29 @@ public class MyMoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog();
+            }
+        });
+
+        logout = (TextView) findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginBusiness.logout(new TIMCallBack() {
+                    @Override
+                    public void onError(int i, String s) {
+                        Toast.makeText(MyMoreActivity.this, getResources().getString(R.string.setting_logout_fail), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccess() {
+                        UserInfo.getInstance().setId(null);
+                        UserInfo.getInstance().setUserSig(null);
+                        MessageEvent.getInstance().clear();
+                        Intent intent = new Intent(MyMoreActivity.this, SplashActivity.class);
+                        finish();
+                        startActivity(intent);
+                    }
+                });
             }
         });
     }

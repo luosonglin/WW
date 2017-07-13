@@ -34,6 +34,7 @@
             android:src="@mipmap/index_search_btn" />
 
         <ImageView
+            android:id="@+id/conversation_iv"
             android:layout_width="46dp"
             android:layout_height="46dp"
             android:layout_alignParentRight="true"

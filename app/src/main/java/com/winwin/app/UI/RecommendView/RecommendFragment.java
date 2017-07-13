@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.Entity.IndexStaticDateDto;
+import com.winwin.app.UI.ImView.ConversationActivity;
 import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
 import com.winwin.app.UI.MineView.MyCreditActivity;
 import com.winwin.app.UI.RoomView.MapActivity;
@@ -62,6 +64,8 @@ public class RecommendFragment extends Fragment {
     TextView location;
     @Bind(R.id.banner)
     Banner banner;
+    @Bind(R.id.conversation_iv)
+    ImageView conversation;
     @Bind(R.id.map_llyt)
     LinearLayout mapLlyt;
     @Bind(R.id.earn_llyt)
@@ -74,6 +78,7 @@ public class RecommendFragment extends Fragment {
     RecyclerView rvList;
     @Bind(R.id.rv_list2)
     RecyclerView rvList2;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -254,7 +259,7 @@ public class RecommendFragment extends Fragment {
         mRecyclerView2.setLayoutManager(new LinearLayoutManager(getActivity()));
         //如果Item高度固定  增加该属性能够提高效率
         mRecyclerView2.setHasFixedSize(true);
-        // test data
+        // Constant data
         mLatestRecommendationAdapter = new LatestRecommendationAdapter(R.layout.item_index_fragment_latest_recommendation, null);
         //设置加载动画
         mLatestRecommendationAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_CUSTOM);
@@ -341,11 +346,14 @@ public class RecommendFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.search_iv, R.id.map_llyt, R.id.earn_llyt, R.id.my_llyt, R.id.brokerage_llyt})
+    @OnClick({R.id.search_iv, R.id.conversation_iv, R.id.map_llyt, R.id.earn_llyt, R.id.my_llyt, R.id.brokerage_llyt})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.search_iv:
                 startActivity(new Intent(getActivity(), SearchParkActivity.class));
+                break;
+            case R.id.conversation_iv:
+                startActivity(new Intent(getActivity(), ConversationActivity.class));
                 break;
             case R.id.map_llyt:
                 startActivity(new Intent(getActivity(), MapActivity.class));

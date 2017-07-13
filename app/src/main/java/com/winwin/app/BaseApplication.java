@@ -3,9 +3,14 @@ package com.winwin.app;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.winwin.app.UI.OtherView.WelcomeActivity;
+import com.medmeeting.m.zhiyi.im.business.InitBusiness;
+import com.tencent.imsdk.TIMLogLevel;
+import com.winwin.app.Constant.Constant;
+import com.winwin.app.UI.OtherView.SplashActivity;
+import com.winwin.app.Util.Foreground;
 import com.xiaochao.lcrapiddeveloplibrary.Exception.core.Recovery;
 
 import java.util.ArrayList;
@@ -27,7 +32,8 @@ public class BaseApplication extends Application{
     public void onCreate() {
         Log.d(TAG, "Winwin Application is running~~~~~~~hahaha~~~~!");
         super.onCreate();
-        context = this;
+        Foreground.init(this);
+        context = getApplicationContext();
         instance = this;
 
 //        //初始化异常管理工具
@@ -35,8 +41,13 @@ public class BaseApplication extends Application{
                 .debug(true)//关闭后 在错误统一管理页面不显示异常数据
                 .recoverInBackground(false)
                 .recoverStack(true)
-                .mainPage(WelcomeActivity.class)//恢复页面
+                .mainPage(SplashActivity.class)//恢复页面
                 .init(this);
+
+        SharedPreferences pref = getSharedPreferences("data", MODE_PRIVATE);
+        int loglvl = pref.getInt("loglvl", TIMLogLevel.DEBUG.ordinal());
+        //初始化IMSDK
+        InitBusiness.start(getApplicationContext(), loglvl, Constant.SDK_APPID);
     }
 
     public static Context getContext() {
@@ -116,4 +127,5 @@ public class BaseApplication extends Application{
         }
         System.exit(0);
     }
+
 }

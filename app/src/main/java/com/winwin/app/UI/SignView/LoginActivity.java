@@ -33,7 +33,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.medmeeting.m.zhiyi.im.business.LoginBusiness;
+import com.medmeeting.m.zhiyi.im.model.UserInfo;
 import com.snappydb.SnappydbException;
+import com.tencent.imsdk.TIMCallBack;
 import com.winwin.app.Constant.Data;
 import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.MainActivity;
@@ -127,11 +130,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         /**
-         * test
+         * Constant
          *
          */
-        mPhoneView.setText("admin");
-        mPasswordView.setText("winwin123");
+        mPhoneView.setText("13967150832");
+        mPasswordView.setText("shumang");
 
 
 
@@ -427,6 +430,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         e.printStackTrace();
                     }
                     Data.setUserToken(loginUserDto.getToken());
+                    UserInfo.getInstance().setId(loginUserDto.getId()+"");
+                    UserInfo.getInstance().setUserSig(loginUserDto.getUserSig());
                 }
 
                 @Override
@@ -438,16 +443,26 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 @Override
                 public void onComplete() {
-                    Log.d(TAG, "Login succeed!");
-                    finish();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+                    Log.e(TAG, UserInfo.getInstance().getId()+" "+UserInfo.getInstance().getUserSig());
+                    LoginBusiness.loginIm(UserInfo.getInstance().getId(), UserInfo.getInstance().getUserSig(), new TIMCallBack() {
+                        @Override
+                        public void onError(int i, String s) {
+                            Log.e(TAG, "login error : code " + i + " " + s);
+                            mPasswordView.setError("im login error : code " + i + " " + s);
+                            mPasswordView.requestFocus();
+                            showProgress(false);
+                        }
+
+                        @Override
+                        public void onSuccess() {
+                            Log.d(TAG, "Login succeed!");
+                            finish();
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        }
+                    });
                 }
             }, userLoginVo);
-//            if (success) {
-//
-//            } else {
-//
-//            }
         }
 
         @Override

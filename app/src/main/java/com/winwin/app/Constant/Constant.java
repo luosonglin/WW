@@ -17,4 +17,9 @@ public class Constant {
     public static final String API_SERVER_RELEASE = "http://106.15.198.247:8888";
 
     public static final String FIRST_OPEN = "first_open";
+
+    //sdk appid 由腾讯分配
+    //正式服
+    public static final int ACCOUNT_TYPE = 14039;
+    public static final int SDK_APPID = 1400035587;
 }

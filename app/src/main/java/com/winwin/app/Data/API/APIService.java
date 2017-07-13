@@ -48,7 +48,7 @@ import retrofit2.http.QueryMap;
  */
 public interface APIService {
 
-    //test 获取banner
+    //Constant 获取banner
     @GET("api/v1/banner/meeting")
     Observable<HttpResult2<BannerDto>> getBannerList();
 

@@ -108,7 +108,7 @@ public class HttpData extends RetrofitUtils {
 //        setSubscribe(observableCahce,observer);
 //    }
 
-    //get test banner
+    //get Constant banner
     public void HttpDataGetBanner(Observer<BannerDto> observer) {
         Observable observable = service.getBannerList();//.map(new HttpResultFunc<BannerDto>());
         setSubscribe(observable, observer);

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * test
+ * Constant
  */
 public class BannerDto implements Serializable {
 

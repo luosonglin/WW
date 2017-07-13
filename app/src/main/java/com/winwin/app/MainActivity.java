@@ -35,9 +35,9 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
         implements IndexFragment.OnFragmentInteractionListener,
-                RecommendFragment.OnFragmentInteractionListener,
-                RoomFragment.OnFragmentInteractionListener,
-                MineFragment.OnFragmentInteractionListener{
+        RecommendFragment.OnFragmentInteractionListener,
+        RoomFragment.OnFragmentInteractionListener,
+        MineFragment.OnFragmentInteractionListener {
 
     @Bind(R.id.container)
     FrameLayout container;
@@ -122,8 +122,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     //版本  大于等于 19  才会生效
-    private void initStatusBar(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+    private void initStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
@@ -229,14 +229,14 @@ public class MainActivity extends AppCompatActivity
     /**
      * 仿微博弹出菜单
      *
-     * @param isProfessor   是否是大咖
+     * @param isProfessor 是否是大咖
      */
-    private void initPopMenu(boolean isProfessor){
+    private void initPopMenu(boolean isProfessor) {
         if (isProfessor) {
             mPopMenu = new PopMenu.Builder().attachToActivity(MainActivity.this)
                     .addMenuItem(new PopMenuItem("发布项目", getResources().getDrawable(R.mipmap.tab_btn_project_nor)))
                     .addMenuItem(new PopMenuItem("发布需求", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
-                    .addMenuItem(new PopMenuItem("test", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
+                    .addMenuItem(new PopMenuItem("Constant", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
                     .setOnItemClickListener(new PopMenuItemListener() {
                         @Override
                         public void onItemClick(PopMenu popMenu, int position) {
@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity
             mPopMenu = new PopMenu.Builder().attachToActivity(MainActivity.this)
                     .addMenuItem(new PopMenuItem("发布项目", getResources().getDrawable(R.mipmap.tab_btn_project_nor)))
                     .addMenuItem(new PopMenuItem("发布需求", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
-                    .addMenuItem(new PopMenuItem("test", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
+                    .addMenuItem(new PopMenuItem("Constant", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
                     .setOnItemClickListener(new PopMenuItemListener() {
                         @Override
                         public void onItemClick(PopMenu popMenu, int position) {
@@ -260,7 +260,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     *
      * @param position
      */
     private void PopMenuItemClick(int position) {
@@ -276,7 +275,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case 2:
                 // 唤出RecoveryActivity
-                BookListDto bookListDto=null;
+                BookListDto bookListDto = null;
                 Toast.makeText(MainActivity.this, bookListDto.getBookName(), Toast.LENGTH_SHORT).show();
                 break;
         }
