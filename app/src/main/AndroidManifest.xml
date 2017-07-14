@@ -192,6 +192,8 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".UI.ImView.FriendshipManageMessageActivity" />
+        <activity android:name=".UI.ImView.FriendshipHandleActivity" />
 
     </application>
 </manifest>

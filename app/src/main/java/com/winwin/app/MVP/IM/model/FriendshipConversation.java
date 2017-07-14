@@ -1,11 +1,12 @@
 package com.winwin.app.MVP.IM.model;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.tencent.imsdk.ext.sns.TIMFriendFutureItem;
 import com.winwin.app.BaseApplication;
 import com.winwin.app.R;
-import com.winwin.app.Util.ToastUtils;
+import com.winwin.app.UI.ImView.FriendshipManageMessageActivity;
 import com.winwin.app.im.model.Conversation;
 
 /**
@@ -62,9 +63,9 @@ public class FriendshipConversation extends Conversation {
      */
     @Override
     public void navToDetail(Context context) {
-//        Intent intent = new Intent(context, FriendshipManageMessageActivity.class);
-//        context.startActivity(intent);
-        ToastUtils.show(context, "跳转FriendshipManageMessageActivity");
+        Intent intent = new Intent(context, FriendshipManageMessageActivity.class);
+        context.startActivity(intent);
+//        ToastUtils.show(context, "跳转FriendshipManageMessageActivity");
     }
 
     /**
