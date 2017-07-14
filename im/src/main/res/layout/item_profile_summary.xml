@@ -8,7 +8,7 @@
     android:paddingBottom="8dp"
     android:paddingTop="8dp">
 
-    <com.medmeeting.m.zhiyi.im.ui.CircleImageView
+    <com.winwin.m.app.im.ui.CircleImageView
         android:id="@id/avatar"
         android:layout_width="35dp"
         android:layout_height="35dp"

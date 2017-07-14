@@ -12,9 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.medmeeting.m.zhiyi.im.business.LoginBusiness;
-import com.medmeeting.m.zhiyi.im.event.MessageEvent;
-import com.medmeeting.m.zhiyi.im.model.UserInfo;
+import com.winwin.app.im.business.LoginBusiness;
+import com.winwin.app.im.event.MessageEvent;
+import com.winwin.app.im.model.UserInfo;
 import com.tencent.imsdk.TIMCallBack;
 import com.winwin.app.R;
 import com.winwin.app.UI.OtherView.SplashActivity;

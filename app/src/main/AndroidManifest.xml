@@ -186,6 +186,12 @@
         <activity
             android:name=".UI.ImView.ConversationActivity"
             android:label="" />
+        <activity android:name=".UI.ImView.ImageViewActivity" />
+        <activity
+            android:name=".UI.ImView.ChatActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
 
     </application>
 </manifest>

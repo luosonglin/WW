@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.medmeeting.m.zhiyi.im.business.InitBusiness;
+import com.winwin.app.im.business.InitBusiness;
 import com.tencent.imsdk.TIMLogLevel;
 import com.winwin.app.Constant.Constant;
 import com.winwin.app.UI.OtherView.SplashActivity;
