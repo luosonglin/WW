@@ -2,15 +2,16 @@ package com.winwin.app.UI.Adapter;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.tencent.imsdk.TIMConversationType;
 import com.winwin.app.R;
 import com.winwin.app.UI.Entity.BrokerDto;
+import com.winwin.app.UI.ImView.ChatActivity;
 import com.winwin.app.Util.GlideCircleTransform;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.BaseViewHolder;
@@ -42,7 +43,12 @@ public class BrokerAdapter extends BaseQuickAdapter<BrokerDto> {
         helper.getView(R.id.message).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e(TAG, item.getId() + "");
+                Intent intent = new Intent(mContext, ChatActivity.class);
+//                intent.putExtra("identify", identify);
+                intent.putExtra("identify", item.getId()+"");
+                intent.putExtra("userName", item.getRealName());
+                intent.putExtra("type", TIMConversationType.C2C);
+                mContext.startActivity(intent);
             }
         });
         helper.getView(R.id.call).setOnClickListener(new View.OnClickListener() {

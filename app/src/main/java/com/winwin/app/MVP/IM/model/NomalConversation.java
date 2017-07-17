@@ -18,13 +18,10 @@ public class NomalConversation extends Conversation {
 
     private TIMConversation conversation;
 
-
-
     //最后一条消息
     private Message lastMessage;
 
-
-    public NomalConversation(TIMConversation conversation){
+    public NomalConversation(TIMConversation conversation) {
         this.conversation = conversation;
         type = conversation.getType();
         identify = conversation.getPeer();
@@ -38,7 +35,7 @@ public class NomalConversation extends Conversation {
 
     @Override
     public int getAvatar() {
-        switch (type){
+        switch (type) {
             case C2C:
                 return R.drawable.head_other;
 //            case Group:
@@ -54,23 +51,23 @@ public class NomalConversation extends Conversation {
      */
     @Override
     public void navToDetail(Context context) {
-        ChatActivity.navToChat(context,identify,type);
+        ChatActivity.navToChat(context, identify, type);
     }
 
     /**
      * 获取最后一条消息摘要
      */
     @Override
-    public String getLastMessageSummary(){
+    public String getLastMessageSummary() {
         TIMConversationExt ext = new TIMConversationExt(conversation);
-        if (ext.hasDraft()){
+        if (ext.hasDraft()) {
             TextMessage textMessage = new TextMessage(ext.getDraft());
-            if (lastMessage == null || lastMessage.getMessage().timestamp() < ext.getDraft().getTimestamp()){
+            if (lastMessage == null || lastMessage.getMessage().timestamp() < ext.getDraft().getTimestamp()) {
                 return BaseApplication.getContext().getString(R.string.conversation_draft) + textMessage.getSummary();
-            }else{
+            } else {
                 return lastMessage.getSummary();
             }
-        }else{
+        } else {
             if (lastMessage == null) return "";
             return lastMessage.getSummary();
         }
@@ -81,12 +78,12 @@ public class NomalConversation extends Conversation {
      */
     @Override
     public String getName() {
-        if (type == TIMConversationType.Group){
+        if (type == TIMConversationType.Group) {
 //            name=GroupInfo.getInstance().getGroupName(identify);
 //            if (name.equals("")) name = identify;
-        }else{
-//            FriendProfile profile = FriendshipInfo.getInstance().getProfile(identify);
-//            name=profile == null?identify:profile.getName();
+        } else {
+            FriendProfile profile = FriendshipInfo.getInstance().getProfile(identify);
+            name = profile == null ? identify : profile.getName();
         }
         return name;
     }
@@ -96,7 +93,7 @@ public class NomalConversation extends Conversation {
      * 获取未读消息数量
      */
     @Override
-    public long getUnreadNum(){
+    public long getUnreadNum() {
         if (conversation == null) return 0;
         TIMConversationExt ext = new TIMConversationExt(conversation);
         return ext.getUnreadMessageNum();
@@ -106,8 +103,8 @@ public class NomalConversation extends Conversation {
      * 将所有消息标记为已读
      */
     @Override
-    public void readAllMessage(){
-        if (conversation != null){
+    public void readAllMessage() {
+        if (conversation != null) {
             TIMConversationExt ext = new TIMConversationExt(conversation);
             ext.setReadMessage(null, null);
         }
@@ -120,10 +117,10 @@ public class NomalConversation extends Conversation {
     @Override
     public long getLastMessageTime() {
         TIMConversationExt ext = new TIMConversationExt(conversation);
-        if (ext.hasDraft()){
-            if (lastMessage == null || lastMessage.getMessage().timestamp() < ext.getDraft().getTimestamp()){
+        if (ext.hasDraft()) {
+            if (lastMessage == null || lastMessage.getMessage().timestamp() < ext.getDraft().getTimestamp()) {
                 return ext.getDraft().getTimestamp();
-            }else{
+            } else {
                 return lastMessage.getMessage().timestamp();
             }
         }
@@ -134,7 +131,7 @@ public class NomalConversation extends Conversation {
     /**
      * 获取会话类型
      */
-    public TIMConversationType getType(){
+    public TIMConversationType getType() {
         return conversation.getType();
     }
 }

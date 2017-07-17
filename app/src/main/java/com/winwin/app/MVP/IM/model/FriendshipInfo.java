@@ -80,7 +80,6 @@ public class FriendshipInfo extends Observable implements Observer {
         }
     }
 
-
     private void refresh(){
         groups.clear();
         friends.clear();

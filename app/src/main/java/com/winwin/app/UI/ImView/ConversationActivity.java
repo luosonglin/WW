@@ -3,6 +3,7 @@ package com.winwin.app.UI.ImView;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,9 +14,7 @@ import android.widget.ListView;
 import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMMessage;
 import com.tencent.imsdk.ext.group.TIMGroupCacheInfo;
-import com.tencent.imsdk.ext.sns.TIMFriendFutureItem;
 import com.winwin.app.MVP.IM.model.CustomMessage;
-import com.winwin.app.MVP.IM.model.FriendshipConversation;
 import com.winwin.app.MVP.IM.model.MessageFactory;
 import com.winwin.app.MVP.IM.model.NomalConversation;
 import com.winwin.app.R;
@@ -23,16 +22,17 @@ import com.winwin.app.UI.Adapter.ConversationAdapter;
 import com.winwin.app.Util.PushUtil;
 import com.winwin.app.im.model.Conversation;
 import com.winwin.app.im.presenter.ConversationPresenter;
-import com.winwin.app.im.presenter.FriendshipManagerPresenter;
 import com.winwin.app.im.viewfeatures.ConversationView;
-import com.winwin.app.im.viewfeatures.FriendshipMessageView;
 
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ConversationActivity extends AppCompatActivity implements ConversationView, FriendshipMessageView {
+/**
+ * 会话界面
+ */
+public class ConversationActivity extends AppCompatActivity implements ConversationView {
 
     private static final String TAG = ConversationActivity.class.getSimpleName();
     private Toolbar toolbar;
@@ -40,8 +40,6 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
     private ConversationAdapter adapter;
     private ListView listView;
     private ConversationPresenter presenter;
-    private FriendshipManagerPresenter friendshipManagerPresenter;
-    private FriendshipConversation friendshipConversation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +54,8 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 conversationList.get(position).navToDetail(ConversationActivity.this);
-//                if (conversationList.get(position) instanceof GroupManageConversation) {
-//                    groupManagerPresenter.getGroupManageLastMessage();
-//                }
             }
         });
-        friendshipManagerPresenter = new FriendshipManagerPresenter(this);
-//        groupManagerPresenter = new GroupManagerPresenter(this);
         presenter = new ConversationPresenter(this);
         presenter.getConversation();
         registerForContextMenu(listView);
@@ -82,15 +75,12 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
         });
     }
 
-
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         refresh();
         PushUtil.getInstance().reset();
     }
-
-
 
     /**
      * 初始化界面或刷新界面
@@ -100,18 +90,27 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
     @Override
     public void initView(List<TIMConversation> conversationList) {
         this.conversationList.clear();
-//        groupList = new ArrayList<>();
-        for (TIMConversation item:conversationList){
-            switch (item.getType()){
+        for (TIMConversation item : conversationList) {
+            switch (item.getType()) {
                 case C2C:
+//                    this.conversationList.add(new NomalConversation(item));
+                    break;
 //                case Group:
 //                    this.conversationList.add(new NomalConversation(item));
 //                    groupList.add(item.getPeer());
 //                    break;
             }
         }
-        friendshipManagerPresenter.getFriendshipLastMessage();
-//        groupManagerPresenter.getGroupManageLastMessage();
+
+        for (Conversation i : this.conversationList) {
+            Log.e(TAG + "1 ", i.getIdentify()
+                    + "\n" + i.getName()
+                    + "\n" + i.getAvatar()
+                    + "\n" + i.getLastMessageSummary()
+                    + "\n" + i.getLastMessageTime()
+                    + "\n" + i.getUnreadNum()
+            );
+        }
     }
 
     /**
@@ -121,20 +120,16 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
      */
     @Override
     public void updateMessage(TIMMessage message) {
-        if (message == null){
+        if (message == null) {
             adapter.notifyDataSetChanged();
             return;
         }
-//        if (message.getConversation().getType() == TIMConversationType.System){
-//            groupManagerPresenter.getGroupManageLastMessage();
-//            return;
-//        }
         if (MessageFactory.getMessage(message) instanceof CustomMessage) return;
         NomalConversation conversation = new NomalConversation(message.getConversation());
-        Iterator<Conversation> iterator =conversationList.iterator();
-        while (iterator.hasNext()){
+        Iterator<Conversation> iterator = conversationList.iterator();
+        while (iterator.hasNext()) {
             Conversation c = iterator.next();
-            if (conversation.equals(c)){
+            if (conversation.equals(c)) {
                 conversation = (NomalConversation) c;
                 iterator.remove();
                 break;
@@ -143,6 +138,15 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
         conversation.setLastMessage(MessageFactory.getMessage(message));
         conversationList.add(conversation);
         Collections.sort(conversationList);
+        for (Conversation i : this.conversationList) {
+            Log.e(TAG + "2 ", i.getIdentify()
+                    + "\n" + i.getName()
+                    + "\n" + i.getAvatar()
+                    + "\n" + i.getLastMessageSummary()
+                    + "\n" + i.getLastMessageTime()
+                    + "\n" + i.getUnreadNum()
+            );
+        }
         refresh();
     }
 
@@ -151,7 +155,7 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
      */
     @Override
     public void updateFriendshipMessage() {
-        friendshipManagerPresenter.getFriendshipLastMessage();
+//        friendshipManagerPresenter.getFriendshipLastMessage();
     }
 
     /**
@@ -162,9 +166,9 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
     @Override
     public void removeConversation(String identify) {
         Iterator<Conversation> iterator = conversationList.iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             Conversation conversation = iterator.next();
-            if (conversation.getIdentify()!=null&&conversation.getIdentify().equals(identify)){
+            if (conversation.getIdentify() != null && conversation.getIdentify().equals(identify)) {
                 iterator.remove();
                 adapter.notifyDataSetChanged();
                 return;
@@ -179,8 +183,8 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
      */
     @Override
     public void updateGroupInfo(TIMGroupCacheInfo info) {
-        for (Conversation conversation : conversationList){
-            if (conversation.getIdentify()!=null && conversation.getIdentify().equals(info.getGroupInfo().getGroupId())){
+        for (Conversation conversation : conversationList) {
+            if (conversation.getIdentify() != null && conversation.getIdentify().equals(info.getGroupInfo().getGroupId())) {
                 adapter.notifyDataSetChanged();
                 return;
             }
@@ -198,43 +202,12 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
 //            ((HomeActivity) getActivity()).setMsgUnread(getTotalUnreadNum() == 0);
     }
 
-    /**
-     * 获取好友关系链管理系统最后一条消息的回调
-     *
-     * @param message 最后一条消息
-     * @param unreadCount 未读数
-     */
-    @Override
-    public void onGetFriendshipLastMessage(TIMFriendFutureItem message, long unreadCount) {
-        if (friendshipConversation == null){
-            friendshipConversation = new FriendshipConversation(message);
-            conversationList.add(friendshipConversation);
-        }else{
-            friendshipConversation.setLastMessage(message);
-        }
-        friendshipConversation.setUnreadCount(unreadCount);
-        Collections.sort(conversationList);
-        refresh();
-    }
-
-    /**
-     * 获取好友关系链管理最后一条系统消息的回调
-     *
-     * @param message 消息列表
-     */
-    @Override
-    public void onGetFriendshipMessage(List<TIMFriendFutureItem> message) {
-        friendshipManagerPresenter.getFriendshipLastMessage();
-    }
-
-
-
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         Conversation conversation = conversationList.get(info.position);
-        if (conversation instanceof NomalConversation){
+        if (conversation instanceof NomalConversation) {
             menu.add(0, 1, Menu.NONE, getString(R.string.conversation_del));
         }
     }
@@ -246,8 +219,8 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
         NomalConversation conversation = (NomalConversation) conversationList.get(info.position);
         switch (item.getItemId()) {
             case 1:
-                if (conversation != null){
-                    if (presenter.delConversation(conversation.getType(), conversation.getIdentify())){
+                if (conversation != null) {
+                    if (presenter.delConversation(conversation.getType(), conversation.getIdentify())) {
                         conversationList.remove(conversation);
                         adapter.notifyDataSetChanged();
                     }
@@ -259,16 +232,13 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
         return super.onContextItemSelected(item);
     }
 
-    private long getTotalUnreadNum(){
+    private long getTotalUnreadNum() {
         long num = 0;
-        for (Conversation conversation : conversationList){
+        for (Conversation conversation : conversationList) {
             num += conversation.getUnreadNum();
         }
         return num;
     }
-
-
-
 
 
 }

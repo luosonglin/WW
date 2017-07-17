@@ -13,7 +13,6 @@ import com.winwin.app.im.model.ProfileSummary;
  */
 public class FriendProfile implements ProfileSummary {
 
-
     private TIMUserProfile profile;
     private boolean isSelected;
 

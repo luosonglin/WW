@@ -93,7 +93,7 @@ public class RecommendFragment extends Fragment {
     private SelectedParkAdapter mSelectedParkAdapter;
     private RecyclerView mRecyclerView2;
     private LatestRecommendationAdapter mLatestRecommendationAdapter;
-
+    private ImageView msgUnread;
     private OnFragmentInteractionListener mListener;
 
     public RecommendFragment() {
@@ -133,6 +133,8 @@ public class RecommendFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recommend, container, false);
         ButterKnife.bind(this, view);
+
+        msgUnread = (ImageView) view.findViewById(R.id.tabUnread);
 
         mBanner = (Banner) view.findViewById(R.id.banner);
         HttpData.getInstance().HttpDataGetBanners(new Observer<HttpResult<List<IndexBannerDto>>>() {
@@ -384,5 +386,13 @@ public class RecommendFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+
+    /**
+     * 设置未读tab显示
+     */
+    public void setMsgUnread(boolean noUnread){
+        msgUnread.setVisibility(noUnread?View.GONE:View.VISIBLE);
     }
 }

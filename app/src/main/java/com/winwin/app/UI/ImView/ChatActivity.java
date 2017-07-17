@@ -43,6 +43,7 @@ import com.winwin.app.Util.FileUtil;
 import com.winwin.app.Util.MediaUtil;
 import com.winwin.app.Util.RecorderUtil;
 import com.winwin.app.Util.ToastUtils;
+import com.winwin.app.im.event.RefreshEvent;
 import com.winwin.app.im.presenter.ChatPresenter;
 import com.winwin.app.im.ui.ChatInput;
 import com.winwin.app.im.ui.TemplateTitle;
@@ -91,6 +92,7 @@ public class ChatActivity extends FragmentActivity implements ChatView {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         identify = getIntent().getStringExtra("identify");
         type = (TIMConversationType) getIntent().getSerializableExtra("type");
+
         presenter = new ChatPresenter(this, identify, type);
         input = (ChatInput) findViewById(R.id.input_panel);
         input.setChatView(this);
@@ -143,7 +145,8 @@ public class ChatActivity extends FragmentActivity implements ChatView {
                         }
                     });
                     FriendProfile profile = FriendshipInfo.getInstance().getProfile(identify);
-                    title.setTitleText(titleStr = profile == null ? identify : profile.getName());
+//                    title.setTitleText(titleStr = profile == null ? identify : profile.getName());
+                    title.setTitleText(profile.getName()+" "+profile.getIdentify());
                 }else{
                     title.setMoreImgAction(new View.OnClickListener() {
                         @Override
@@ -155,7 +158,8 @@ public class ChatActivity extends FragmentActivity implements ChatView {
                             ToastUtils.show(ChatActivity.this, "跳转AddFriendActivity");
                         }
                     });
-                    title.setTitleText(titleStr = identify);
+//                    title.setTitleText(titleStr = identify);
+                    title.setTitleText(getIntent().getStringExtra("userName"));
                 }
                 break;
             case Group:
@@ -187,7 +191,7 @@ public class ChatActivity extends FragmentActivity implements ChatView {
         }else{
             presenter.saveDraft(null);
         }
-//        RefreshEvent.getInstance().onRefresh();
+        RefreshEvent.getInstance().onRefresh();
         presenter.readMessages();
         MediaUtil.getInstance().stop();
     }

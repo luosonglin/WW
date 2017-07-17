@@ -13,8 +13,6 @@ public class LoginBusiness {
 
     private LoginBusiness(){}
 
-
-
     /**
      * 登录imsdk
      *

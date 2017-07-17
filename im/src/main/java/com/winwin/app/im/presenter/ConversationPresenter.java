@@ -93,7 +93,11 @@ public class ConversationPresenter implements Observer {
                     if (timMessages.size() > 0) {
                         view.updateMessage(timMessages.get(0));
                     }
-
+//                    for (TIMMessage i : timMessages) {
+//                        Log.e(TAG, i.getConversation().getPeer());
+////                        FriendProfile profile = FriendshipInfo.getInstance().getProfile(identify);
+////                        name = profile == null ? identify : profile.getName();
+//                    }
                 }
             });
 
