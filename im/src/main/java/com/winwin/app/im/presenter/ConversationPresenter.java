@@ -26,7 +26,7 @@ public class ConversationPresenter implements Observer {
     private static final String TAG = "ConversationPresenter";
     private ConversationView view;
 
-    public ConversationPresenter(ConversationView view){
+    public ConversationPresenter(ConversationView view) {
         //注册消息监听
         MessageEvent.getInstance().addObserver(this);
         //注册刷新监听
@@ -40,14 +40,14 @@ public class ConversationPresenter implements Observer {
 
     @Override
     public void update(Observable observable, Object data) {
-        if (observable instanceof MessageEvent){
+        if (observable instanceof MessageEvent) {
             if (data instanceof TIMMessage) {
                 TIMMessage msg = (TIMMessage) data;
                 view.updateMessage(msg);
             }
-        }else if (observable instanceof FriendshipEvent){
+        } else if (observable instanceof FriendshipEvent) {
             FriendshipEvent.NotifyCmd cmd = (FriendshipEvent.NotifyCmd) data;
-            switch (cmd.type){
+            switch (cmd.type) {
                 case ADD_REQ:
                 case READ_MSG:
                 case ADD:
@@ -68,17 +68,16 @@ public class ConversationPresenter implements Observer {
 //
 //            }
 //        }
-        else if (observable instanceof RefreshEvent){
+        else if (observable instanceof RefreshEvent) {
             view.refresh();
         }
     }
 
 
-
-    public void getConversation(){
+    public void getConversation() {
         List<TIMConversation> list = TIMManagerExt.getInstance().getConversationList();
         List<TIMConversation> result = new ArrayList<>();
-        for (TIMConversation conversation : list){
+        for (TIMConversation conversation : list) {
             if (conversation.getType() == TIMConversationType.System) continue;
             result.add(conversation);
             TIMConversationExt conversationExt = new TIMConversationExt(conversation);
@@ -109,9 +108,9 @@ public class ConversationPresenter implements Observer {
      * 删除会话
      *
      * @param type 会话类型
-     * @param id 会话对象id
+     * @param id   会话对象id
      */
-    public boolean delConversation(TIMConversationType type, String id){
+    public boolean delConversation(TIMConversationType type, String id) {
         return TIMManagerExt.getInstance().deleteConversationAndLocalMsgs(type, id);
     }
 

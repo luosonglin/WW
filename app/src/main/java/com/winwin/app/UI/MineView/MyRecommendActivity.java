@@ -1,5 +1,6 @@
 package com.winwin.app.UI.MineView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.winwin.app.MainActivity;
 import com.winwin.app.R;
 import com.xiaochao.lcrapiddeveloplibrary.SmartTab.SmartTabLayout;
 import com.xiaochao.lcrapiddeveloplibrary.SmartTab.UtilsV4.v4.FragmentPagerItem;
@@ -36,6 +38,9 @@ public class MyRecommendActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MyRecommendActivity.this, MainActivity.class);
+                intent.putExtra("ReturnToMainActivity", 4);
+                startActivity(intent);
                 finish();
             }
         });

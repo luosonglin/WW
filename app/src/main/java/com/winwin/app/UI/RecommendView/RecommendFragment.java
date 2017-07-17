@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.winwin.app.Data.HttpData.HttpData;
+import com.winwin.app.MainActivity;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.LatestRecommendationAdapter;
 import com.winwin.app.UI.Adapter.SelectedParkAdapter;
@@ -28,7 +29,6 @@ import com.winwin.app.UI.Entity.IndexStaticDateDto;
 import com.winwin.app.UI.ImView.ConversationActivity;
 import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
 import com.winwin.app.UI.MineView.MyCreditActivity;
-import com.winwin.app.UI.RoomView.MapActivity;
 import com.winwin.app.UI.SearchView.SearchParkActivity;
 import com.winwin.app.Widget.GlideImageLoader;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
@@ -145,10 +145,10 @@ public class RecommendFragment extends Fragment {
 
             @Override
             public void onError(Throwable e) {
-                Log.e(TAG, "onError: "+e.getMessage()
-                        +"\n"+e.getCause()
-                        +"\n"+e.getLocalizedMessage()
-                        +"\n"+e.getStackTrace());
+                Log.e(TAG, "onError: " + e.getMessage()
+                        + "\n" + e.getCause()
+                        + "\n" + e.getLocalizedMessage()
+                        + "\n" + e.getStackTrace());
             }
 
             @Override
@@ -159,7 +159,7 @@ public class RecommendFragment extends Fragment {
             @Override
             public void onNext(HttpResult<List<IndexBannerDto>> indexBannerDto) {
 
-                for (IndexBannerDto i:indexBannerDto.getData()) {
+                for (IndexBannerDto i : indexBannerDto.getData()) {
                     bannerImages.add(i.getBannerPath());
                 }
                 mBanner.setImages(bannerImages != null ? bannerImages : null)
@@ -184,10 +184,10 @@ public class RecommendFragment extends Fragment {
 
             @Override
             public void onError(Throwable e) {
-                Log.e(TAG, "indexStaticDateDtoHttpResult onError: "+e.getMessage()
-                        +"\n"+e.getCause()
-                        +"\n"+e.getLocalizedMessage()
-                        +"\n"+e.getStackTrace());
+                Log.e(TAG, "indexStaticDateDtoHttpResult onError: " + e.getMessage()
+                        + "\n" + e.getCause()
+                        + "\n" + e.getLocalizedMessage()
+                        + "\n" + e.getStackTrace());
             }
 
             @Override
@@ -202,14 +202,14 @@ public class RecommendFragment extends Fragment {
 
             @Override
             public void onNext(HttpResult<IndexStaticDateDto> indexStaticDateDtoHttpResult) {
-                mCurrentProNum.setText(indexStaticDateDtoHttpResult.getData().getCurrentProNum()+"");
-                mNewBeraNum.setText(indexStaticDateDtoHttpResult.getData().getNewBeraNum()+"");
-                mCommendSuccessNum.setText(indexStaticDateDtoHttpResult.getData().getCommendSuccessNum()+"");
+                mCurrentProNum.setText(indexStaticDateDtoHttpResult.getData().getCurrentProNum() + "");
+                mNewBeraNum.setText(indexStaticDateDtoHttpResult.getData().getNewBeraNum() + "");
+                mCommendSuccessNum.setText(indexStaticDateDtoHttpResult.getData().getCommendSuccessNum() + "");
 
                 Log.e(TAG, "indexStaticDateDtoHttpResult onNext"
                         + indexStaticDateDtoHttpResult.getData().getCommendSuccessNum()
-                        +" "+indexStaticDateDtoHttpResult.getData().getNewBeraNum()
-                        +" "+indexStaticDateDtoHttpResult.getData().getCurrentProNum());
+                        + " " + indexStaticDateDtoHttpResult.getData().getNewBeraNum()
+                        + " " + indexStaticDateDtoHttpResult.getData().getCurrentProNum());
             }
         });
 
@@ -236,10 +236,10 @@ public class RecommendFragment extends Fragment {
 
             @Override
             public void onError(Throwable e) {
-                Log.e(TAG, "onError: "+e.getMessage()
-                        +"\n"+e.getCause()
-                        +"\n"+e.getLocalizedMessage()
-                        +"\n"+e.getStackTrace());
+                Log.e(TAG, "onError: " + e.getMessage()
+                        + "\n" + e.getCause()
+                        + "\n" + e.getLocalizedMessage()
+                        + "\n" + e.getStackTrace());
             }
 
             @Override
@@ -278,10 +278,10 @@ public class RecommendFragment extends Fragment {
 
             @Override
             public void onError(Throwable e) {
-                Log.e(TAG, "onError: "+e.getMessage()
-                        +"\n"+e.getCause()
-                        +"\n"+e.getLocalizedMessage()
-                        +"\n"+e.getStackTrace());
+                Log.e(TAG, "onError: " + e.getMessage()
+                        + "\n" + e.getCause()
+                        + "\n" + e.getLocalizedMessage()
+                        + "\n" + e.getStackTrace());
             }
 
             @Override
@@ -350,25 +350,57 @@ public class RecommendFragment extends Fragment {
 
     @OnClick({R.id.search_iv, R.id.conversation_iv, R.id.map_llyt, R.id.earn_llyt, R.id.my_llyt, R.id.brokerage_llyt})
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.search_iv:
-                startActivity(new Intent(getActivity(), SearchParkActivity.class));
+                intent = new Intent(getActivity(), SearchParkActivity.class);
+                startActivity(intent);
                 break;
             case R.id.conversation_iv:
-                startActivity(new Intent(getActivity(), ConversationActivity.class));
+                intent = new Intent(getActivity(), ConversationActivity.class);
+                startActivity(intent);
                 break;
             case R.id.map_llyt:
-                startActivity(new Intent(getActivity(), MapActivity.class));
+//                startActivityForResult(new Intent(getActivity(), MainActivity.class),  2);
+
+//                intent = new Intent(getActivity(), MainActivity.class);
+//                intent.putExtra("page", "map");
+//                startActivityForResult(intent, 0);
+//                getActivity().finish();
+
+                intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtra("ReturnToMainActivity", 3);
+                startActivity(intent);
+                getActivity().finish();
                 break;
             case R.id.earn_llyt:
-                startActivity(new Intent(getActivity(), EarnMoneyActivity.class));
+                intent = new Intent(getActivity(), EarnMoneyActivity.class);
+                startActivity(intent);
                 break;
             case R.id.my_llyt:
-//                MainActivity.toMyWinwinPage();
-//                startActivity(new Intent(getActivity(), MyWinwinActivity.class));
+//                MainActivity activity = (MainActivity) getActivity();
+//                FragmentManager fm = activity.getSupportFragmentManager();
+//                FragmentTransaction ft = fm.beginTransaction();
+//                if (activity.mIndexFragment == null) {
+//                    activity.mIndexFragment = new IndexFragment();
+//                }
+//                ft.replace(R.id.container, activity.mIndexFragment, activity.TAB_INDEX_TAG);
+////                ft.addToBackStack(null);
+//                ft.commit();
+
+                intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtra("ReturnToMainActivity", 1);
+                startActivity(intent);
+                getActivity().finish();
+
+//                intent = new Intent(getActivity(), MainActivity.class);
+//                intent.putExtra("page", "index");
+//                startActivityForResult(intent, 0);
+//                getActivity().finish();
                 break;
             case R.id.brokerage_llyt:
-                startActivity(new Intent(getActivity(), MyCreditActivity.class));
+                intent = new Intent(getActivity(), MyCreditActivity.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -392,7 +424,7 @@ public class RecommendFragment extends Fragment {
     /**
      * 设置未读tab显示
      */
-    public void setMsgUnread(boolean noUnread){
-        msgUnread.setVisibility(noUnread?View.GONE:View.VISIBLE);
+    public void setMsgUnread(boolean noUnread) {
+        msgUnread.setVisibility(noUnread ? View.GONE : View.VISIBLE);
     }
 }

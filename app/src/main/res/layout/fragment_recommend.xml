@@ -42,8 +42,8 @@
 
             <ImageView
                 android:id="@+id/conversation_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="46dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:padding="10dp"
                 android:scaleType="fitXY"
                 android:src="@mipmap/index_community_btn" />
@@ -52,7 +52,7 @@
                 android:id="@+id/tabUnread"
                 android:layout_width="6dp"
                 android:layout_height="6dp"
-                android:layout_marginLeft="-20dp"
+                android:layout_marginLeft="-16dp"
                 android:layout_marginTop="10dp"
                 android:layout_centerVertical="true"
                 android:visibility="gone"

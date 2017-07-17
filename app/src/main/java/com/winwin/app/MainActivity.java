@@ -77,7 +77,8 @@ public class MainActivity extends AppCompatActivity
     @Bind(R.id.tab_mine)
     LinearLayout tabMine;
 
-    private static final String TAB_INDEX_TAG = "TAB_INDEX_TAG";
+    private static final String TAG = MainActivity.class.getSimpleName();
+    public static final String TAB_INDEX_TAG = "TAB_INDEX_TAG";
     private static final String TAB_RECOMMEND_TAG = "TAB_RECOMMEND_TAG";
     private static final String TAB_ROOM_TAG = "TAB_ROOM_TAG";
     private static final String TAB_MINE_TAG = "TAB_MINE_TAG";
@@ -223,6 +224,7 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
         fragmentTransaction.commit();
+        PageId = 0;
     }
 
 
@@ -321,15 +323,34 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    private int PageId = 0;
+
     @Override
     protected void onResume() {
-//        int id = getIntent().getIntExtra("ReturnToMiniSupplierActivity", 0);
-//        if (id == 1) {
-//            setTabSelection(tabRoom);
-//        } else if (id == 2) {
-//            setTabSelection(tabIndex);
-//        }
+        PageId = getIntent().getIntExtra("ReturnToMainActivity", 0);
+        if (PageId == 1) {
+            setTabSelection(tabIndex);
+        } else if (PageId == 3) {
+            setTabSelection(tabRoom);
+        } else if (PageId == 4) {
+            setTabSelection(tabMine);
+        }
         super.onResume();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        Log.i(TAG, "onActivityResult"+"requestCode"+requestCode+"\n resultCode="+resultCode);
+//        switch (data.getStringExtra("page")) {
+//            case "index":
+//                setTabSelection(tabIndex);
+//                break;
+//            case "map":
+//                setTabSelection(tabRoom);
+//                break;
+//        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
