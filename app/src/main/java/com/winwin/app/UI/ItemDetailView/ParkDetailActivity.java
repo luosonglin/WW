@@ -73,6 +73,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_park_detail);
         toolBar();
         initView(getIntent().getExtras().getInt("parkId"));

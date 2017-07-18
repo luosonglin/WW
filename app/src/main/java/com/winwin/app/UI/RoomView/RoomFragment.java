@@ -436,7 +436,10 @@ public class RoomFragment extends Fragment {
     private void initMap() {
         if (aMap == null) {
             aMap = mapView.getMap();
+            aMap.getUiSettings().setLogoBottomMargin(-50);//隐藏logo
+            aMap.getUiSettings().setZoomControlsEnabled(false);//内置的缩放控制键，显示在地图的右下角。默认情况下是开启true的
         }
+
         //刚打开map的第一屏
         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(convertToLatLng(centerpoint), 13));
 

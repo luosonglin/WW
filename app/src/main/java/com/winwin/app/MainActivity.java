@@ -302,7 +302,6 @@ public class MainActivity extends AppCompatActivity
         tabMineTitle.setTextColor(inactiveResources);
     }
 
-
     /**
      * 将所有的Fragment都置为隐藏状态。
      *
