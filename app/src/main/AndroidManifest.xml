@@ -84,8 +84,10 @@
         <activity
             android:name=".UI.ItemDetailView.ParkDetailActivity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Animation"/>
             <!--android:theme="@style/ItemDetailTheme" />-->
+
+        <!--android:theme="@style/AppTheme.NoActionBar"-->
 
         <!--我的-->
         <activity

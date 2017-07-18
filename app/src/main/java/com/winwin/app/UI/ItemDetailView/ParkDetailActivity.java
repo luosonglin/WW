@@ -91,8 +91,8 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 
     private void toolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         toolbar.setTitle("");
         toolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.back_white));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

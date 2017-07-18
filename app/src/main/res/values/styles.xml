@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -80,10 +82,12 @@
         <item name="android:textColorSecondary">#FFF</item>
         <item name="actionMenuTextColor">#FFF</item>
     </style>
+
     <style name="TextStyle_title_golden">
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">@color/gold</item>
     </style>
+
     <style name="TextStyle_gray">
         <item name="android:textSize">13dp</item>
         <item name="android:textColor">@color/grey</item>
@@ -157,5 +161,25 @@
         <item name="picture.crop.title.color">@color/white</item>
         <!--相册文件夹列表选中图标-->
         <item name="picture.folder_checked_dot">@drawable/orange_oval</item>
+    </style>
+
+    <!--activity底部滑出-->
+    <style name="AppTheme.Animation" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="windowNoTitle">true</item>
+        <!--Activity之间跳转出现短暂黑屏-->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 设置activity切换动画 -->
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+
+    <style name="activityAnimation" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_open</item>
+        <!--<item name="android:activityOpenExitAnimation">@anim/activity_open</item>-->
+        <!--<item name="android:activityCloseEnterAnimation">@anim/activity_close</item>-->
+        <item name="android:activityCloseExitAnimation">@anim/activity_close</item>
     </style>
 </resources>
