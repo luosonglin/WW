@@ -1,1 +1,1 @@
-include ':app', ':lcrapiddeveloplibrary', ':im'
+include ':app', ':lcrapiddeveloplibrary', ':im', ':share'

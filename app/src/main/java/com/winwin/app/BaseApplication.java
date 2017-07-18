@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 import com.winwin.app.im.business.InitBusiness;
 import com.tencent.imsdk.TIMLogLevel;
 import com.winwin.app.Constant.Constant;
@@ -48,6 +50,8 @@ public class BaseApplication extends Application{
         int loglvl = pref.getInt("loglvl", TIMLogLevel.DEBUG.ordinal());
         //初始化IMSDK
         InitBusiness.start(getApplicationContext(), loglvl, Constant.SDK_APPID);
+
+        UMShareAPI.get(this);
     }
 
     public static Context getContext() {
@@ -126,6 +130,14 @@ public class BaseApplication extends Application{
             }
         }
         System.exit(0);
+    }
+
+    //各个平台的配置，建议放在全局Application或者程序入口
+    {
+        PlatformConfig.setWeixin(Constant.WeChat_AppID, Constant.WeChat_AppSecret);
+        PlatformConfig.setQQZone(Constant.QQ_AppID, Constant.QQ_AppSecret);
+//        PlatformConfig.setSinaWeibo("188948618", "416592ff15fdad47403ad89e894d5fd4", "http://sns.whalecloud.com");
+//        PlatformConfig.setAlipay("2015111700822536");
     }
 
 }

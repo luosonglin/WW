@@ -22,4 +22,12 @@ public class Constant {
     //正式服
     public static final int ACCOUNT_TYPE = 14039;
     public static final int SDK_APPID = 1400035587;
+
+    //微信appID
+    public static final String WeChat_AppID = "wx3970d79845c3fc6d";
+    public static final String WeChat_AppSecret = "2a18467ae966bd9509ecfeb9a2500070";
+
+    //QQ appID
+    public static final String QQ_AppID = "1106138121";
+    public static final String QQ_AppSecret = "LkYvB93SN1ZimrVd";
 }
