@@ -34,6 +34,7 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.core.LatLonPoint;
 import com.bumptech.glide.Glide;
+import com.tencent.imsdk.TIMConversationType;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
@@ -50,6 +51,7 @@ import com.winwin.app.UI.Adapter.BrokerAdapter;
 import com.winwin.app.UI.Entity.BrokerDto;
 import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.ParkDetailDto;
+import com.winwin.app.UI.ImView.ChatActivity;
 import com.winwin.app.Util.ToastUtils;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.widget.SpringView;
@@ -81,7 +83,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
             usingAreaPercent, checkInCustomers,
             parkDesc, peripheryDesc,
             payDay, proStand, watStand, proArea,
-            broker;
+            broker, secretary;
     private BaseQuickAdapter mBaseQuickAdapter;
     private ImageView collectIv, shareIv;
     private boolean isCollect = false;
@@ -187,7 +189,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                 checkInCustomers.setText("入驻企业（" + parkDetailDtoHttpResult.getCheckInCustomers() + "家）");
                 parkDesc.setText(parkDetailDtoHttpResult.getParkVo().getParkDesc());
                 peripheryDesc.setText(parkDetailDtoHttpResult.getParkVo().getPeripheryDesc());
-                payDay.setText(parkDetailDtoHttpResult.getParkVo().getPayDay() + "元/天 或 " + parkDetailDtoHttpResult.getParkVo().getPayMon() + "元/月");
+                payDay.setText(parkDetailDtoHttpResult.getParkVo().getPayMon() + "元/月");//parkDetailDtoHttpResult.getParkVo().getPayDay() + "元/天 或 " +
                 proStand.setText(parkDetailDtoHttpResult.getParkVo().getProStand() + "元/度");
                 watStand.setText(parkDetailDtoHttpResult.getParkVo().getWatStand() + "元/吨");
                 proArea.setText(parkDetailDtoHttpResult.getParkVo().getProArea() + "平方米");
@@ -389,6 +391,18 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                         }
                     }, getIntent().getExtras().getInt("parkId"), 2);
                 }
+            }
+        });
+
+        secretary = (TextView) findViewById(R.id.secretary);
+        secretary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ParkDetailActivity.this, ChatActivity.class);
+                intent.putExtra("identify", "19");
+                intent.putExtra("userName", "winwin小秘");
+                intent.putExtra("type", TIMConversationType.C2C);
+                startActivity(intent);
             }
         });
     }

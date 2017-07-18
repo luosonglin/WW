@@ -76,14 +76,12 @@ public class ChatActivity extends FragmentActivity implements ChatView {
     private String titleStr;
     private Handler handler = new Handler();
 
-
     public static void navToChat(Context context, String identify, TIMConversationType type){
         Intent intent = new Intent(context, ChatActivity.class);
         intent.putExtra("identify", identify);
         intent.putExtra("type", type);
         context.startActivity(intent);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,31 +131,31 @@ public class ChatActivity extends FragmentActivity implements ChatView {
         TemplateTitle title = (TemplateTitle) findViewById(R.id.chat_title);
         switch (type) {
             case C2C:
-                title.setMoreImg(R.drawable.btn_person);
+//                title.setMoreImg(R.drawable.btn_person);
                 if (FriendshipInfo.getInstance().isFriend(identify)){
-                    title.setMoreImgAction(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-//                            Intent intent = new Intent(ChatActivity.this, ProfileActivity.class);
-//                            intent.putExtra("identify", identify);
-//                            startActivity(intent);
-                            ToastUtils.show(ChatActivity.this, "跳转ProfileActivity");
-                        }
-                    });
+//                    title.setMoreImgAction(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+////                            Intent intent = new Intent(ChatActivity.this, ProfileActivity.class);
+////                            intent.putExtra("identify", identify);
+////                            startActivity(intent);
+//                            ToastUtils.show(ChatActivity.this, "跳转ProfileActivity");
+//                        }
+//                    });
                     FriendProfile profile = FriendshipInfo.getInstance().getProfile(identify);
 //                    title.setTitleText(titleStr = profile == null ? identify : profile.getName());
                     title.setTitleText(profile.getName()+" "+profile.getIdentify());
                 }else{
-                    title.setMoreImgAction(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-//                            Intent person = new Intent(ChatActivity.this,AddFriendActivity.class);
-//                            person.putExtra("id",identify);
-//                            person.putExtra("name",identify);
-//                            startActivity(person);
-                            ToastUtils.show(ChatActivity.this, "跳转AddFriendActivity");
-                        }
-                    });
+//                    title.setMoreImgAction(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+////                            Intent person = new Intent(ChatActivity.this,AddFriendActivity.class);
+////                            person.putExtra("id",identify);
+////                            person.putExtra("name",identify);
+////                            startActivity(person);
+//                            ToastUtils.show(ChatActivity.this, "跳转AddFriendActivity");
+//                        }
+//                    });
 //                    title.setTitleText(titleStr = identify);
                     title.setTitleText(getIntent().getStringExtra("userName"));
                 }
