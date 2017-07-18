@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/chat_rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="40dp"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
+    android:paddingLeft="10dp"
+    android:background="@color/white">
+
+    <com.winwin.app.im.ui.CircleImageView
+        android:id="@id/avatar"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@mipmap/chat_header"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/avatar"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:text="系统消息"/>
+        <TextView
+            android:id="@+id/last_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:singleLine="true"
+            android:text="显示最近一条系统消息"
+            android:textColor="@color/text_gray1"
+            android:textSize="14sp"/>
+    </LinearLayout>
+</RelativeLayout>

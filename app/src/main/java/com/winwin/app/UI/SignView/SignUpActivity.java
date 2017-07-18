@@ -69,10 +69,10 @@ public class SignUpActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Animation animation= AnimationUtils.loadAnimation(SignUpActivity.this,R.anim.login_background_translate_anim);
+                Animation animation = AnimationUtils.loadAnimation(SignUpActivity.this, R.anim.login_background_translate_anim);
                 mBackgroundImageView.startAnimation(animation);
             }
-        },1000);
+        }, 1000);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -179,7 +179,7 @@ public class SignUpActivity extends AppCompatActivity {
         CountDownTimer timer = new CountDownTimer(60000, 1000) {
             @Override
             public void onTick(long l) {
-                mGetCodeView.setEnabled(false );
+                mGetCodeView.setEnabled(false);
                 mGetCodeView.setText("剩余" + l / 1000 + "秒");
             }
 

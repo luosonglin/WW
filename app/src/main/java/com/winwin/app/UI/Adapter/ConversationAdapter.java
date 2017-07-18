@@ -23,6 +23,8 @@ public class ConversationAdapter extends ArrayAdapter<Conversation> {
     private View view;
     private ViewHolder viewHolder;
 
+    private View mHeaderView;
+
     /**
      * Constructor
      *
@@ -81,6 +83,11 @@ public class ConversationAdapter extends ArrayAdapter<Conversation> {
         public TextView lastMessage;
         public TextView time;
         public TextView unread;
-
     }
+
+    public void addHeaderView(View header) {
+        this.mHeaderView = header;
+        this.notifyDataSetChanged();
+    }
+
 }

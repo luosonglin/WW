@@ -329,6 +329,8 @@ public class MainActivity extends AppCompatActivity
         PageId = getIntent().getIntExtra("ReturnToMainActivity", 0);
         if (PageId == 1) {
             setTabSelection(tabIndex);
+        } else if (PageId == 2) {
+            setTabSelection(tabRecommend);
         } else if (PageId == 3) {
             setTabSelection(tabRoom);
         } else if (PageId == 4) {

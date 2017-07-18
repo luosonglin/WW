@@ -7,18 +7,10 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.winwin.app.im.business.InitBusiness;
-import com.winwin.app.im.business.LoginBusiness;
-import com.winwin.app.im.event.FriendshipEvent;
-import com.winwin.app.im.event.MessageEvent;
-import com.winwin.app.im.event.RefreshEvent;
-import com.winwin.app.im.model.UserInfo;
-import com.winwin.app.im.presenter.SplashPresenter;
-import com.winwin.app.im.ui.NotifyDialog;
-import com.winwin.app.im.viewfeatures.SplashView;
 import com.tencent.imsdk.TIMCallBack;
 import com.tencent.imsdk.TIMConnListener;
 import com.tencent.imsdk.TIMLogLevel;
@@ -29,15 +21,23 @@ import com.winwin.app.Constant.Constant;
 import com.winwin.app.MainActivity;
 import com.winwin.app.R;
 import com.winwin.app.UI.CustomView.DialogActivity;
-import com.winwin.app.UI.ListvView.ListvViewActivity;
 import com.winwin.app.UI.SignView.LoginActivity;
 import com.winwin.app.Util.SpUtils;
+import com.winwin.app.im.business.InitBusiness;
+import com.winwin.app.im.business.LoginBusiness;
+import com.winwin.app.im.event.FriendshipEvent;
+import com.winwin.app.im.event.MessageEvent;
+import com.winwin.app.im.event.RefreshEvent;
+import com.winwin.app.im.model.UserInfo;
+import com.winwin.app.im.presenter.SplashPresenter;
+import com.winwin.app.im.ui.NotifyDialog;
+import com.winwin.app.im.viewfeatures.SplashView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class SplashActivity extends ListvViewActivity implements SplashView {
+public class SplashActivity extends AppCompatActivity implements SplashView {
     private static final String TAG = SplashActivity.class.getSimpleName();
     SplashPresenter presenter;
     private int LOGIN_RESULT_CODE = 100;

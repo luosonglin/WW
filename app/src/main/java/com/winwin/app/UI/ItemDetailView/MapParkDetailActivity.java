@@ -44,8 +44,8 @@ import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
-public class ParkDetailActivity extends AppCompatActivity implements SpringView.OnFreshListener {
-    private static final String TAG = ParkDetailActivity.class.getSimpleName();
+public class MapParkDetailActivity extends AppCompatActivity implements SpringView.OnFreshListener {
+    private static final String TAG = MapParkDetailActivity.class.getSimpleName();
     private Toolbar toolbar;
     private Context context = this;
     private ScrollView scrollView;
@@ -91,13 +91,16 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 
     private void toolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         toolbar.setTitle("");
         toolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.back_white));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Intent intent = new Intent(MapParkDetailActivity.this, MainActivity.class);
+//                intent.putExtra("ReturnToMainActivity", 3);
+//                startActivity(intent);
                 finish();
             }
         });
@@ -136,7 +139,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 
             @Override
             public void onNext(ParkDetailDto parkDetailDtoHttpResult) {
-                Glide.with(ParkDetailActivity.this)
+                Glide.with(MapParkDetailActivity.this)
                         .load(parkDetailDtoHttpResult.getParkVo().getHomeImage())
                         .into((ImageView) findViewById(R.id.img));
                 amount_textview.setText("¥" + parkDetailDtoHttpResult.getParkVo().getDayRentStartPi());
@@ -169,13 +172,13 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
         broker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final View popupView = ParkDetailActivity.this.getLayoutInflater().inflate(R.layout.popupwindow_broker, null);
+                final View popupView = MapParkDetailActivity.this.getLayoutInflater().inflate(R.layout.popupwindow_broker, null);
 
                 RecyclerView recyclerView = (RecyclerView) popupView.findViewById(R.id.brokers);
                 recyclerView.setLayoutManager(new LinearLayoutManager(popupView.getContext()));
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-                recyclerView.addItemDecoration(new DividerItemDecoration(ParkDetailActivity.this, DividerItemDecoration.VERTICAL));
+                recyclerView.addItemDecoration(new DividerItemDecoration(MapParkDetailActivity.this, DividerItemDecoration.VERTICAL));
                 recyclerView.setAdapter(mBaseQuickAdapter);
 
                 HttpData.getInstance().HttpDataGetBrokers(new Observer<List<BrokerDto>>() {
@@ -313,7 +316,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 
                         @Override
                         public void onComplete() {
-                            ToastUtils.show(ParkDetailActivity.this, "收藏成功");
+                            ToastUtils.show(MapParkDetailActivity.this, "收藏成功");
                         }
                     }, getIntent().getExtras().getInt("parkId"), 2);
                 } else {
@@ -339,7 +342,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 
                         @Override
                         public void onComplete() {
-                            ToastUtils.show(ParkDetailActivity.this, "取消收藏");
+                            ToastUtils.show(MapParkDetailActivity.this, "取消收藏");
                         }
                     }, getIntent().getExtras().getInt("parkId"), 2);
                 }
@@ -370,7 +373,6 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
             }
         });
         anim.start();
-
     }
 
     @Override

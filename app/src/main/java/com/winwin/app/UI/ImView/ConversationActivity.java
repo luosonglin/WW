@@ -1,5 +1,6 @@
 package com.winwin.app.UI.ImView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMMessage;
@@ -60,6 +62,15 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
         presenter.getConversation();
         registerForContextMenu(listView);
         adapter.notifyDataSetChanged();
+
+
+        RelativeLayout mChatRecyclerView = (RelativeLayout) findViewById(R.id.chat_rl);
+        mChatRecyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ConversationActivity.this, SystemMessageActivity.class));
+            }
+        });
     }
 
     private void toolBar() {
@@ -120,6 +131,17 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
      */
     @Override
     public void updateMessage(TIMMessage message) {
+        //头view
+//        View mHeaderView = LayoutInflater.from(ConversationActivity.this).inflate(R.layout.item_chat_header, null);
+//        RelativeLayout mChatRecyclerView = (RelativeLayout) mHeaderView.findViewById(R.id.chat_rl);
+//        mChatRecyclerView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ToastUtils.show(ConversationActivity.this, "hhh");
+//            }
+//        });
+//        adapter.addHeaderView(mHeaderView);
+
         if (message == null) {
             adapter.notifyDataSetChanged();
             return;

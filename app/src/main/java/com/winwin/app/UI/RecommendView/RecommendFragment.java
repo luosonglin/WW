@@ -367,7 +367,6 @@ public class RecommendFragment extends Fragment {
 //                intent.putExtra("page", "map");
 //                startActivityForResult(intent, 0);
 //                getActivity().finish();
-
                 intent = new Intent(getActivity(), MainActivity.class);
                 intent.putExtra("ReturnToMainActivity", 3);
                 startActivity(intent);

@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:paddingBottom="8dp"
     android:paddingTop="8dp"
-    android:paddingLeft="10dp">
+    android:paddingLeft="10dp"
+    android:background="@color/white">
     <com.winwin.app.im.ui.CircleImageView
         android:id="@id/avatar"
         android:layout_width="45dp"

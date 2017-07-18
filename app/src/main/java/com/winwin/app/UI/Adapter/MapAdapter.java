@@ -9,7 +9,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.winwin.app.R;
 import com.winwin.app.UI.Entity.ParkDto;
-import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
+import com.winwin.app.UI.ItemDetailView.MapParkDetailActivity;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.BaseViewHolder;
 
@@ -42,7 +42,7 @@ public class MapAdapter extends BaseQuickAdapter<ParkDto> {
         helper.getView(R.id.item_map).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, ParkDetailActivity.class);
+                Intent intent = new Intent(mContext, MapParkDetailActivity.class);
                 intent.putExtra("parkId", item.getId());
                 mContext.startActivity(intent);
             }

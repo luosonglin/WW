@@ -83,11 +83,11 @@
 
         <activity
             android:name=".UI.ItemDetailView.ParkDetailActivity"
+            android:label=""/>
+        <activity
+            android:name=".UI.ItemDetailView.MapParkDetailActivity"
             android:label=""
             android:theme="@style/AppTheme.Animation"/>
-            <!--android:theme="@style/ItemDetailTheme" />-->
-
-        <!--android:theme="@style/AppTheme.NoActionBar"-->
 
         <!--我的-->
         <activity
@@ -188,6 +188,9 @@
 
         <activity
             android:name=".UI.ImView.ConversationActivity"
+            android:label="" />
+        <activity
+            android:name=".UI.ImView.SystemMessageActivity"
             android:label="" />
         <activity android:name=".UI.ImView.ImageViewActivity" />
         <activity
