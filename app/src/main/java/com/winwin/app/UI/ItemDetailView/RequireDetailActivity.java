@@ -3,6 +3,7 @@ package com.winwin.app.UI.ItemDetailView;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,10 +19,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.tencent.imsdk.TIMConversationType;
 import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
 import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.RequireDto;
+import com.winwin.app.UI.ImView.ChatActivity;
 import com.winwin.app.Util.DateUtils;
 import com.winwin.app.Util.GlideCircleTransform;
 import com.winwin.app.Util.ToastUtils;
@@ -108,7 +111,7 @@ public class RequireDetailActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNext(@NonNull RequireDto requireDto) {
+            public void onNext(@NonNull final RequireDto requireDto) {
                 Glide.with(RequireDetailActivity.this)
                         .load(requireDto.getEffectImgs().get(0).getImagePath())
                         .into((ImageView) findViewById(R.id.img));
@@ -139,6 +142,18 @@ public class RequireDetailActivity extends AppCompatActivity {
                     a1.setTag("not_collect");
                     a1.setImageResource(R.mipmap.parkdetailactivity_fravorite);
                 }
+
+                a2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(RequireDetailActivity.this, ChatActivity.class);
+                        intent.putExtra("identify", requireDto.getPubRequireId()+"");
+                        intent.putExtra("userName", requireDto.getPubRequireName());
+                        intent.putExtra("type", TIMConversationType.C2C);
+                        startActivity(intent);
+                    }
+                });
+
             }
 
             @Override
@@ -217,6 +232,7 @@ public class RequireDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
 
 
         // 获取屏幕宽高
