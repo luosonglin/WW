@@ -17,7 +17,7 @@ public class MyCreditParkAdapter extends BaseQuickAdapter<CreditDto.PublishParkL
     @Override
     protected void convert(BaseViewHolder helper, CreditDto.PublishParkListBean item) {
         helper.setText(R.id.name,item.getName()+"");
-        helper.setText(R.id.credit,"+" + item.getId());
+        helper.setText(R.id.credit,"+5");
         helper.setText(R.id.time, DateUtils.formatDate(item.getCreateTime(), DateUtils.TYPE_06));
     }
 }

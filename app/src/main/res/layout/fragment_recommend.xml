@@ -194,7 +194,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="8dp"
-                                android:text="我的积分"
+                                android:text="我的佣金"
                                 android:textColor="@color/black"
                                 android:textSize="13sp" />
                         </LinearLayout>

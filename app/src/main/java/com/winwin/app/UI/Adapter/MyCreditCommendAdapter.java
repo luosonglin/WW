@@ -16,7 +16,7 @@ public class MyCreditCommendAdapter extends BaseQuickAdapter<CreditDto.CommendsL
     @Override
     protected void convert(BaseViewHolder helper, CreditDto.CommendsListBean item) {
         helper.setText(R.id.name,item.getRemarks()+"");
-        helper.setText(R.id.credit,"+" + item.getId());
+        helper.setText(R.id.credit,"+1");
         helper.setText(R.id.time, DateUtils.formatDate(item.getCreateTime(), DateUtils.TYPE_06));
     }
 }

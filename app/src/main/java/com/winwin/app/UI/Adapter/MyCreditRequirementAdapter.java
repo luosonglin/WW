@@ -15,8 +15,8 @@ public class MyCreditRequirementAdapter extends BaseQuickAdapter<CreditDto.Publi
 
     @Override
     protected void convert(BaseViewHolder helper, CreditDto.PublishRequirementList item) {
-        helper.setText(R.id.name, item.getPubRequireName() + "");
-        helper.setText(R.id.credit, "+" + item.getId());
+        helper.setText(R.id.name, item.getRequireTitle() + "");
+        helper.setText(R.id.credit, "+1");
         helper.setText(R.id.time, DateUtils.formatDate(item.getCreateTime(), DateUtils.TYPE_06));
     }
 }
