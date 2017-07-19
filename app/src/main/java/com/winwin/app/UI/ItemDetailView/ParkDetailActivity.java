@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -89,6 +90,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
     private boolean isCollect = false;
     private AMap aMap;
     private MapView mapView;
+    private RelativeLayout mapRl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,6 +213,14 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                 Log.e(TAG, "onNext");
             }
         }, parkId);
+
+        mapRl = (RelativeLayout) findViewById(R.id.map_ry);
+        mapRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         broker = (TextView) findViewById(R.id.broker);
         mBaseQuickAdapter = new BrokerAdapter(R.layout.item_broker, null);

@@ -38,14 +38,14 @@ public class BrokerAdapter extends BaseQuickAdapter<BrokerDto> {
                 .into((ImageView) helper.getView(R.id.avatar));
 
         helper.setText(R.id.name, item.getRealName())
-                .setText(R.id.attitude, "态度好，服务热情");
+                .setText(R.id.attitude, item.getRoleName());
 
         helper.getView(R.id.message).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, ChatActivity.class);
 //                intent.putExtra("identify", identify);
-                intent.putExtra("identify", item.getId()+"");
+                intent.putExtra("identify", item.getUserId()+"");
                 intent.putExtra("userName", item.getRealName());
                 intent.putExtra("type", TIMConversationType.C2C);
                 mContext.startActivity(intent);
