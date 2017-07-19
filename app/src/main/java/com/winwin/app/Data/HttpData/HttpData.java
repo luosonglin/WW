@@ -31,6 +31,7 @@ import com.winwin.app.UI.Entity.ParkDto;
 import com.winwin.app.UI.Entity.SelectAppParksVo;
 import com.winwin.app.UI.Entity.SelectRequirementVo;
 import com.winwin.app.UI.Entity.UserLoginVo;
+import com.winwin.app.UI.Entity.UserRegisterVo;
 import com.winwin.app.Util.FileUtil;
 
 import java.io.File;
@@ -136,6 +137,7 @@ public class HttpData extends RetrofitUtils {
         Observable observable = service.getRecommandParks();
         setSubscribe(observable, observer);
     }
+
     public void HttpDataGetRecommandParkList(Observer<List<ParkDto>> observer, Map<String, Object> map) {
         Observable observable = service.getRecommandParkList(map).map(new HttpResultFunc<List<ParkDto>>());
         setSubscribe(observable, observer);
@@ -221,6 +223,7 @@ public class HttpData extends RetrofitUtils {
         Observable observable = service.getMyPubRequires().map(new HttpResultFunc<List<RequireDto>>());
         setSubscribe(observable, observer);
     }
+
     public void HttpDataGetMyPubParks(Observer<List<ParkDto>> observer, Integer state) {
         Observable observable = service.getMyPubParks(state).map(new HttpResultFunc<List<ParkDto>>());
         setSubscribe(observable, observer);
@@ -240,26 +243,43 @@ public class HttpData extends RetrofitUtils {
         Observable observable = service.collectPark(dataId, dataType);
         setSubscribe(observable, observer);
     }
+
     public void HttpDataCancelCollectPark(Observer<HttpResult> observer, int dataId, Integer dataType) {
         Observable observable = service.cancelCollectPark(dataId, dataType);
         setSubscribe(observable, observer);
     }
+
     public void HttpDataSendRequirement(Observer<RequireDto> observer, RequireDto requireDto) {
         Observable observable = service.sendRequirement(requireDto).map(new HttpResultFunc<RequireDto>());
         setSubscribe(observable, observer);
     }
+
     public void HttpDataSendPark(Observer<HttpResult> observer, ParkAppVo parkAppVo) {
         Observable observable = service.sendPark(parkAppVo);
         setSubscribe(observable, observer);
     }
+
     public void HttpDataGetRequireDetail(Observer<RequireDto> observer, long id) {
         Observable observable = service.getRequireDetail(id).map(new HttpResultFunc<RequireDto>());
         setSubscribe(observable, observer);
     }
+
     public void HttpDataGetRequireList(Observer<List<RequireDto>> observer, SelectRequirementVo selectRequirementVo) {
         Observable observable = service.getRequireList(selectRequirementVo).map(new HttpResultFunc<List<RequireDto>>());
         setSubscribe(observable, observer);
     }
+
+    public void HttpDataSendMsgCaptcha(Observer<HttpResult> observer, UserRegisterVo userRegisterVo) {
+        Observable observable = service.sendMsgCaptcha(userRegisterVo);
+        setSubscribe(observable, observer);
+    }
+
+    public void HttpDataConfirmRegister(Observer<HttpResult> observer, UserRegisterVo userRegisterVo) {
+        Observable observable = service.confirmRegister(userRegisterVo);
+        setSubscribe(observable, observer);
+    }
+
+
     /**
      * 插入观察者
      *

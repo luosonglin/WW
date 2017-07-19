@@ -26,6 +26,7 @@ import com.winwin.app.UI.Entity.RequireDto;
 import com.winwin.app.UI.Entity.SelectAppParksVo;
 import com.winwin.app.UI.Entity.SelectRequirementVo;
 import com.winwin.app.UI.Entity.UserLoginVo;
+import com.winwin.app.UI.Entity.UserRegisterVo;
 
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,22 @@ public interface APIService {
     //Constant 获取banner
     @GET("api/v1/banner/meeting")
     Observable<HttpResult2<BannerDto>> getBannerList();
+
+    /**
+     * 登录注册
+     */
+    //POST /v1/sessions/sendMsgCaptcha （**新App**）app注册点击发送短信验证码接口
+    @POST("/v1/sessions/sendMsgCaptcha")
+    Observable<HttpResult> sendMsgCaptcha(@Body UserRegisterVo userRegisterVo);
+
+
+    //POST /v1/sessions/registerUser/confirmRegister (**新App**)App用户注册流程中输入用户名，密码以及头像之后确认接口
+    @POST("/v1/sessions/registerUser/confirmRegister")
+    Observable<HttpResult> confirmRegister(@Body UserRegisterVo userRegisterVo);
+
+    //POST /v1/sessions/applogin (新App)创建会话，用户登录
+    @POST("/v1/sessions/applogin")
+    Observable<HttpResult<LoginUserDto>> login(@Body UserLoginVo userLoginVo);
 
     /**
      * 首页
@@ -109,7 +126,6 @@ public interface APIService {
     //此处分为取消收藏园区还是取消收藏需求，取消收藏数据类型（1：取消收藏需求，2：取消收藏项目）
     @POST("api/v1/app/stores/del/{dataId}/{dataType}")
     Observable<HttpResult> cancelCollectPark(@Path("dataId") long dataId, @Path("dataType") Integer dataType);
-
 
 
     /**
@@ -184,15 +200,6 @@ public interface APIService {
     //赚钱快车详情、需求详情
     @GET("api/v1/makeMoney/{id}")
     Observable<HttpResult<RequireDto>> getRequireDetail(@Path("id") long id);
-
-
-
-    /**
-     * login
-     */
-    //POST /v1/sessions/applogin (新App)创建会话，用户登录
-    @POST("/v1/sessions/applogin")
-    Observable<HttpResult<LoginUserDto>> login(@Body UserLoginVo userLoginVo);
 
     /**
      * 园区列表
