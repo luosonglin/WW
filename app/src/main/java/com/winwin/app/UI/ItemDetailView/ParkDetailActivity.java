@@ -72,6 +72,9 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
     private ScrollView scrollView;
     private ImageView imageView;
 
+    private double longitude;
+    private double latitude;
+
     // 记录首次按下位置
     private float mFirstPosition = 0;
     // 是否正在放大
@@ -210,6 +213,10 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                         parkDetailDtoHttpResult.getParkVo().getHomeImage(),
                         parkDetailDtoHttpResult.getParkVo().getParkDesc(),
                         parkDetailDtoHttpResult.getShareUrl());
+
+                longitude = parkDetailDtoHttpResult.getParkVo().getLongitude();
+                latitude = parkDetailDtoHttpResult.getParkVo().getLatitude();
+
                 Log.e(TAG, "onNext");
             }
         }, parkId);
@@ -218,7 +225,10 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
         mapRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(ParkDetailActivity.this, ParkMapActivity.class);
+                intent.putExtra("longitude", longitude);
+                intent.putExtra("latitude", latitude);
+                startActivity(intent);
             }
         });
 

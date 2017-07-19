@@ -1,4 +1,4 @@
-package com.winwin.app.UI.ImView;
+package com.winwin.app.UI.ItemDetailView;
 
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -16,15 +16,17 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.github.lzyzsd.jsbridge.BridgeWebView;
-import com.winwin.app.Constant.Data;
 import com.winwin.app.R;
 
-public class SystemMessageActivity extends AppCompatActivity {
+/**
+ * 园区详情的地图位置
+ */
+public class ParkMapActivity extends AppCompatActivity {
 
-    private static final String TAG = SystemMessageActivity.class.getSimpleName();
+    private static final String TAG = ParkMapActivity.class.getSimpleName();
     private Toolbar toolbar;
     private BridgeWebView mWebView;
-    private static final String URL = "http://winwin.jidichong.com/#/message?token=" + Data.getUserToken();
+    private static String URL = "http://winwin.jidichong.com/#/homeParkDetailMap?longitude=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class SystemMessageActivity extends AppCompatActivity {
             }
         });
     }
+
 
     /**
      * 初始化WebView配置
@@ -82,6 +85,7 @@ public class SystemMessageActivity extends AppCompatActivity {
             settings.setPluginState(WebSettings.PluginState.ON_DEMAND);
         }
 
+        URL = URL + getIntent().getExtras().getDouble("longitude") + "&latitude=" + getIntent().getExtras().getDouble("latitude");
         mWebView.loadUrl(URL);
 //        mWebView.addJavascriptInterface(new IndexFragment.JSHook(), "SetAndroidJavaScriptBridge");
         mWebView.setWebChromeClient(new WebChromeClient() {

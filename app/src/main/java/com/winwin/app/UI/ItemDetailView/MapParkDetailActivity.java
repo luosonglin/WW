@@ -44,6 +44,9 @@ import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
+/**
+ * 空间页 底部弹出activity
+ */
 public class MapParkDetailActivity extends AppCompatActivity implements SpringView.OnFreshListener {
     private static final String TAG = MapParkDetailActivity.class.getSimpleName();
     private Toolbar toolbar;

@@ -234,6 +234,9 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
+        <activity
+            android:name=".UI.ItemDetailView.ParkMapActivity"
+            android:label="" />
 
     </application>
 </manifest>
