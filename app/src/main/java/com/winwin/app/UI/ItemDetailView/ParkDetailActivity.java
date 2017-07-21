@@ -58,6 +58,7 @@ import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.widget.SpringView;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -93,7 +94,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
     private boolean isCollect = false;
     private AMap aMap;
     private MapView mapView;
-    private RelativeLayout mapRl;
+    private RelativeLayout mapRl, collectRl, shareRl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,7 +194,9 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                 usingAreaPercent.setText("租赁统计（" + parkDetailDtoHttpResult.getUsingAreaPercent() + "）");
                 checkInCustomers.setText("入驻企业（" + parkDetailDtoHttpResult.getCheckInCustomers() + "家）");
                 parkDesc.setText(parkDetailDtoHttpResult.getParkVo().getParkDesc());
-                peripheryDesc.setText(parkDetailDtoHttpResult.getParkVo().getPeripheryDesc());
+//                peripheryDesc.setText(parkDetailDtoHttpResult.getParkVo().getPeripheryDesc());
+                peripheryDesc.setText(parkDetailDtoHttpResult.getParkVo().getDistanceMetroDesc());
+
                 payDay.setText(parkDetailDtoHttpResult.getParkVo().getPayMon() + "元/月");//parkDetailDtoHttpResult.getParkVo().getPayDay() + "元/天 或 " +
                 proStand.setText(parkDetailDtoHttpResult.getParkVo().getProStand() + "元/度");
                 watStand.setText(parkDetailDtoHttpResult.getParkVo().getWatStand() + "元/吨");
@@ -212,7 +215,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                 initShare(parkDetailDtoHttpResult.getParkVo().getName(),
                         parkDetailDtoHttpResult.getParkVo().getHomeImage(),
                         parkDetailDtoHttpResult.getParkVo().getParkDesc(),
-                        parkDetailDtoHttpResult.getShareUrl());
+                        parkDetailDtoHttpResult.getParkVo().getShareUrl());
 
                 longitude = parkDetailDtoHttpResult.getParkVo().getLongitude();
                 latitude = parkDetailDtoHttpResult.getParkVo().getLatitude();
@@ -228,6 +231,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                 Intent intent = new Intent(ParkDetailActivity.this, ParkMapActivity.class);
                 intent.putExtra("longitude", longitude);
                 intent.putExtra("latitude", latitude);
+                Log.e(TAG, longitude + " " + latitude);
                 startActivity(intent);
             }
         });
@@ -354,8 +358,9 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
         /**
          * 收藏
          */
+        collectRl = (RelativeLayout) findViewById(R.id.collect_rl);
         collectIv = (ImageView) findViewById(R.id.collect_iv);
-        collectIv.setOnClickListener(new View.OnClickListener() {
+        collectRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (collectIv.getTag().equals("not_collected")) {
@@ -418,11 +423,36 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
         secretary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ParkDetailActivity.this, ChatActivity.class);
-                intent.putExtra("identify", "19");
-                intent.putExtra("userName", "winwin小秘");
-                intent.putExtra("type", TIMConversationType.C2C);
-                startActivity(intent);
+                Map<String, Object> map = new HashMap<>();
+                map.put("needId", 19);
+                map.put("addSource", 1);
+                HttpData.getInstance().HttpDataAddFriend(new Observer<HttpResult>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull HttpResult httpResult) {
+                        if (!httpResult.getStatus().getCode().equals("0")) return;
+                        Intent intent = new Intent(ParkDetailActivity.this, ChatActivity.class);
+                        intent.putExtra("identify", "19");
+                        intent.putExtra("userName", "winwin小秘");
+                        intent.putExtra("type", TIMConversationType.C2C);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }, map);
+
             }
         });
     }
@@ -487,8 +517,9 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
      * 社会化分享
      */
     public void initShare(final String title, final String photo, final String description, final String url) {
+        shareRl = (RelativeLayout) findViewById(R.id.share_rl);
         shareIv = (ImageView) findViewById(R.id.share);
-        shareIv.setOnClickListener(new View.OnClickListener() {
+        shareRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ShareBoardConfig config = new ShareBoardConfig();
@@ -511,6 +542,12 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
             ActivityCompat.requestPermissions(this, mPermissionList, 123);
         }
 
+        Log.e(TAG, "0 url" + url
+                + "\n" + "title" + title
+                + "\n" + "photo" + photo
+                + "\n" + "description" + description
+        );
+
         mShareListener = new ParkDetailActivity.CustomShareListener(this);
         /*增加自定义按钮的分享面板*/
         mShareAction = new ShareAction(ParkDetailActivity.this)
@@ -518,6 +555,12 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                 .setShareboardclickCallback(new ShareBoardlistener() {
                     @Override
                     public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+
+                        Log.e(TAG, "1 url" + url
+                                + "\n" + "title" + title
+                                + "\n" + "photo" + photo
+                                + "\n" + "description" + description
+                        );
 
                         UMWeb web = new UMWeb(url);
                         web.setTitle(title);//标题

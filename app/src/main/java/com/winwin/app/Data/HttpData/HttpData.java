@@ -279,6 +279,10 @@ public class HttpData extends RetrofitUtils {
         setSubscribe(observable, observer);
     }
 
+    public void HttpDataAddFriend(Observer<HttpResult> observer, Map<String, Object> map) {
+        Observable observable = service.addFriend(map);
+        setSubscribe(observable, observer);
+    }
 
     /**
      * 插入观察者

@@ -11,19 +11,17 @@
     <com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity
         android:id="@+id/progress"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottom_view">
 
             <ScrollView
                 android:id="@+id/scrollView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -40,6 +38,8 @@
                             android:layout_height="240dp"
                             android:layout_gravity="center"
                             android:scaleType="centerCrop" />
+
+
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -398,6 +398,7 @@
 
 
         <LinearLayout
+            android:id="@+id/bottom_view"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_alignParentBottom="true"
@@ -421,6 +422,7 @@
                     android:orientation="horizontal">
 
                     <RelativeLayout
+                        android:id="@+id/collect_rl"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
@@ -447,6 +449,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/share_rl"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1">

@@ -1,5 +1,7 @@
 package com.winwin.app.UI.Entity;
 
+import java.util.List;
+
 public class ParkDetailDto {
 
     /**
@@ -12,7 +14,6 @@ public class ParkDetailDto {
     private double usingAreaPercent;
     private int checkInCustomers;
     private ParkVoBean parkVo;
-    private String shareUrl;
 
     public double getUsingAreaPercent() {
         return usingAreaPercent;
@@ -36,14 +37,6 @@ public class ParkDetailDto {
 
     public void setParkVo(ParkVoBean parkVo) {
         this.parkVo = parkVo;
-    }
-
-    public String getShareUrl() {
-        return shareUrl;
-    }
-
-    public void setShareUrl(String shareUrl) {
-        this.shareUrl = shareUrl;
     }
 
     public static class ParkVoBean {
@@ -128,7 +121,7 @@ public class ParkDetailDto {
         private double longitude;
         private double latitude;
         private Object planImgs;
-        private Object coverImgs;
+        private List<FileDto> coverImgs;
         private Object sandImgs;
         private Object adImg;
         private Object commercialId;
@@ -144,6 +137,7 @@ public class ParkDetailDto {
         private String peripheryDesc;
         private boolean collection;
         private boolean belongCurrentUser;
+        private String shareUrl;
 
         public int getCreateId() {
             return createId;
@@ -393,11 +387,11 @@ public class ParkDetailDto {
             this.planImgs = planImgs;
         }
 
-        public Object getCoverImgs() {
+        public List<FileDto> getCoverImgs() {
             return coverImgs;
         }
 
-        public void setCoverImgs(Object coverImgs) {
+        public void setCoverImgs(List<FileDto> coverImgs) {
             this.coverImgs = coverImgs;
         }
 
@@ -519,6 +513,15 @@ public class ParkDetailDto {
 
         public void setBelongCurrentUser(boolean belongCurrentUser) {
             this.belongCurrentUser = belongCurrentUser;
+        }
+
+
+        public String getShareUrl() {
+            return shareUrl;
+        }
+
+        public void setShareUrl(String shareUrl) {
+            this.shareUrl = shareUrl;
         }
 
         public static class CityBean {

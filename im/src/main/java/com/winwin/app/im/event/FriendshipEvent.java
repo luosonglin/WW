@@ -36,11 +36,6 @@ public class FriendshipEvent extends Observable implements TIMFriendshipProxyLis
                 .setFriendshipProxyListener(this);
     }
 
-
-
-
-
-
     @Override
     public void OnAddFriends(List<TIMUserProfile> list) {
         Log.d(TAG, "OnAddFriends");

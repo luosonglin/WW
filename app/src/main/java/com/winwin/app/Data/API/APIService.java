@@ -214,4 +214,11 @@ public interface APIService {
     //POST /api/v1/parkapp/noLogin/getParksByConditions （**App**）多条件搜索项目或园区列表
     @POST("api/v1/parkapp/noLogin/getParksByConditions")
     Observable<HttpResult<List<ParkDto>>> getParksByConditions(@Body SelectAppParksVo selectAppParksVo);
+
+    /**
+     * 加好友
+     */
+    //GET /api/v1/user/appAddFriend (**App**)发送消息之前加好友  被添加好友用户id   添加来源，1：安卓；2：苹果 @Path("needId") long needId, @Path("addSource") Integer addSource
+    @GET("api/v1/user/appAddFriend")
+    Observable<HttpResult> addFriend(@QueryMap Map<String, Object> map);
 }

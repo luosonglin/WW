@@ -174,6 +174,7 @@ public class IndexFragment extends Fragment {
             settings.setPluginState(WebSettings.PluginState.ON_DEMAND);
         }
 
+        Log.e(TAG, "URL "+URL);
         mWebView.loadUrl(URL);
         mWebView.addJavascriptInterface(new IndexFragment.JSHook(), "SetAndroidJavaScriptBridge");
         mWebView.setWebChromeClient(new WebChromeClient() {

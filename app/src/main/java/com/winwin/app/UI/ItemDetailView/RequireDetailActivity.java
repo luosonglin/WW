@@ -29,6 +29,9 @@ import com.winwin.app.Util.DateUtils;
 import com.winwin.app.Util.GlideCircleTransform;
 import com.winwin.app.Util.ToastUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.reactivex.Observer;
@@ -146,11 +149,36 @@ public class RequireDetailActivity extends AppCompatActivity {
                 a2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(RequireDetailActivity.this, ChatActivity.class);
-                        intent.putExtra("identify", requireDto.getPubRequireId()+"");
-                        intent.putExtra("userName", requireDto.getPubRequireName());
-                        intent.putExtra("type", TIMConversationType.C2C);
-                        startActivity(intent);
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("needId", requireDto.getPubRequireId());
+                        map.put("addSource", 1);
+                        HttpData.getInstance().HttpDataAddFriend(new Observer<HttpResult>() {
+                            @Override
+                            public void onSubscribe(@NonNull Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onNext(@NonNull HttpResult httpResult) {
+                                if (!httpResult.getStatus().getCode().equals("0")) return;
+                                Intent intent = new Intent(RequireDetailActivity.this, ChatActivity.class);
+                                intent.putExtra("identify", requireDto.getPubRequireId()+"");
+                                intent.putExtra("userName", requireDto.getPubRequireName());
+                                intent.putExtra("type", TIMConversationType.C2C);
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        }, map);
+
                     }
                 });
 

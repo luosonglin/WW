@@ -71,6 +71,7 @@ public abstract class Conversation implements Comparable {
         Conversation that = (Conversation) o;
         if (!identify.equals(that.identify)) return false;
         return type == that.type;
+
     }
 
     @Override
@@ -105,6 +106,7 @@ public abstract class Conversation implements Comparable {
             throw new ClassCastException();
         }
     }
+
 
 
 

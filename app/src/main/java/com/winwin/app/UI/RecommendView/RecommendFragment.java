@@ -202,8 +202,8 @@ public class RecommendFragment extends Fragment {
 
             @Override
             public void onNext(HttpResult<IndexStaticDateDto> indexStaticDateDtoHttpResult) {
-                mCurrentProNum.setText(indexStaticDateDtoHttpResult.getData().getCurrentProNum() + "");
-                mNewBeraNum.setText(indexStaticDateDtoHttpResult.getData().getNewBeraNum() + "");
+                mCurrentProNum.setText(indexStaticDateDtoHttpResult.getData().getNewBeraNum() + "");
+                mNewBeraNum.setText(indexStaticDateDtoHttpResult.getData().getCurrentProNum() + "");
                 mCommendSuccessNum.setText(indexStaticDateDtoHttpResult.getData().getCommendSuccessNum() + "");
 
                 Log.e(TAG, "indexStaticDateDtoHttpResult onNext"

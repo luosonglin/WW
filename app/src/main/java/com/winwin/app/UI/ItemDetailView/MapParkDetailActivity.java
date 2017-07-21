@@ -1,11 +1,16 @@
 package com.winwin.app.UI.ItemDetailView;
 
+import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,8 +24,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -28,17 +35,32 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.core.LatLonPoint;
 import com.bumptech.glide.Glide;
+import com.tencent.imsdk.TIMConversationType;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
+import com.umeng.socialize.shareboard.ShareBoardConfig;
+import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.ShareBoardlistener;
 import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.BrokerAdapter;
 import com.winwin.app.UI.Entity.BrokerDto;
 import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.ParkDetailDto;
+import com.winwin.app.UI.ImView.ChatActivity;
 import com.winwin.app.Util.ToastUtils;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.widget.SpringView;
 
+import java.lang.ref.WeakReference;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
@@ -61,17 +83,21 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
 
     private DisplayMetrics metric;
 
+    private double longitude;
+    private double latitude;
+
     //显示数据组件
     private TextView amount_textview, name, location,
             usingAreaPercent, checkInCustomers,
             parkDesc, peripheryDesc,
             payDay, proStand, watStand, proArea,
-            broker;
+            broker, secretary;;
     private BaseQuickAdapter mBaseQuickAdapter;
-    private ImageView collectIv;
+    private ImageView collectIv, shareIv;
     private boolean isCollect = false;
     private AMap aMap;
     private MapView mapView;
+    private RelativeLayout mapRl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +116,29 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
         // MapsInitializer.sdcardDir =OffLineMapUtils.getSdCacheDir(this);
         mapView = (MapView) findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
+
+        //qq微信新浪授权防杀死, 在onCreate中再设置一次回调
+        UMShareAPI.get(this).fetchAuthResultWithBundle(this, savedInstanceState, new UMAuthListener() {
+            @Override
+            public void onStart(SHARE_MEDIA share_media) {
+
+            }
+
+            @Override
+            public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+
+            }
+
+            @Override
+            public void onError(SHARE_MEDIA platform, int action, Throwable t) {
+
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA platform, int action) {
+
+            }
+        });
     }
 
     private void toolBar() {
@@ -166,9 +215,30 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
                     collectIv.setImageResource(R.mipmap.parkdetailactivity_fravorite);
                 }
                 initMap(new LatLonPoint(parkDetailDtoHttpResult.getParkVo().getLatitude(), parkDetailDtoHttpResult.getParkVo().getLongitude()));
+
+                initShare(parkDetailDtoHttpResult.getParkVo().getName(),
+                        parkDetailDtoHttpResult.getParkVo().getHomeImage(),
+                        parkDetailDtoHttpResult.getParkVo().getParkDesc(),
+                        parkDetailDtoHttpResult.getParkVo().getShareUrl());
+
+                longitude = parkDetailDtoHttpResult.getParkVo().getLongitude();
+                latitude = parkDetailDtoHttpResult.getParkVo().getLatitude();
+
                 Log.e(TAG, "onNext");
             }
         }, parkId);
+
+        mapRl = (RelativeLayout) findViewById(R.id.map_ry);
+        mapRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MapParkDetailActivity.this, ParkMapActivity.class);
+                intent.putExtra("longitude", longitude);
+                intent.putExtra("latitude", latitude);
+                Log.e(TAG, longitude+" "+latitude);
+                startActivity(intent);
+            }
+        });
 
         broker = (TextView) findViewById(R.id.broker);
         mBaseQuickAdapter = new BrokerAdapter(R.layout.item_broker, null);
@@ -351,6 +421,44 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
                 }
             }
         });
+
+
+        secretary = (TextView) findViewById(R.id.secretary);
+        secretary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("needId", 19);
+                map.put("addSource", 1);
+                HttpData.getInstance().HttpDataAddFriend(new Observer<HttpResult>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull HttpResult httpResult) {
+                        if (!httpResult.getStatus().getCode().equals("0")) return;
+                        Intent intent = new Intent(MapParkDetailActivity.this, ChatActivity.class);
+                        intent.putExtra("identify", "19");
+                        intent.putExtra("userName", "winwin小秘");
+                        intent.putExtra("type", TIMConversationType.C2C);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }, map);
+
+            }
+        });
     }
 
     // 回弹动画 (使用了属性动画)
@@ -406,5 +514,126 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
         }
         //刚打开map的第一屏
         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(convertToLatLng(centerpoint), 13));
+    }
+
+    /**
+     * 社会化分享
+     */
+    public void initShare(final String title, final String photo, final String description, final String url) {
+        shareIv = (ImageView) findViewById(R.id.share);
+        shareIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShareBoardConfig config = new ShareBoardConfig();
+                config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_NONE);
+                mShareAction.open(config);
+            }
+        });
+        //因为分享授权中需要使用一些对应的权限，如果你的targetSdkVersion设置的是23或更高，需要提前获取权限。
+        if (Build.VERSION.SDK_INT >= 23) {
+            String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.CALL_PHONE,
+                    Manifest.permission.READ_LOGS,
+                    Manifest.permission.READ_PHONE_STATE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.SET_DEBUG_APP,
+                    Manifest.permission.SYSTEM_ALERT_WINDOW,
+                    Manifest.permission.GET_ACCOUNTS,
+                    Manifest.permission.WRITE_APN_SETTINGS};
+            ActivityCompat.requestPermissions(this, mPermissionList, 123);
+        }
+
+        mShareListener = new MapParkDetailActivity.CustomShareListener(this);
+        /*增加自定义按钮的分享面板*/
+        mShareAction = new ShareAction(MapParkDetailActivity.this)
+                .setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ)//, SHARE_MEDIA.MORE
+                .setShareboardclickCallback(new ShareBoardlistener() {
+                    @Override
+                    public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+
+                        UMWeb web = new UMWeb(url);
+                        web.setTitle(title);//标题
+                        web.setThumb(new UMImage(MapParkDetailActivity.this, photo));  //缩略图
+                        web.setDescription(description);//描述
+                        new ShareAction(MapParkDetailActivity.this)
+                                .withMedia(web)
+                                .setPlatform(share_media)
+                                .setCallback(mShareListener)
+                                .share();
+                    }
+                });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    private UMShareListener mShareListener;
+    private ShareAction mShareAction;
+
+    private static class CustomShareListener implements UMShareListener {
+
+        private WeakReference<MapParkDetailActivity> mActivity;
+
+        private CustomShareListener(MapParkDetailActivity activity) {
+            mActivity = new WeakReference(activity);
+        }
+
+        @Override
+        public void onStart(SHARE_MEDIA share_media) {
+        }
+
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+
+            if (platform.name().equals("WEIXIN_FAVORITE")) {
+                Toast.makeText(mActivity.get(), platform + " 收藏成功啦", Toast.LENGTH_SHORT).show();
+            } else {
+                if (platform != SHARE_MEDIA.MORE) {
+                    Toast.makeText(mActivity.get(), platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            if (platform != SHARE_MEDIA.MORE) {
+                Toast.makeText(mActivity.get(), platform + "分享失败啦~~ \n" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                if (t != null) {
+                    com.umeng.socialize.utils.Log.e(TAG, "umeng throw:" + t.getMessage());
+                }
+            }
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            Toast.makeText(mActivity.get(), platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //qq微信新浪授权防杀死
+        UMShareAPI.get(this).onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //内存泄漏，在使用分享或者授权的Activity中，重写onDestory()方法：
+        UMShareAPI.get(this).release();
+    }
+
+    /**
+     * 屏幕横竖屏切换时避免出现window leak的问题
+     */
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mShareAction.close();
     }
 }

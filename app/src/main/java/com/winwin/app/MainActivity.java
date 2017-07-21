@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity
             mPopMenu = new PopMenu.Builder().attachToActivity(MainActivity.this)
                     .addMenuItem(new PopMenuItem("发布项目", getResources().getDrawable(R.mipmap.tab_btn_project_nor)))
                     .addMenuItem(new PopMenuItem("发布需求", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
-                    .addMenuItem(new PopMenuItem("Constant", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
+//                    .addMenuItem(new PopMenuItem("Constant", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
                     .setOnItemClickListener(new PopMenuItemListener() {
                         @Override
                         public void onItemClick(PopMenu popMenu, int position) {
@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity
             mPopMenu = new PopMenu.Builder().attachToActivity(MainActivity.this)
                     .addMenuItem(new PopMenuItem("发布项目", getResources().getDrawable(R.mipmap.tab_btn_project_nor)))
                     .addMenuItem(new PopMenuItem("发布需求", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
-                    .addMenuItem(new PopMenuItem("Constant", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
+//                    .addMenuItem(new PopMenuItem("Constant", getResources().getDrawable(R.mipmap.tab_btn_demand_nor)))
                     .setOnItemClickListener(new PopMenuItemListener() {
                         @Override
                         public void onItemClick(PopMenu popMenu, int position) {

@@ -31,7 +31,7 @@ public class ParkMapActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_system_message);
+        setContentView(R.layout.activity_park_map);
         toolBar();
         initWebView();
     }
@@ -86,6 +86,7 @@ public class ParkMapActivity extends AppCompatActivity {
         }
 
         URL = URL + getIntent().getExtras().getDouble("longitude") + "&latitude=" + getIntent().getExtras().getDouble("latitude");
+        Log.e(TAG, URL);
         mWebView.loadUrl(URL);
 //        mWebView.addJavascriptInterface(new IndexFragment.JSHook(), "SetAndroidJavaScriptBridge");
         mWebView.setWebChromeClient(new WebChromeClient() {
