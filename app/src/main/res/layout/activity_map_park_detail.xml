@@ -32,18 +32,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <!--<ImageView-->
-                            <!--android:id="@+id/img"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="240dp"-->
-                            <!--android:layout_gravity="center"-->
-                            <!--android:scaleType="centerCrop" />-->
-                        <com.youth.banner.Banner
-                            android:id="@+id/banner"
+                        <ImageView
+                            android:id="@+id/img"
                             android:layout_width="match_parent"
                             android:layout_height="240dp"
-                            app:delay_time="5000"
-                            app:image_scale_type="fit_xy" />
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -206,132 +200,132 @@
                         android:background="@color/grey1" />
 
                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginLeft="16dp"
-                         android:layout_marginTop="16dp"
-                         android:text="园区介绍"
-                         android:textColor="@color/black"
-                         android:textSize="16sp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="园区介绍"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
-                     <TextView
-                         android:id="@+id/parkDesc"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginLeft="16dp"
-                         android:layout_marginRight="16dp"
-                         android:layout_marginTop="6dp"
-                         android:text="今日柳浪闻莺，经过近四十多年不断的开发和建设由当年帝王享受的御花园，演变为普通老百姓的大乐园。她仍以青翠柳色和婉啭莺鸣作为公园景观基调在沿湖长达千米的堤岸上和园路主干道路沿途栽种垂柳及狮柳，醉柳，浣沙柳等特色柳树。"
-                         android:textColor="@color/grey"
-                         android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/parkDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="6dp"
+                        android:text="今日柳浪闻莺，经过近四十多年不断的开发和建设由当年帝王享受的御花园，演变为普通老百姓的大乐园。她仍以青翠柳色和婉啭莺鸣作为公园景观基调在沿湖长达千米的堤岸上和园路主干道路沿途栽种垂柳及狮柳，醉柳，浣沙柳等特色柳树。"
+                        android:textColor="@color/grey"
+                        android:textSize="14sp" />
 
-                     <View
-                         android:layout_width="match_parent"
-                         android:layout_height="1dp"
-                         android:layout_marginTop="16dp"
-                         android:background="@color/grey1" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/grey1" />
 
-                     <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginLeft="16dp"
-                         android:layout_marginTop="10dp"
-                         android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
-                         <TextView
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:text="物业标准"
-                             android:textColor="@color/black"
-                             android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="物业标准"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
-                         <TextView
-                             android:id="@+id/payDay"
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:layout_marginLeft="28dp"
-                             android:text="10 物业费／天"
-                             android:textColor="@color/grey"
-                             android:textSize="14sp" />
-                     </LinearLayout>
+                        <TextView
+                            android:id="@+id/payDay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="28dp"
+                            android:text="10 物业费／天"
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
-                     <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginLeft="16dp"
-                         android:layout_marginTop="10dp"
-                         android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
-                         <TextView
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:text="电费标准"
-                             android:textColor="@color/black"
-                             android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="电费标准"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
-                         <TextView
-                             android:id="@+id/proStand"
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:layout_marginLeft="28dp"
-                             android:text="1.25元/度"
-                             android:textColor="@color/grey"
-                             android:textSize="14sp" />
-                     </LinearLayout>
+                        <TextView
+                            android:id="@+id/proStand"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="28dp"
+                            android:text="1.25元/度"
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
-                     <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginLeft="16dp"
-                         android:layout_marginTop="10dp"
-                         android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
-                         <TextView
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:text="水费标准"
-                             android:textColor="@color/black"
-                             android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="水费标准"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
-                         <TextView
-                             android:id="@+id/watStand"
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:layout_marginLeft="28dp"
-                             android:text="5.5元/吨"
-                             android:textColor="@color/grey"
-                             android:textSize="14sp" />
-                     </LinearLayout>
+                        <TextView
+                            android:id="@+id/watStand"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="28dp"
+                            android:text="5.5元/吨"
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
-                     <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginLeft="16dp"
-                         android:layout_marginTop="10dp"
-                         android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
-                         <TextView
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:text="合同面积"
-                             android:textColor="@color/black"
-                             android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="合同面积"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
-                         <TextView
-                             android:id="@+id/proArea"
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:layout_marginLeft="28dp"
-                             android:text="145335.3平方米"
-                             android:textColor="@color/grey"
-                             android:textSize="14sp" />
-                     </LinearLayout>
+                        <TextView
+                            android:id="@+id/proArea"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="28dp"
+                            android:text="145335.3平方米"
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
-                     <View
-                         android:layout_width="match_parent"
-                         android:layout_height="1dp"
-                         android:layout_marginTop="10dp"
-                         android:background="@color/grey1" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/grey1" />
 
                     <RelativeLayout
                         android:id="@+id/map_ry"

@@ -1,8 +1,6 @@
 package com.winwin.app.UI.ItemDetailView;
 
 import android.Manifest;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -19,7 +17,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -34,7 +31,6 @@ import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.core.LatLonPoint;
-import com.bumptech.glide.Glide;
 import com.tencent.imsdk.TIMConversationType;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMAuthListener;
@@ -50,14 +46,21 @@ import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.BrokerAdapter;
 import com.winwin.app.UI.Entity.BrokerDto;
+import com.winwin.app.UI.Entity.FileDto;
 import com.winwin.app.UI.Entity.HttpResult;
+import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
 import com.winwin.app.UI.ImView.ChatActivity;
 import com.winwin.app.Util.ToastUtils;
+import com.winwin.app.Widget.GlideImageLoader;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.widget.SpringView;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +74,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
     private Toolbar toolbar;
     private Context context = this;
     private ScrollView scrollView;
-    private ImageView imageView;
+//    private ImageView imageView;
 
     private double longitude;
     private double latitude;
@@ -95,6 +98,10 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
     private AMap aMap;
     private MapView mapView;
     private RelativeLayout mapRl, collectRl, shareRl;
+
+    private Banner banner;
+    private List<String> bannerImages = new ArrayList<>();
+    private List<IndexBannerDto> parkBannerImages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,6 +160,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
     }
 
     private void initView(final long parkId) {
+        banner = (Banner) findViewById(R.id.banner);
         amount_textview = (TextView) findViewById(R.id.amount_textview);
         name = (TextView) findViewById(R.id.name);
         location = (TextView) findViewById(R.id.location);
@@ -185,9 +193,19 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 
             @Override
             public void onNext(ParkDetailDto parkDetailDtoHttpResult) {
-                Glide.with(ParkDetailActivity.this)
-                        .load(parkDetailDtoHttpResult.getParkVo().getHomeImage())
-                        .into((ImageView) findViewById(R.id.img));
+//                Glide.with(ParkDetailActivity.this)
+//                        .load(parkDetailDtoHttpResult.getParkVo().getHomeImage())
+//                        .into((ImageView) findViewById(R.id.img));
+                for (FileDto i : parkDetailDtoHttpResult.getParkVo().getCoverImgs()) {
+                    bannerImages.add(i.getImagePath());
+
+                    Log.e(TAG,i.getImagePath());
+                }
+                banner.setImages(bannerImages != null ? bannerImages : null)
+                        .setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
+                        .setBannerAnimation(Transformer.Tablet)
+                        .setImageLoader(new GlideImageLoader()).start();
+
                 amount_textview.setText("¥" + parkDetailDtoHttpResult.getParkVo().getDayRentStartPi());
                 name.setText(parkDetailDtoHttpResult.getParkVo().getName());
                 location.setText(parkDetailDtoHttpResult.getParkVo().getDistanceMetroDesc());
@@ -304,7 +322,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
             }
         });
 
-        // 以下为顶部拖动图
+     /*   // 以下为顶部拖动图
         // 获取屏幕宽高
         metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
@@ -353,7 +371,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                 }
                 return false;
             }
-        });
+        });*/
 
         /**
          * 收藏
@@ -457,7 +475,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
         });
     }
 
-    // 回弹动画 (使用了属性动画)
+   /* // 回弹动画 (使用了属性动画)
     public void replyImage() {
         final ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) imageView
                 .getLayoutParams();
@@ -481,7 +499,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
         });
         anim.start();
 
-    }
+    }*/
 
     @Override
     public void onRefresh() {

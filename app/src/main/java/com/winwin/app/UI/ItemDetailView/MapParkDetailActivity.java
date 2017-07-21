@@ -103,7 +103,7 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_park_detail);
+        setContentView(R.layout.activity_map_park_detail);
         toolBar();
         initView(getIntent().getExtras().getInt("parkId"));
 
