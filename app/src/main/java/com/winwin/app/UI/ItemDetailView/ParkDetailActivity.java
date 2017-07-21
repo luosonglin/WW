@@ -198,9 +198,11 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 //                        .into((ImageView) findViewById(R.id.img));
                 for (FileDto i : parkDetailDtoHttpResult.getParkVo().getCoverImgs()) {
                     bannerImages.add(i.getImagePath());
-
                     Log.e(TAG,i.getImagePath());
                 }
+
+                if (bannerImages.size() == 0) bannerImages.add(parkDetailDtoHttpResult.getParkVo().getHomeImage());
+
                 banner.setImages(bannerImages != null ? bannerImages : null)
                         .setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
                         .setBannerAnimation(Transformer.Tablet)

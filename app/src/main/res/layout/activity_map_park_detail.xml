@@ -32,12 +32,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:id="@+id/img"
+                        <!--<ImageView-->
+                            <!--android:id="@+id/img"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="240dp"-->
+                            <!--android:layout_gravity="center"-->
+                            <!--android:scaleType="centerCrop" />-->
+
+                        <com.youth.banner.Banner
+                            android:id="@+id/banner"
                             android:layout_width="match_parent"
                             android:layout_height="240dp"
-                            android:layout_gravity="center"
-                            android:scaleType="centerCrop" />
+                            app:delay_time="5000"
+                            app:image_scale_type="fit_xy" />
                     </RelativeLayout>
 
                     <RelativeLayout
