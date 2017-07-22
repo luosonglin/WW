@@ -31,8 +31,12 @@ public class FriendshipEvent extends Observable implements TIMFriendshipProxyLis
     public TIMUserConfig init(TIMUserConfig userConfig){
         TIMFriendshipSettings settings = new TIMFriendshipSettings();
         userConfig.setFriendshipSettings(settings);
+
+        //资料关系链扩展用户配置
         return new TIMUserConfigSnsExt(userConfig)
+                //开启资料关系链本地存储
                 .enableFriendshipStorage(true)
+                //设置关系链变更事件监听器
                 .setFriendshipProxyListener(this);
     }
 

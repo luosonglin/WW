@@ -99,6 +99,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         userConfig.setUserStatusListener(new TIMUserStatusListener() {
             @Override
             public void onForceOffline() {
+                //被其他终端踢下线
                 Log.d(TAG, "receive force offline message");
                 Intent intent = new Intent(SplashActivity.this, DialogActivity.class);
                 startActivity(intent);
@@ -111,26 +112,29 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 //                            logout();
+                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     }
                 });
             }
-        }).setConnectionListener(new TIMConnListener() {
-            @Override
-            public void onConnected() {
-                Log.i(TAG, "onConnected");
-            }
+        })
+                //设置连接状态事件监听器
+                .setConnectionListener(new TIMConnListener() {
+                    @Override
+                    public void onConnected() {
+                        Log.i(TAG, "onConnected");
+                    }
 
-            @Override
-            public void onDisconnected(int code, String desc) {
-                Log.i(TAG, "onDisconnected");
-            }
+                    @Override
+                    public void onDisconnected(int code, String desc) {
+                        Log.i(TAG, "onDisconnected");
+                    }
 
-            @Override
-            public void onWifiNeedAuth(String name) {
-                Log.i(TAG, "onWifiNeedAuth");
-            }
-        });
-        //设置刷新监听
+                    @Override
+                    public void onWifiNeedAuth(String name) {
+                        Log.i(TAG, "onWifiNeedAuth");
+                    }
+                });
+        //设置会话刷刷新监听
         RefreshEvent.getInstance().init(userConfig);
         userConfig = FriendshipEvent.getInstance().init(userConfig);
 //        userConfig = GroupEvent.getInstance().init(userConfig);
@@ -184,7 +188,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
 
     @Override
     public boolean isUserLogin() {
-        return UserInfo.getInstance().getId()!= null;
+        return UserInfo.getInstance().getId() != null;
     }
 
 //    @Override

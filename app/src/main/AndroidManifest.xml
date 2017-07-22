@@ -195,6 +195,7 @@
             android:name=".UI.ImView.SystemMessageActivity"
             android:label="" />
         <activity android:name=".UI.ImView.ImageViewActivity" />
+        <activity android:name=".UI.ImView.ImagePreviewActivity"></activity>
         <activity
             android:name=".UI.ImView.ChatActivity"
             android:launchMode="singleTask"

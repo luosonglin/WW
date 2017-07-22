@@ -546,10 +546,9 @@ public class ChatActivity extends FragmentActivity implements ChatView {
 
     private void showImagePreview(String path){
         if (path == null) return;
-//        Intent intent = new Intent(this, ImagePreviewActivity.class);
-//        intent.putExtra("path", path);
-//        startActivityForResult(intent, IMAGE_PREVIEW);
-        ToastUtils.show(ChatActivity.this, "跳转ImagePreviewActivity");
+        Intent intent = new Intent(this, ImagePreviewActivity.class);
+        intent.putExtra("path", path);
+        startActivityForResult(intent, IMAGE_PREVIEW);
     }
 
     private void sendFile(String path){

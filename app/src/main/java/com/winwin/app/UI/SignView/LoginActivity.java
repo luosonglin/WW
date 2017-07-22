@@ -459,8 +459,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         @Override
                         public void onSuccess() {
                             Log.d(TAG, "Login succeed!");
-                            finish();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            finish();
                         }
                     });
                 }
