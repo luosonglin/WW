@@ -35,6 +35,7 @@ import com.winwin.app.MVP.IM.model.ImageMessage;
 import com.winwin.app.MVP.IM.model.Message;
 import com.winwin.app.MVP.IM.model.MessageFactory;
 import com.winwin.app.MVP.IM.model.TextMessage;
+import com.winwin.app.MVP.IM.model.UGCMessage;
 import com.winwin.app.MVP.IM.model.VideoMessage;
 import com.winwin.app.MVP.IM.model.VoiceMessage;
 import com.winwin.app.R;
@@ -42,7 +43,6 @@ import com.winwin.app.UI.Adapter.ChatAdapter;
 import com.winwin.app.Util.FileUtil;
 import com.winwin.app.Util.MediaUtil;
 import com.winwin.app.Util.RecorderUtil;
-import com.winwin.app.Util.ToastUtils;
 import com.winwin.app.im.event.RefreshEvent;
 import com.winwin.app.im.presenter.ChatPresenter;
 import com.winwin.app.im.ui.ChatInput;
@@ -435,9 +435,9 @@ public class ChatActivity extends FragmentActivity implements ChatView {
 
     @Override
     public void videoAction() {
-//        Intent intent = new Intent(this, TCVideoRecordActivity.class);
-//        startActivityForResult(intent, VIDEO_RECORD);
-        ToastUtils.show(ChatActivity.this, "跳转TCVideoRecordActivity");
+        Intent intent = new Intent(this, TCVideoRecordActivity.class);
+        startActivityForResult(intent, VIDEO_RECORD);
+//        ToastUtils.show(ChatActivity.this, "跳转TCVideoRecordActivity");
     }
 
     @Override
@@ -532,12 +532,12 @@ public class ChatActivity extends FragmentActivity implements ChatView {
         }
         else if (requestCode == VIDEO_RECORD) {
             if (resultCode == RESULT_OK) {
-//                String videoPath = data.getStringExtra("videoPath");
-//                String coverPath = data.getStringExtra("coverPath");
-//                long duration = data.getLongExtra("duration", 0);
-//                Message message = new UGCMessage(videoPath, coverPath, duration);
-//                presenter.sendMessage(message.getMessage());
-                ToastUtils.show(ChatActivity.this, "UGCMessage消息");
+                String videoPath = data.getStringExtra("videoPath");
+                String coverPath = data.getStringExtra("coverPath");
+                long duration = data.getLongExtra("duration", 0);
+                Message message = new UGCMessage(videoPath, coverPath, duration);
+                presenter.sendMessage(message.getMessage());
+//                ToastUtils.show(ChatActivity.this, "UGCMessage消息");
             }
         }
 

@@ -196,6 +196,12 @@
             android:label="" />
         <activity android:name=".UI.ImView.ImageViewActivity" />
         <activity android:name=".UI.ImView.ImagePreviewActivity"></activity>
+        <activity android:name=".UI.ImView.TCVideoRecordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UI.ImView.TCVideoPreviewActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UI.ImView.VideoActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".UI.ImView.ChatActivity"
             android:launchMode="singleTask"
