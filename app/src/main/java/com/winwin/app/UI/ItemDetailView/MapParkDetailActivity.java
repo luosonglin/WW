@@ -461,7 +461,7 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
                         if (!httpResult.getStatus().getCode().equals("0")) return;
                         Intent intent = new Intent(MapParkDetailActivity.this, ChatActivity.class);
                         intent.putExtra("identify", "19");
-                        intent.putExtra("userName", "winwin小秘");
+                        intent.putExtra("userName", "winwin助手");
                         intent.putExtra("type", TIMConversationType.C2C);
                         startActivity(intent);
                     }
