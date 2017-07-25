@@ -25,13 +25,15 @@ import android.widget.TextView;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.core.PoiItem;
 import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
-import com.winwin.app.UI.Adapter.HotArea2Adapter;
+import com.winwin.app.UI.Adapter.HotAreaAdapter;
 import com.winwin.app.UI.Adapter.MapAdapter;
 import com.winwin.app.UI.Adapter.MetaDataAdapter;
 import com.winwin.app.UI.Entity.HotAreaDto;
@@ -39,6 +41,7 @@ import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.Entity.ParkDto;
 import com.winwin.app.UI.Entity.SelectAppParksVo;
 import com.winwin.app.UI.SearchView.SearchParkActivity;
+import com.winwin.app.Widget.overlay.PoiOverlay;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 
 import java.util.ArrayList;
@@ -96,7 +99,7 @@ public class RoomFragment extends Fragment {
     private AMap aMap;
     private MapView mapView;
     private LatLonPoint centerpoint = new LatLonPoint(31.109626, 121.290789);
-    private MapActivity.ViewPoiOverlay poiOverlay;
+    private ViewPoiOverlay poiOverlay;
     private EditText searchEt;
     private String keyword;
     private RelativeLayout mMapRelativeLayout;
@@ -322,7 +325,7 @@ public class RoomFragment extends Fragment {
             if (type == 1) {
                 mCoreRecyclerView.setVisibility(View.VISIBLE);
                 //设置适配器
-                mCoreQuickAdapter = new HotArea2Adapter(R.layout.item_meta_data, null);
+                mCoreQuickAdapter = new HotAreaAdapter(R.layout.item_meta_data, null);
                 //设置加载动画
                 mCoreQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
                 //设置是否自动加载以及加载个数
@@ -489,5 +492,23 @@ public class RoomFragment extends Fragment {
             return null;
         }
         return new LatLng(latLonPoint.getLatitude(), latLonPoint.getLongitude());
+    }
+
+
+    public class ViewPoiOverlay extends PoiOverlay {
+
+        public ViewPoiOverlay(AMap aMap, List<PoiItem> list) {
+            super(aMap, list);
+        }
+
+        @Override
+        protected BitmapDescriptor getBitmapDescriptor(int index) {
+            View view = null;
+            view = View.inflate(getActivity(), R.layout.custom_view, null);
+            TextView textView = ((TextView) view.findViewById(R.id.title));
+            textView.setText(getTitle(index));
+
+            return  BitmapDescriptorFactory.fromView(view);
+        }
     }
 }

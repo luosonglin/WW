@@ -19,7 +19,7 @@ import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.MVP.Presenter.RequireListPresent;
 import com.winwin.app.MVP.View.RequireListView;
 import com.winwin.app.R;
-import com.winwin.app.UI.Adapter.HotArea2Adapter;
+import com.winwin.app.UI.Adapter.HotAreaAdapter;
 import com.winwin.app.UI.Adapter.MetaDataAdapter;
 import com.winwin.app.UI.Adapter.RequireAdapter;
 import com.winwin.app.UI.Entity.HotAreaDto;
@@ -299,7 +299,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
             if (type == 3) {
                 mCoreRecyclerView.setVisibility(View.VISIBLE);
                 //设置适配器
-                mCoreQuickAdapter = new HotArea2Adapter(R.layout.item_meta_data, null);
+                mCoreQuickAdapter = new HotAreaAdapter(R.layout.item_meta_data, null);
                 //设置加载动画
                 mCoreQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
                 //设置是否自动加载以及加载个数

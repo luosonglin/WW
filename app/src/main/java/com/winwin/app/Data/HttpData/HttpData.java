@@ -20,14 +20,12 @@ import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.Entity.IndexStaticDateDto;
 import com.winwin.app.UI.Entity.LoginUserDto;
-import com.winwin.app.UI.Entity.MapDto;
 import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.Entity.MyInfoDto;
 import com.winwin.app.UI.Entity.ParkAppVo;
-import com.winwin.app.UI.Entity.RequireDto;
-import com.winwin.app.UI.Entity.PageDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
 import com.winwin.app.UI.Entity.ParkDto;
+import com.winwin.app.UI.Entity.RequireDto;
 import com.winwin.app.UI.Entity.SelectAppParksVo;
 import com.winwin.app.UI.Entity.SelectRequirementVo;
 import com.winwin.app.UI.Entity.UserLoginVo;
@@ -173,8 +171,8 @@ public class HttpData extends RetrofitUtils {
         setSubscribe(observable, observer);
     }
 
-    public void HttpDataSearchParksByName(Observer<List<MapDto>> observer, String parkName) {
-        Observable observable = service.searchParkByName(parkName).map(new HttpResultFunc<List<MapDto>>());
+    public void HttpDataSearchParksByName(Observer<List<ParkDto>> observer, String parkName) {
+        Observable observable = service.searchParkByName(parkName).map(new HttpResultFunc<List<ParkDto>>());
         setSubscribe(observable, observer);
     }
 
@@ -201,11 +199,6 @@ public class HttpData extends RetrofitUtils {
 
     public void HttpDataLogin(Observer<LoginUserDto> observer, UserLoginVo userLoginVo) {
         Observable observable = service.login(userLoginVo).map(new HttpResultFunc<LoginUserDto>());
-        setSubscribe(observable, observer);
-    }
-
-    public void HttpDataGetParkByConditions(Observer<PageDto<ParkDto>> observer, Map<String, Object> map) {
-        Observable observable = service.getParkByConditions(map).map(new HttpResultFunc<PageDto<ParkDto>>());
         setSubscribe(observable, observer);
     }
 

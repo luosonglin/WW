@@ -1,26 +1,25 @@
 package com.winwin.app.MVP.Presenter;
 
 import com.winwin.app.MVP.Listener.OnLoadDataListListener;
-import com.winwin.app.MVP.Model.ParkListModel;
+import com.winwin.app.MVP.Model.ParkNameListModel;
 import com.winwin.app.MVP.View.ParkListView;
 import com.winwin.app.UI.Entity.ParkDto;
 
 import java.util.List;
-import java.util.Map;
 
-public class ParkListPresent implements OnLoadDataListListener<List<ParkDto>> {
+public class ParkNameListPresent implements OnLoadDataListListener<List<ParkDto>> {
     private ParkListView mView;
-    private ParkListModel mModel;
+    private ParkNameListModel mModel;
     private boolean isjz;
-    public ParkListPresent(ParkListView mView) {
+    public ParkNameListPresent(ParkListView mView) {
         this.mView = mView;
-        this.mModel=new ParkListModel();
+        this.mModel=new ParkNameListModel();
         mView.showProgress();
     }
 
-    public void LoadData(boolean isjz, Map<String, Object> map){
+    public void LoadData(boolean isjz, String parkName){
         this.isjz=isjz;
-        mModel.LoadData(this, map);
+        mModel.LoadData(this, parkName);
     }
 
     @Override
@@ -47,3 +46,4 @@ public class ParkListPresent implements OnLoadDataListListener<List<ParkDto>> {
         mView.showLoadFailMsg();
     }
 }
+

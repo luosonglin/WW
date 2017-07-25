@@ -4,29 +4,28 @@ import android.util.Log;
 
 import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.MVP.Listener.OnLoadDataListListener;
-import com.winwin.app.UI.Entity.PageDto;
 import com.winwin.app.UI.Entity.ParkDto;
 
-import java.util.Map;
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
-public class ParkListModel {
-    private static final String TAG = ParkListModel.class.getSimpleName();
+public class ParkNameListModel {
+    private static final String TAG = ParkNameListModel.class.getSimpleName();
 
-    public void LoadData(final OnLoadDataListListener listener, Map<String, Object> map) {
+    public void LoadData(final OnLoadDataListListener listener, String parkName) {
 
-        HttpData.getInstance().HttpDataGetParkByConditions(new Observer<PageDto<ParkDto>>() {
+        HttpData.getInstance().HttpDataSearchParksByName(new Observer<List<ParkDto>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
             }
 
             @Override
-            public void onNext(@NonNull PageDto<ParkDto> parkDtoPageDto) {
-                listener.onSuccess(parkDtoPageDto.getList());
+            public void onNext(@NonNull List<ParkDto> parkDtoPageDto) {
+                listener.onSuccess(parkDtoPageDto);
                 Log.e(TAG, "onNext");
             }
 
@@ -44,6 +43,7 @@ public class ParkListModel {
             public void onComplete() {
                 Log.e(TAG, "onCompleted");
             }
-        }, map);
+        }, parkName);
     }
 }
+

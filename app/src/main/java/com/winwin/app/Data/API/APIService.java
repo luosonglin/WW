@@ -15,10 +15,8 @@ import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.Entity.IndexStaticDateDto;
 import com.winwin.app.UI.Entity.LoginUserDto;
-import com.winwin.app.UI.Entity.MapDto;
 import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.Entity.MyInfoDto;
-import com.winwin.app.UI.Entity.PageDto;
 import com.winwin.app.UI.Entity.ParkAppVo;
 import com.winwin.app.UI.Entity.ParkDetailDto;
 import com.winwin.app.UI.Entity.ParkDto;
@@ -103,14 +101,27 @@ public interface APIService {
     @GET("v1/parkapp/search/hotAreas")
     Observable<HttpResult<List<AreaDto>>> getHotArea();
 
-
     //获取上海所有区域列表
     @GET("v1/parkapp/search/shanghai/Areas")
     Observable<HttpResult<List<HotAreaDto>>> getShanghaiHotAreas();
 
-    //根据名称搜索我要找的项目或园区
+    //根据名称搜索我要找的项目或园区，只能搜楼盘
     @GET("api/v1/parkapp/noLogin/searchParksByName")
-    Observable<HttpResult<List<MapDto>>> searchParkByName(@Query("parkName") String parkName);
+    Observable<HttpResult<List<ParkDto>>> searchParkByName(@Query("parkName") String parkName);
+
+//    /**
+//     * 园区列表，老API，不用了
+//     */
+//    //综合条件筛选园区信息，只能搜多条件
+//    @GET("api/v1/park/getParkByConditions")
+//    Observable<HttpResult<PageDto<ParkDto>>> getParkByConditions(@QueryMap Map<String, Object> map);
+
+    /**
+     * 空间页
+     */
+    //POST /api/v1/parkapp/noLogin/getParksByConditions （**App**）多条件搜索项目或园区列表
+    @POST("api/v1/parkapp/noLogin/getParksByConditions")
+    Observable<HttpResult<List<ParkDto>>> getParksByConditions(@Body SelectAppParksVo selectAppParksVo);
 
     /**
      * 园区详情
@@ -126,7 +137,6 @@ public interface APIService {
     //此处分为取消收藏园区还是取消收藏需求，取消收藏数据类型（1：取消收藏需求，2：取消收藏项目）
     @POST("api/v1/app/stores/del/{dataId}/{dataType}")
     Observable<HttpResult> cancelCollectPark(@Path("dataId") long dataId, @Path("dataType") Integer dataType);
-
 
     /**
      * 个人页
@@ -185,7 +195,6 @@ public interface APIService {
     @POST("/api/v1/requirements/publishPark")
     Observable<HttpResult> sendPark(@Body ParkAppVo parkAppVo);
 
-
     /**
      * 挣钱快车
      */
@@ -201,19 +210,6 @@ public interface APIService {
     @GET("api/v1/makeMoney/{id}")
     Observable<HttpResult<RequireDto>> getRequireDetail(@Path("id") long id);
 
-    /**
-     * 园区列表
-     */
-    //综合条件筛选园区信息
-    @GET("api/v1/park/getParkByConditions")
-    Observable<HttpResult<PageDto<ParkDto>>> getParkByConditions(@QueryMap Map<String, Object> map);
-
-    /**
-     * 空间页
-     */
-    //POST /api/v1/parkapp/noLogin/getParksByConditions （**App**）多条件搜索项目或园区列表
-    @POST("api/v1/parkapp/noLogin/getParksByConditions")
-    Observable<HttpResult<List<ParkDto>>> getParksByConditions(@Body SelectAppParksVo selectAppParksVo);
 
     /**
      * 加好友

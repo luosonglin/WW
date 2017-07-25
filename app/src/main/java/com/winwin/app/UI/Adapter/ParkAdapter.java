@@ -31,7 +31,7 @@ public class ParkAdapter extends BaseQuickAdapter<ParkDto> {
 //                .placeholder(R.mipmap.ic_launcher)
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
         Glide.with(mContext)
-                .load(item.getCoverImgs().get(0).getImagePath())
+                .load(item.getHomeImage())
                 .apply(options)
                 .into((ImageView) helper.getView(R.id.image));
 

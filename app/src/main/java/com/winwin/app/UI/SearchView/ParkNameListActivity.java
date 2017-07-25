@@ -11,12 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.winwin.app.Constant.Constant;
-import com.winwin.app.MVP.Presenter.ParksListPresent;
+import com.winwin.app.MVP.Presenter.ParkNameListPresent;
 import com.winwin.app.MVP.View.ParkListView;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.ParkAdapter;
 import com.winwin.app.UI.Entity.ParkDto;
-import com.winwin.app.UI.Entity.SelectAppParksVo;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.container.DefaultHeader;
 import com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity;
@@ -25,9 +24,9 @@ import com.xiaochao.lcrapiddeveloplibrary.widget.SpringView;
 import java.util.List;
 
 /**
- * 名称搜索页
+ * 搜索名称进来的列表页
  */
-public class ParkListActivity extends AppCompatActivity implements BaseQuickAdapter.RequestLoadMoreListener, SpringView.OnFreshListener, ParkListView {
+public class ParkNameListActivity extends AppCompatActivity implements BaseQuickAdapter.RequestLoadMoreListener, SpringView.OnFreshListener, ParkListView {
 
     private RecyclerView mRecyclerView;
     private ProgressActivity progress;
@@ -35,8 +34,8 @@ public class ParkListActivity extends AppCompatActivity implements BaseQuickAdap
     private BaseQuickAdapter mQuickAdapter;
     private int PageIndex = 1;
     private SpringView springView;
-    private ParksListPresent present;
-    SelectAppParksVo selectAppParksVo = new SelectAppParksVo();
+    private ParkNameListPresent present;
+    private String parkName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,6 @@ public class ParkListActivity extends AppCompatActivity implements BaseQuickAdap
     }
 
     private void initView() {
-
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
         springView = (SpringView) findViewById(R.id.springview);
         //设置下拉刷新监听
@@ -69,20 +67,15 @@ public class ParkListActivity extends AppCompatActivity implements BaseQuickAdap
         //设置下拉刷新样式
         springView.setType(SpringView.Type.FOLLOW);
         springView.setHeader(new DefaultHeader(this));
-//        springView.setFooter(new DefaultFooter(this));
-//        springView.setHeader(new RotationHeader(this));
-//        springView.setFooter(new RotationFooter(this)); //mRecyclerView内部集成的自动加载  上啦加载用不上   在其他View使用
-
         progress = (ProgressActivity) findViewById(R.id.progress);
         //设置RecyclerView的显示模式  当前List模式
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(ParkListActivity.this, DividerItemDecoration.VERTICAL));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(ParkNameListActivity.this, DividerItemDecoration.VERTICAL));
         //如果Item高度固定  增加该属性能够提高效率
         mRecyclerView.setHasFixedSize(true);
         //设置页面为加载中..
         progress.showLoading();
         //设置适配器
-//        mQuickAdapter = new ListViewAdapter(R.layout.list_view_item_layout,null);
         mQuickAdapter = new ParkAdapter(R.layout.item_park, null);
         //设置加载动画
         mQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
@@ -91,9 +84,9 @@ public class ParkListActivity extends AppCompatActivity implements BaseQuickAdap
         //将适配器添加到RecyclerView
         mRecyclerView.setAdapter(mQuickAdapter);
         //请求网络数据
-        present = new ParksListPresent(this);
-        selectAppParksVo.setAreaId(getIntent().getExtras().getInt("areaId"));
-        present.LoadData(false, selectAppParksVo);
+        present = new ParkNameListPresent(this);
+        parkName = getIntent().getExtras().getString("parkName");
+        present.LoadData(false, parkName);
     }
 
     private void initListener() {
@@ -103,13 +96,13 @@ public class ParkListActivity extends AppCompatActivity implements BaseQuickAdap
         mQuickAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(ParkListActivity.this, "点击了" + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ParkNameListActivity.this, "点击了" + position, Toast.LENGTH_SHORT).show();
             }
         });
         mQuickAdapter.setOnRecyclerViewItemLongClickListener(new BaseQuickAdapter.OnRecyclerViewItemLongClickListener() {
             @Override
             public boolean onItemLongClick(View view, int position) {
-                Toast.makeText(ParkListActivity.this, "长按了" + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ParkNameListActivity.this, "长按了" + position, Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -120,7 +113,7 @@ public class ParkListActivity extends AppCompatActivity implements BaseQuickAdap
     public void onLoadMoreRequested() {
         PageIndex++;
 //        present.LoadData("1",PageIndex,true);
-        present.LoadData(false, selectAppParksVo);
+        present.LoadData(false, parkName);
     }
 
     //下拉刷新
@@ -128,7 +121,7 @@ public class ParkListActivity extends AppCompatActivity implements BaseQuickAdap
     public void onRefresh() {
         PageIndex = 1;
 //        present.LoadData("1",PageIndex,false);
-        present.LoadData(false, selectAppParksVo);
+        present.LoadData(false, parkName);
     }
 
     //上啦加载  mRecyclerView内部集成的自动加载  上啦加载用不上   在其他View使用
@@ -173,7 +166,7 @@ public class ParkListActivity extends AppCompatActivity implements BaseQuickAdap
             public void onClick(View v) {
                 PageIndex = 1;
 //                present.LoadData("1",PageIndex,false);
-                present.LoadData(false, selectAppParksVo);
+                present.LoadData(false, parkName);
             }
         });
     }

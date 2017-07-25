@@ -24,7 +24,6 @@ public class AreaAdapter extends BaseQuickAdapter<AreaDto> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, ParkListActivity.class);
-                intent.putExtra("type", 1);
                 intent.putExtra("areaId", item.getAreaId());
                 mContext.startActivity(intent);
             }

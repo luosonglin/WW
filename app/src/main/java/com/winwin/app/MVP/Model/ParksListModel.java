@@ -14,7 +14,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 public class ParksListModel {
-    private static final String TAG = ParkListModel.class.getSimpleName();
+    private static final String TAG = ParksListModel.class.getSimpleName();
 
     public void LoadData(final OnLoadDataListListener listener, SelectAppParksVo selectAppParksVo) {
 

@@ -17,7 +17,7 @@ import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.AreaAdapter;
 import com.winwin.app.UI.Entity.AreaDto;
 import com.winwin.app.UI.MineView.MyInfoActivity;
-import com.winwin.app.Util.ToastUtils;
+import com.winwin.app.UI.SendView.SendRequireActivity;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 
 import java.util.List;
@@ -115,16 +115,15 @@ public class SearchParkActivity extends AppCompatActivity implements AreaListVie
                 finish();
                 break;
             case R.id.search_btn:
-                Intent intent = new Intent(SearchParkActivity.this, ParkListActivity.class);
-                intent.putExtra("type", 0);
+                Intent intent;
                 if (!searchEdit.getText().toString().trim().equals("")) {
-                    intent.putExtra("type", 2);
-                    intent.putExtra("searchValue", searchEdit.getText().toString().trim());
+                    intent = new Intent(SearchParkActivity.this, ParkNameListActivity.class);
+                    intent.putExtra("parkName", searchEdit.getText().toString().trim());
+                    startActivity(intent);
                 }
-                startActivity(intent);
                 break;
             case R.id.card_view:
-                ToastUtils.show(SearchParkActivity.this, "创建");
+                startActivity(new Intent(SearchParkActivity.this, SendRequireActivity.class));
                 break;
         }
     }
