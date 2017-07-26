@@ -6,6 +6,8 @@ import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.MVP.Listener.OnLoadDataListListener;
 import com.winwin.app.UI.Entity.CreditDto;
 
+import java.util.Arrays;
+
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -27,7 +29,7 @@ public class CreditRequirementListModel {
                 Log.e(TAG, "onError: "+e.getMessage()
                         +"\n"+e.getCause()
                         +"\n"+e.getLocalizedMessage()
-                        +"\n"+e.getStackTrace());
+                        +"\n"+ Arrays.toString(e.getStackTrace()));
             }
 
             @Override

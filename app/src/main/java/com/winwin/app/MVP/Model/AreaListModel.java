@@ -6,6 +6,7 @@ import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.MVP.Listener.OnLoadDataListListener;
 import com.winwin.app.UI.Entity.AreaDto;
 
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -29,7 +30,7 @@ public class AreaListModel {
                 Log.e(TAG, "onError: "+e.getMessage()
                         +"\n"+e.getCause()
                         +"\n"+e.getLocalizedMessage()
-                        +"\n"+e.getStackTrace());
+                        +"\n"+ Arrays.toString(e.getStackTrace()));
             }
 
             @Override

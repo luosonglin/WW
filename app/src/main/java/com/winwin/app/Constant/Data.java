@@ -7,9 +7,6 @@ import com.winwin.app.UI.Entity.MainDateDto;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Administrator on 2016/6/30.
- */
 public class Data {
     public static String[] MAIN_TITLE = {"程序异常奔溃统一管理", "状态显示页面", "常见ListView显示", "常见分组ListView显示", "常见GridView显示", "多布局Listview显示", "Tab+Fragment快速实现", "LIST视频播放"};
     public static String[] MAIN_INFO = {"恢复界面,重启应用,重启并清空缓存\n越大的程序往往有一些不为人知的BUG\n统一管理奔溃BUG提高用户体验", "显示加载中,无数据,加载错误,以及数据页\n让耗时的过程有个过度,增高用户体验\n本页为方便演示,具体使用看下面例子", "数据加载页,无数据页,网络错误页\n包含下拉刷新,自动加载,图片显示及缓存\n本页菜单可切换下拉刷新",
@@ -28,7 +25,7 @@ public class Data {
     public static String CHAT_DATA_URL = "http://d.hiphotos.baidu.com/zhidao/wh%3D600%2C800/sign=27d514408cb1cb133e3c3415ed647a76/b7003af33a87e95026578cc311385343faf2b4d8.jpg";
 
     public static List<MainDateDto> getData() {
-        List<MainDateDto> data = new ArrayList<MainDateDto>();
+        List<MainDateDto> data = new ArrayList<>();
         for (int i = 0; i < MAIN_TITLE.length; i++) {
             data.add(new MainDateDto(MAIN_TITLE[i], MAIN_INFO[i], MAIN_IMAGE_URL[i]));
         }

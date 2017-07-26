@@ -1,8 +1,5 @@
 package com.winwin.app.Widget.popmenu;
 
-/**
- * Created by HanHailong on 16/2/18.
- */
 public interface PopMenuItemListener {
     /**
      * Item点击事件

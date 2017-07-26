@@ -18,7 +18,7 @@ import java.util.List;
 public class PoiOverlay {
 	private List<PoiItem> mPois;
 	private AMap mAMap;
-	private ArrayList<Marker> mPoiMarks = new ArrayList<Marker>();
+	private ArrayList<Marker> mPoiMarks = new ArrayList<>();
 	/**
 	 * 通过此构造函数创建Poi图层。
 	 * @param amap 地图对象。

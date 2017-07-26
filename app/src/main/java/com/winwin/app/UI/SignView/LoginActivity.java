@@ -130,8 +130,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         /**
-         * Constant
-         *
+         * test data
          */
         mPhoneView.setText("13967150832");
         mPasswordView.setText("shumang");

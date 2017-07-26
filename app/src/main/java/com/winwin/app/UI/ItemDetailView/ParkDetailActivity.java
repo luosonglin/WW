@@ -61,6 +61,7 @@ import com.youth.banner.Transformer;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -183,7 +184,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                 Log.e(TAG, "onError: " + e.getMessage()
                         + "\n" + e.getCause()
                         + "\n" + e.getLocalizedMessage()
-                        + "\n" + e.getStackTrace());
+                        + "\n" + Arrays.toString(e.getStackTrace()));
             }
 
             @Override
@@ -281,7 +282,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                         Log.e(TAG, "onError: " + e.getMessage()
                                 + "\n" + e.getCause()
                                 + "\n" + e.getLocalizedMessage()
-                                + "\n" + e.getStackTrace());
+                                + "\n" + Arrays.toString(e.getStackTrace()));
                     }
 
                     @Override
@@ -401,7 +402,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                             Log.e(TAG, "onError: " + e.getMessage()
                                     + "\n" + e.getCause()
                                     + "\n" + e.getLocalizedMessage()
-                                    + "\n" + e.getStackTrace());
+                                    + "\n" + Arrays.toString(e.getStackTrace()));
                         }
 
                         @Override
@@ -427,7 +428,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                             Log.e(TAG, "onError: " + e.getMessage()
                                     + "\n" + e.getCause()
                                     + "\n" + e.getLocalizedMessage()
-                                    + "\n" + e.getStackTrace());
+                                    + "\n" + Arrays.toString(e.getStackTrace()));
                         }
 
                         @Override

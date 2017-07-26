@@ -3,10 +3,6 @@ package com.winwin.app.Util;
 import android.content.Context;
 import android.util.TypedValue;
 
-/**
- * Created by LuckyJayce on 2016/11/29.
- */
-
 public class DisplayUtil {
 
     public static int dipToPix(Context context, float dip) {

@@ -7,6 +7,7 @@ import com.winwin.app.MVP.Listener.OnLoadDataListListener;
 import com.winwin.app.UI.Entity.ParkDto;
 import com.winwin.app.UI.Entity.SelectAppParksVo;
 
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -37,7 +38,7 @@ public class ParksListModel {
                 Log.e(TAG, "onError: " + e.getMessage()
                         + "\n" + e.getCause()
                         + "\n" + e.getLocalizedMessage()
-                        + "\n" + e.getStackTrace());
+                        + "\n" + Arrays.toString(e.getStackTrace()));
             }
 
             @Override

@@ -2,9 +2,6 @@ package com.winwin.app.UI.Entity;
 
 import com.xiaochao.lcrapiddeveloplibrary.entity.MultiItemEntity;
 
-/**
- * Created by Administrator on 2016/7/19.
- */
 public class ChatDto extends MultiItemEntity {
     public static final int TEXT = 1;
     public static final int IMG = 2;

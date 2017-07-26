@@ -47,6 +47,7 @@ import com.winwin.app.Widget.gridimage.GridImageAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -612,7 +613,7 @@ public class SignUpActivity extends AppCompatActivity {
                 Log.e(TAG, "uploadFile onError: " + e.getMessage()
                         + "\n" + e.getCause()
                         + "\n" + e.getLocalizedMessage()
-                        + "\n" + e.getStackTrace());
+                        + "\n" + Arrays.toString(e.getStackTrace()));
             }
 
             @Override

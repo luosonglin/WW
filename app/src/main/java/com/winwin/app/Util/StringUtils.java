@@ -22,8 +22,8 @@ public class StringUtils {
         if(h == 0 && value.length() > 0) {
             char[] val = value.toCharArray();
 
-            for(int i = 0; i < val.length; ++i) {
-                h = 31 * h + val[i];
+            for (char aVal : val) {
+                h = 31 * h + aVal;
             }
         }
 

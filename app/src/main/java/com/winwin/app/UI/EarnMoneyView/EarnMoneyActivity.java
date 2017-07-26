@@ -31,6 +31,7 @@ import com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity;
 import com.xiaochao.lcrapiddeveloplibrary.widget.SpringView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
@@ -300,7 +301,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
                         Log.e(TAG, "onError: " + e.getMessage()
                                 + "\n" + e.getCause()
                                 + "\n" + e.getLocalizedMessage()
-                                + "\n" + e.getStackTrace());
+                                + "\n" + Arrays.toString(e.getStackTrace()));
                     }
 
                     @Override
@@ -373,7 +374,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
                         Log.e(TAG, "onError: " + e.getMessage()
                                 + "\n" + e.getCause()
                                 + "\n" + e.getLocalizedMessage()
-                                + "\n" + e.getStackTrace());
+                                + "\n" + Arrays.toString(e.getStackTrace()));
                     }
 
                     @Override

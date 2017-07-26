@@ -13,6 +13,7 @@ import com.winwin.app.Util.ToastUtils;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.BaseViewHolder;
 
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -59,7 +60,7 @@ public class MyRecommendAdapter extends BaseQuickAdapter<CustomerDto> {
                                 Log.e(TAG, "onError: "+e.getMessage()
                                         +"\n"+e.getCause()
                                         +"\n"+e.getLocalizedMessage()
-                                        +"\n"+e.getStackTrace());
+                                        +"\n"+ Arrays.toString(e.getStackTrace()));
                             }
 
                             @Override
@@ -92,7 +93,7 @@ public class MyRecommendAdapter extends BaseQuickAdapter<CustomerDto> {
                                 Log.e(TAG, "onError: "+e.getMessage()
                                         +"\n"+e.getCause()
                                         +"\n"+e.getLocalizedMessage()
-                                        +"\n"+e.getStackTrace());
+                                        +"\n"+ Arrays.toString(e.getStackTrace()));
                             }
 
                             @Override

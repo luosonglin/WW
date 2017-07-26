@@ -1,8 +1,5 @@
 package com.winwin.app.UI.Entity;
 
-/**
- * Created by liukun on 16/3/5.
- */
 public class HttpResult2<T> {
 
 

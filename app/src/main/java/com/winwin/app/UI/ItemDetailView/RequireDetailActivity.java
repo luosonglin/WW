@@ -29,6 +29,7 @@ import com.winwin.app.Util.DateUtils;
 import com.winwin.app.Util.GlideCircleTransform;
 import com.winwin.app.Util.ToastUtils;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -189,7 +190,7 @@ public class RequireDetailActivity extends AppCompatActivity {
                 Log.e(TAG, "onError: " + e.getMessage()
                         + "\n" + e.getCause()
                         + "\n" + e.getLocalizedMessage()
-                        + "\n" + e.getStackTrace());
+                        + "\n" + Arrays.toString(e.getStackTrace()));
             }
 
             @Override
@@ -221,7 +222,7 @@ public class RequireDetailActivity extends AppCompatActivity {
                             Log.e(TAG, "onError: " + e.getMessage()
                                     + "\n" + e.getCause()
                                     + "\n" + e.getLocalizedMessage()
-                                    + "\n" + e.getStackTrace());
+                                    + "\n" + Arrays.toString(e.getStackTrace()));
                         }
 
                         @Override
@@ -249,7 +250,7 @@ public class RequireDetailActivity extends AppCompatActivity {
                             Log.e(TAG, "onError: " + e.getMessage()
                                     + "\n" + e.getCause()
                                     + "\n" + e.getLocalizedMessage()
-                                    + "\n" + e.getStackTrace());
+                                    + "\n" + Arrays.toString(e.getStackTrace()));
                         }
 
                         @Override

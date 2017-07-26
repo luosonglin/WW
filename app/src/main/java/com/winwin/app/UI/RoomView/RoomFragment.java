@@ -45,6 +45,7 @@ import com.winwin.app.Widget.overlay.PoiOverlay;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -343,7 +344,7 @@ public class RoomFragment extends Fragment {
                         Log.e(TAG, "onError: " + e.getMessage()
                                 + "\n" + e.getCause()
                                 + "\n" + e.getLocalizedMessage()
-                                + "\n" + e.getStackTrace());
+                                + "\n" + Arrays.toString(e.getStackTrace()));
                     }
 
                     @Override
@@ -405,7 +406,7 @@ public class RoomFragment extends Fragment {
                         Log.e(TAG, "onError: " + e.getMessage()
                                 + "\n" + e.getCause()
                                 + "\n" + e.getLocalizedMessage()
-                                + "\n" + e.getStackTrace());
+                                + "\n" + Arrays.toString(e.getStackTrace()));
                     }
 
                     @Override
@@ -474,7 +475,7 @@ public class RoomFragment extends Fragment {
                 Log.e(TAG, "onError: " + e.getMessage()
                         + "\n" + e.getCause()
                         + "\n" + e.getLocalizedMessage()
-                        + "\n" + e.getStackTrace());
+                        + "\n" + Arrays.toString(e.getStackTrace()));
             }
 
             @Override

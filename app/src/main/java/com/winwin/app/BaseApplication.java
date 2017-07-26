@@ -26,9 +26,9 @@ public class BaseApplication extends Application{
     private static final String TAG = "BaseApplication";
     private static Context context;
     //记录当前栈里所有activity
-    private List<Activity> activities = new ArrayList<Activity>();
+    private List<Activity> activities = new ArrayList<>();
     //记录需要一次性关闭的页面
-    private List<Activity> activitys = new ArrayList<Activity>();
+    private List<Activity> activitys = new ArrayList<>();
 
     @Override
     public void onCreate() {

@@ -32,9 +32,6 @@ import com.winwin.app.R;
 
 import java.lang.ref.WeakReference;
 
-/**
- * Created by Administrator on 2016/8/3.
- */
 public class TCUtils {
 
     /**
@@ -392,8 +389,8 @@ public class TCUtils {
     public static int getChineseNum(String s) {
         int num = 0;
         char[] myChar = s.toCharArray();
-        for (int i = 0; i < myChar.length; i++) {
-            if ((char) (byte) myChar[i] != myChar[i]) {
+        for (char aMyChar : myChar) {
+            if ((char) (byte) aMyChar != aMyChar) {
                 num++;
             }
         }

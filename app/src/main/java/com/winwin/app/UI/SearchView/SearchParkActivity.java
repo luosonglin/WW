@@ -19,7 +19,6 @@ import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.AreaAdapter;
 import com.winwin.app.UI.Adapter.HistoryAdapter;
 import com.winwin.app.UI.Entity.AreaDto;
-import com.winwin.app.UI.ItemDetailView.MapParkDetailActivity;
 import com.winwin.app.UI.MineView.MyInfoActivity;
 import com.winwin.app.UI.SendView.SendRequireActivity;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;

@@ -1,8 +1,5 @@
 package com.winwin.app.UI.Entity;
 
-/**
- * Created by Administrator on 2016/6/30.
- */
 public class MainDateDto {
     private String title;
     private String info;

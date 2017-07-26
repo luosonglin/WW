@@ -22,6 +22,8 @@ import com.winwin.app.MainActivity;
 import com.winwin.app.R;
 import com.winwin.app.UI.Entity.MyInfoDto;
 
+import java.util.Arrays;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -123,7 +125,7 @@ public class MineFragment extends Fragment {
                 Log.e(TAG, "onError: "+e.getMessage()
                         +"\n"+e.getCause()
                         +"\n"+e.getLocalizedMessage()
-                        +"\n"+e.getStackTrace());
+                        +"\n"+ Arrays.toString(e.getStackTrace()));
             }
 
             @Override

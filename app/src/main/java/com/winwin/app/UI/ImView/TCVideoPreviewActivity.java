@@ -26,10 +26,6 @@ import com.winwin.app.R;
 import java.io.File;
 import java.util.Locale;
 
-/**
- * Created by jasonxiao on 2017/6/8.
- */
-
 public class TCVideoPreviewActivity extends Activity implements View.OnClickListener, ITXLivePlayListener {
     public static final String TAG = "TCVideoPreviewActivity";
 

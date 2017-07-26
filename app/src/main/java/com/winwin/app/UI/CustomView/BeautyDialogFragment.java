@@ -113,7 +113,7 @@ public class BeautyDialogFragment extends DialogFragment implements SeekBar.OnSe
         mBigEyeSeekbar.setOnSeekBarChangeListener(this);
         mBigEyeSeekbar.setProgress( mBeautyParams.mBigEyeProgress * mBigEyeSeekbar.getMax() / 9);
 
-        mFilterIDList = new ArrayList<Integer>();
+        mFilterIDList = new ArrayList<>();
         mFilterIDList.add(R.drawable.orginal);
         mFilterIDList.add(R.drawable.langman);
         mFilterIDList.add(R.drawable.qingxin);

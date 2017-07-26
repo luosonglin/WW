@@ -2,9 +2,6 @@ package com.winwin.app.UI.Entity;
 
 import java.io.Serializable;
 
-/**
- * Created by Administrator on 2016/5/5.
- */
 public class BookListDto implements Serializable {
 
     /**

@@ -9,7 +9,6 @@
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
-        android:id="@+id/live_search_bar_llyt"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 

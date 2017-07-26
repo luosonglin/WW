@@ -7,6 +7,7 @@ import com.winwin.app.MVP.Listener.OnLoadDataListListener;
 import com.winwin.app.UI.Entity.RequireDto;
 import com.winwin.app.UI.Entity.SelectRequirementVo;
 
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -37,7 +38,7 @@ public class RequireListModel {
                 Log.e(TAG, "onError: " + e.getMessage()
                         + "\n" + e.getCause()
                         + "\n" + e.getLocalizedMessage()
-                        + "\n" + e.getStackTrace());
+                        + "\n" + Arrays.toString(e.getStackTrace()));
             }
 
             @Override

@@ -271,7 +271,7 @@ public class SendRequireActivity extends AppCompatActivity {
                 Log.e(TAG, "uploadFile onError: " + e.getMessage()
                         + "\n" + e.getCause()
                         + "\n" + e.getLocalizedMessage()
-                        + "\n" + e.getStackTrace());
+                        + "\n" + Arrays.toString(e.getStackTrace()));
             }
 
             @Override
@@ -298,7 +298,7 @@ public class SendRequireActivity extends AppCompatActivity {
                     public void onNext(@NonNull List<HotAreaDto> hotAreaDtos) {
                         requireAreaNames.addAll(hotAreaDtos);
 
-                        List<String> h = new ArrayList<String>();
+                        List<String> h = new ArrayList<>();
                         for (HotAreaDto i : hotAreaDtos) {
                             h.add(i.getName());
                         }
@@ -312,7 +312,7 @@ public class SendRequireActivity extends AppCompatActivity {
                         Log.e(TAG, "onError: " + e.getMessage()
                                 + "\n" + e.getCause()
                                 + "\n" + e.getLocalizedMessage()
-                                + "\n" + e.getStackTrace());
+                                + "\n" + Arrays.toString(e.getStackTrace()));
                     }
 
                     @Override
@@ -333,7 +333,7 @@ public class SendRequireActivity extends AppCompatActivity {
                     public void onNext(@NonNull List<MetaDataDto> metaDataDtos) {
                         belongIndustryDisPlays.addAll(metaDataDtos);
 
-                        List<String> h = new ArrayList<String>();
+                        List<String> h = new ArrayList<>();
                         for (MetaDataDto i : metaDataDtos) {
                             h.add(i.getDataDisplay());
                         }
@@ -348,7 +348,7 @@ public class SendRequireActivity extends AppCompatActivity {
                         Log.e(TAG, "onError: " + e.getMessage()
                                 + "\n" + e.getCause()
                                 + "\n" + e.getLocalizedMessage()
-                                + "\n" + e.getStackTrace());
+                                + "\n" + Arrays.toString(e.getStackTrace()));
                     }
 
                     @Override
@@ -368,7 +368,7 @@ public class SendRequireActivity extends AppCompatActivity {
                     public void onNext(@NonNull List<MetaDataDto> metaDataDtos) {
                         requireAreaRangDisplays.addAll(metaDataDtos);
 
-                        List<String> h = new ArrayList<String>();
+                        List<String> h = new ArrayList<>();
                         for (MetaDataDto i : metaDataDtos) {
                             h.add(i.getDataDisplay());
                         }
@@ -383,7 +383,7 @@ public class SendRequireActivity extends AppCompatActivity {
                         Log.e(TAG, "onError: " + e.getMessage()
                                 + "\n" + e.getCause()
                                 + "\n" + e.getLocalizedMessage()
-                                + "\n" + e.getStackTrace());
+                                + "\n" + Arrays.toString(e.getStackTrace()));
                     }
 
                     @Override
@@ -434,7 +434,7 @@ public class SendRequireActivity extends AppCompatActivity {
                         Log.e(TAG, "onError: " + e.getMessage()
                                 + "\n" + e.getCause()
                                 + "\n" + e.getLocalizedMessage()
-                                + "\n" + e.getStackTrace());
+                                + "\n" + Arrays.toString(e.getStackTrace()));
                     }
 
                     @Override

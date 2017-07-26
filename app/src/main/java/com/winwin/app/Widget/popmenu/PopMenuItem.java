@@ -2,9 +2,6 @@ package com.winwin.app.Widget.popmenu;
 
 import android.graphics.drawable.Drawable;
 
-/**
- * Created by HanHailong on 16/2/17.
- */
 public class PopMenuItem {
 
     private String title;

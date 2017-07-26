@@ -1,8 +1,5 @@
 package com.winwin.app.UI.Entity;
 
-/**
- * Created by Administrator on 2016/5/3.
- */
 public class VideoListDto {
 
     /**

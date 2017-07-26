@@ -1,8 +1,5 @@
 package com.winwin.app.Constant;
 
-/**
- * Created by Administrator on 2016/7/1.
- */
 public class Constant {
 
     public static String  ERROR_TITLE="网络连接异常";
