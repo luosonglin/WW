@@ -87,7 +87,7 @@ public class RoomTab1Fragment extends Fragment implements BaseQuickAdapter.Reque
         mRecyclerView.setAdapter(mQuickAdapter);
         present = new ParksListPresent(this);
         //请求网络数据
-//        selectAppParksVo.setOfficeSuperType(1);
+        selectAppParksVo.setOfficeSuperType(1);
         present.LoadData(false, selectAppParksVo);
     }
 

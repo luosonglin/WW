@@ -228,7 +228,7 @@ public class RoomFragment extends Fragment {
         //将适配器添加到RecyclerView
         mMapRecyclerView.setAdapter(mMapQuickAdapter);
 
-        selectAppParksVo.setOfficeSuperType(type);
+//        selectAppParksVo.setOfficeSuperType(type);
         setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
 
         return view;

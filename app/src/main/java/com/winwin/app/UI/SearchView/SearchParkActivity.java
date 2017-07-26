@@ -3,7 +3,9 @@ package com.winwin.app.UI.SearchView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +17,14 @@ import com.winwin.app.MVP.Presenter.AreaListPresent;
 import com.winwin.app.MVP.View.AreaListView;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.AreaAdapter;
+import com.winwin.app.UI.Adapter.HistoryAdapter;
 import com.winwin.app.UI.Entity.AreaDto;
+import com.winwin.app.UI.ItemDetailView.MapParkDetailActivity;
 import com.winwin.app.UI.MineView.MyInfoActivity;
 import com.winwin.app.UI.SendView.SendRequireActivity;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -39,6 +44,9 @@ public class SearchParkActivity extends AppCompatActivity implements AreaListVie
     private BaseQuickAdapter mQuickAdapter;
     private int PageIndex = 1;
     private AreaListPresent present;
+    private RecyclerView mHistoryRecyclerView;
+    private BaseQuickAdapter mHistoryQuickAdapter;
+    private List<String> mHistoryData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +73,14 @@ public class SearchParkActivity extends AppCompatActivity implements AreaListVie
         present = new AreaListPresent(this);
         //请求网络数据
         present.LoadData(false);
+
+        mHistoryRecyclerView = (RecyclerView) findViewById(R.id.history_list);
+        mHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mHistoryRecyclerView.setHasFixedSize(true);
+        mHistoryQuickAdapter = new HistoryAdapter(R.layout.item_history, mHistoryData);
+        mHistoryQuickAdapter.openLoadMore(2, true);
+        mHistoryRecyclerView.addItemDecoration(new DividerItemDecoration(SearchParkActivity.this, DividerItemDecoration.VERTICAL));
+        mHistoryRecyclerView.setAdapter(mHistoryQuickAdapter);
     }
 
     @Override
@@ -119,6 +135,7 @@ public class SearchParkActivity extends AppCompatActivity implements AreaListVie
                 if (!searchEdit.getText().toString().trim().equals("")) {
                     intent = new Intent(SearchParkActivity.this, ParkNameListActivity.class);
                     intent.putExtra("parkName", searchEdit.getText().toString().trim());
+                    mHistoryData.add(searchEdit.getText().toString().trim());
                     startActivity(intent);
                 }
                 break;
