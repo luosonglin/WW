@@ -1,6 +1,5 @@
 package com.winwin.app.UI.EarnMoneyView;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.winwin.app.Constant.Constant;
 import com.winwin.app.Data.HttpData.HttpData;
@@ -26,7 +24,7 @@ import com.winwin.app.UI.Entity.HotAreaDto;
 import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.Entity.RequireDto;
 import com.winwin.app.UI.Entity.SelectRequirementVo;
-import com.winwin.app.UI.ItemDetailView.RequireDetailActivity;
+import com.winwin.app.Util.ToastUtils;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.container.DefaultHeader;
 import com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity;
@@ -156,21 +154,6 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
     private void initListener() {
         //设置自动加载监听
         mQuickAdapter.setOnLoadMoreListener(this);
-
-        mQuickAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                startActivity(new Intent(EarnMoneyActivity.this, RequireDetailActivity.class));
-                Toast.makeText(EarnMoneyActivity.this, "点击了" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-        mQuickAdapter.setOnRecyclerViewItemLongClickListener(new BaseQuickAdapter.OnRecyclerViewItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(View view, int position) {
-                Toast.makeText(EarnMoneyActivity.this, "长按了" + position, Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
     }
 
     //自动加载
@@ -248,6 +231,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
     public void showNoData() {
         //设置无数据显示页面
         progress.showEmpty(getResources().getDrawable(R.mipmap.monkey_nodata), Constant.EMPTY_TITLE, Constant.EMPTY_CONTEXT);
+        ToastUtils.show(EarnMoneyActivity.this, "暂无数据");
     }
 
     @OnClick({R.id.publicDateDesc, R.id.followDesc, R.id.district_rlyt, R.id.area_rlyt, R.id.day_rent_rlyt})
@@ -339,8 +323,9 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
                         selectRequirementVo.setAreaId(districts.get(position));
 //                        setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
                         mCoreRecyclerView.setVisibility(View.GONE);
-                        districtTv.setTextColor(Color.LTGRAY);
-                        present.LoadData(true, selectRequirementVo);
+                        districtTv.setTextColor(Color.GRAY);
+//                        present.LoadData(true, selectRequirementVo);
+                        onRefresh();
                     }
                 });
             } else {
@@ -401,14 +386,15 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
                     public void onItemClick(View view, int position) {
                         if (type == 1) {
                             selectRequirementVo.setBelongNetId(areas.get(position));
-                            areaTv.setTextColor(Color.LTGRAY);
+                            areaTv.setTextColor(Color.GRAY);
                         } else if (type == 2) {
                             selectRequirementVo.setRequireAreaRangId(dayRents.get(position));
-                            dayRentTv.setTextColor(Color.LTGRAY);
+                            dayRentTv.setTextColor(Color.GRAY);
                         }
                         mCoreRecyclerView.setVisibility(View.GONE);
 
-                        present.LoadData(true, selectRequirementVo);
+//                        present.LoadData(true, selectRequirementVo);
+                        onRefresh();
                     }
                 });
             }
