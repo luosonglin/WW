@@ -145,7 +145,6 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
 
         present.LoadData(false, selectRequirementVo);
 
-
         mCoreRecyclerView = (RecyclerView) findViewById(R.id.core_rv_list);
         //设置RecyclerView的显示模式  当前List模式
         mCoreRecyclerView.setLayoutManager(new LinearLayoutManager(EarnMoneyActivity.this));

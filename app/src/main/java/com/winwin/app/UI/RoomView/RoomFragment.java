@@ -252,8 +252,8 @@ public class RoomFragment extends Fragment {
         final IndexChildAdapter mIndexChildAdapter = new IndexChildAdapter(getChildFragmentManager());
 
         mIndexChildAdapter.addFragment(new RoomTab1Fragment().newInstance(selectAppParksVo), "产业园");
-        mIndexChildAdapter.addFragment(new RoomTab2Fragment(), "众创空间");
-        mIndexChildAdapter.addFragment(new RoomTab3Fragment(), "写字楼");
+        mIndexChildAdapter.addFragment(new RoomTab2Fragment().newInstance(selectAppParksVo), "众创空间");
+        mIndexChildAdapter.addFragment(new RoomTab3Fragment().newInstance(selectAppParksVo), "写字楼");
 
         viewPager.setOffscreenPageLimit(3);//缓存view 的个数
         viewPager.setAdapter(mIndexChildAdapter);
@@ -507,7 +507,6 @@ public class RoomFragment extends Fragment {
             view = View.inflate(getActivity(), R.layout.custom_view, null);
             TextView textView = ((TextView) view.findViewById(R.id.title));
             textView.setText(getTitle(index));
-
             return  BitmapDescriptorFactory.fromView(view);
         }
     }

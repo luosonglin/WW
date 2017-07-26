@@ -108,7 +108,7 @@ public class SearchParkActivity extends AppCompatActivity implements AreaListVie
 
     }
 
-    @OnClick({R.id.back, R.id.search_btn, R.id.card_view})
+    @OnClick({R.id.back, R.id.search_btn, R.id.phone_sign_in_button})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back:
@@ -122,7 +122,7 @@ public class SearchParkActivity extends AppCompatActivity implements AreaListVie
                     startActivity(intent);
                 }
                 break;
-            case R.id.card_view:
+            case R.id.phone_sign_in_button:
                 startActivity(new Intent(SearchParkActivity.this, SendRequireActivity.class));
                 break;
         }

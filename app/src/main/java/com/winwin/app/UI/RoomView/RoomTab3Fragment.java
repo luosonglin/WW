@@ -34,7 +34,13 @@ public class RoomTab3Fragment extends Fragment implements BaseQuickAdapter.Reque
     private int PageIndex=1;
     private SpringView springView;
     private ParksListPresent present;
-    private SelectAppParksVo selectAppParksVo = new SelectAppParksVo();
+    private static SelectAppParksVo selectAppParksVo = new SelectAppParksVo();
+
+    public static RoomTab3Fragment newInstance(SelectAppParksVo selectAppParksVo1) {
+        RoomTab3Fragment fragment = new RoomTab3Fragment();
+        selectAppParksVo = selectAppParksVo1;
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

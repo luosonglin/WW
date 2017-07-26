@@ -130,8 +130,7 @@ public class RoomTab1Fragment extends Fragment implements BaseQuickAdapter.Reque
     }
     /*
     * MVP模式的相关状态
-    *
-    * */
+    */
     @Override
     public void showProgress() {
         progress.showLoading();
