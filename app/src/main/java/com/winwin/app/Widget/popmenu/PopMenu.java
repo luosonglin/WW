@@ -32,7 +32,7 @@ public class PopMenu {
     /**
      * 默认的列数为4个
      */
-    private static final int DEFAULT_COLUMN_COUNT = 3;
+    private static final int DEFAULT_COLUMN_COUNT = 2;
 
     /**
      * 动画时间

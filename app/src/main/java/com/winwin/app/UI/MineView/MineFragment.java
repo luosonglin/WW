@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.winwin.app.Constant.Data;
 import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.MainActivity;
 import com.winwin.app.R;
@@ -192,35 +193,27 @@ public class MineFragment extends Fragment {
                 intent.putExtra("UserName", UserName);
                 intent.putExtra("UserAvatar", UserAvatar);
                 startActivity(intent);
-                getActivity().finish();
                 break;
             case R.id.credit:
                 startActivity(new Intent(getActivity(), MyCreditActivity.class));
-                getActivity().finish();
                 break;
             case R.id.my_winwin:
-//                startActivityForResult(new Intent(getActivity(), MainActivity.class),  1);
-//                getActivity().finish();
                 intent = new Intent(getActivity(), MainActivity.class);
-                intent.putExtra("ReturnToMainActivity", 1);
+                Data.setPage(1);
                 startActivity(intent);
                 getActivity().finish();
                 break;
             case R.id.customer_recommend:
                 startActivity(new Intent(getActivity(), MyRecommendActivity.class));
-                getActivity().finish();
                 break;
             case R.id.my_send:
                 startActivity(new Intent(getActivity(), MySendActivity.class));
-                getActivity().finish();
                 break;
             case R.id.my_collect:
                 startActivity(new Intent(getActivity(), MyCollectActivity.class));
-                getActivity().finish();
                 break;
             case R.id.my_more:
                 startActivity(new Intent(getActivity(), MyMoreActivity.class));
-                getActivity().finish();
                 break;
         }
     }

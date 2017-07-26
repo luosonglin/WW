@@ -135,18 +135,22 @@ public class MainActivity extends AppCompatActivity
         switch (view.getId()) {
             case R.id.tab_index:
                 setTabSelection(tabIndex);
+                Data.setPage(1);
                 break;
             case R.id.tab_room:
                 setTabSelection(tabRecommend);
+                Data.setPage(2);
                 break;
             case R.id.tab_plus:
                 setTabSelection(tabPlus);
                 break;
             case R.id.tab_message:
                 setTabSelection(tabRoom);
+                Data.setPage(3);
                 break;
             case R.id.tab_mine:
                 setTabSelection(tabMine);
+                Data.setPage(4);
                 break;
         }
     }
@@ -224,7 +228,6 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
         fragmentTransaction.commit();
-        PageId = 0;
     }
 
 
@@ -322,19 +325,21 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private int PageId = 0;
-
     @Override
     protected void onResume() {
-        PageId = getIntent().getIntExtra("ReturnToMainActivity", 0);
-        if (PageId == 1) {
-            setTabSelection(tabIndex);
-        } else if (PageId == 2) {
-            setTabSelection(tabRecommend);
-        } else if (PageId == 3) {
-            setTabSelection(tabRoom);
-        } else if (PageId == 4) {
-            setTabSelection(tabMine);
+        switch (Data.getPage()) {
+            case 1:
+                setTabSelection(tabIndex);
+                break;
+            case 2:
+                setTabSelection(tabRecommend);
+                break;
+            case 3:
+                setTabSelection(tabRoom);
+                break;
+            case 4:
+                setTabSelection(tabMine);
+                break;
         }
         super.onResume();
     }

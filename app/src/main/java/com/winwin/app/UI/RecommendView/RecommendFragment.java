@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.winwin.app.Constant.Data;
 import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.MainActivity;
 import com.winwin.app.R;
@@ -361,14 +362,9 @@ public class RecommendFragment extends Fragment {
                 startActivity(intent);
                 break;
             case R.id.map_llyt:
-//                startActivityForResult(new Intent(getActivity(), MainActivity.class),  2);
-
-//                intent = new Intent(getActivity(), MainActivity.class);
-//                intent.putExtra("page", "map");
-//                startActivityForResult(intent, 0);
-//                getActivity().finish();
                 intent = new Intent(getActivity(), MainActivity.class);
-                intent.putExtra("ReturnToMainActivity", 3);
+//                intent.putExtra("ReturnToMainActivity", 3);
+                Data.setPage(3);
                 startActivity(intent);
                 getActivity().finish();
                 break;
@@ -388,7 +384,8 @@ public class RecommendFragment extends Fragment {
 //                ft.commit();
 
                 intent = new Intent(getActivity(), MainActivity.class);
-                intent.putExtra("ReturnToMainActivity", 1);
+//                intent.putExtra("ReturnToMainActivity", 1);
+                Data.setPage(1);
                 startActivity(intent);
                 getActivity().finish();
 

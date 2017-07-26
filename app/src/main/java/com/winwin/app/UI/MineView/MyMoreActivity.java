@@ -12,15 +12,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.winwin.app.MainActivity;
-import com.winwin.app.im.business.LoginBusiness;
-import com.winwin.app.im.event.MessageEvent;
-import com.winwin.app.im.model.UserInfo;
 import com.tencent.imsdk.TIMCallBack;
+import com.winwin.app.Constant.Data;
 import com.winwin.app.R;
 import com.winwin.app.UI.OtherView.SplashActivity;
 import com.winwin.app.Util.CleanUtils;
 import com.winwin.app.Util.CustomUtils;
+import com.winwin.app.im.business.LoginBusiness;
+import com.winwin.app.im.event.MessageEvent;
+import com.winwin.app.im.model.UserInfo;
 
 public class MyMoreActivity extends AppCompatActivity {
     private static final String TAG = MyInfoActivity.class.getSimpleName();
@@ -48,9 +48,10 @@ public class MyMoreActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyMoreActivity.this, MainActivity.class);
-                intent.putExtra("ReturnToMainActivity", 4);
-                startActivity(intent);
+//                Intent intent = new Intent(MyMoreActivity.this, MainActivity.class);
+//                intent.putExtra("ReturnToMainActivity", 4);
+//                startActivity(intent);
+                Data.setPage(4);
                 finish();
             }
         });

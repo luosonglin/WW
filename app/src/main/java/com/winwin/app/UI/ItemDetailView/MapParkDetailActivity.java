@@ -157,9 +157,6 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(MapParkDetailActivity.this, MainActivity.class);
-//                intent.putExtra("ReturnToMainActivity", 3);
-//                startActivity(intent);
                 finish();
             }
         });
