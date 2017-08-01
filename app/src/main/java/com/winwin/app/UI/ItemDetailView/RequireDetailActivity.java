@@ -97,7 +97,7 @@ public class RequireDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle("");
-        toolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.back_white));
+        toolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.back));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

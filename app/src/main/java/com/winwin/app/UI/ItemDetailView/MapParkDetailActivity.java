@@ -155,7 +155,7 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
 //        setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         toolbar.setTitle("");
-        toolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.back_white));
+        toolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.back));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -36,7 +36,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="2dp"
-            android:src="@mipmap/tab2_g" />
+            android:src="@mipmap/tab4_g" />
 
         <TextView
             android:id="@+id/tab_room_title"
@@ -73,7 +73,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="2dp"
-            android:src="@mipmap/tab4_g" />
+            android:src="@mipmap/tab2_g" />
 
         <TextView
             android:id="@+id/tab_message_title"

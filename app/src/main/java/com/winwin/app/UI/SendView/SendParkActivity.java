@@ -399,7 +399,7 @@ public class SendParkActivity extends AppCompatActivity {
             schoolNumberPicker.setMaxValue(0);
         }
 
-        schoolNumberPicker.setValue(2);
+//        schoolNumberPicker.setValue(2);
 
         schoolNumberPicker.setWrapSelectorWheel(false); //防止NumberPicker无限滚动
         schoolNumberPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS); //禁止NumberPicker输入

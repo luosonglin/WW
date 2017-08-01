@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.tab_room:
                 hideFragments(fragmentTransaction);
 
-                tabRecommendImg.setImageResource(R.mipmap.tab2_b);
+                tabRecommendImg.setImageResource(R.mipmap.tab4_b);
                 tabRecommendTitle.setTextColor(activeColorRecourse);
                 if (mRecommendFragment == null) {
                     mRecommendFragment = new RecommendFragment();
@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.tab_message:
                 hideFragments(fragmentTransaction);
 
-                tabRoomImg.setImageResource(R.mipmap.tab4_b);
+                tabRoomImg.setImageResource(R.mipmap.tab2_b);
                 tabRoomTitle.setTextColor(activeColorRecourse);
                 if (mRoomFragment == null) {
                     mRoomFragment = new RoomFragment();
@@ -293,12 +293,12 @@ public class MainActivity extends AppCompatActivity
         tabIndexImg.setImageResource(R.mipmap.tab1_g);
         tabIndexTitle.setTextColor(inactiveResources);
 
-        tabRecommendImg.setImageResource(R.mipmap.tab2_g);
+        tabRecommendImg.setImageResource(R.mipmap.tab4_g);
         tabRecommendTitle.setTextColor(inactiveResources);
 
         tabPlusImg.setImageResource(R.mipmap.tab3_g);
 
-        tabRoomImg.setImageResource(R.mipmap.tab4_g);
+        tabRoomImg.setImageResource(R.mipmap.tab2_g);
         tabRoomTitle.setTextColor(inactiveResources);
 
         tabMineImg.setImageResource(R.mipmap.tab5_g);
