@@ -98,6 +98,7 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
             broker, secretary;;
     private BaseQuickAdapter mBaseQuickAdapter;
     private ImageView collectIv, shareIv;
+    private RelativeLayout collectRlyt, shareRlyt;
     private boolean isCollect = false;
     private AMap aMap;
     private MapView mapView;
@@ -176,6 +177,10 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
         proStand = (TextView) findViewById(R.id.proStand);
         watStand = (TextView) findViewById(R.id.watStand);
         proArea = (TextView) findViewById(R.id.proArea);
+        collectIv = (ImageView) findViewById(R.id.collect_iv);
+        collectRlyt = (RelativeLayout) findViewById(R.id.collect_rl);
+        shareIv = (ImageView) findViewById(R.id.share);
+        shareRlyt = (RelativeLayout) findViewById(R.id.share_rl);
         HttpData.getInstance().HttpDataGetParkDetail(new Observer<ParkDetailDto>() {
             @Override
             public void onComplete() {
@@ -380,8 +385,7 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
         /**
          * 收藏
          */
-        collectIv = (ImageView) findViewById(R.id.collect_iv);
-        collectIv.setOnClickListener(new View.OnClickListener() {
+        collectRlyt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (collectIv.getTag().equals("not_collected")) {
@@ -538,8 +542,8 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
      * 社会化分享
      */
     public void initShare(final String title, final String photo, final String description, final String url) {
-        shareIv = (ImageView) findViewById(R.id.share);
-        shareIv.setOnClickListener(new View.OnClickListener() {
+
+        shareRlyt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ShareBoardConfig config = new ShareBoardConfig();
@@ -565,7 +569,7 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
         mShareListener = new MapParkDetailActivity.CustomShareListener(this);
         /*增加自定义按钮的分享面板*/
         mShareAction = new ShareAction(MapParkDetailActivity.this)
-                .setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ)//, SHARE_MEDIA.MORE
+                .setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ, SHARE_MEDIA.MORE)
                 .setShareboardclickCallback(new ShareBoardlistener() {
                     @Override
                     public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {

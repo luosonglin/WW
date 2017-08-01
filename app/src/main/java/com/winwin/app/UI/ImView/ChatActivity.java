@@ -143,8 +143,7 @@ public class ChatActivity extends FragmentActivity implements ChatView {
 //                        }
 //                    });
                     FriendProfile profile = FriendshipInfo.getInstance().getProfile(identify);
-//                    title.setTitleText(titleStr = profile == null ? identify : profile.getName());
-                    title.setTitleText(profile.getName()+" "+profile.getIdentify());
+                    title.setTitleText(profile.getName());//+" "+profile.getIdentify());
                 }else{
 //                    title.setMoreImgAction(new View.OnClickListener() {
 //                        @Override

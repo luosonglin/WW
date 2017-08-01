@@ -218,7 +218,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 //                peripheryDesc.setText(parkDetailDtoHttpResult.getParkVo().getPeripheryDesc());
                 peripheryDesc.setText(parkDetailDtoHttpResult.getParkVo().getDistanceMetroDesc());
 
-                payDay.setText(parkDetailDtoHttpResult.getParkVo().getPayMon() + "元/月");//parkDetailDtoHttpResult.getParkVo().getPayDay() + "元/天 或 " +
+                payDay.setText(parkDetailDtoHttpResult.getParkVo().getPayMon() + "元/平米/月");//parkDetailDtoHttpResult.getParkVo().getPayDay() + "元/天 或 " +
                 proStand.setText(parkDetailDtoHttpResult.getParkVo().getProStand() + "元/度");
                 watStand.setText(parkDetailDtoHttpResult.getParkVo().getWatStand() + "元/吨");
                 proArea.setText(parkDetailDtoHttpResult.getParkVo().getProArea() + "平方米");
