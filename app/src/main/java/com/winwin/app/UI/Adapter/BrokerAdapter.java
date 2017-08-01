@@ -46,7 +46,7 @@ public class BrokerAdapter extends BaseQuickAdapter<BrokerDto> {
                 .into((ImageView) helper.getView(R.id.avatar));
 
         helper.setText(R.id.name, item.getRealName())
-                .setText(R.id.attitude, item.getRoleName());
+                .setText(R.id.attitude, "");//item.getRoleName()
 
         helper.getView(R.id.message).setOnClickListener(new View.OnClickListener() {
             @Override

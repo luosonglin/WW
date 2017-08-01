@@ -461,11 +461,9 @@ public class SendRequireActivity extends AppCompatActivity {
         View coresPopupwindowView = LayoutInflater.from(this).inflate(R.layout.popupwindow_core, null);
         mSearchPopupWindow = new PopupWindow(coresPopupwindowView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
 
-
         final TextView mCancelTv = (TextView) coresPopupwindowView.findViewById(R.id.cancel);
         final TextView mConfirmTv = (TextView) coresPopupwindowView.findViewById(R.id.purchase_time_confirm);
         NumberPicker schoolNumberPicker = (NumberPicker) coresPopupwindowView.findViewById(R.id.schools_picker);
-
 
         if (!StringUtils.isEmpty(Arrays.toString(cores))) {
 
@@ -483,7 +481,7 @@ public class SendRequireActivity extends AppCompatActivity {
             schoolNumberPicker.setMaxValue(0);
         }
 
-        schoolNumberPicker.setValue(2);
+//        schoolNumberPicker.setValue(2);
 
         schoolNumberPicker.setWrapSelectorWheel(false); //防止NumberPicker无限滚动
         schoolNumberPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS); //禁止NumberPicker输入
@@ -503,10 +501,26 @@ public class SendRequireActivity extends AppCompatActivity {
 
         mChooseCore = cores[0];
         mChooseCoreId = null;
-        schoolNumberPicker.setOnScrollListener(new NumberPicker.OnScrollListener() {
+        schoolNumberPicker.setOnScrollListener(new NumberPicker.OnScrollListener() {    //用于监听滑动状态变化，其状态有SCROLL_STATE_FLING 、 SCROLL_STATE_IDLE 、 SCROLL_STATE_TOUCH_SCROLL
             @Override
             public void onScrollStateChange(NumberPicker numberPicker, int scrollState) {
-                if (scrollState == NumberPicker.OnScrollListener.SCROLL_STATE_IDLE) {
+                if (scrollState == NumberPicker.OnScrollListener.SCROLL_STATE_IDLE) {   //NumberPicker停止滑动
+                    if (numberPicker.getValue() > cores.length) {
+                        mChooseCore = cores[cores.length];
+                        mChooseCoreId = null;
+                    } else {
+                        mChooseCore = cores[numberPicker.getValue()];
+                        mChooseCoreId = null;
+                    }
+                } else if (scrollState == NumberPicker.OnScrollListener.SCROLL_STATE_FLING) {   //正在滑动中的状态
+                    if (numberPicker.getValue() > cores.length) {
+                        mChooseCore = cores[cores.length];
+                        mChooseCoreId = null;
+                    } else {
+                        mChooseCore = cores[numberPicker.getValue()];
+                        mChooseCoreId = null;
+                    }
+                } else if (scrollState == NumberPicker.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {   //用户按下去然后滑动
                     if (numberPicker.getValue() > cores.length) {
                         mChooseCore = cores[cores.length];
                         mChooseCoreId = null;
@@ -517,6 +531,13 @@ public class SendRequireActivity extends AppCompatActivity {
                 }
             }
         });
+//        schoolNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {     //用于监听数值变化，通过此接口可以得到变化前的值和当前值
+//            @Override
+//            public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
+//                mChooseCore = cores[cores.length];
+//                mChooseCoreId = null;
+//            }
+//        });
 
         LinearLayout popupParentLayout2 = (LinearLayout) coresPopupwindowView.findViewById(R.id.popup_parent);
         popupParentLayout2.setOnClickListener(new View.OnClickListener() {

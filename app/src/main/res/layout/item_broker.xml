@@ -46,7 +46,8 @@
                 android:layout_height="wrap_content"
                 android:text="ha"
                 android:textColor="@color/gray"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <ImageView
