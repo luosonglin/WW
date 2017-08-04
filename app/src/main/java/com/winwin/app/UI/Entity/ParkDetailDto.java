@@ -106,8 +106,8 @@ public class ParkDetailDto {
         private double payMon;
         private double proStand;
         private double watStand;
-        private int proArea;
-        private int rentArea;
+        private double proArea;
+        private double rentArea;
         private Object planImage;
         private int noteDay;
         private int state;
@@ -267,19 +267,19 @@ public class ParkDetailDto {
             this.watStand = watStand;
         }
 
-        public int getProArea() {
+        public double getProArea() {
             return proArea;
         }
 
-        public void setProArea(int proArea) {
+        public void setProArea(double proArea) {
             this.proArea = proArea;
         }
 
-        public int getRentArea() {
+        public double getRentArea() {
             return rentArea;
         }
 
-        public void setRentArea(int rentArea) {
+        public void setRentArea(double rentArea) {
             this.rentArea = rentArea;
         }
 

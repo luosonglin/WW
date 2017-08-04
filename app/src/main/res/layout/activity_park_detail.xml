@@ -249,7 +249,7 @@
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
                              android:layout_marginLeft="28dp"
-                             android:text="10 物业费／天"
+                             android:text="10 元/平米/月"
                              android:textColor="@color/grey"
                              android:textSize="14sp" />
                      </LinearLayout>

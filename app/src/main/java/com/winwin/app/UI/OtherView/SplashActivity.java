@@ -207,4 +207,11 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
 //            }
 //        }
 //    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        init();
+    }
 }

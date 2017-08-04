@@ -29,7 +29,9 @@ import android.widget.Toast;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.services.core.LatLonPoint;
 import com.tencent.imsdk.TIMConversationType;
 import com.umeng.socialize.ShareAction;
@@ -381,6 +383,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
          */
         collectRl = (RelativeLayout) findViewById(R.id.collect_rl);
         collectIv = (ImageView) findViewById(R.id.collect_iv);
+        collectIv.setTag("not_collected");
         collectRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -532,6 +535,10 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
         }
         //刚打开map的第一屏
         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(convertToLatLng(centerpoint), 13));
+
+        aMap.addMarker(new MarkerOptions().position(convertToLatLng(centerpoint))
+                .autoOverturnInfoWindow(true)
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.map_icon_red)));
     }
 
     /**
