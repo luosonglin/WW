@@ -50,8 +50,8 @@
 
             <ImageView
                 android:id="@+id/tabUnread"
-                android:layout_width="6dp"
-                android:layout_height="6dp"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
                 android:layout_marginLeft="-16dp"
                 android:layout_marginTop="10dp"
                 android:layout_centerVertical="true"

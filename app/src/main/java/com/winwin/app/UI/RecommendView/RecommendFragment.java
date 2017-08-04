@@ -50,6 +50,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 /**
+ * 发现Fragment
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link OnFragmentInteractionListener} interface
@@ -95,7 +96,7 @@ public class RecommendFragment extends Fragment {
     private SelectedParkAdapter mSelectedParkAdapter;
     private RecyclerView mRecyclerView2;
     private LatestRecommendationAdapter mLatestRecommendationAdapter;
-    private ImageView msgUnread;
+    private static ImageView msgUnread;
     private OnFragmentInteractionListener mListener;
 
     public RecommendFragment() {
@@ -421,7 +422,7 @@ public class RecommendFragment extends Fragment {
     /**
      * 设置未读tab显示
      */
-    public void setMsgUnread(boolean noUnread) {
+    public static void setMsgUnread(boolean noUnread) {
         msgUnread.setVisibility(noUnread ? View.GONE : View.VISIBLE);
     }
 }

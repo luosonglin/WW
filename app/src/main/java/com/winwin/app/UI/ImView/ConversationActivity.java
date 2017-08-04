@@ -23,6 +23,7 @@ import com.winwin.app.MVP.IM.model.MessageFactory;
 import com.winwin.app.MVP.IM.model.NomalConversation;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.ConversationAdapter;
+import com.winwin.app.UI.RecommendView.RecommendFragment;
 import com.winwin.app.Util.PushUtil;
 import com.winwin.app.im.model.Conversation;
 import com.winwin.app.im.presenter.ConversationPresenter;
@@ -204,6 +205,7 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
         adapter.notifyDataSetChanged();
 //        if (getActivity() instanceof  HomeActivity)
 //            ((HomeActivity) getActivity()).setMsgUnread(getTotalUnreadNum() == 0);
+        RecommendFragment.setMsgUnread(getTotalUnreadNum() == 0);
     }
 
     @Override
