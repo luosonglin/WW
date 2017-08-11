@@ -33,6 +33,7 @@ import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.services.core.LatLonPoint;
+import com.bumptech.glide.Glide;
 import com.tencent.imsdk.TIMConversationType;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMAuthListener;
@@ -81,6 +82,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 
     private double longitude;
     private double latitude;
+    private String title;
 
     // 记录首次按下位置
     private float mFirstPosition = 0;
@@ -153,7 +155,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         toolbar.setTitle("");
-        toolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.back));
+        toolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.back_grey));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,6 +215,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 
                 amount_textview.setText("¥" + parkDetailDtoHttpResult.getParkVo().getDayRentStartPi());
                 name.setText(parkDetailDtoHttpResult.getParkVo().getName());
+                title = parkDetailDtoHttpResult.getParkVo().getName();
                 location.setText(parkDetailDtoHttpResult.getParkVo().getDistanceMetroDesc());
                 usingAreaPercent.setText("租赁统计（" + parkDetailDtoHttpResult.getUsingAreaPercent() + "）");
                 checkInCustomers.setText("入驻企业（" + parkDetailDtoHttpResult.getCheckInCustomers() + "家）");
@@ -240,8 +243,8 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                         parkDetailDtoHttpResult.getParkVo().getParkDesc(),
                         parkDetailDtoHttpResult.getParkVo().getShareUrl());
 
-                longitude = parkDetailDtoHttpResult.getParkVo().getLongitude();
-                latitude = parkDetailDtoHttpResult.getParkVo().getLatitude();
+                longitude = parkDetailDtoHttpResult.getParkVo().getH5Longitude();
+                latitude = parkDetailDtoHttpResult.getParkVo().getH5Latitude();
 
                 Log.e(TAG, "onNext");
             }
@@ -252,6 +255,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ParkDetailActivity.this, ParkMapActivity.class);
+                intent.putExtra("title", title);
                 intent.putExtra("longitude", longitude);
                 intent.putExtra("latitude", latitude);
                 Log.e(TAG, longitude + " " + latitude);
@@ -664,6 +668,9 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
         super.onDestroy();
         //内存泄漏，在使用分享或者授权的Activity中，重写onDestory()方法：
         UMShareAPI.get(this).release();
+
+        //此处避免you cannot start a load for a destroyed activity，因为glide不在主线程
+        Glide.with(getApplicationContext()).pauseRequests();
     }
 
     /**

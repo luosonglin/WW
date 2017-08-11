@@ -91,6 +91,7 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
 
     private double longitude;
     private double latitude;
+    private String title;
 
     //显示数据组件
     private TextView amount_textview, name, location,
@@ -221,6 +222,7 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
 
                 amount_textview.setText("¥" + parkDetailDtoHttpResult.getParkVo().getDayRentStartPi());
                 name.setText(parkDetailDtoHttpResult.getParkVo().getName());
+                title = parkDetailDtoHttpResult.getParkVo().getName();
                 location.setText(parkDetailDtoHttpResult.getParkVo().getDistanceMetroDesc());
                 usingAreaPercent.setText("租赁统计（" + parkDetailDtoHttpResult.getUsingAreaPercent() + "）");
                 checkInCustomers.setText("入驻企业（" + parkDetailDtoHttpResult.getCheckInCustomers() + "家）");
@@ -246,8 +248,8 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
                         parkDetailDtoHttpResult.getParkVo().getParkDesc(),
                         parkDetailDtoHttpResult.getParkVo().getShareUrl());
 
-                longitude = parkDetailDtoHttpResult.getParkVo().getLongitude();
-                latitude = parkDetailDtoHttpResult.getParkVo().getLatitude();
+                longitude = parkDetailDtoHttpResult.getParkVo().getH5Longitude();
+                latitude = parkDetailDtoHttpResult.getParkVo().getH5Latitude();
 
                 Log.e(TAG, "onNext");
             }
@@ -258,6 +260,7 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MapParkDetailActivity.this, ParkMapActivity.class);
+                intent.putExtra("title", title);
                 intent.putExtra("longitude", longitude);
                 intent.putExtra("latitude", latitude);
                 Log.e(TAG, longitude+" "+latitude);

@@ -97,7 +97,7 @@ public class RequireDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle("");
-        toolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.back));
+        toolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.back_grey));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -335,6 +335,13 @@ public class RequireDetailActivity extends AppCompatActivity {
         });
         anim.start();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //此处避免you cannot start a load for a destroyed activity，因为glide不在主线程
+        Glide.with(getApplicationContext()).pauseRequests();
     }
 }
 

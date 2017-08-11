@@ -138,6 +138,24 @@ public class ParkDetailDto {
         private boolean collection;
         private boolean belongCurrentUser;
         private String shareUrl;
+        private double h5Longitude;
+        private double h5Latitude;
+
+        public double getH5Longitude() {
+            return h5Longitude;
+        }
+
+        public void setH5Longitude(double h5Longitude) {
+            this.h5Longitude = h5Longitude;
+        }
+
+        public double getH5Latitude() {
+            return h5Latitude;
+        }
+
+        public void setH5Latitude(double h5Latitude) {
+            this.h5Latitude = h5Latitude;
+        }
 
         public int getCreateId() {
             return createId;

@@ -14,6 +14,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.github.lzyzsd.jsbridge.BridgeWebView;
 import com.winwin.app.R;
@@ -25,6 +26,7 @@ public class ParkMapActivity extends AppCompatActivity {
 
     private static final String TAG = ParkMapActivity.class.getSimpleName();
     private Toolbar toolbar;
+    private TextView title;
     private BridgeWebView mWebView;
     private static String URL = "http://winwin.jidichong.com/#/homeParkDetailMap?longitude=";
 
@@ -38,6 +40,9 @@ public class ParkMapActivity extends AppCompatActivity {
 
     private void toolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        title = (TextView) findViewById(R.id.title);
+        title.setText(getIntent().getExtras().getString("title"));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.back));
@@ -48,7 +53,6 @@ public class ParkMapActivity extends AppCompatActivity {
             }
         });
     }
-
 
     /**
      * 初始化WebView配置

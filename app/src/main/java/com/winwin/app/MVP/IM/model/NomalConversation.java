@@ -23,6 +23,20 @@ public class NomalConversation extends Conversation {
     //最后一条消息
     private Message lastMessage;
 
+    private String nickName;
+    private int avatar;
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public void setAvatar(int avatar) {
+        this.avatar = avatar;
+    }
 
     public NomalConversation(TIMConversation conversation){
         this.conversation = conversation;
@@ -40,7 +54,7 @@ public class NomalConversation extends Conversation {
     public int getAvatar() {
         switch (type){
             case C2C:
-                return R.drawable.head_other;
+                return avatar;//R.drawable.head_other;
 //            case Group:
 //                return R.drawable.head_group;
         }

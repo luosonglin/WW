@@ -16,9 +16,7 @@ import android.widget.RelativeLayout;
 import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMMessage;
 import com.tencent.imsdk.ext.group.TIMGroupCacheInfo;
-import com.tencent.imsdk.ext.sns.TIMFriendFutureItem;
 import com.winwin.app.MVP.IM.model.CustomMessage;
-import com.winwin.app.MVP.IM.model.FriendshipConversation;
 import com.winwin.app.MVP.IM.model.MessageFactory;
 import com.winwin.app.MVP.IM.model.NomalConversation;
 import com.winwin.app.R;
@@ -27,9 +25,7 @@ import com.winwin.app.UI.RecommendView.RecommendFragment;
 import com.winwin.app.Util.PushUtil;
 import com.winwin.app.im.model.Conversation;
 import com.winwin.app.im.presenter.ConversationPresenter;
-import com.winwin.app.im.presenter.FriendshipManagerPresenter;
 import com.winwin.app.im.viewfeatures.ConversationView;
-import com.winwin.app.im.viewfeatures.FriendshipMessageView;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -39,7 +35,7 @@ import java.util.List;
 /**
  * 会话界面
  */
-public class ConversationActivity extends AppCompatActivity implements ConversationView, FriendshipMessageView {
+public class ConversationActivity extends AppCompatActivity implements ConversationView {
 
     private static final String TAG = ConversationActivity.class.getSimpleName();
     private Toolbar toolbar;
@@ -47,9 +43,9 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
     private ConversationAdapter adapter;
     private ListView listView;
     private ConversationPresenter presenter;
-
-    private FriendshipManagerPresenter friendshipManagerPresenter;
-    private FriendshipConversation friendshipConversation;
+    private List<String> identityList = new LinkedList<>();
+    private List<String> nickNameList = new LinkedList<>();
+    private List<String> mAvatarList = new LinkedList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +55,7 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
         toolBar();
 
         listView = (ListView) findViewById(R.id.list);
-        adapter = new ConversationAdapter(this, R.layout.item_conversation, conversationList);
+        adapter = new ConversationAdapter(this, R.layout.item_conversation, conversationList, nickNameList, mAvatarList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -67,11 +63,11 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
                 conversationList.get(position).navToDetail(ConversationActivity.this);
             }
         });
-        friendshipManagerPresenter = new FriendshipManagerPresenter(this);
         presenter = new ConversationPresenter(this);
         presenter.getConversation();
         registerForContextMenu(listView);
-        adapter.notifyDataSetChanged();
+        if (nickNameList.size() != 0)
+            adapter.notifyDataSetChanged();
 
         RelativeLayout mChatRecyclerView = (RelativeLayout) findViewById(R.id.chat_rl);
         mChatRecyclerView.setOnClickListener(new View.OnClickListener() {
@@ -102,24 +98,35 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
         PushUtil.getInstance().reset();
     }
 
+
     /**
      * 初始化界面或刷新界面
      *
      * @param conversationList
      */
     @Override
-    public void initView(List<TIMConversation> conversationList) {
+    public void initView(List<TIMConversation> conversationList, List<String> nickNameList, List<String> avatarList) {
         this.conversationList.clear();
-        for (TIMConversation item:conversationList){
-            switch (item.getType()){
+        for (TIMConversation item : conversationList) {
+            switch (item.getType()) {
                 case C2C:
-                case Group:
 //                    this.conversationList.add(new NomalConversation(item));
-//                    groupList.add(item.getPeer());
+                case Group:
+                    this.conversationList.add(new NomalConversation(item));
                     break;
             }
         }
-        friendshipManagerPresenter.getFriendshipLastMessage();
+
+        this.nickNameList.clear();
+        this.nickNameList.addAll(nickNameList);
+
+        Log.e(TAG, this.nickNameList.size() + " List<String> nickNameList");
+        for (String i : this.nickNameList) {
+            Log.e(TAG, " nickNameList: " + i);
+        }
+
+        this.mAvatarList.clear();
+        this.mAvatarList.addAll(avatarList);
     }
 
     /**
@@ -129,20 +136,16 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
      */
     @Override
     public void updateMessage(TIMMessage message) {
-        if (message == null){
+        if (message == null) {
             adapter.notifyDataSetChanged();
             return;
         }
-//        if (message.getConversation().getType() == TIMConversationType.System){
-//            groupManagerPresenter.getGroupManageLastMessage();
-//            return;
-//        }
         if (MessageFactory.getMessage(message) instanceof CustomMessage) return;
         NomalConversation conversation = new NomalConversation(message.getConversation());
-        Iterator<Conversation> iterator =conversationList.iterator();
-        while (iterator.hasNext()){
+        Iterator<Conversation> iterator = conversationList.iterator();
+        while (iterator.hasNext()) {
             Conversation c = iterator.next();
-            if (conversation.equals(c)){
+            if (conversation.equals(c)) {
                 conversation = (NomalConversation) c;
                 iterator.remove();
                 break;
@@ -154,13 +157,9 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
         refresh();
     }
 
-    /**
-     * 更新好友关系链消息
-     */
     @Override
     public void updateFriendshipMessage() {
-        Log.e(TAG, "updateFriendshipMessage");
-        friendshipManagerPresenter.getFriendshipLastMessage();
+
     }
 
     /**
@@ -203,8 +202,6 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
     public void refresh() {
         Collections.sort(conversationList);
         adapter.notifyDataSetChanged();
-//        if (getActivity() instanceof  HomeActivity)
-//            ((HomeActivity) getActivity()).setMsgUnread(getTotalUnreadNum() == 0);
         RecommendFragment.setMsgUnread(getTotalUnreadNum() == 0);
     }
 
@@ -245,34 +242,4 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
         }
         return num;
     }
-
-    /**
-     * 获取好友关系链管理系统最后一条消息的回调
-     *
-     * @param message 最后一条消息
-     * @param unreadCount 未读数
-     */
-    @Override
-    public void onGetFriendshipLastMessage(TIMFriendFutureItem message, long unreadCount) {
-        if (friendshipConversation == null){
-            friendshipConversation = new FriendshipConversation(message);
-            conversationList.add(friendshipConversation);
-        }else{
-            friendshipConversation.setLastMessage(message);
-        }
-        friendshipConversation.setUnreadCount(unreadCount);
-        Collections.sort(conversationList);
-        refresh();
-    }
-
-    /**
-     * 获取好友关系链管理最后一条系统消息的回调
-     *
-     * @param message 消息列表
-     */
-    @Override
-    public void onGetFriendshipMessage(List<TIMFriendFutureItem> message) {
-        friendshipManagerPresenter.getFriendshipLastMessage();
-    }
-
 }

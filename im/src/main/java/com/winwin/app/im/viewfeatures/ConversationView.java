@@ -15,8 +15,7 @@ public interface ConversationView extends MvpView {
     /**
      * 初始化界面或刷新界面
      */
-    void initView(List<TIMConversation> conversationList);
-
+    void initView(List<TIMConversation> conversationList, List<String> nickNameList, List<String> avatarList);
 
     /**
      * 更新最新消息显示
@@ -29,7 +28,6 @@ public interface ConversationView extends MvpView {
      * 更新好友关系链消息
      */
     void updateFriendshipMessage();
-
 
     /**
      * 删除会话

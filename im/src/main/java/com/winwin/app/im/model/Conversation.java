@@ -18,7 +18,6 @@ public abstract class Conversation implements Comparable {
     //会话对象名称
     protected String name;
 
-
     /**
      * 获取最后一条消息的时间
      */
@@ -29,18 +28,15 @@ public abstract class Conversation implements Comparable {
      */
     abstract public long getUnreadNum();
 
-
     /**
      * 将所有消息标记为已读
      */
     abstract public void readAllMessage();
 
-
     /**
      * 获取头像
      */
     abstract public int getAvatar();
-
 
     /**
      * 跳转到聊天界面或会话详情
@@ -58,7 +54,6 @@ public abstract class Conversation implements Comparable {
      * 获取名称
      */
     abstract public String getName();
-
 
     public String getIdentify(){
         return identify;

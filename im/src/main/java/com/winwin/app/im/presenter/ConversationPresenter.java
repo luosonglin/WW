@@ -4,11 +4,12 @@ import android.util.Log;
 
 import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMConversationType;
+import com.tencent.imsdk.TIMFriendshipManager;
 import com.tencent.imsdk.TIMMessage;
+import com.tencent.imsdk.TIMUserProfile;
 import com.tencent.imsdk.TIMValueCallBack;
 import com.tencent.imsdk.ext.message.TIMConversationExt;
 import com.tencent.imsdk.ext.message.TIMManagerExt;
-import com.winwin.app.im.event.FriendshipEvent;
 import com.winwin.app.im.event.MessageEvent;
 import com.winwin.app.im.event.RefreshEvent;
 import com.winwin.app.im.viewfeatures.ConversationView;
@@ -32,7 +33,7 @@ public class ConversationPresenter implements Observer {
         //注册刷新监听
         RefreshEvent.getInstance().addObserver(this);
         //注册好友关系链监听
-        FriendshipEvent.getInstance().addObserver(this);
+//        FriendshipEvent.getInstance().addObserver(this);
         //注册群关系监听
 //        GroupEvent.getInstance().addObserver(this);
         this.view = view;
@@ -45,16 +46,18 @@ public class ConversationPresenter implements Observer {
                 TIMMessage msg = (TIMMessage) data;
                 view.updateMessage(msg);
             }
-        } else if (observable instanceof FriendshipEvent) {
-            FriendshipEvent.NotifyCmd cmd = (FriendshipEvent.NotifyCmd) data;
-            switch (cmd.type) {
-                case ADD_REQ:
-                case READ_MSG:
-                case ADD:
-                    view.updateFriendshipMessage();
-                    break;
-            }
         }
+//        else if (observable instanceof FriendshipEvent) {
+//            FriendshipEvent.NotifyCmd cmd = (FriendshipEvent.NotifyCmd) data;
+//            switch (cmd.type) {
+//                case ADD_REQ:
+//                case READ_MSG:
+//                case ADD:
+//                    view.updateFriendshipMessage();
+//                    break;
+//            }
+//        }
+
 //        else if (observable instanceof GroupEvent){
 //            GroupEvent.NotifyCmd cmd = (GroupEvent.NotifyCmd) data;
 //            switch (cmd.type){
@@ -75,32 +78,109 @@ public class ConversationPresenter implements Observer {
 
     public void getConversation() {
         List<TIMConversation> list = TIMManagerExt.getInstance().getConversationList();
-        List<TIMConversation> result = new ArrayList<>();
+
+        /**
+         *
+         08-11 16:14:39.526 2051-2051/com.winwin.app E/ConversationActivity: onCreate
+         08-11 16:14:39.627 2051-2051/com.winwin.app E/ConversationPresenter: 4 List<TIMConversation> haha
+         08-11 16:14:39.627 2051-2051/com.winwin.app E/ConversationPresenter:  getConversationList()19 C2C
+         08-11 16:14:39.627 2051-2051/com.winwin.app E/ConversationPresenter:  getConversationList()14 C2C
+         08-11 16:14:39.627 2051-2051/com.winwin.app E/ConversationPresenter:  getConversationList() System
+         08-11 16:14:39.628 2051-2051/com.winwin.app E/ConversationPresenter:  getConversationList()25 C2C
+         */
+        Log.e(TAG, list.size()+" List<TIMConversation> list");
+        for (TIMConversation i :list) {
+            Log.e(TAG, " getConversationList()" +i.getPeer()+" "+i.getType());
+        }
+
+        final List<TIMConversation> result = new ArrayList<>();
+        final List<String> identityList = new ArrayList<>();
+        final List<String> nickNameList = new ArrayList<>();
+        final List<String> avatarList = new ArrayList<>();
+
         for (TIMConversation conversation : list) {
-            if (conversation.getType() == TIMConversationType.System) continue;
-            result.add(conversation);
-            TIMConversationExt conversationExt = new TIMConversationExt(conversation);
-            conversationExt.getMessage(1, null, new TIMValueCallBack<List<TIMMessage>>() {
+            if (conversation.getType() == TIMConversationType.C2C) {
+                identityList.add(conversation.getPeer());
+            }
+        }
+        Log.e(TAG, "identityList.size() result.size() "+identityList.size()+" "+result.size());
+        if (identityList.size() != 0) {
+            //获取用户资料
+            TIMFriendshipManager.getInstance().getUsersProfile(identityList, new TIMValueCallBack<List<TIMUserProfile>>() {
                 @Override
-                public void onError(int i, String s) {
-                    Log.e(TAG, "get message error" + s);
+                public void onError(int code, String desc) {
+                    //错误码code和错误描述desc，可用于定位请求失败原因
+                    //错误码code列表请参见错误码表
+                    Log.e(TAG, "getUsersProfile failed: " + code + " desc");
                 }
 
                 @Override
-                public void onSuccess(List<TIMMessage> timMessages) {
-                    if (timMessages.size() > 0) {
-                        view.updateMessage(timMessages.get(0));
+                public void onSuccess(List<TIMUserProfile> userResult) {
+                    Log.e(TAG, "getUsersProfile succ");
+                    nickNameList.clear();
+                    avatarList.clear();
+                    for (TIMUserProfile res : userResult) {
+                        Log.e(TAG, "identifier: " + res.getIdentifier() + " nickName: " + res.getNickName() + " remark: " + res.getRemark());
+                        nickNameList.add(res.getNickName());
+                        avatarList.add(res.getFaceUrl());
                     }
-//                    for (TIMMessage i : timMessages) {
-//                        Log.e(TAG, i.getConversation().getPeer());
-////                        FriendProfile profile = FriendshipInfo.getInstance().getProfile(identify);
-////                        name = profile == null ? identify : profile.getName();
-//                    }
+                    view.initView(result, nickNameList, avatarList);
                 }
             });
-
         }
-        view.initView(result);
+
+        for (TIMConversation conversation : list) {
+            if (conversation.getType() == TIMConversationType.C2C) {
+                result.add(conversation);
+
+                TIMConversationExt conversationExt = new TIMConversationExt(conversation);
+                conversationExt.getMessage(1, null, new TIMValueCallBack<List<TIMMessage>>() {
+                    @Override
+                    public void onError(int i, String s) {
+                        Log.e(TAG, "get message error" + s);
+                    }
+
+                    @Override
+                    public void onSuccess(List<TIMMessage> timMessages) {
+                        if (timMessages.size() > 0) {
+                            view.updateMessage(timMessages.get(0));
+                        }
+                        for (TIMMessage i : timMessages) {
+                            Log.e(TAG, "timMessages "
+                                    +i.getConversation().getPeer() + " " + i.getSenderProfile()
+//                                    + " \n" + i.getSenderProfile().getNickName()
+//                                    + " \n" + i.getSenderProfile().getIdentifier()
+//                                    + " \n" + i.getSenderProfile().getRemark()
+//                                    + " \n" + i.getSenderProfile().getFaceUrl()
+                                    + "  " + i.getConversation().getType());
+                        }
+                    }
+                });
+            }
+        }
+
+
+        Log.e(TAG, result.size() + " List<TIMConversation> result");
+        for (TIMConversation i : result) {
+            Log.e(TAG, " result: " + i.getPeer() + " " + i.getType());
+        }
+        Log.e(TAG, nickNameList.size() + " List<String> nickNameList");
+        for (String i : nickNameList) {
+            Log.e(TAG, " nickNameList: " + i);
+        }
+        Log.e(TAG, avatarList.size() + " List<String> avatarList");
+        for (String i : avatarList) {
+            Log.e(TAG, " avatarList: " + i);
+        }
+
+        if (nickNameList.size() !=0) {
+            view.initView(result, nickNameList, avatarList);
+        }
+        else {
+            view.initView(result, identityList, identityList);
+        }
+
+
     }
 
     /**
