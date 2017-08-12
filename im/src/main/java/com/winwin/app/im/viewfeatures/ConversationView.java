@@ -15,7 +15,7 @@ public interface ConversationView extends MvpView {
     /**
      * 初始化界面或刷新界面
      */
-    void initView(List<TIMConversation> conversationList, List<String> nickNameList, List<String> avatarList);
+    void initView(List<TIMConversation> conversationList);
 
     /**
      * 更新最新消息显示

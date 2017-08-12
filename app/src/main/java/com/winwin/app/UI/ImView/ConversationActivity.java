@@ -14,8 +14,12 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.tencent.imsdk.TIMConversation;
+import com.tencent.imsdk.TIMFriendshipManager;
 import com.tencent.imsdk.TIMMessage;
+import com.tencent.imsdk.TIMUserProfile;
+import com.tencent.imsdk.TIMValueCallBack;
 import com.tencent.imsdk.ext.group.TIMGroupCacheInfo;
+import com.winwin.app.MVP.IM.model.ConversationUser;
 import com.winwin.app.MVP.IM.model.CustomMessage;
 import com.winwin.app.MVP.IM.model.MessageFactory;
 import com.winwin.app.MVP.IM.model.NomalConversation;
@@ -27,6 +31,7 @@ import com.winwin.app.im.model.Conversation;
 import com.winwin.app.im.presenter.ConversationPresenter;
 import com.winwin.app.im.viewfeatures.ConversationView;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -43,9 +48,6 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
     private ConversationAdapter adapter;
     private ListView listView;
     private ConversationPresenter presenter;
-    private List<String> identityList = new LinkedList<>();
-    private List<String> nickNameList = new LinkedList<>();
-    private List<String> mAvatarList = new LinkedList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
         toolBar();
 
         listView = (ListView) findViewById(R.id.list);
-        adapter = new ConversationAdapter(this, R.layout.item_conversation, conversationList, nickNameList, mAvatarList);
+        adapter = new ConversationAdapter(this, R.layout.item_conversation, conversationList, conversationUsers);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -66,8 +68,7 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
         presenter = new ConversationPresenter(this);
         presenter.getConversation();
         registerForContextMenu(listView);
-        if (nickNameList.size() != 0)
-            adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
 
         RelativeLayout mChatRecyclerView = (RelativeLayout) findViewById(R.id.chat_rl);
         mChatRecyclerView.setOnClickListener(new View.OnClickListener() {
@@ -99,34 +100,64 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
     }
 
 
+    //待获取用户资料的用户列表
+    List<String> users = new ArrayList<String>();
+    List<String> nickNames = new ArrayList<>();
+    List<String> avatars = new ArrayList<>();
+    List<ConversationUser> conversationUsers = new ArrayList<>();
     /**
      * 初始化界面或刷新界面
      *
      * @param conversationList
      */
     @Override
-    public void initView(List<TIMConversation> conversationList, List<String> nickNameList, List<String> avatarList) {
+    public void initView(List<TIMConversation> conversationList) {
         this.conversationList.clear();
         for (TIMConversation item : conversationList) {
             switch (item.getType()) {
                 case C2C:
+                    if (!users.contains(item.getPeer())) users.add(item.getPeer());
 //                    this.conversationList.add(new NomalConversation(item));
                 case Group:
                     this.conversationList.add(new NomalConversation(item));
                     break;
             }
         }
-
-        this.nickNameList.clear();
-        this.nickNameList.addAll(nickNameList);
-
-        Log.e(TAG, this.nickNameList.size() + " List<String> nickNameList");
-        for (String i : this.nickNameList) {
-            Log.e(TAG, " nickNameList: " + i);
+        Log.e(TAG, "conversationList:");
+        for (TIMConversation i : conversationList) {
+            Log.e(TAG, i.getPeer());
         }
 
-        this.mAvatarList.clear();
-        this.mAvatarList.addAll(avatarList);
+        Log.e(TAG, "users:");
+        for (String i : users) {
+            Log.e(TAG, i);
+        }
+
+        //获取用户资料
+        TIMFriendshipManager.getInstance().getUsersProfile(users, new TIMValueCallBack<List<TIMUserProfile>>() {
+            @Override
+            public void onError(int code, String desc) {
+                //错误码code和错误描述desc，可用于定位请求失败原因
+                //错误码code列表请参见错误码表
+                Log.e(TAG, "getUsersProfile failed: " + code + " desc");
+            }
+
+            @Override
+            public void onSuccess(List<TIMUserProfile> result) {
+                Log.e(TAG, "getUsersProfile succ");
+                for (TIMUserProfile res : result) {
+                    Log.e(TAG, "identifier: " + res.getIdentifier()
+                            + " nickName: " + res.getNickName()
+                            + " avatar: " + res.getFaceUrl());
+                    if (nickNames.contains(res.getNickName()))
+                        nickNames.add(res.getNickName());
+                    if (avatars.contains(res.getFaceUrl()))
+                        avatars.add(res.getFaceUrl());
+
+                    conversationUsers.add(new ConversationUser(res.getIdentifier(), res.getNickName(), res.getFaceUrl()));
+                }
+            }
+        });
     }
 
     /**

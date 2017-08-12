@@ -11,9 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.tencent.imsdk.TIMFriendshipManager;
-import com.tencent.imsdk.TIMUserProfile;
-import com.tencent.imsdk.TIMValueCallBack;
+import com.winwin.app.MVP.IM.model.ConversationUser;
 import com.winwin.app.R;
 import com.winwin.app.Util.GlideCircleTransform;
 import com.winwin.app.Util.TimeUtil;
@@ -21,6 +19,7 @@ import com.winwin.app.im.model.Conversation;
 import com.winwin.app.im.ui.CircleImageView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -34,14 +33,16 @@ public class ConversationAdapter extends ArrayAdapter<Conversation> {
     private View view;
     private ViewHolder viewHolder;
     private List<Conversation> mConversations;
-    private List<String> mNickNames;
-    private List<String> mAvatars;
 
     private View mHeaderView;
 
 
-    //待获取用户资料的用户列表
-    List<String> users = new ArrayList<String>();
+//    //待获取用户资料的用户列表
+//    List<String> users = new ArrayList<String>();
+//
+//    List<String> nickNames = new ArrayList<>();
+//    List<String> avatars = new ArrayList<>();
+    List<ConversationUser> mConversationUsers = new ArrayList<>();
 
     /**
      * Constructor
@@ -51,13 +52,12 @@ public class ConversationAdapter extends ArrayAdapter<Conversation> {
      *                 instantiating views.
      * @param objects  The objects to represent in the ListView.
      */
-    public ConversationAdapter(Context context, int resource, List<Conversation> objects, List<String> nickNames, List<String> avatars) {
+    public ConversationAdapter(Context context, int resource, List<Conversation> objects, List<ConversationUser> conversationUsers) {
         super(context, resource, objects);
         mContext = context;
         resourceId = resource;
         mConversations = objects;
-        mNickNames = nickNames;
-        mAvatars = avatars;
+        mConversationUsers = conversationUsers;
     }
 
     @Override
@@ -78,56 +78,25 @@ public class ConversationAdapter extends ArrayAdapter<Conversation> {
         final Conversation data = getItem(position);
         Log.e(TAG, position + " position");
 
-        users.clear();
-        users.add(data.getIdentify());
-        Log.e(TAG, users.size() + " users.size()");
-        for (String i :users) {
-            Log.e(TAG, i);
-        }
-        //获取用户资料
-        TIMFriendshipManager.getInstance().getUsersProfile(users, new TIMValueCallBack<List<TIMUserProfile>>(){
-            @Override
-            public void onError(int code, String desc){
-                //错误码code和错误描述desc，可用于定位请求失败原因
-                //错误码code列表请参见错误码表
-                Log.e(TAG, "getUsersProfile failed: " + code + " desc");
-            }
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .transform(new GlideCircleTransform(mContext))
+                .placeholder(R.mipmap.emoji)
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
 
-            @Override
-            public void onSuccess(List<TIMUserProfile> result){
-                Log.e(TAG, "getUsersProfile succ" + result.get(position).getNickName()+" "+result.get(0).getIdentifier());
-                for(TIMUserProfile res : result){
-                    Log.e(TAG, "identifier: " + res.getIdentifier() + " nickName: " + res.getNickName()
-                            + " remark: " + res.getRemark());
+        HashSet<ConversationUser> hs = new HashSet<>(mConversationUsers); //此时已经去掉重复的数据保存在hashset中
+
+        for (ConversationUser i: hs) {
+            Log.e(TAG, i.getIdentify()+" "+i.getNickName()+" "+i.getAvatar());
+                if (i.getIdentify().equals(data.getIdentify())) {
+                    viewHolder.tvName.setText(i.getNickName());
+                    Glide.with(mContext)
+                            .load(i.getAvatar())
+                            .apply(options)
+                            .into(viewHolder.avatar);
                 }
-                viewHolder.tvName.setText(result.get(position).getNickName()+" "+data.getIdentify() +" "+data.getName());
-                RequestOptions options = new RequestOptions()
-                        .centerCrop()
-                        .transform(new GlideCircleTransform(mContext))
-                        .placeholder(R.mipmap.emoji)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL);
-                Glide.with(mContext)
-                        .load(result.get(0).getFaceUrl())
-                        .apply(options)
-                        .into(viewHolder.avatar);
             }
-        });
-
-//        Log.e(TAG, mNickNames.size()+" mNickNames.size()");
-//        Log.e(TAG, position + " dataNickName position");
-//        final String dataNickName = mNickNames.get(position);
-
-//        viewHolder.tvName.setText(dataNickName);
-//        viewHolder.avatar.setImageResource(data.getAvatar());
-//        RequestOptions options = new RequestOptions()
-//                        .centerCrop()
-//                        .transform(new GlideCircleTransform(mContext))
-//                        .diskCacheStrategy(DiskCacheStrategy.ALL);
-//                Glide.with(mContext)
-//                        .load(mAvatars.get(position))
-//                        .apply(options)
-//                        .into(viewHolder.avatar);
-//        viewHolder.lastMessage.setText(data.getLastMessageSummary());
+        viewHolder.lastMessage.setText(data.getLastMessageSummary());
         viewHolder.time.setText(TimeUtil.getTimeStr(data.getLastMessageTime()));
         long unRead = data.getUnreadNum();
         if (unRead <= 0) {

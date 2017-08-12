@@ -4,9 +4,7 @@ import android.util.Log;
 
 import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMConversationType;
-import com.tencent.imsdk.TIMFriendshipManager;
 import com.tencent.imsdk.TIMMessage;
-import com.tencent.imsdk.TIMUserProfile;
 import com.tencent.imsdk.TIMValueCallBack;
 import com.tencent.imsdk.ext.message.TIMConversationExt;
 import com.tencent.imsdk.ext.message.TIMManagerExt;
@@ -94,40 +92,40 @@ public class ConversationPresenter implements Observer {
         }
 
         final List<TIMConversation> result = new ArrayList<>();
-        final List<String> identityList = new ArrayList<>();
-        final List<String> nickNameList = new ArrayList<>();
-        final List<String> avatarList = new ArrayList<>();
-
-        for (TIMConversation conversation : list) {
-            if (conversation.getType() == TIMConversationType.C2C) {
-                identityList.add(conversation.getPeer());
-            }
-        }
-        Log.e(TAG, "identityList.size() result.size() "+identityList.size()+" "+result.size());
-        if (identityList.size() != 0) {
-            //获取用户资料
-            TIMFriendshipManager.getInstance().getUsersProfile(identityList, new TIMValueCallBack<List<TIMUserProfile>>() {
-                @Override
-                public void onError(int code, String desc) {
-                    //错误码code和错误描述desc，可用于定位请求失败原因
-                    //错误码code列表请参见错误码表
-                    Log.e(TAG, "getUsersProfile failed: " + code + " desc");
-                }
-
-                @Override
-                public void onSuccess(List<TIMUserProfile> userResult) {
-                    Log.e(TAG, "getUsersProfile succ");
-                    nickNameList.clear();
-                    avatarList.clear();
-                    for (TIMUserProfile res : userResult) {
-                        Log.e(TAG, "identifier: " + res.getIdentifier() + " nickName: " + res.getNickName() + " remark: " + res.getRemark());
-                        nickNameList.add(res.getNickName());
-                        avatarList.add(res.getFaceUrl());
-                    }
-                    view.initView(result, nickNameList, avatarList);
-                }
-            });
-        }
+//        final List<String> identityList = new ArrayList<>();
+//        final List<String> nickNameList = new ArrayList<>();
+//        final List<String> avatarList = new ArrayList<>();
+//
+//        for (TIMConversation conversation : list) {
+//            if (conversation.getType() == TIMConversationType.C2C) {
+//                identityList.add(conversation.getPeer());
+//            }
+//        }
+//        Log.e(TAG, "identityList.size() result.size() "+identityList.size()+" "+result.size());
+//        if (identityList.size() != 0) {
+//            //获取用户资料
+//            TIMFriendshipManager.getInstance().getUsersProfile(identityList, new TIMValueCallBack<List<TIMUserProfile>>() {
+//                @Override
+//                public void onError(int code, String desc) {
+//                    //错误码code和错误描述desc，可用于定位请求失败原因
+//                    //错误码code列表请参见错误码表
+//                    Log.e(TAG, "getUsersProfile failed: " + code + " desc");
+//                }
+//
+//                @Override
+//                public void onSuccess(List<TIMUserProfile> userResult) {
+//                    Log.e(TAG, "getUsersProfile succ");
+//                    nickNameList.clear();
+//                    avatarList.clear();
+//                    for (TIMUserProfile res : userResult) {
+//                        Log.e(TAG, "identifier: " + res.getIdentifier() + " nickName: " + res.getNickName() + " remark: " + res.getRemark());
+//                        nickNameList.add(res.getNickName());
+//                        avatarList.add(res.getFaceUrl());
+//                    }
+//                    view.initView(result, nickNameList, avatarList);
+//                }
+//            });
+//        }
 
         for (TIMConversation conversation : list) {
             if (conversation.getType() == TIMConversationType.C2C) {
@@ -160,26 +158,26 @@ public class ConversationPresenter implements Observer {
         }
 
 
-        Log.e(TAG, result.size() + " List<TIMConversation> result");
-        for (TIMConversation i : result) {
-            Log.e(TAG, " result: " + i.getPeer() + " " + i.getType());
-        }
-        Log.e(TAG, nickNameList.size() + " List<String> nickNameList");
-        for (String i : nickNameList) {
-            Log.e(TAG, " nickNameList: " + i);
-        }
-        Log.e(TAG, avatarList.size() + " List<String> avatarList");
-        for (String i : avatarList) {
-            Log.e(TAG, " avatarList: " + i);
-        }
-
-        if (nickNameList.size() !=0) {
-            view.initView(result, nickNameList, avatarList);
-        }
-        else {
-            view.initView(result, identityList, identityList);
-        }
-
+//        Log.e(TAG, result.size() + " List<TIMConversation> result");
+//        for (TIMConversation i : result) {
+//            Log.e(TAG, " result: " + i.getPeer() + " " + i.getType());
+//        }
+//        Log.e(TAG, nickNameList.size() + " List<String> nickNameList");
+//        for (String i : nickNameList) {
+//            Log.e(TAG, " nickNameList: " + i);
+//        }
+//        Log.e(TAG, avatarList.size() + " List<String> avatarList");
+//        for (String i : avatarList) {
+//            Log.e(TAG, " avatarList: " + i);
+//        }
+//
+//        if (nickNameList.size() !=0) {
+//            view.initView(result, nickNameList, avatarList);
+//        }
+//        else {
+//            view.initView(result, identityList, identityList);
+//        }
+        view.initView(result);
 
     }
 
