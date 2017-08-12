@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,15 +23,16 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.tencent.imsdk.TIMConversationType;
+import com.tencent.imsdk.TIMFriendshipManager;
 import com.tencent.imsdk.TIMMessage;
 import com.tencent.imsdk.TIMMessageStatus;
+import com.tencent.imsdk.TIMUserProfile;
+import com.tencent.imsdk.TIMValueCallBack;
 import com.tencent.imsdk.ext.message.TIMMessageDraft;
 import com.tencent.imsdk.ext.message.TIMMessageExt;
 import com.tencent.imsdk.ext.message.TIMMessageLocator;
 import com.winwin.app.MVP.IM.model.CustomMessage;
 import com.winwin.app.MVP.IM.model.FileMessage;
-import com.winwin.app.MVP.IM.model.FriendProfile;
-import com.winwin.app.MVP.IM.model.FriendshipInfo;
 import com.winwin.app.MVP.IM.model.ImageMessage;
 import com.winwin.app.MVP.IM.model.Message;
 import com.winwin.app.MVP.IM.model.MessageFactory;
@@ -128,36 +130,58 @@ public class ChatActivity extends FragmentActivity implements ChatView {
             }
         });
         registerForContextMenu(listView);
-        TemplateTitle title = (TemplateTitle) findViewById(R.id.chat_title);
+        final TemplateTitle title = (TemplateTitle) findViewById(R.id.chat_title);
         switch (type) {
             case C2C:
-//                title.setMoreImg(R.drawable.btn_person);
+                //获取用户资料
+                List<String> users = new ArrayList<>();
+                users.add(identify);
+                TIMFriendshipManager.getInstance().getUsersProfile(users, new TIMValueCallBack<List<TIMUserProfile>>() {
+                    @Override
+                    public void onError(int code, String desc) {
+                        //错误码code和错误描述desc，可用于定位请求失败原因
+                        //错误码code列表请参见错误码表
+                        Log.e(TAG, "getUsersProfile failed: " + code + " desc");
+                    }
+
+                    @Override
+                    public void onSuccess(List<TIMUserProfile> result) {
+                        Log.e(TAG, "getUsersProfile succ");
+                        for (TIMUserProfile res : result) {
+                            Log.e(TAG, "identifier: " + res.getIdentifier()
+                                    + " nickName: " + res.getNickName()
+                                    + " avatar: " + res.getFaceUrl());
+                            title.setTitleText(res.getNickName());
+                        }
+                    }
+                });
+                /*title.setMoreImg(R.mipmap.logo);
                 if (FriendshipInfo.getInstance().isFriend(identify)){
-//                    title.setMoreImgAction(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-////                            Intent intent = new Intent(ChatActivity.this, ProfileActivity.class);
-////                            intent.putExtra("identify", identify);
-////                            startActivity(intent);
-//                            ToastUtils.show(ChatActivity.this, "跳转ProfileActivity");
-//                        }
-//                    });
+                    title.setMoreImgAction(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+//                            Intent intent = new Intent(ChatActivity.this, ProfileActivity.class);
+//                            intent.putExtra("identify", identify);
+//                            startActivity(intent);
+                            ToastUtils.show(ChatActivity.this, "跳转ProfileActivity");
+                        }
+                    });
                     FriendProfile profile = FriendshipInfo.getInstance().getProfile(identify);
-                    title.setTitleText(profile.getName());//+" "+profile.getIdentify());
+                    title.setTitleText(profile.getName()+" "+profile.getIdentify());
                 }else{
-//                    title.setMoreImgAction(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-////                            Intent person = new Intent(ChatActivity.this,AddFriendActivity.class);
-////                            person.putExtra("id",identify);
-////                            person.putExtra("name",identify);
-////                            startActivity(person);
-//                            ToastUtils.show(ChatActivity.this, "跳转AddFriendActivity");
-//                        }
-//                    });
+                    title.setMoreImgAction(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+//                            Intent person = new Intent(ChatActivity.this,AddFriendActivity.class);
+//                            person.putExtra("id",identify);
+//                            person.putExtra("name",identify);
+//                            startActivity(person);
+                            ToastUtils.show(ChatActivity.this, "跳转AddFriendActivity");
+                        }
+                    });
 //                    title.setTitleText(titleStr = identify);
                     title.setTitleText(getIntent().getStringExtra("userName"));
-                }
+                }*/
                 break;
             case Group:
 //                title.setMoreImg(R.drawable.btn_group);

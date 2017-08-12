@@ -1,5 +1,8 @@
 package com.winwin.app.MVP.IM.model;
 
+/**
+ * 会话页获取好友详细资料的实体
+ */
 public class ConversationUser {
     public String identify;
     public String nickName;
