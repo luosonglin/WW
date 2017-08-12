@@ -156,6 +156,7 @@ public class ConversationActivity extends AppCompatActivity implements Conversat
 
                     conversationUsers.add(new ConversationUser(res.getIdentifier(), res.getNickName(), res.getFaceUrl()));
                 }
+                adapter.notifyDataSetChanged();
             }
         });
     }
