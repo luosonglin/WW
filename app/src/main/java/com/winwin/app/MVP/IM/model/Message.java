@@ -54,12 +54,9 @@ public abstract class Message {
         if (message.isSelf()) {
             viewHolder.leftPanel.setVisibility(View.GONE);
             viewHolder.rightPanel.setVisibility(View.VISIBLE);
-//            viewHolder.rightAvatar.setImageURI(Uri.parse("http://wx1.sinaimg.cn/mw1024/006GdN7Xgy1fi8rbak4b6j30k00zktod.jpg"));//message.getSenderProfile().getFaceUrl()
-//            viewHolder.rightAvatar.setImageResource(R.mipmap.logo);
             return viewHolder.rightMessage;
         } else {
             viewHolder.leftPanel.setVisibility(View.VISIBLE);
-//            viewHolder.leftAvatar.setImageURI(Uri.parse(message.getSenderProfile().getFaceUrl()));
             viewHolder.rightPanel.setVisibility(View.GONE);
             //群聊显示名称，群名片>个人昵称>identify
             if (message.getConversation().getType() == TIMConversationType.Group) {

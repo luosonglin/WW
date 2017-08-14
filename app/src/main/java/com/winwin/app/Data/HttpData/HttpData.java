@@ -81,6 +81,7 @@ public class HttpData extends RetrofitUtils {
             .using(CacheProviders.class);
 
     protected static final APIService service = getRetrofit().create(APIService.class);
+    protected static final APIService service_no_token = getNoTokenRetrofit().create(APIService.class);
 
     //在访问HttpMethods时创建单例
     private static class SingletonHolder {
@@ -142,7 +143,7 @@ public class HttpData extends RetrofitUtils {
     }
 
     public void HttpDataGetParkDetail(Observer<ParkDetailDto> observer, long parkId) {
-        Observable observable = service.getParkDetail(parkId).map(new HttpResultFunc<ParkDetailDto>());
+        Observable observable = service_no_token.getParkDetail(parkId).map(new HttpResultFunc<ParkDetailDto>());
         setSubscribe(observable, observer);
     }
 

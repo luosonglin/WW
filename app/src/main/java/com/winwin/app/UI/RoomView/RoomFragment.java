@@ -162,11 +162,10 @@ public class RoomFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
 
         mCoreRecyclerView = (RecyclerView) view.findViewById(R.id.core_rv_list);
-        //设置RecyclerView的显示模式  当前List模式
         mCoreRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //如果Item高度固定  增加该属性能够提高效率
         mCoreRecyclerView.setHasFixedSize(true);
 
+        //区域
         districtRlyt = (RelativeLayout) view.findViewById(R.id.district_rlyt);
         districtTv = (TextView) view.findViewById(R.id.district_tv);
         districtRlyt.setOnClickListener(new View.OnClickListener() {
@@ -177,6 +176,8 @@ public class RoomFragment extends Fragment {
                 initCoreView(type, savedInstanceState);
             }
         });
+
+        //面积区间
         areaRlyt = (RelativeLayout) view.findViewById(R.id.area_rlyt);
         areaTv = (TextView) view.findViewById(R.id.area_tv);
         areaRlyt.setOnClickListener(new View.OnClickListener() {
@@ -187,6 +188,8 @@ public class RoomFragment extends Fragment {
                 initCoreView(type, savedInstanceState);
             }
         });
+
+        //日租金
         dayRentRlyt = (RelativeLayout) view.findViewById(R.id.day_rent_rlyt);
         dayRentTv = (TextView) view.findViewById(R.id.day_rent_tv);
         dayRentRlyt.setOnClickListener(new View.OnClickListener() {

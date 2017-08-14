@@ -16,6 +16,9 @@ public abstract class RetrofitUtils {
     private static Retrofit mRetrofit;
     private static OkHttpClient mOkHttpClient;
 
+    private static Retrofit mNoTokenRetrofit;
+    private static OkHttpClient mNoTokenOKHttpClient;
+
     /**
      * 获取Retrofit对象
      *
@@ -44,5 +47,35 @@ public abstract class RetrofitUtils {
 
         return mRetrofit;
     }
+
+    /**
+     * 获取Retrofit对象，不带token
+     *
+     * @return
+     */
+    protected static Retrofit getNoTokenRetrofit() {
+
+        if (null == mNoTokenRetrofit) {
+
+            if (null == mNoTokenOKHttpClient) {
+                mNoTokenOKHttpClient = OkHttpUtils.getNoTokenOkHttpClient();
+            }
+
+            //Retrofit2后使用build设计模式
+            mNoTokenRetrofit = new Retrofit.Builder()
+                    //设置服务器路径
+                    .baseUrl(Constant.API_SERVER_RELEASE + "/")
+                    //添加转化库，默认是Gson
+                    .addConverterFactory(GsonConverterFactory.create())
+                    //添加回调库，采用RxJava
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    //设置使用okhttp网络请求
+                    .client(mNoTokenOKHttpClient)
+                    .build();
+        }
+
+        return mNoTokenRetrofit;
+    }
+
 
 }

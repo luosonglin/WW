@@ -17,6 +17,7 @@ import okhttp3.Response;
 public class OkHttpUtils {
 
     private static OkHttpClient mOkHttpClient;
+    private static OkHttpClient mNoTokenOkHttpClient;
 
     /**
      * 获取OkHttpClient对象
@@ -55,4 +56,25 @@ public class OkHttpUtils {
             return chain.proceed(authorised);
         }
     };
+
+
+    /**
+     * 获取OkHttpClient对象, 不带token
+     */
+    public static OkHttpClient getNoTokenOkHttpClient() {
+
+        if (null == mNoTokenOkHttpClient) {
+
+            //同样okhttp3后也使用build设计模式
+            mNoTokenOkHttpClient = new OkHttpClient.Builder()
+                    //添加网络连接器
+                    //设置请求读写的超时时间
+                    .connectTimeout(30, TimeUnit.SECONDS)
+                    .writeTimeout(30, TimeUnit.SECONDS)
+                    .readTimeout(30, TimeUnit.SECONDS)
+                    .build();
+        }
+
+        return mNoTokenOkHttpClient;
+    }
 }
