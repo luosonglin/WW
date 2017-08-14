@@ -31,6 +31,7 @@ import com.tencent.imsdk.TIMValueCallBack;
 import com.tencent.imsdk.ext.message.TIMMessageDraft;
 import com.tencent.imsdk.ext.message.TIMMessageExt;
 import com.tencent.imsdk.ext.message.TIMMessageLocator;
+import com.winwin.app.Constant.Data;
 import com.winwin.app.MVP.IM.model.CustomMessage;
 import com.winwin.app.MVP.IM.model.FileMessage;
 import com.winwin.app.MVP.IM.model.ImageMessage;
@@ -77,6 +78,7 @@ public class ChatActivity extends FragmentActivity implements ChatView {
     private TIMConversationType type;
     private String titleStr;
     private Handler handler = new Handler();
+    private String mLeftAvatar="";
 
     public static void navToChat(Context context, String identify, TIMConversationType type){
         Intent intent = new Intent(context, ChatActivity.class);
@@ -96,7 +98,7 @@ public class ChatActivity extends FragmentActivity implements ChatView {
         presenter = new ChatPresenter(this, identify, type);
         input = (ChatInput) findViewById(R.id.input_panel);
         input.setChatView(this);
-        adapter = new ChatAdapter(this, R.layout.item_message, messageList);
+        adapter = new ChatAdapter(this, R.layout.item_message, messageList, mLeftAvatar);
         listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(adapter);
         listView.setTranscriptMode(ListView.TRANSCRIPT_MODE_NORMAL);
@@ -120,7 +122,6 @@ public class ChatActivity extends FragmentActivity implements ChatView {
                 if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && firstItem == 0) {
                     //如果拉到顶端读取更多消息
                     presenter.getMessage(messageList.size() > 0 ? messageList.get(0).getMessage() : null);
-
                 }
             }
 
@@ -135,6 +136,7 @@ public class ChatActivity extends FragmentActivity implements ChatView {
             case C2C:
                 //获取用户资料
                 List<String> users = new ArrayList<>();
+                users.clear();
                 users.add(identify);
                 TIMFriendshipManager.getInstance().getUsersProfile(users, new TIMValueCallBack<List<TIMUserProfile>>() {
                     @Override
@@ -152,49 +154,13 @@ public class ChatActivity extends FragmentActivity implements ChatView {
                                     + " nickName: " + res.getNickName()
                                     + " avatar: " + res.getFaceUrl());
                             title.setTitleText(res.getNickName());
+                            mLeftAvatar = res.getFaceUrl();
+                            Data.setLeftAvatar(mLeftAvatar);
                         }
                     }
                 });
-                /*title.setMoreImg(R.mipmap.logo);
-                if (FriendshipInfo.getInstance().isFriend(identify)){
-                    title.setMoreImgAction(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-//                            Intent intent = new Intent(ChatActivity.this, ProfileActivity.class);
-//                            intent.putExtra("identify", identify);
-//                            startActivity(intent);
-                            ToastUtils.show(ChatActivity.this, "跳转ProfileActivity");
-                        }
-                    });
-                    FriendProfile profile = FriendshipInfo.getInstance().getProfile(identify);
-                    title.setTitleText(profile.getName()+" "+profile.getIdentify());
-                }else{
-                    title.setMoreImgAction(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-//                            Intent person = new Intent(ChatActivity.this,AddFriendActivity.class);
-//                            person.putExtra("id",identify);
-//                            person.putExtra("name",identify);
-//                            startActivity(person);
-                            ToastUtils.show(ChatActivity.this, "跳转AddFriendActivity");
-                        }
-                    });
-//                    title.setTitleText(titleStr = identify);
-                    title.setTitleText(getIntent().getStringExtra("userName"));
-                }*/
                 break;
             case Group:
-//                title.setMoreImg(R.drawable.btn_group);
-//                title.setMoreImgAction(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-////                        Intent intent = new Intent(ChatActivity.this, GroupProfileActivity.class);
-////                        intent.putExtra("identify", identify);
-////                        startActivity(intent);
-//                        ToastUtils.show(ChatActivity.this, "跳转GroupProfileActivity");
-//                    }
-//                });
-//                title.setTitleText(GroupInfo.getInstance().getGroupName(identify));
                 break;
 
         }

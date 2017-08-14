@@ -79,5 +79,29 @@ public class Data {
         Data.page = page;
     }
 
+    /**
+     * 用户avatar
+     */
+    public static String avatar = "";
 
+    public static String getAvatar() {
+        return avatar;
+    }
+
+    public static void setAvatar(String avatar) {
+        Data.avatar = avatar;
+    }
+
+    /**
+     * 聊天对话页，好友的avatar
+     */
+    public static String leftAvatar = "";
+
+    public static String getLeftAvatar() {
+        return leftAvatar;
+    }
+
+    public static void setLeftAvatar(String leftAvatar) {
+        Data.leftAvatar = leftAvatar;
+    }
 }

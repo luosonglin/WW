@@ -37,7 +37,7 @@ public abstract class Message {
      * 显示消息
      *
      * @param viewHolder 界面样式
-     * @param context 显示消息的上下文
+     * @param context    显示消息的上下文
      */
     public abstract void showMessage(ChatAdapter.ViewHolder viewHolder, Context context);
 
@@ -46,31 +46,36 @@ public abstract class Message {
      *
      * @param viewHolder 界面样式
      */
-    public RelativeLayout getBubbleView(ChatAdapter.ViewHolder viewHolder){
-        viewHolder.systemMessage.setVisibility(hasTime? View.VISIBLE: View.GONE);
+    public RelativeLayout getBubbleView(ChatAdapter.ViewHolder viewHolder) {
+        viewHolder.systemMessage.setVisibility(hasTime ? View.VISIBLE : View.GONE);
         viewHolder.systemMessage.setText(TimeUtil.getChatTimeStr(message.timestamp()));
         showDesc(viewHolder);
-        if (message.isSelf()){
+
+        if (message.isSelf()) {
             viewHolder.leftPanel.setVisibility(View.GONE);
             viewHolder.rightPanel.setVisibility(View.VISIBLE);
+//            viewHolder.rightAvatar.setImageURI(Uri.parse("http://wx1.sinaimg.cn/mw1024/006GdN7Xgy1fi8rbak4b6j30k00zktod.jpg"));//message.getSenderProfile().getFaceUrl()
+//            viewHolder.rightAvatar.setImageResource(R.mipmap.logo);
             return viewHolder.rightMessage;
-        }else{
+        } else {
             viewHolder.leftPanel.setVisibility(View.VISIBLE);
+//            viewHolder.leftAvatar.setImageURI(Uri.parse(message.getSenderProfile().getFaceUrl()));
             viewHolder.rightPanel.setVisibility(View.GONE);
             //群聊显示名称，群名片>个人昵称>identify
-            if (message.getConversation().getType() == TIMConversationType.Group){
+            if (message.getConversation().getType() == TIMConversationType.Group) {
                 viewHolder.sender.setVisibility(View.VISIBLE);
                 String name = "";
-                if (message.getSenderGroupMemberProfile()!=null) name = message.getSenderGroupMemberProfile().getNameCard();
-                if (name.equals("")&&message.getSenderProfile()!=null) name = message.getSenderProfile().getNickName();
+                if (message.getSenderGroupMemberProfile() != null)
+                    name = message.getSenderGroupMemberProfile().getNameCard();
+                if (name.equals("") && message.getSenderProfile() != null)
+                    name = message.getSenderProfile().getNickName();
                 if (name.equals("")) name = message.getSender();
                 viewHolder.sender.setText(name);
-            }else{
+            } else {
                 viewHolder.sender.setVisibility(View.GONE);
             }
             return viewHolder.leftMessage;
         }
-
     }
 
     /**
@@ -78,8 +83,8 @@ public abstract class Message {
      *
      * @param viewHolder 界面样式
      */
-    public void showStatus(ChatAdapter.ViewHolder viewHolder){
-        switch (message.status()){
+    public void showStatus(ChatAdapter.ViewHolder viewHolder) {
+        switch (message.status()) {
             case Sending:
                 viewHolder.error.setVisibility(View.GONE);
                 viewHolder.sending.setVisibility(View.VISIBLE);
@@ -98,15 +103,13 @@ public abstract class Message {
 
     /**
      * 判断是否是自己发的
-     *
      */
-    public boolean isSelf(){
+    public boolean isSelf() {
         return message.isSelf();
     }
 
     /**
      * 获取消息摘要
-     *
      */
     public abstract String getSummary();
 
@@ -119,26 +122,21 @@ public abstract class Message {
 
     /**
      * 保存消息或消息文件
-     *
      */
     public abstract void save();
 
 
     /**
      * 删除消息
-     *
      */
-    public void remove(){
+    public void remove() {
         TIMMessageExt ext = new TIMMessageExt(message);
         ext.remove();
     }
 
 
-
-
     /**
      * 是否需要显示时间获取
-     *
      */
     public boolean getHasTime() {
         return hasTime;
@@ -150,8 +148,8 @@ public abstract class Message {
      *
      * @param message 上一条消息
      */
-    public void setHasTime(TIMMessage message){
-        if (message == null){
+    public void setHasTime(TIMMessage message) {
+        if (message == null) {
             hasTime = true;
             return;
         }
@@ -161,24 +159,21 @@ public abstract class Message {
 
     /**
      * 消息是否发送失败
-     *
      */
-    public boolean isSendFail(){
+    public boolean isSendFail() {
         return message.status() == TIMMessageStatus.SendFail;
     }
 
     /**
      * 清除气泡原有数据
-     *
      */
-    protected void clearView(ChatAdapter.ViewHolder viewHolder){
+    protected void clearView(ChatAdapter.ViewHolder viewHolder) {
         getBubbleView(viewHolder).removeAllViews();
         getBubbleView(viewHolder).setOnClickListener(null);
     }
 
     /**
      * 显示撤回的消息
-     *
      */
     boolean checkRevoke(ChatAdapter.ViewHolder viewHolder) {
         if (message.status() == TIMMessageStatus.HasRevoked) {
@@ -193,11 +188,10 @@ public abstract class Message {
 
     /**
      * 获取发送者
-     *
      */
-    public String getSender(){
+    public String getSender() {
         if (message.getSender() == null) return "";
-        return message.getSender();
+        return message.getSender()+" "+message.getSenderProfile().getNickName();
     }
 
     public String getDesc() {
@@ -209,11 +203,11 @@ public abstract class Message {
     }
 
 
-    private void showDesc(ChatAdapter.ViewHolder viewHolder){
+    private void showDesc(ChatAdapter.ViewHolder viewHolder) {
 
-        if (desc == null || desc.equals("")){
+        if (desc == null || desc.equals("")) {
             viewHolder.rightDesc.setVisibility(View.GONE);
-        }else{
+        } else {
             viewHolder.rightDesc.setVisibility(View.VISIBLE);
             viewHolder.rightDesc.setText(desc);
         }

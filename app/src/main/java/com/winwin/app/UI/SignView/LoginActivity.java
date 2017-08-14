@@ -427,10 +427,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 public void onNext(@io.reactivex.annotations.NonNull LoginUserDto loginUserDto) {
                     try {
                         DBUtils.put(LoginActivity.this, "userToken", loginUserDto.getToken());
+                        DBUtils.put(LoginActivity.this, "userAvatar", loginUserDto.getToken());
                     } catch (SnappydbException e) {
                         e.printStackTrace();
                     }
                     Data.setUserToken(loginUserDto.getToken());
+                    Data.setAvatar(loginUserDto.getImage());
                     UserInfo.getInstance().setId(loginUserDto.getId()+"");
                     UserInfo.getInstance().setUserSig(loginUserDto.getUserSig());
                 }

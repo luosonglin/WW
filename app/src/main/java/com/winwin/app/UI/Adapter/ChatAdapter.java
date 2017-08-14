@@ -1,6 +1,7 @@
 package com.winwin.app.UI.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,14 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+import com.winwin.app.Constant.Data;
 import com.winwin.app.MVP.IM.model.Message;
 import com.winwin.app.R;
+import com.winwin.app.Util.GlideCircleTransform;
+import com.winwin.app.im.ui.CircleImageView;
 
 import java.util.List;
 
@@ -21,10 +28,15 @@ import java.util.List;
 public class ChatAdapter extends ArrayAdapter<Message> {
 
     private final String TAG = "ChatAdapter";
-
+    private Context mContext;
     private int resourceId;
     private View view;
     private ViewHolder viewHolder;
+    private String mLeftAvatar;
+    RequestOptions options = new RequestOptions()
+            .centerCrop()
+            .transform(new GlideCircleTransform(mContext))
+            .diskCacheStrategy(DiskCacheStrategy.ALL);
 
     /**
      * Constructor
@@ -34,17 +46,19 @@ public class ChatAdapter extends ArrayAdapter<Message> {
      *                 instantiating views.
      * @param objects  The objects to represent in the ListView.
      */
-    public ChatAdapter(Context context, int resource, List<Message> objects) {
+    public ChatAdapter(Context context, int resource, List<Message> objects, String leftAvatar) {
         super(context, resource, objects);
+        mContext = context;
         resourceId = resource;
+        mLeftAvatar = leftAvatar;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView != null){
+        if (convertView != null) {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();
-        }else{
+        } else {
             view = LayoutInflater.from(getContext()).inflate(resourceId, null);
             viewHolder = new ViewHolder();
             viewHolder.leftMessage = (RelativeLayout) view.findViewById(R.id.leftMessage);
@@ -56,17 +70,34 @@ public class ChatAdapter extends ArrayAdapter<Message> {
             viewHolder.sender = (TextView) view.findViewById(R.id.sender);
             viewHolder.rightDesc = (TextView) view.findViewById(R.id.rightDesc);
             viewHolder.systemMessage = (TextView) view.findViewById(R.id.systemMessage);
+
+            viewHolder.leftAvatar = (CircleImageView) view.findViewById(R.id.leftAvatar);
+            viewHolder.rightAvatar = (CircleImageView) view.findViewById(R.id.rightAvatar);
+
+            Glide.with(mContext)
+                    .load(Data.getAvatar())
+                    .apply(options)
+                    .into(viewHolder.rightAvatar);
+
             view.setTag(viewHolder);
         }
-        if (position < getCount()){
+        if (position < getCount()) {
             final Message data = getItem(position);
             data.showMessage(viewHolder, getContext());
+
+            mLeftAvatar = Data.getLeftAvatar();
+            Log.e(TAG, " haha " + mLeftAvatar);
+            if(mLeftAvatar != null) {
+                Glide.with(mContext)
+                        .load(mLeftAvatar)
+                        .apply(options)
+                        .into(viewHolder.leftAvatar);
+            }
         }
         return view;
     }
 
-
-    public class ViewHolder{
+    public class ViewHolder {
         public RelativeLayout leftMessage;
         public RelativeLayout rightMessage;
         public RelativeLayout leftPanel;
@@ -76,5 +107,8 @@ public class ChatAdapter extends ArrayAdapter<Message> {
         public TextView sender;
         public TextView systemMessage;
         public TextView rightDesc;
+
+        public CircleImageView leftAvatar;
+        public CircleImageView rightAvatar;
     }
 }
