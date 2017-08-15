@@ -21,6 +21,7 @@ import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.MainActivity;
 import com.winwin.app.R;
 import com.winwin.app.UI.Entity.MyInfoDto;
+import com.winwin.app.Util.GlideCircleTransform;
 
 import java.util.Arrays;
 
@@ -114,6 +115,11 @@ public class MineFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.bind(this, view);
 
+        initView();
+        return view;
+    }
+
+    private void initView() {
         HttpData.getInstance().HttpDataGetMyInformation(new Observer<MyInfoDto>() {
             @Override
             public void onComplete() {
@@ -138,6 +144,7 @@ public class MineFragment extends Fragment {
 
                 RequestOptions options = new RequestOptions()
                         .centerCrop()
+                        .transform(new GlideCircleTransform(getActivity()))
 //                        .placeholder(R.mipmap.emoji)
                         .diskCacheStrategy(DiskCacheStrategy.ALL);
                 Glide.with(getActivity())
@@ -152,8 +159,12 @@ public class MineFragment extends Fragment {
                 UserAvatar = myInfoDto.getHeadPic();
             }
         });
+    }
 
-        return view;
+    @Override
+    public void onResume() {
+        super.onResume();
+        initView();
     }
 
     // TODO: Rename method, update argument and hook method into UI event

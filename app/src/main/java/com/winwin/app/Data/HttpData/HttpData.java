@@ -7,6 +7,7 @@ import com.winwin.app.Data.API.APIService;
 import com.winwin.app.Data.API.CacheProviders;
 import com.winwin.app.Data.Retrofit.ApiException;
 import com.winwin.app.Data.Retrofit.RetrofitUtils;
+import com.winwin.app.UI.Entity.AppUserVo;
 import com.winwin.app.UI.Entity.AreaDto;
 import com.winwin.app.UI.Entity.BannerDto;
 import com.winwin.app.UI.Entity.BrokerDto;
@@ -278,6 +279,10 @@ public class HttpData extends RetrofitUtils {
         setSubscribe(observable, observer);
     }
 
+    public void HttpDataUpdateAppUserInfo(Observer<HttpResult> observer, AppUserVo appUserVo) {
+        Observable observable = service.updateAppUserInfo(appUserVo);
+        setSubscribe(observable, observer);
+    }
     /**
      * 插入观察者
      *

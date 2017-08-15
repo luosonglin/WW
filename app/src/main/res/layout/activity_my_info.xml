@@ -112,7 +112,7 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <TextView
+        <EditText
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
@@ -120,8 +120,10 @@
             android:layout_marginRight="11dp"
             android:layout_toLeftOf="@+id/right_tip2"
             android:gravity="center_vertical"
+            android:background="@color/btn_text"
             android:text="松林"
             android:textColor="@color/grey"
+            android:focusable="false"
             android:textSize="16sp" />
 
         <ImageView

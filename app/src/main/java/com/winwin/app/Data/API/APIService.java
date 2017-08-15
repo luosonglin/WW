@@ -1,6 +1,7 @@
 package com.winwin.app.Data.API;
 
 
+import com.winwin.app.UI.Entity.AppUserVo;
 import com.winwin.app.UI.Entity.AreaDto;
 import com.winwin.app.UI.Entity.BannerDto;
 import com.winwin.app.UI.Entity.BrokerDto;
@@ -141,6 +142,10 @@ public interface APIService {
     /**
      * 个人页
      */
+    //POST /api/v1/user/updateAppUserInfo (**App**)App修改用户
+    @POST("api/v1/user/updateAppUserInfo")
+    Observable<HttpResult> updateAppUserInfo(@Body AppUserVo appUserVo);
+
     //app获取我的积分包含用户的头像以及姓名等信息
     @GET("api/v1/credits/info")
     Observable<HttpResult<MyInfoDto>> getMyInformation();
