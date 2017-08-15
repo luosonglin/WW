@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -49,7 +51,6 @@ import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.BrokerAdapter;
 import com.winwin.app.UI.Entity.BrokerDto;
-import com.winwin.app.UI.Entity.FileDto;
 import com.winwin.app.UI.Entity.HttpResult;
 import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.ParkDetailDto;
@@ -105,6 +106,8 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
     private RelativeLayout mapRl, collectRl, shareRl;
 
     private Banner banner;
+    private ImageView btnPlayVideo;
+    private Integer page = 1;
     private List<String> bannerImages = new ArrayList<>();
     private List<IndexBannerDto> parkBannerImages = new ArrayList<>();
 
@@ -166,6 +169,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 
     private void initView(final long parkId) {
         banner = (Banner) findViewById(R.id.banner);
+        btnPlayVideo = (ImageView) findViewById(R.id.btn_play_video);
         amount_textview = (TextView) findViewById(R.id.amount_textview);
         name = (TextView) findViewById(R.id.name);
         location = (TextView) findViewById(R.id.location);
@@ -197,21 +201,71 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
             }
 
             @Override
-            public void onNext(ParkDetailDto parkDetailDtoHttpResult) {
+            public void onNext(final ParkDetailDto parkDetailDtoHttpResult) {
 //                Glide.with(ParkDetailActivity.this)
 //                        .load(parkDetailDtoHttpResult.getParkVo().getHomeImage())
 //                        .into((ImageView) findViewById(R.id.img));
-                for (FileDto i : parkDetailDtoHttpResult.getParkVo().getCoverImgs()) {
-                    bannerImages.add(i.getImagePath());
-                    Log.e(TAG,i.getImagePath());
+                final List<Integer> videos = new ArrayList<Integer>();
+                for (int i = 0; i < parkDetailDtoHttpResult.getParkVo().getCoverImgs().size(); i++) {
+                    bannerImages.add(parkDetailDtoHttpResult.getParkVo().getCoverImgs().get(i).getImagePath());
+                    Log.e(TAG, parkDetailDtoHttpResult.getParkVo().getCoverImgs().get(i).getImagePath());
+                    if (parkDetailDtoHttpResult.getParkVo().getCoverImgs().get(i).getSuffix().equals("mp4")) {
+                        videos.add(i);
+                    }
                 }
 
-                if (bannerImages.size() == 0) bannerImages.add(parkDetailDtoHttpResult.getParkVo().getHomeImage());
+                if (bannerImages.size() == 0)
+                    bannerImages.add(parkDetailDtoHttpResult.getParkVo().getHomeImage());
 
                 banner.setImages(bannerImages != null ? bannerImages : null)
                         .setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
                         .setBannerAnimation(Transformer.Tablet)
                         .setImageLoader(new GlideImageLoader()).start();
+
+//                banner.setOnBannerClickListener(new OnBannerClickListener() {
+//                    @Override
+//                    public void OnBannerClick(int position) {
+//                        for (Integer i : videos)
+//                            Log.e(TAG, "videos" + i);
+//                        if (videos.contains(position-1)) {
+//                            ToastUtils.show(ParkDetailActivity.this, parkDetailDtoHttpResult.getParkVo().getCoverImgs().get(position-1).getImagePath());
+//                        }
+//                    }
+//                });
+
+                //当页面在滑动的时候会调用此方法，在滑动被停止之前，此方法回一直得到
+                banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    //arg0 :当前页面，及你点击滑动的页面 arg1:当前页面偏移的百分比 arg2:当前页面偏移的像素位置
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//                        Log.e(TAG, position + " " + positionOffset + " " + positionOffsetPixels);
+                        page = position;
+                        if (videos.contains(position-1)) btnPlayVideo.setVisibility(View.VISIBLE);
+                        else btnPlayVideo.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+
+                    }
+                });
+                btnPlayVideo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//                        ToastUtils.show(ParkDetailActivity.this, parkDetailDtoHttpResult.getParkVo().getCoverImgs().get(page-1).getImagePath());
+                        Uri uri = Uri.parse(parkDetailDtoHttpResult.getParkVo().getCoverImgs().get(page-1).getImagePath());
+                        //调用系统自带的播放器
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        Log.v("URI:::::::::", uri.toString());
+                        intent.setDataAndType(uri, "video/mp4");
+                        startActivity(intent);
+                    }
+                });
 
                 amount_textview.setText("¥" + parkDetailDtoHttpResult.getParkVo().getDayRentStartPi());
                 name.setText(parkDetailDtoHttpResult.getParkVo().getName());
