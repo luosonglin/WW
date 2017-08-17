@@ -21,8 +21,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.github.lzyzsd.jsbridge.BridgeWebView;
-import com.winwin.app.Constant.Data;
+import com.snappydb.SnappydbException;
 import com.winwin.app.R;
+import com.winwin.app.Util.DBUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -51,7 +52,7 @@ public class IndexFragment extends Fragment {
 
     private static final String TAG = IndexFragment.class.getSimpleName();
     private Toolbar toolbar;
-    private static final String URL = "http://winwin.jidichong.com/#/workbench?token="+ Data.getUserToken();
+    private static String URL = "http://winwin.jidichong.com/#/workbench?token=";//+ Data.getUserToken();
 
     public IndexFragment() {
         // Required empty public constructor
@@ -175,7 +176,11 @@ public class IndexFragment extends Fragment {
         }
 
         Log.e(TAG, "URL "+URL);
-        mWebView.loadUrl(URL);
+        try {
+            mWebView.loadUrl(URL + DBUtils.get(getActivity(), "userToken"));
+        } catch (SnappydbException e) {
+            e.printStackTrace();
+        }
         mWebView.addJavascriptInterface(new IndexFragment.JSHook(), "SetAndroidJavaScriptBridge");
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override

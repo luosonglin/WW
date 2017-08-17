@@ -33,8 +33,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.winwin.app.im.business.LoginBusiness;
-import com.winwin.app.im.model.UserInfo;
 import com.snappydb.SnappydbException;
 import com.tencent.imsdk.TIMCallBack;
 import com.winwin.app.Constant.Data;
@@ -45,6 +43,8 @@ import com.winwin.app.UI.Entity.LoginUserDto;
 import com.winwin.app.UI.Entity.UserLoginVo;
 import com.winwin.app.Util.DBUtils;
 import com.winwin.app.Util.PhoneUtils;
+import com.winwin.app.im.business.LoginBusiness;
+import com.winwin.app.im.model.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,12 +132,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         /**
          * test data
          */
-        mPhoneView.setText("13967150832");
-        mPasswordView.setText("shumang");
+//        mPhoneView.setText("13967150832");
+//        mPasswordView.setText("shumang");
 
-//        mPhoneView.setText("13761067953");
-//        mPasswordView.setText("winwin123");
-
+        mPhoneView.setText("13761067953");
+        mPasswordView.setText("winwin123");
 
         Button mPhoneSignInButton = (Button) findViewById(R.id.phone_sign_in_button);
         mPhoneSignInButton.setOnClickListener(new OnClickListener() {
@@ -431,11 +430,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     } catch (SnappydbException e) {
                         e.printStackTrace();
                     }
+//                    Data.
                     Data.setUserToken(loginUserDto.getToken());
+                    Log.e(TAG, "user " + loginUserDto.getToken()+" "+Data.getUserToken());
                     Data.setAvatar(loginUserDto.getImage());
                     UserInfo.getInstance().setId(loginUserDto.getId()+"");
                     UserInfo.getInstance().setUserSig(loginUserDto.getUserSig());
                 }
+//E/LoginActivity: user e385ad02ea58473aa44fc71bd385562cApp#19 e385ad02ea58473aa44fc71bd385562cApp#19
+//E/LoginActivity: user 852248c939854f9d964640c1715ebb49App#56 852248c939854f9d964640c1715ebb49App#56
 
                 @Override
                 public void onError(@io.reactivex.annotations.NonNull Throwable e) {

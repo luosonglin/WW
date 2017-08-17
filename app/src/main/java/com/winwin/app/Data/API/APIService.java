@@ -59,6 +59,21 @@ public interface APIService {
     @POST("/v1/sessions/sendMsgCaptcha")
     Observable<HttpResult> sendMsgCaptcha(@Body UserRegisterVo userRegisterVo);
 
+    /**
+     * 忘记密码
+     */
+    //POST /v1/sessions/forgotPassword/sendMsgCaptcha （**新App**）app忘记密码中点击发送短信验证码接口
+    @POST("/v1/sessions/forgotPassword/sendMsgCaptcha")
+    Observable<HttpResult> forgotPassword(@Body UserRegisterVo userRegisterVo);
+
+    //POST /v1/sessions/registerUser/checkMsg (**新App**)App用户注册,忘记密码流程中校验验证码接口
+    @POST("/v1/sessions/registerUser/checkMsg")
+    Observable<HttpResult> checkMsg(@Body UserRegisterVo userRegisterVo);
+
+    //POST /v1/sessions/forgotPassword (**新App**)App忘记密码后确定修改密码按钮
+    @POST("/v1/sessions/forgotPassword")
+    Observable<HttpResult> modifyForgotPassword(@Body UserRegisterVo userRegisterVo);
+
 
     //POST /v1/sessions/registerUser/confirmRegister (**新App**)App用户注册流程中输入用户名，密码以及头像之后确认接口
     @POST("/v1/sessions/registerUser/confirmRegister")

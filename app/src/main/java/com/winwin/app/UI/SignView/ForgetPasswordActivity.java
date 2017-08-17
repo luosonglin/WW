@@ -23,8 +23,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
+import com.winwin.app.UI.Entity.HttpResult;
+import com.winwin.app.UI.Entity.UserRegisterVo;
 import com.winwin.app.Util.ToastUtils;
+
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 
 public class ForgetPasswordActivity extends AppCompatActivity {
 
@@ -163,6 +170,8 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         }
     }
 
+    public static UserRegisterVo userRegisterVo = new UserRegisterVo();
+
     /**
      * The first placeholder fragment containing a simple view.
      */
@@ -216,9 +225,38 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             mPhoneView = (TextView) rootView.findViewById(R.id.phone);
             mCodeView = (EditText) rootView.findViewById(R.id.code);
             mGetCodeView = (TextView) rootView.findViewById(R.id.get_code_textview);
+
+            userRegisterVo.setCardType(1);
+            userRegisterVo.setMsgType(1);
+            userRegisterVo.setUserCard(mPhoneView.getText().toString().trim());
             mGetCodeView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    HttpData.getInstance().HttpDataForgotPassword(new Observer<HttpResult>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(@NonNull HttpResult httpResult) {
+                            if(!httpResult.getStatus().getCode().equals("0")) {
+                                ToastUtils.show(getActivity(), httpResult.getStatus().getMsg());
+                                return;
+                            }
+                            ToastUtils.show(getActivity(), "已发送验证码");
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    }, userRegisterVo);
                     timer.start();
                 }
             });
@@ -226,7 +264,36 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             mConfirmView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mViewPager.setCurrentItem(getArguments().getInt(ARG_SECTION_NUMBER) + 1, true);
+                    if (mCodeView.getText().toString().trim().equals("")) {
+                        ToastUtils.show(getActivity(), "请先获取验证码");
+                        return;
+                    }
+                    userRegisterVo.setMsgCaptcha(mCodeView.getText().toString().trim());
+                    HttpData.getInstance().HttpDataCheckMsg(new Observer<HttpResult>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(@NonNull HttpResult httpResult) {
+                            if(!httpResult.getStatus().getCode().equals("0")) {
+                                ToastUtils.show(getActivity(), httpResult.getStatus().getMsg());
+                                return;
+                            }
+                            mViewPager.setCurrentItem(getArguments().getInt(ARG_SECTION_NUMBER) + 1, true);
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    }, userRegisterVo);
                 }
             });
             return rootView;
@@ -273,11 +340,44 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             mConfirmView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (!mNewPasswordView.getText().toString().equals(mRepeatPasswordView.getText().toString())) {
+                    if (mNewPasswordView.getText().toString().trim().equals("")) {
+                        ToastUtils.show(getActivity(), "请输入新密码");
+                        return;
+                    }
+                    if (mRepeatPasswordView.getText().toString().trim().equals("")) {
+                        ToastUtils.show(getActivity(), "请再次输入新密码");
+                        return;
+                    }
+                    if (!mNewPasswordView.getText().toString().trim().equals(mRepeatPasswordView.getText().toString().trim())) {
                         ToastUtils.show(getActivity(), "两次密码不一致");
                         return;
                     }
-                    mViewPager.setCurrentItem(getArguments().getInt(ARG_SECTION_NUMBER) + 1, true);
+                    userRegisterVo.setPassword(mNewPasswordView.getText().toString().trim());
+                    HttpData.getInstance().HttpDataModifyForgotPassword(new Observer<HttpResult>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(@NonNull HttpResult httpResult) {
+                            if(!httpResult.getStatus().getCode().equals("0")) {
+                                ToastUtils.show(getActivity(), httpResult.getStatus().getMsg());
+                                return;
+                            }
+                            mViewPager.setCurrentItem(getArguments().getInt(ARG_SECTION_NUMBER) + 1, true);
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    }, userRegisterVo);
                 }
             });
             return rootView;
@@ -322,6 +422,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     ToastUtils.show(getActivity(), "修改密码成功");
+                    getActivity().finish();
                 }
             });
             return rootView;

@@ -283,6 +283,22 @@ public class HttpData extends RetrofitUtils {
         Observable observable = service.updateAppUserInfo(appUserVo);
         setSubscribe(observable, observer);
     }
+
+    public void HttpDataForgotPassword(Observer<HttpResult> observer, UserRegisterVo userRegisterVo) {
+        Observable observable = service.forgotPassword(userRegisterVo);
+        setSubscribe(observable, observer);
+    }
+
+    public void HttpDataCheckMsg(Observer<HttpResult> observer, UserRegisterVo userRegisterVo) {
+        Observable observable = service.checkMsg(userRegisterVo);
+        setSubscribe(observable, observer);
+    }
+
+    public void HttpDataModifyForgotPassword(Observer<HttpResult> observer, UserRegisterVo userRegisterVo) {
+        Observable observable = service.modifyForgotPassword(userRegisterVo);
+        setSubscribe(observable, observer);
+    }
+
     /**
      * 插入观察者
      *
