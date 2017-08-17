@@ -24,6 +24,8 @@ public class MetaDataAdapter extends BaseQuickAdapter<MetaDataDto> {
             case 3:
                 helper.setText(R.id.name,item.getDataDisplay());
                 break;
+            default:
+                helper.setText(R.id.name, item.getDataDisplay());
         }
     }
 }

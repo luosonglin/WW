@@ -326,7 +326,7 @@ public class RoomFragment extends Fragment {
 
     private void initCoreView(final int type, final Bundle savedInstanceState) {
         if (mCoreRecyclerView.getVisibility() == View.GONE) {
-            if (type == 1) {
+            if (type == 1) {    //区域弹窗
                 mCoreRecyclerView.setVisibility(View.VISIBLE);
                 //设置适配器
                 mCoreQuickAdapter = new HotAreaAdapter(R.layout.item_meta_data, null);
@@ -357,7 +357,9 @@ public class RoomFragment extends Fragment {
 
                     @Override
                     public void onNext(List<HotAreaDto> data) {
+                        data.add(new HotAreaDto(0, "不限"));
                         mCoreQuickAdapter.addData(data);
+//                        mCoreQuickAdapter.add(data.size(), );
                         for (HotAreaDto i : data) {
                             districts.add(i.getId());
                         }
@@ -391,15 +393,23 @@ public class RoomFragment extends Fragment {
 
                     @Override
                     public void onNext(@NonNull List<MetaDataDto> metaDataDtos) {
+                        metaDataDtos.add(new MetaDataDto(0, "不限"));
                         mCoreQuickAdapter.addData(metaDataDtos);
+//                        mCoreQuickAdapter.add(metaDataDtos.size(), new MetaDataDto(0, "不限"));
 
                         for (MetaDataDto i : metaDataDtos) {
-                            if (type == 2) {
+                            if (type == 2) {    //面积区间
                                 areas.add(i.getId());
-                            } else if (type == 3) {
+                            } else if (type == 3) {     //日租金
                                 dayRents.add(i.getId());
                             }
+                            Log.e(TAG, "metaData " + i.getDataDisplay());
                         }
+//                        if (type == 2) {
+//                            areas.add(0);
+//                        } else if (type == 3) {
+//                            dayRents.add(0);
+//                        }
 
                         Log.e(TAG, "onNext");
                     }
@@ -511,7 +521,7 @@ public class RoomFragment extends Fragment {
             view = View.inflate(getActivity(), R.layout.custom_view, null);
             TextView textView = ((TextView) view.findViewById(R.id.title));
             textView.setText(getTitle(index));
-            return  BitmapDescriptorFactory.fromView(view);
+            return BitmapDescriptorFactory.fromView(view);
         }
     }
 }

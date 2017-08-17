@@ -31,6 +31,13 @@ public class MetaDataDto {
     private int leftData;
     private int rightData;
 
+    //面积区间弹窗用
+    //日租金弹窗用
+    public MetaDataDto(int id, String dataDisplay) {
+        this.id = id;
+        this.dataDisplay = dataDisplay;
+    }
+
     public Object getCreateId() {
         return createId;
     }

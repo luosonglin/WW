@@ -12,6 +12,11 @@ public class HotAreaDto {
     private String name;
     private ParentBean parent;
 
+    public HotAreaDto(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }
