@@ -352,7 +352,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 
                     @Override
                     public void onNext(List<BrokerDto> brokerDto) {
-                        mBaseQuickAdapter.addData(brokerDto);
+                        mBaseQuickAdapter.setNewData(brokerDto);
                         Log.e(TAG, "onNext");
                     }
                 }, parkId);

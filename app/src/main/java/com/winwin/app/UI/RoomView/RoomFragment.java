@@ -256,8 +256,8 @@ public class RoomFragment extends Fragment {
         final IndexChildAdapter mIndexChildAdapter = new IndexChildAdapter(getChildFragmentManager());
 
         mIndexChildAdapter.addFragment(new RoomTab1Fragment().newInstance(selectAppParksVo), "产业园");
-        mIndexChildAdapter.addFragment(new RoomTab2Fragment().newInstance(selectAppParksVo), "众创空间");
         mIndexChildAdapter.addFragment(new RoomTab3Fragment().newInstance(selectAppParksVo), "写字楼");
+        mIndexChildAdapter.addFragment(new RoomTab2Fragment().newInstance(selectAppParksVo), "众创空间");
 
         viewPager.setOffscreenPageLimit(3);//缓存view 的个数
         viewPager.setAdapter(mIndexChildAdapter);

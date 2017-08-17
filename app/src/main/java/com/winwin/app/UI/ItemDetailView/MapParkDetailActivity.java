@@ -303,7 +303,7 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
 
                     @Override
                     public void onNext(List<BrokerDto> brokerDto) {
-                        mBaseQuickAdapter.addData(brokerDto);
+                        mBaseQuickAdapter.setNewData(brokerDto);
                         Log.e(TAG, "onNext");
                     }
                 }, parkId);

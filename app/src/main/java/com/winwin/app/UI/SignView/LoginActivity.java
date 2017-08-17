@@ -138,6 +138,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //        mPhoneView.setText("13761067953");
 //        mPasswordView.setText("winwin123");
 
+        mPhoneView.setText("18817802295");
+        mPasswordView.setText("123");
+
         Button mPhoneSignInButton = (Button) findViewById(R.id.phone_sign_in_button);
         mPhoneSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -463,8 +466,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         @Override
                         public void onSuccess() {
                             Log.d(TAG, "Login succeed!");
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            finish();
+//                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                            finish();
+                            //登录后, 进入具体页面, finish了前面所有的Activity, 防止Back回来又跑到登录页面
+                            LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                            LoginActivity.this.finish();
                         }
                     });
                 }
