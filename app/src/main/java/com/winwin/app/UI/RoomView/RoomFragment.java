@@ -372,7 +372,7 @@ public class RoomFragment extends Fragment {
                         selectAppParksVo.setAreaId(districts.get(position));
                         setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
                         mCoreRecyclerView.setVisibility(View.GONE);
-                        districtTv.setTextColor(Color.LTGRAY);
+                        districtTv.setTextColor(getResources().getColor(R.color.grey));
                     }
                 });
             } else {
@@ -432,10 +432,10 @@ public class RoomFragment extends Fragment {
                     public void onItemClick(View view, int position) {
                         if (type == 2) {
                             selectAppParksVo.setAreaRangeId(areas.get(position));
-                            areaTv.setTextColor(Color.LTGRAY);
+                            areaTv.setTextColor(getResources().getColor(R.color.grey));
                         } else if (type == 3) {
                             selectAppParksVo.setDayRentId(dayRents.get(position));
-                            dayRentTv.setTextColor(Color.LTGRAY);
+                            dayRentTv.setTextColor(getResources().getColor(R.color.grey));
                         }
                         setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
                         mCoreRecyclerView.setVisibility(View.GONE);
