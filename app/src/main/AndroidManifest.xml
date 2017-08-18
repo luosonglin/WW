@@ -36,6 +36,7 @@
         <activity
             android:name=".UI.OtherView.SplashActivity"
             android:theme="@style/WelcomeTheme"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

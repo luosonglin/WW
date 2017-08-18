@@ -30,13 +30,13 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
     public static final String TAG = "TCVideoPreviewActivity";
 
 
-    public static final String VIDEO_RECORD_TYPE        = "type";
-    public static final String VIDEO_RECORD_RESULT      = "result";
-    public static final String VIDEO_RECORD_DESCMSG     = "descmsg";
-    public static final String VIDEO_RECORD_VIDEPATH    = "path";
-    public static final String VIDEO_RECORD_COVERPATH   = "coverpath";
-    public static final String VIDEO_RECORD_ROTATION    = "rotation";
-    public static final String VIDEO_RECORD_NO_CACHE    = "nocache";
+    public static final String VIDEO_RECORD_TYPE = "type";
+    public static final String VIDEO_RECORD_RESULT = "result";
+    public static final String VIDEO_RECORD_DESCMSG = "descmsg";
+    public static final String VIDEO_RECORD_VIDEPATH = "path";
+    public static final String VIDEO_RECORD_COVERPATH = "coverpath";
+    public static final String VIDEO_RECORD_ROTATION = "rotation";
+    public static final String VIDEO_RECORD_NO_CACHE = "nocache";
     public static final String DEFAULT_MEDIA_PACK_FOLDER = "txrtmp";
 
 
@@ -84,7 +84,7 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean bFromUser) {
                 if (mProgressTime != null) {
-                    mProgressTime.setText(String.format(Locale.CHINA, "%02d:%02d/%02d:%02d", (progress)/60, (progress) % 60, (seekBar.getMax()) / 60, (seekBar.getMax()) % 60));
+                    mProgressTime.setText(String.format(Locale.CHINA, "%02d:%02d/%02d:%02d", (progress) / 60, (progress) % 60, (seekBar.getMax()) / 60, (seekBar.getMax()) % 60));
                 }
             }
 
@@ -95,7 +95,7 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if ( mTXLivePlayer != null) {
+                if (mTXLivePlayer != null) {
                     mTXLivePlayer.seek(seekBar.getProgress());
                 }
                 mTrackingTouchTS = System.currentTimeMillis();
@@ -202,7 +202,7 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
             sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,
                     Uri.parse("file://" + filename)));
         } else {
-            MediaScannerConnection.scanFile(this, new String[] { filename },
+            MediaScannerConnection.scanFile(this, new String[]{filename},
                     null, new MediaScannerConnection.OnScanCompletedListener() {
                         public void onScanCompleted(String path, Uri uri) {
                         }
@@ -265,6 +265,8 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
         super.onDestroy();
         mTXCloudVideoView.onDestroy();
         stopPlay(true);
+        //此处避免you cannot start a load for a destroyed activity，因为glide不在主线程
+        Glide.with(getApplicationContext()).pauseRequests();
     }
 
     protected void stopPlay(boolean clearLastFrame) {
@@ -278,7 +280,7 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
     @Override
     public void onPlayEvent(int event, Bundle param) {
         if (mTXCloudVideoView != null) {
-            mTXCloudVideoView.setLogText(null,param,event);
+            mTXCloudVideoView.setLogText(null, param, event);
         }
         if (event == TXLiveConstants.PLAY_EVT_PLAY_PROGRESS) {
             if (mStartSeek) {
@@ -309,7 +311,7 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
 
         } else if (event == TXLiveConstants.PLAY_EVT_PLAY_END) {
             if (mProgressTime != null) {
-                mProgressTime.setText(String.format(Locale.CHINA, "%s","00:00/00:00"));
+                mProgressTime.setText(String.format(Locale.CHINA, "%s", "00:00/00:00"));
             }
             if (mSeekBar != null) {
                 mSeekBar.setProgress(0);

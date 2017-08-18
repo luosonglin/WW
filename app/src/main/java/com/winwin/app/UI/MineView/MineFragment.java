@@ -196,6 +196,12 @@ public class MineFragment extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //此处避免you cannot start a load for a destroyed activity，因为glide不在主线程
+        Glide.with(getActivity().getApplicationContext()).pauseRequests();
+    }
 
     @OnClick({R.id.avatar, R.id.credit, R.id.my_winwin, R.id.customer_recommend, R.id.my_send, R.id.my_collect, R.id.my_more})
     public void onClick(View view) {

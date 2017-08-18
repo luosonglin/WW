@@ -68,6 +68,7 @@ public class Data {
 
     /**
      * 主页的分页标签
+     * 1、首页； 2、推荐页； 3、空间页（列表）； 4、个人页； 5、空间页（地图）
      */
     public static Integer page = 1;
 

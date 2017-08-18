@@ -14,8 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.winwin.app.Constant.Data;
 import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.MainActivity;
@@ -28,7 +28,6 @@ import com.winwin.app.UI.Entity.IndexBannerDto;
 import com.winwin.app.UI.Entity.IndexRecommandParkDto;
 import com.winwin.app.UI.Entity.IndexStaticDateDto;
 import com.winwin.app.UI.ImView.ConversationActivity;
-import com.winwin.app.UI.ItemDetailView.ParkDetailActivity;
 import com.winwin.app.UI.MineView.MyCreditActivity;
 import com.winwin.app.UI.SearchView.SearchParkActivity;
 import com.winwin.app.Widget.GlideImageLoader;
@@ -305,20 +304,20 @@ public class RecommendFragment extends Fragment {
 
     private void initListener() {
 
-        mLatestRecommendationAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                startActivity(new Intent(getActivity(), ParkDetailActivity.class));
-                Toast.makeText(getActivity(), "点击了" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-        mLatestRecommendationAdapter.setOnRecyclerViewItemLongClickListener(new BaseQuickAdapter.OnRecyclerViewItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(View view, int position) {
-                Toast.makeText(getActivity(), "长按了" + position, Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
+//        mLatestRecommendationAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                startActivity(new Intent(getActivity(), ParkDetailActivity.class));
+//                Toast.makeText(getActivity(), "点击了" + position, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        mLatestRecommendationAdapter.setOnRecyclerViewItemLongClickListener(new BaseQuickAdapter.OnRecyclerViewItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(View view, int position) {
+//                Toast.makeText(getActivity(), "长按了" + position, Toast.LENGTH_SHORT).show();
+//                return true;
+//            }
+//        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -351,6 +350,13 @@ public class RecommendFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //此处避免you cannot start a load for a destroyed activity，因为glide不在主线程
+        Glide.with(getActivity().getApplicationContext()).pauseRequests();
+    }
+
     @OnClick({R.id.search_iv, R.id.conversation_iv, R.id.map_llyt, R.id.earn_llyt, R.id.my_llyt, R.id.brokerage_llyt})
     public void onClick(View view) {
         Intent intent;
@@ -366,7 +372,8 @@ public class RecommendFragment extends Fragment {
             case R.id.map_llyt:
                 intent = new Intent(getActivity(), MainActivity.class);
 //                intent.putExtra("ReturnToMainActivity", 3);
-                Data.setPage(3);
+//                Data.setPage(3);
+                Data.setPage(5);
                 startActivity(intent);
                 getActivity().finish();
                 break;

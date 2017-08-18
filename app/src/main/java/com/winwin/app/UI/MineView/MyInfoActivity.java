@@ -326,5 +326,12 @@ public class MyInfoActivity extends AppCompatActivity {
             }
         }, part);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //此处避免you cannot start a load for a destroyed activity，因为glide不在主线程
+        Glide.with(getApplicationContext()).pauseRequests();
+    }
 }
 

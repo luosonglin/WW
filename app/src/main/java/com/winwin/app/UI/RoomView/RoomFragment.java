@@ -31,6 +31,7 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
+import com.winwin.app.Constant.Data;
 import com.winwin.app.Data.HttpData.HttpData;
 import com.winwin.app.R;
 import com.winwin.app.UI.Adapter.HotAreaAdapter;
@@ -72,7 +73,7 @@ public class RoomFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private ImageView searchIv;
+    private RelativeLayout searchRlyt;
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
@@ -146,8 +147,8 @@ public class RoomFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_room, container, false);
 
-        searchIv = (ImageView) view.findViewById(R.id.search_iv);
-        searchIv.setOnClickListener(new View.OnClickListener() {
+        searchRlyt = (RelativeLayout) view.findViewById(R.id.search_rlyt);
+        searchRlyt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), SearchParkActivity.class));
@@ -233,6 +234,14 @@ public class RoomFragment extends Fragment {
         mMapRecyclerView.setAdapter(mMapQuickAdapter);
 
 //        selectAppParksVo.setOfficeSuperType(type);
+
+        if (Data.getPage() == 3) {
+            isMap = false;
+        } else if (Data.getPage() == 5) {
+            isMap = true;
+        } else {
+            isMap = false;
+        }
         setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
 
         return view;
@@ -457,9 +466,6 @@ public class RoomFragment extends Fragment {
             aMap.getUiSettings().setZoomControlsEnabled(false);//内置的缩放控制键，显示在地图的右下角。默认情况下是开启true的
         }
 
-        //刚打开map的第一屏
-        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(convertToLatLng(centerpoint), 13));
-
         selectAppParksVo.setOfficeSuperType(1);
         HttpData.getInstance().HttpDataGetParksByConditions(new Observer<List<ParkDto>>() {
             @Override
@@ -468,8 +474,36 @@ public class RoomFragment extends Fragment {
             }
 
             @Override
-            public void onNext(@NonNull List<ParkDto> parkDtoPageDto) {
-                mMapQuickAdapter.addData(parkDtoPageDto);
+            public void onNext(@NonNull final List<ParkDto> parkDtoPageDto) {
+                mMapQuickAdapter.setNewData(parkDtoPageDto);
+                mMapQuickAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+
+                    }
+                });
+                mMapQuickAdapter.setOnRecyclerViewItemChildClickListener(new BaseQuickAdapter.OnRecyclerViewItemChildClickListener() {
+                    @Override
+                    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                        ParkDto parkDto = (ParkDto) adapter.getItem(position);
+                        switch (view.getId()) {
+                            case R.id.item_map:
+                                //地图焦点
+                                centerpoint.setLatitude(parkDtoPageDto.get(position).getLatitude());
+                                centerpoint.setLongitude(parkDtoPageDto.get(position).getLongitude());
+                                //刚打开map的第一屏
+                                aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(convertToLatLng(centerpoint), 13));
+                                break;
+                        }
+                    }
+                });
+
+                //地图焦点
+                centerpoint.setLatitude(parkDtoPageDto.get(0).getLatitude());
+                centerpoint.setLongitude(parkDtoPageDto.get(0).getLongitude());
+                //刚打开map的第一屏
+                aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(convertToLatLng(centerpoint), 13));
+
                 for (ParkDto i : parkDtoPageDto) {
                     aMap.addMarker(new MarkerOptions().position(new LatLng(i.getLatitude(), i.getLongitude()))
                             .title(i.getName())
@@ -480,6 +514,8 @@ public class RoomFragment extends Fragment {
                             .icon(BitmapDescriptorFactory.fromPath(i.getHomeImage())));
                 }
                 Log.e(TAG, "onNext");
+
+
             }
 
             @Override

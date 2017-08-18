@@ -138,8 +138,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //        mPhoneView.setText("13761067953");
 //        mPasswordView.setText("winwin123");
 
-        mPhoneView.setText("18817802295");
-        mPasswordView.setText("123");
+//        mPhoneView.setText("18817802295");
+//        mPasswordView.setText("123");
 
         Button mPhoneSignInButton = (Button) findViewById(R.id.phone_sign_in_button);
         mPhoneSignInButton.setOnClickListener(new OnClickListener() {

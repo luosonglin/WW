@@ -13,24 +13,42 @@
         android:layout_height="?attr/actionBarSize">
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:id="@+id/search_rlyt"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:background="@color/colorPrimary"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="50dp"
+            android:layout_toRightOf="@+id/back"
+            android:background="@drawable/textview_radius_grey"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/search_iv"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/roomfragment_search" />
+
+            <TextView
+                android:id="@+id/search_edit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/index_search_btn"
-                android:scaleType="fitXY"/>
+                android:layout_height="28dp"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="6dp"
+                android:background="@drawable/search_bar_bg"
+                android:text="请输入楼盘名称"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"
+                android:paddingRight="0dp"
+                android:singleLine="true"
+                android:textColor="@color/grey"
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <ImageView

@@ -341,6 +341,8 @@ public class MainActivity extends AppCompatActivity
             case 4:
                 setTabSelection(tabMine);
                 break;
+            case 5:
+                setTabSelection(tabRoom);
         }
         super.onResume();
     }
