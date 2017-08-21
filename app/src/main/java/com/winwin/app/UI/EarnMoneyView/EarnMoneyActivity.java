@@ -24,7 +24,6 @@ import com.winwin.app.UI.Entity.HotAreaDto;
 import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.Entity.RequireDto;
 import com.winwin.app.UI.Entity.SelectRequirementVo;
-import com.winwin.app.Util.ToastUtils;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.container.DefaultHeader;
 import com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity;
@@ -232,7 +231,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
     public void showNoData() {
         //设置无数据显示页面
         progress.showEmpty(getResources().getDrawable(R.mipmap.monkey_nodata), Constant.EMPTY_TITLE, Constant.EMPTY_CONTEXT);
-        ToastUtils.show(EarnMoneyActivity.this, "暂无数据");
+//        ToastUtils.show(EarnMoneyActivity.this, "暂无数据");
     }
 
     @OnClick({R.id.publicDateDesc, R.id.followDesc, R.id.district_rlyt, R.id.area_rlyt, R.id.day_rent_rlyt})
@@ -276,7 +275,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
     }
 
     /**
-     * @param type 1行业；2需求面积；3区域
+     * @param type 1行业；2需求面积；3目标区域
      */
     private void initCoreVIew(final int type) {
         if (mCoreRecyclerView.getVisibility() == View.GONE) {
@@ -311,6 +310,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
 
                     @Override
                     public void onNext(List<HotAreaDto> data) {
+                        data.add(new HotAreaDto(0, "不限"));
                         mCoreQuickAdapter.addData(data);
                         for (HotAreaDto i : data) {
                             districts.add(i.getId());
@@ -324,9 +324,10 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
                         selectRequirementVo.setAreaId(districts.get(position));
 //                        setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
                         mCoreRecyclerView.setVisibility(View.GONE);
-                        districtTv.setTextColor(Color.GRAY);
+                        districtTv.setTextColor(getResources().getColor(R.color.grey));
 //                        present.LoadData(true, selectRequirementVo);
-                        onRefresh();
+//                        onRefresh();
+                        present.LoadData(false, selectRequirementVo);
                     }
                 });
             } else {
@@ -357,6 +358,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
 
                     @Override
                     public void onNext(@NonNull List<MetaDataDto> metaDataDtos) {
+                        metaDataDtos.add(new MetaDataDto(0, "不限"));
                         mCoreQuickAdapter.addData(metaDataDtos);
                         for (MetaDataDto i : metaDataDtos) {
                             if (type == 1) {
@@ -387,15 +389,16 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
                     public void onItemClick(View view, int position) {
                         if (type == 1) {
                             selectRequirementVo.setBelongNetId(areas.get(position));
-                            areaTv.setTextColor(Color.GRAY);
+                            areaTv.setTextColor(getResources().getColor(R.color.grey));
                         } else if (type == 2) {
                             selectRequirementVo.setRequireAreaRangId(dayRents.get(position));
-                            dayRentTv.setTextColor(Color.GRAY);
+                            dayRentTv.setTextColor(getResources().getColor(R.color.grey));
                         }
                         mCoreRecyclerView.setVisibility(View.GONE);
 
 //                        present.LoadData(true, selectRequirementVo);
-                        onRefresh();
+//                        onRefresh();
+                        present.LoadData(false, selectRequirementVo);
                     }
                 });
             }
