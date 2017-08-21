@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.winwin.app.Constant.Data;
 import com.winwin.app.MVP.Presenter.AreaListPresent;
 import com.winwin.app.MVP.View.AreaListView;
 import com.winwin.app.R;
@@ -76,8 +77,10 @@ public class SearchParkActivity extends AppCompatActivity implements AreaListVie
         mHistoryRecyclerView = (RecyclerView) findViewById(R.id.history_list);
         mHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mHistoryRecyclerView.setHasFixedSize(true);
+
+        mHistoryData.addAll(Data.getSearchHistory());
         mHistoryQuickAdapter = new HistoryAdapter(R.layout.item_history, mHistoryData);
-        mHistoryQuickAdapter.openLoadMore(2, true);
+        mHistoryQuickAdapter.openLoadMore(3, true);
         mHistoryRecyclerView.addItemDecoration(new DividerItemDecoration(SearchParkActivity.this, DividerItemDecoration.VERTICAL));
         mHistoryRecyclerView.setAdapter(mHistoryQuickAdapter);
     }
@@ -135,6 +138,7 @@ public class SearchParkActivity extends AppCompatActivity implements AreaListVie
                     intent = new Intent(SearchParkActivity.this, ParkNameListActivity.class);
                     intent.putExtra("parkName", searchEdit.getText().toString().trim());
                     mHistoryData.add(searchEdit.getText().toString().trim());
+                    Data.setSearchHistory(mHistoryData);
                     startActivity(intent);
                 }
                 break;

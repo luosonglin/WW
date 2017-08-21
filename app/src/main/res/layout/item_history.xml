@@ -1,15 +1,15 @@
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="30dp"
-    android:layout_marginTop="14dp"
+    android:layout_height="32dp"
     android:orientation="horizontal"
+    android:background="@color/grey1"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="6dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginRight="6dp"
         android:gravity="left|center_vertical"
         android:text="哈"
