@@ -161,6 +161,26 @@ public class RoomFragment extends Fragment {
             tabLayout.setTabMode(TabLayout.SCROLL_AXIS_HORIZONTAL);//tablayout设置可以滑动
         }
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                Log.e(TAG, "ee onTabSelected" + tab.getPosition() +" "+ tab.getCustomView());
+//                setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
+                if (isMap) {
+                    initMap(tab.getPosition()+1);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                Log.e(TAG, "ee onTabUnselected" + tab.getPosition() +" "+ tab.getCustomView());
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                Log.e(TAG, "ee onTabReselected" + tab.getPosition() +" "+ tab.getCustomView());
+            }
+        });
 
         mCoreRecyclerView = (RecyclerView) view.findViewById(R.id.core_rv_list);
         mCoreRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -256,7 +276,7 @@ public class RoomFragment extends Fragment {
             mMapRelativeLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.GONE);
             mapView.onCreate(savedInstanceState);// 此方法必须重写
-            initMap();
+            initMap(selectAppParksVo.getOfficeSuperType());
         } else {
             mMapRelativeLayout.setVisibility(View.GONE);
             viewPager.setVisibility(View.VISIBLE);
@@ -458,15 +478,17 @@ public class RoomFragment extends Fragment {
 
     /**
      * map
+     *
+     * @param type 1、产业园 2、写字楼 3、众创空间
      */
-    private void initMap() {
+    private void initMap(int type) {
         if (aMap == null) {
             aMap = mapView.getMap();
             aMap.getUiSettings().setLogoBottomMargin(-50);//隐藏logo
             aMap.getUiSettings().setZoomControlsEnabled(false);//内置的缩放控制键，显示在地图的右下角。默认情况下是开启true的
         }
 
-        selectAppParksVo.setOfficeSuperType(1);
+        selectAppParksVo.setOfficeSuperType(type);
         HttpData.getInstance().HttpDataGetParksByConditions(new Observer<List<ParkDto>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
@@ -519,8 +541,6 @@ public class RoomFragment extends Fragment {
                     }
                 }
                 Log.e(TAG, "onNext");
-
-
             }
 
             @Override

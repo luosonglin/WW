@@ -178,5 +178,6 @@ public class RoomTab1Fragment extends Fragment implements BaseQuickAdapter.Reque
     public void showNoData() {
         //设置无数据显示页面
         progress.showEmpty(getResources().getDrawable(R.mipmap.monkey_nodata),Constant.EMPTY_TITLE,Constant.EMPTY_CONTEXT);
+        springView.onFinishFreshAndLoad();
     }
 }
