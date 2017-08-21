@@ -151,6 +151,12 @@ public class MyCollectParkTabFragment extends Fragment implements BaseQuickAdapt
     public void showNoData() {
         //设置无数据显示页面
         progress.showEmpty(getResources().getDrawable(R.mipmap.monkey_nodata),Constant.EMPTY_TITLE,Constant.EMPTY_CONTEXT);
+        springView.onFinishFreshAndLoad();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        present.LoadData(false);
+    }
 }
