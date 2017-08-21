@@ -521,7 +521,7 @@ public class RoomFragment extends Fragment {
                 });
 
                 //地图焦点
-                if (parkDtoPageDto.size() != 0) {
+                if (parkDtoPageDto.size() > 0) {
                     centerpoint.setLatitude(parkDtoPageDto.get(0).getLatitude());
                     centerpoint.setLongitude(parkDtoPageDto.get(0).getLongitude());
                 }

@@ -116,9 +116,11 @@ public class RequireDetailActivity extends AppCompatActivity {
 
             @Override
             public void onNext(@NonNull final RequireDto requireDto) {
-                Glide.with(RequireDetailActivity.this)
-                        .load(requireDto.getEffectImgs().get(0).getImagePath())
-                        .into((ImageView) findViewById(R.id.img));
+                if (requireDto.getEffectImgs().size() > 0) {
+                    Glide.with(RequireDetailActivity.this)
+                            .load(requireDto.getEffectImgs().get(0).getImagePath())
+                            .into((ImageView) findViewById(R.id.img));
+                }
                 name.setText(requireDto.getRequireTitle());
                 time.setText(DateUtils.formatDate(requireDto.getCreateTime(), DateUtils.TYPE_04));
                 times.setText(requireDto.getBrowseNum() + "次浏览");

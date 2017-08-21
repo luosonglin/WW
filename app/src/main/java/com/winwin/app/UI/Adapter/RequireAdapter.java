@@ -27,11 +27,12 @@ public class RequireAdapter extends BaseQuickAdapter<RequireDto> {
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
-        Glide.with(mContext)
-                .load(item.getEffectImgs().get(0).getImagePath())
-                .apply(options)
-                .into((ImageView) helper.getView(R.id.image));
-
+        if (item.getEffectImgs().size() > 0) {
+            Glide.with(mContext)
+                    .load(item.getEffectImgs().get(0).getImagePath())
+                    .apply(options)
+                    .into((ImageView) helper.getView(R.id.image));
+        }
         helper.setText(R.id.name, item.getRequireTitle())
                 .setText(R.id.target, "目标区域：" + item.getRequireAreaName())
                 .setText(R.id.area, "需求面积：" + item.getRequireAreaRangDisplay() + "平方米")
