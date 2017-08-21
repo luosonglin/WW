@@ -396,6 +396,36 @@ public class SendRequireActivity extends AppCompatActivity {
 
                 break;
             case R.id.buildllyt:
+                //非空判断
+                if (requireTitle.getText().toString().trim().equals("")) {
+                    ToastUtils.show(SendRequireActivity.this, "请填写需求标题");
+                    return;
+                }
+                if (files.size() <= 0) {
+                    ToastUtils.show(SendRequireActivity.this, "请添加图片");
+                    return;
+                }
+                if (pubRequireCompany.getText().toString().trim().equals("")) {
+                    ToastUtils.show(SendRequireActivity.this, "请填写公司名称");
+                    return;
+                }
+                if (requireDto.getRequireAreaName().equals("")) {
+                    ToastUtils.show(SendRequireActivity.this, "请选择目标区域");
+                    return;
+                }
+                if (requireDto.getBelongIndustryDisPlay().equals("")) {
+                    ToastUtils.show(SendRequireActivity.this, "请选择目所属行业");
+                    return;
+                }
+                if (requireDto.getRequireAreaRangDisplay().equals("")) {
+                    ToastUtils.show(SendRequireActivity.this, "请选择需求面积");
+                    return;
+                }
+                if (description.getText().toString().trim().equals("")) {
+                    ToastUtils.show(SendRequireActivity.this, "请填写描述信息");
+                    return;
+                }
+
                 for (HotAreaDto i : requireAreaNames) {
                     if (requireDto.getRequireAreaName().equals(i.getName())) {
                         requireDto.setRequireAreaIdArray(new String[]{i.getId() + ""});

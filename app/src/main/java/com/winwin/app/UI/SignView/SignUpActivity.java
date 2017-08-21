@@ -460,7 +460,7 @@ public class SignUpActivity extends AppCompatActivity {
 //                        return;
 //                    }
                     if (files.size() > 0) {
-                        userRegisterVo.setHeadPicUrl(filesw.get(0).getImagePath());
+                        userRegisterVo.setHeadPicUrl(files.get(0).getImagePath());
                     } else {
                         userRegisterVo.setHeadPicUrl("");
                     }
