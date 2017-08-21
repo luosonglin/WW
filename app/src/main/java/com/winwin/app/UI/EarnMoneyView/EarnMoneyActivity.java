@@ -274,6 +274,8 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
         }
     }
 
+    List<HotAreaDto> mHotAreaDto = new ArrayList<>();
+    List<MetaDataDto> mMetaDataDtos = new ArrayList<>();
     /**
      * @param type 1行业；2需求面积；3目标区域
      */
@@ -315,6 +317,8 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
                         for (HotAreaDto i : data) {
                             districts.add(i.getId());
                         }
+                        mHotAreaDto.clear();
+                        mHotAreaDto.addAll(data);
                         Log.e(TAG, "onNext");
                     }
                 });
@@ -325,8 +329,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
 //                        setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
                         mCoreRecyclerView.setVisibility(View.GONE);
                         districtTv.setTextColor(getResources().getColor(R.color.grey));
-//                        present.LoadData(true, selectRequirementVo);
-//                        onRefresh();
+                        districtTv.setText(mHotAreaDto.get(position).getName());
                         present.LoadData(false, selectRequirementVo);
                     }
                 });
@@ -368,6 +371,8 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
                             }
                         }
 
+                        mMetaDataDtos.clear();
+                        mMetaDataDtos.addAll(metaDataDtos);
                         Log.e(TAG, "onNext");
                     }
 
@@ -390,14 +395,14 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
                         if (type == 1) {
                             selectRequirementVo.setBelongNetId(areas.get(position));
                             areaTv.setTextColor(getResources().getColor(R.color.grey));
+                            areaTv.setText(mMetaDataDtos.get(position).getDataDisplay());
                         } else if (type == 2) {
                             selectRequirementVo.setRequireAreaRangId(dayRents.get(position));
                             dayRentTv.setTextColor(getResources().getColor(R.color.grey));
+                            dayRentTv.setText(mMetaDataDtos.get(position).getDataDisplay());
                         }
                         mCoreRecyclerView.setVisibility(View.GONE);
 
-//                        present.LoadData(true, selectRequirementVo);
-//                        onRefresh();
                         present.LoadData(false, selectRequirementVo);
                     }
                 });
