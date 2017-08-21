@@ -353,6 +353,8 @@ public class RoomFragment extends Fragment {
         }
     }
 
+    List<HotAreaDto> mHotAreaDto = new ArrayList<>();
+    List<MetaDataDto> mMetaDataDtos = new ArrayList<>();
     private void initCoreView(final int type, final Bundle savedInstanceState) {
         if (mCoreRecyclerView.getVisibility() == View.GONE) {
             if (type == 1) {    //区域弹窗
@@ -393,6 +395,7 @@ public class RoomFragment extends Fragment {
                             districts.add(i.getId());
                         }
                         Log.e(TAG, "onNext");
+                        mHotAreaDto.addAll(data);
                     }
                 });
                 mCoreQuickAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
@@ -402,6 +405,7 @@ public class RoomFragment extends Fragment {
                         setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
                         mCoreRecyclerView.setVisibility(View.GONE);
                         districtTv.setTextColor(getResources().getColor(R.color.grey));
+                        districtTv.setText(mHotAreaDto.get(position).getName());
                     }
                 });
             } else {
@@ -434,11 +438,9 @@ public class RoomFragment extends Fragment {
                             }
                             Log.e(TAG, "metaData " + i.getDataDisplay());
                         }
-//                        if (type == 2) {
-//                            areas.add(0);
-//                        } else if (type == 3) {
-//                            dayRents.add(0);
-//                        }
+
+                        mMetaDataDtos.clear();
+                        mMetaDataDtos.addAll(metaDataDtos);
 
                         Log.e(TAG, "onNext");
                     }
@@ -462,9 +464,11 @@ public class RoomFragment extends Fragment {
                         if (type == 2) {
                             selectAppParksVo.setAreaRangeId(areas.get(position));
                             areaTv.setTextColor(getResources().getColor(R.color.grey));
+                            areaTv.setText(mMetaDataDtos.get(position).getDataDisplay());
                         } else if (type == 3) {
                             selectAppParksVo.setDayRentId(dayRents.get(position));
                             dayRentTv.setTextColor(getResources().getColor(R.color.grey));
+                            dayRentTv.setText(mMetaDataDtos.get(position).getDataDisplay());
                         }
                         setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
                         mCoreRecyclerView.setVisibility(View.GONE);
