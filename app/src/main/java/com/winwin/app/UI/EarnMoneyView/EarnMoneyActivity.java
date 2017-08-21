@@ -24,6 +24,7 @@ import com.winwin.app.UI.Entity.HotAreaDto;
 import com.winwin.app.UI.Entity.MetaDataDto;
 import com.winwin.app.UI.Entity.RequireDto;
 import com.winwin.app.UI.Entity.SelectRequirementVo;
+import com.winwin.app.Util.ToastUtils;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
 import com.xiaochao.lcrapiddeveloplibrary.container.DefaultHeader;
 import com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity;
@@ -126,6 +127,7 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         //如果Item高度固定  增加该属性能够提高效率
         mRecyclerView.setHasFixedSize(true);
+
         //设置页面为加载中..
         progress.showLoading();
         //设置适配器
@@ -139,8 +141,6 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
 //        present = new BookListPresent(this);
         present = new RequireListPresent(this);
         //请求网络数据
-//        present.LoadData("1",PageIndex,false);
-
         present.LoadData(false, selectRequirementVo);
 
         mCoreRecyclerView = (RecyclerView) findViewById(R.id.core_rv_list);
@@ -231,7 +231,11 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
     public void showNoData() {
         //设置无数据显示页面
         progress.showEmpty(getResources().getDrawable(R.mipmap.monkey_nodata), Constant.EMPTY_TITLE, Constant.EMPTY_CONTEXT);
-//        ToastUtils.show(EarnMoneyActivity.this, "暂无数据");
+        ToastUtils.show(EarnMoneyActivity.this, "暂无数据");
+        List<RequireDto> data = new ArrayList<>();
+        data.clear();
+        mQuickAdapter.setNewData(data);
+
     }
 
     @OnClick({R.id.publicDateDesc, R.id.followDesc, R.id.district_rlyt, R.id.area_rlyt, R.id.day_rent_rlyt})
