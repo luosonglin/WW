@@ -499,19 +499,24 @@ public class RoomFragment extends Fragment {
                 });
 
                 //地图焦点
-                centerpoint.setLatitude(parkDtoPageDto.get(0).getLatitude());
-                centerpoint.setLongitude(parkDtoPageDto.get(0).getLongitude());
+                if (parkDtoPageDto.size() != 0) {
+                    centerpoint.setLatitude(parkDtoPageDto.get(0).getLatitude());
+                    centerpoint.setLongitude(parkDtoPageDto.get(0).getLongitude());
+                }
                 //刚打开map的第一屏
                 aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(convertToLatLng(centerpoint), 13));
 
-                for (ParkDto i : parkDtoPageDto) {
-                    aMap.addMarker(new MarkerOptions().position(new LatLng(i.getLatitude(), i.getLongitude()))
-                            .title(i.getName())
-                            .autoOverturnInfoWindow(true)
-                            .snippet(i.getDistanceMetroDesc())
+                aMap.clear();
+                if (parkDtoPageDto.size() != 0) {
+                    for (ParkDto i : parkDtoPageDto) {
+                        aMap.addMarker(new MarkerOptions().position(new LatLng(i.getLatitude(), i.getLongitude()))
+                                .title(i.getName())
+                                .autoOverturnInfoWindow(true)
+                                .snippet(i.getDistanceMetroDesc())
 //                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.haha)));
 //                            .icon(BitmapDescriptorFactory.fromBitmap(returnBitMap("http://content.52pk.com/files/100623/2230_102437_1_lit.jpg"))));
-                            .icon(BitmapDescriptorFactory.fromPath(i.getHomeImage())));
+                                .icon(BitmapDescriptorFactory.fromPath(i.getHomeImage())));
+                    }
                 }
                 Log.e(TAG, "onNext");
 
