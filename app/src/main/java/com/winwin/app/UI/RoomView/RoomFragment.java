@@ -94,6 +94,7 @@ public class RoomFragment extends Fragment {
     private List<Integer> districts = new ArrayList<>();
     private List<Integer> areas = new ArrayList<>();
     private List<Integer> dayRents = new ArrayList<>();
+    private Integer mType = 1;//产业园、写字楼、众创空间
 
     /*
      * map
@@ -167,8 +168,10 @@ public class RoomFragment extends Fragment {
                 Log.e(TAG, "ee onTabSelected" + tab.getPosition() +" "+ tab.getCustomView());
 //                setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
                 if (isMap) {
-                    initMap(tab.getPosition()+1);
+                    selectAppParksVo.setOfficeSuperType(tab.getPosition()+1);
+                    initMap(selectAppParksVo);
                 }
+                mType = tab.getPosition()+1;
             }
 
             @Override
@@ -276,7 +279,8 @@ public class RoomFragment extends Fragment {
             mMapRelativeLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.GONE);
             mapView.onCreate(savedInstanceState);// 此方法必须重写
-            initMap(selectAppParksVo.getOfficeSuperType());
+            Log.e(TAG, "setUpViewPager() "+selectAppParksVo.getOfficeSuperType()+" "+mType);
+            initMap(selectAppParksVo);
         } else {
             mMapRelativeLayout.setVisibility(View.GONE);
             viewPager.setVisibility(View.VISIBLE);
@@ -343,6 +347,12 @@ public class RoomFragment extends Fragment {
         }
 
         @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+//            super.destroyItem(container, position, object);
+            container.removeView(mFragments.get(position).getView());
+        }
+
+        @Override
         public int getCount() {
             return mFragments.size();
         }
@@ -402,7 +412,14 @@ public class RoomFragment extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         selectAppParksVo.setAreaId(districts.get(position));
-                        setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
+                        if (isMap) {
+                            Log.e(TAG, "initCoreView() "+ mType);
+                            selectAppParksVo.setOfficeSuperType(mType);
+                            initMap(selectAppParksVo);
+                        } else {
+                            setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
+                        }
+
                         mCoreRecyclerView.setVisibility(View.GONE);
                         districtTv.setTextColor(getResources().getColor(R.color.grey));
                         districtTv.setText(mHotAreaDto.get(position).getName());
@@ -470,7 +487,13 @@ public class RoomFragment extends Fragment {
                             dayRentTv.setTextColor(getResources().getColor(R.color.grey));
                             dayRentTv.setText(mMetaDataDtos.get(position).getDataDisplay());
                         }
-                        setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
+                        if (isMap) {
+                            Log.e(TAG, "initCoreView() "+ mType);
+                            selectAppParksVo.setOfficeSuperType(mType);
+                            initMap(selectAppParksVo);
+                        } else {
+                            setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
+                        }
                         mCoreRecyclerView.setVisibility(View.GONE);
                     }
                 });
@@ -485,14 +508,15 @@ public class RoomFragment extends Fragment {
      *
      * @param type 1、产业园 2、写字楼 3、众创空间
      */
-    private void initMap(int type) {
+    private void initMap(SelectAppParksVo selectAppParksVo) {
+        Log.e(TAG, "initMap() "+selectAppParksVo.getOfficeSuperType());
         if (aMap == null) {
             aMap = mapView.getMap();
             aMap.getUiSettings().setLogoBottomMargin(-50);//隐藏logo
             aMap.getUiSettings().setZoomControlsEnabled(false);//内置的缩放控制键，显示在地图的右下角。默认情况下是开启true的
         }
 
-        selectAppParksVo.setOfficeSuperType(type);
+//        selectAppParksVo.setOfficeSuperType(type);
         HttpData.getInstance().HttpDataGetParksByConditions(new Observer<List<ParkDto>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
@@ -541,6 +565,7 @@ public class RoomFragment extends Fragment {
                                 .snippet(i.getDistanceMetroDesc())
 //                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.haha)));
 //                            .icon(BitmapDescriptorFactory.fromBitmap(returnBitMap("http://content.52pk.com/files/100623/2230_102437_1_lit.jpg"))));
+//                                .icon(BitmapDescriptorFactory.from))
                                 .icon(BitmapDescriptorFactory.fromPath(i.getHomeImage())));
                     }
                 }
