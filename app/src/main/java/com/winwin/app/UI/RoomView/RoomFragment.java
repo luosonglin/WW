@@ -506,7 +506,7 @@ public class RoomFragment extends Fragment {
     /**
      * map
      *
-     * @param type 1、产业园 2、写字楼 3、众创空间
+     * @param selectAppParksVo  1、产业园 2、写字楼 3、众创空间
      */
     private void initMap(SelectAppParksVo selectAppParksVo) {
         Log.e(TAG, "initMap() "+selectAppParksVo.getOfficeSuperType());

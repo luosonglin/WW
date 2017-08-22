@@ -28,13 +28,20 @@ public class ParkMapActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView title;
     private BridgeWebView mWebView;
-    private static String URL = "http://winwin.jidichong.com/#/homeParkDetailMap?longitude=";
+    private String URL = "http://winwin.jidichong.com/#/homeParkDetailMap?longitude=";
+    private double latitude;
+    private double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_park_map);
         toolBar();
+
+//        latitude = getIntent().getExtras().getDouble("latitude");
+//        longitude = getIntent().getExtras().getDouble("longitude");
+        latitude = getIntent().getDoubleExtra("latitude", 0);
+        longitude = getIntent().getDoubleExtra("longitude", 0);
         initWebView();
     }
 
@@ -89,7 +96,7 @@ public class ParkMapActivity extends AppCompatActivity {
             settings.setPluginState(WebSettings.PluginState.ON_DEMAND);
         }
 
-        URL = URL + getIntent().getExtras().getDouble("longitude") + "&latitude=" + getIntent().getExtras().getDouble("latitude");
+        URL = URL + longitude + "&latitude=" + latitude;
         Log.e(TAG, URL);
         mWebView.loadUrl(URL);
 //        mWebView.addJavascriptInterface(new IndexFragment.JSHook(), "SetAndroidJavaScriptBridge");
