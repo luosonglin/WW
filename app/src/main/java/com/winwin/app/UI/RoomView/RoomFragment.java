@@ -94,7 +94,8 @@ public class RoomFragment extends Fragment {
     private List<Integer> districts = new ArrayList<>();
     private List<Integer> areas = new ArrayList<>();
     private List<Integer> dayRents = new ArrayList<>();
-    private Integer mType = 1;//产业园、写字楼、众创空间
+    private Integer mType = 1;//产业园、写字楼、众创空间(地图用)
+    private Integer mType2 = 0;//产业园、写字楼、众创空间(列表viewpager用)
 
     /*
      * map
@@ -172,6 +173,7 @@ public class RoomFragment extends Fragment {
                     initMap(selectAppParksVo);
                 }
                 mType = tab.getPosition()+1;
+                mType2 = tab.getPosition();
             }
 
             @Override
@@ -265,6 +267,8 @@ public class RoomFragment extends Fragment {
         } else {
             isMap = false;
         }
+
+
         setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
 
         return view;
@@ -284,16 +288,22 @@ public class RoomFragment extends Fragment {
         } else {
             mMapRelativeLayout.setVisibility(View.GONE);
             viewPager.setVisibility(View.VISIBLE);
+            Log.e(TAG, "isMap==false");
         }
 
         final IndexChildAdapter mIndexChildAdapter = new IndexChildAdapter(getChildFragmentManager());
 
+        Log.e(TAG, "setCurrentItem()1 "+mType2);
+        Data.setmType(mType2);
         mIndexChildAdapter.addFragment(new RoomTab1Fragment().newInstance(selectAppParksVo), "产业园");
         mIndexChildAdapter.addFragment(new RoomTab3Fragment().newInstance(selectAppParksVo), "写字楼");
         mIndexChildAdapter.addFragment(new RoomTab2Fragment().newInstance(selectAppParksVo), "众创空间");
 
         viewPager.setOffscreenPageLimit(3);//缓存view 的个数
         viewPager.setAdapter(mIndexChildAdapter);
+//        viewPager.setCurrentItem(mType-1);
+        viewPager.setCurrentItem(Data.getmType());
+        Log.e(TAG, "setCurrentItem()2 "+mType2);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -346,11 +356,11 @@ public class RoomFragment extends Fragment {
             return mFragments.get(position);
         }
 
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-//            super.destroyItem(container, position, object);
-            container.removeView(mFragments.get(position).getView());
-        }
+//        @Override
+//        public void destroyItem(ViewGroup container, int position, Object object) {
+////            super.destroyItem(container, position, object);
+//            container.removeView(mFragments.get(position).getView());
+//        }
 
         @Override
         public int getCount() {
@@ -412,11 +422,12 @@ public class RoomFragment extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         selectAppParksVo.setAreaId(districts.get(position));
+                        Log.e(TAG, "initCoreView() "+ mType);
                         if (isMap) {
-                            Log.e(TAG, "initCoreView() "+ mType);
                             selectAppParksVo.setOfficeSuperType(mType);
                             initMap(selectAppParksVo);
                         } else {
+                            selectAppParksVo.setOfficeSuperType(mType);
                             setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
                         }
 
@@ -487,11 +498,13 @@ public class RoomFragment extends Fragment {
                             dayRentTv.setTextColor(getResources().getColor(R.color.grey));
                             dayRentTv.setText(mMetaDataDtos.get(position).getDataDisplay());
                         }
+
+                        Log.e(TAG, "initCoreView() "+ mType);
                         if (isMap) {
-                            Log.e(TAG, "initCoreView() "+ mType);
                             selectAppParksVo.setOfficeSuperType(mType);
                             initMap(selectAppParksVo);
                         } else {
+                            selectAppParksVo.setOfficeSuperType(mType);
                             setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
                         }
                         mCoreRecyclerView.setVisibility(View.GONE);

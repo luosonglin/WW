@@ -118,4 +118,17 @@ public class Data {
     public static void setSearchHistory(List<String> searchHistory) {
         Data.searchHistory = searchHistory;
     }
+
+    /**
+     * 空间页列表viewpager3个大类
+     */
+    public static int mType=0;
+
+    public static int getmType() {
+        return mType;
+    }
+
+    public static void setmType(int mType) {
+        Data.mType = mType;
+    }
 }
