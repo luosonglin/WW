@@ -441,7 +441,6 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
          */
         collectRl = (RelativeLayout) findViewById(R.id.collect_rl);
         collectIv = (ImageView) findViewById(R.id.collect_iv);
-        collectIv.setTag("not_collected");
         collectRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -454,6 +453,10 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
 
                         @Override
                         public void onNext(@NonNull HttpResult httpResult) {
+                            if (!httpResult.getStatus().getCode().equals("0")) {
+                                ToastUtils.show(ParkDetailActivity.this, httpResult.getStatus().getMsg());
+                                return;
+                            }
                             collectIv.setTag("collected");
                             collectIv.setImageResource(R.mipmap.parkdetailactivity_fravorite_red);
                         }
@@ -471,7 +474,7 @@ public class ParkDetailActivity extends AppCompatActivity implements SpringView.
                             ToastUtils.show(ParkDetailActivity.this, "收藏成功");
                         }
                     }, getIntent().getExtras().getInt("parkId"), 2);
-                } else {
+                } else if (collectIv.getTag().equals("collected")){
                     HttpData.getInstance().HttpDataCancelCollectPark(new Observer<HttpResult>() {
                         @Override
                         public void onSubscribe(@NonNull Disposable d) {

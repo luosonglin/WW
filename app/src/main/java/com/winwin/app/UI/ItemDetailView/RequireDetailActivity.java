@@ -145,7 +145,7 @@ public class RequireDetailActivity extends AppCompatActivity {
                     a1.setTag("collected");
                     a1.setImageResource(R.mipmap.parkdetailactivity_fravorite_red);
                 } else {
-                    a1.setTag("not_collect");
+                    a1.setTag("not_collected");
                     a1.setImageResource(R.mipmap.parkdetailactivity_fravorite);
                 }
 
@@ -232,7 +232,7 @@ public class RequireDetailActivity extends AppCompatActivity {
                             ToastUtils.show(RequireDetailActivity.this, "收藏成功");
                         }
                     }, getIntent().getExtras().getInt("id"), 1);
-                } else {
+                } else if (a1.getTag().equals("collected")){
                     HttpData.getInstance().HttpDataCancelCollectPark(new Observer<HttpResult>() {
                         @Override
                         public void onSubscribe(@NonNull Disposable d) {

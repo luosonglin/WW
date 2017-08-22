@@ -402,6 +402,10 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
 
                         @Override
                         public void onNext(@NonNull HttpResult httpResult) {
+                            if (!httpResult.getStatus().getCode().equals("0")) {
+                                ToastUtils.show(MapParkDetailActivity.this, httpResult.getStatus().getMsg());
+                                return;
+                            }
                             collectIv.setTag("collected");
                             collectIv.setImageResource(R.mipmap.parkdetailactivity_fravorite_red);
                         }
@@ -419,7 +423,7 @@ public class MapParkDetailActivity extends AppCompatActivity implements SpringVi
                             ToastUtils.show(MapParkDetailActivity.this, "收藏成功");
                         }
                     }, getIntent().getExtras().getInt("parkId"), 2);
-                } else {
+                } else if (collectIv.getTag().equals("collected")){
                     HttpData.getInstance().HttpDataCancelCollectPark(new Observer<HttpResult>() {
                         @Override
                         public void onSubscribe(@NonNull Disposable d) {
