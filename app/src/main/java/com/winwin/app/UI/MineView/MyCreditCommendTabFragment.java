@@ -8,7 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.winwin.app.Constant.Constant;
 import com.winwin.app.MVP.Presenter.CreditCommendListPresent;
@@ -44,7 +43,6 @@ public class MyCreditCommendTabFragment extends Fragment implements BaseQuickAda
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
-        initListener();
     }
 
     private void initView(View root) {
@@ -84,30 +82,12 @@ public class MyCreditCommendTabFragment extends Fragment implements BaseQuickAda
         present.LoadData(false);
     }
 
-    private void initListener() {
-        //设置自动加载监听
-        mQuickAdapter.setOnLoadMoreListener(this);
-
-        mQuickAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(), "点击了"+position, Toast.LENGTH_SHORT).show();
-            }
-        });
-        mQuickAdapter.setOnRecyclerViewItemLongClickListener(new BaseQuickAdapter.OnRecyclerViewItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(View view, int position) {
-                Toast.makeText(getActivity(), "长按了"+position, Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
-    }
     //自动加载
     @Override
     public void onLoadMoreRequested() {
         PageIndex++;
 //        present.LoadData("1",PageIndex,true);
-        present.LoadData(true);
+        present.LoadData(false);
     }
     //下拉刷新
     @Override

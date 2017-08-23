@@ -43,7 +43,6 @@ public class MyCollectParkTabFragment extends Fragment implements BaseQuickAdapt
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
-        initListener();
     }
 
     private void initView(View root) {
@@ -75,16 +74,12 @@ public class MyCollectParkTabFragment extends Fragment implements BaseQuickAdapt
         present.LoadData(false);
     }
 
-    private void initListener() {
-        //设置自动加载监听
-        mQuickAdapter.setOnLoadMoreListener(this);
-    }
     //自动加载
     @Override
     public void onLoadMoreRequested() {
         PageIndex++;
 //        present.LoadData("1",PageIndex,true);
-        present.LoadData(true);
+        present.LoadData(false);
     }
     //下拉刷新
     @Override
