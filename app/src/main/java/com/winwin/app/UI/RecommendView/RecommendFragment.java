@@ -298,26 +298,7 @@ public class RecommendFragment extends Fragment {
             }
         });
 
-        initListener();
         return view;
-    }
-
-    private void initListener() {
-
-//        mLatestRecommendationAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, int position) {
-//                startActivity(new Intent(getActivity(), ParkDetailActivity.class));
-//                Toast.makeText(getActivity(), "点击了" + position, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        mLatestRecommendationAdapter.setOnRecyclerViewItemLongClickListener(new BaseQuickAdapter.OnRecyclerViewItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(View view, int position) {
-//                Toast.makeText(getActivity(), "长按了" + position, Toast.LENGTH_SHORT).show();
-//                return true;
-//            }
-//        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event

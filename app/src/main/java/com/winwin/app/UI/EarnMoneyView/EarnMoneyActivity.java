@@ -97,7 +97,6 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
         ButterKnife.bind(this);
         toolBar();
         initView();
-        initListener();
     }
 
     private void toolBar() {
@@ -148,20 +147,13 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
         mCoreRecyclerView.setLayoutManager(new LinearLayoutManager(EarnMoneyActivity.this));
         //如果Item高度固定  增加该属性能够提高效率
         mCoreRecyclerView.setHasFixedSize(true);
-
-    }
-
-    private void initListener() {
-        //设置自动加载监听
-        mQuickAdapter.setOnLoadMoreListener(this);
     }
 
     //自动加载
     @Override
     public void onLoadMoreRequested() {
         PageIndex++;
-//        present.LoadData("1",PageIndex,true);
-        present.LoadData(true, selectRequirementVo);
+        present.LoadData(false, selectRequirementVo);
     }
 
     //下拉刷新
@@ -175,13 +167,11 @@ public class EarnMoneyActivity extends AppCompatActivity implements BaseQuickAda
     //上啦加载  mRecyclerView内部集成的自动加载  上啦加载用不上   在其他View使用
     @Override
     public void onLoadmore() {
-
     }
 
     /*
     * MVP模式的相关状态
-    *
-    * */
+    */
     @Override
     public void showProgress() {
         progress.showLoading();

@@ -79,7 +79,6 @@ public class MyInfoActivity extends AppCompatActivity {
     private String userName = "";
     private String userAvatar = "";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

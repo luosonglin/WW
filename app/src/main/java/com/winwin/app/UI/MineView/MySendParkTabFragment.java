@@ -43,7 +43,6 @@ public class MySendParkTabFragment extends Fragment implements BaseQuickAdapter.
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
-        initListener();
     }
 
     private void initView(View root) {
@@ -75,24 +74,17 @@ public class MySendParkTabFragment extends Fragment implements BaseQuickAdapter.
         present.LoadData(false, 0);//需要根据项目审核状态查询 0 : 查询所有状态 ；1=未审核（审核中）；2=已审核（默认展示）；3=审核不通过
     }
 
-    private void initListener() {
-        //设置自动加载监听
-        mQuickAdapter.setOnLoadMoreListener(this);
-    }
-
     //自动加载
     @Override
     public void onLoadMoreRequested() {
         PageIndex++;
-//        present.LoadData("1",PageIndex,true);
-        present.LoadData(true, 0);
+        present.LoadData(false, 0);
     }
 
     //下拉刷新
     @Override
     public void onRefresh() {
         PageIndex = 1;
-//        present.LoadData("1",PageIndex,false);
         present.LoadData(false, 0);
     }
 

@@ -238,7 +238,6 @@ public class RoomFragment extends Fragment {
                     isMap = true;
                     setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
                 }
-
             }
         });
         mMapRelativeLayout = (RelativeLayout) view.findViewById(R.id.map_rlyt);
@@ -268,7 +267,6 @@ public class RoomFragment extends Fragment {
             isMap = false;
         }
 
-
         setUpViewPager(viewPager, isMap, savedInstanceState, selectAppParksVo);
 
         return view;
@@ -284,6 +282,7 @@ public class RoomFragment extends Fragment {
             viewPager.setVisibility(View.GONE);
             mapView.onCreate(savedInstanceState);// 此方法必须重写
             Log.e(TAG, "setUpViewPager() "+selectAppParksVo.getOfficeSuperType()+" "+mType);
+            selectAppParksVo.setOfficeSuperType(mType);
             initMap(selectAppParksVo);
         } else {
             mMapRelativeLayout.setVisibility(View.GONE);
