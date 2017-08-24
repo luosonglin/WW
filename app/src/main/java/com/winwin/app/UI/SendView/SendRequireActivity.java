@@ -284,113 +284,129 @@ public class SendRequireActivity extends AppCompatActivity {
         }, file);
     }
 
+    private String[] targetAreas = new String[]{};
+    private String[] industrys = new String[]{};
+    private String[] requestAreas = new String[]{};
+
     @OnClick({R.id.target_area_rlyt, R.id.industry_rlyt, R.id.request_area_rlyt, R.id.other_rlyt, R.id.buildllyt})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.target_area_rlyt:
-                HttpData.getInstance().HttpDataGetShanghaiHotAreas(new Observer<List<HotAreaDto>>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
+                if (targetAreas.length > 0) {
+                    showCoresPopupWindow(targetAreas, 1);
+                } else {
+                    HttpData.getInstance().HttpDataGetShanghaiHotAreas(new Observer<List<HotAreaDto>>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
 
-                    }
-
-                    @Override
-                    public void onNext(@NonNull List<HotAreaDto> hotAreaDtos) {
-                        requireAreaNames.addAll(hotAreaDtos);
-
-                        List<String> h = new ArrayList<>();
-                        for (HotAreaDto i : hotAreaDtos) {
-                            h.add(i.getName());
                         }
-                        String[] ha = h.toArray(new String[h.size()]);
 
-                        showCoresPopupWindow(ha, 1);
-                    }
+                        @Override
+                        public void onNext(@NonNull List<HotAreaDto> hotAreaDtos) {
+                            requireAreaNames.addAll(hotAreaDtos);
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        Log.e(TAG, "onError: " + e.getMessage()
-                                + "\n" + e.getCause()
-                                + "\n" + e.getLocalizedMessage()
-                                + "\n" + Arrays.toString(e.getStackTrace()));
-                    }
+                            List<String> h = new ArrayList<>();
+                            for (HotAreaDto i : hotAreaDtos) {
+                                h.add(i.getName());
+                            }
+                            targetAreas = h.toArray(new String[h.size()]);
 
-                    @Override
-                    public void onComplete() {
+                            showCoresPopupWindow(targetAreas, 1);
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            Log.e(TAG, "onError: " + e.getMessage()
+                                    + "\n" + e.getCause()
+                                    + "\n" + e.getLocalizedMessage()
+                                    + "\n" + Arrays.toString(e.getStackTrace()));
+                        }
 
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    });
+                }
                 break;
             case R.id.industry_rlyt:
-                HttpData.getInstance().HttpDataGetMetaDataList(new Observer<List<MetaDataDto>>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        Log.e(TAG, "onSubscribe");
-                    }
-
-                    @Override
-                    public void onNext(@NonNull List<MetaDataDto> metaDataDtos) {
-                        belongIndustryDisPlays.addAll(metaDataDtos);
-
-                        List<String> h = new ArrayList<>();
-                        for (MetaDataDto i : metaDataDtos) {
-                            h.add(i.getDataDisplay());
+                if (industrys.length > 0) {
+                    showCoresPopupWindow(industrys, 2);
+                } else {
+                    HttpData.getInstance().HttpDataGetMetaDataList(new Observer<List<MetaDataDto>>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
+                            Log.e(TAG, "onSubscribe");
                         }
-                        String[] ha = h.toArray(new String[h.size()]);
 
-                        showCoresPopupWindow(ha, 2);
-                        Log.e(TAG, "onNext");
-                    }
+                        @Override
+                        public void onNext(@NonNull List<MetaDataDto> metaDataDtos) {
+                            belongIndustryDisPlays.addAll(metaDataDtos);
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        Log.e(TAG, "onError: " + e.getMessage()
-                                + "\n" + e.getCause()
-                                + "\n" + e.getLocalizedMessage()
-                                + "\n" + Arrays.toString(e.getStackTrace()));
-                    }
+                            List<String> h = new ArrayList<>();
+                            for (MetaDataDto i : metaDataDtos) {
+                                h.add(i.getDataDisplay());
+                            }
 
-                    @Override
-                    public void onComplete() {
-                        Log.e(TAG, "onComplete");
-                    }
-                }, 1);
+                            industrys = h.toArray(new String[h.size()]);
+
+                            showCoresPopupWindow(industrys, 2);
+                            Log.e(TAG, "onNext");
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            Log.e(TAG, "onError: " + e.getMessage()
+                                    + "\n" + e.getCause()
+                                    + "\n" + e.getLocalizedMessage()
+                                    + "\n" + Arrays.toString(e.getStackTrace()));
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            Log.e(TAG, "onComplete");
+                        }
+                    }, 1);
+                }
                 break;
             case R.id.request_area_rlyt:
-                HttpData.getInstance().HttpDataGetMetaDataList(new Observer<List<MetaDataDto>>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        Log.e(TAG, "onSubscribe");
-                    }
-
-                    @Override
-                    public void onNext(@NonNull List<MetaDataDto> metaDataDtos) {
-                        requireAreaRangDisplays.addAll(metaDataDtos);
-
-                        List<String> h = new ArrayList<>();
-                        for (MetaDataDto i : metaDataDtos) {
-                            h.add(i.getDataDisplay());
+                if (requestAreas.length > 0) {
+                    showCoresPopupWindow(requestAreas, 3);
+                } else {
+                    HttpData.getInstance().HttpDataGetMetaDataList(new Observer<List<MetaDataDto>>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
+                            Log.e(TAG, "onSubscribe");
                         }
-                        String[] ha = h.toArray(new String[h.size()]);
 
-                        showCoresPopupWindow(ha, 3);
-                        Log.e(TAG, "onNext");
-                    }
+                        @Override
+                        public void onNext(@NonNull List<MetaDataDto> metaDataDtos) {
+                            requireAreaRangDisplays.addAll(metaDataDtos);
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        Log.e(TAG, "onError: " + e.getMessage()
-                                + "\n" + e.getCause()
-                                + "\n" + e.getLocalizedMessage()
-                                + "\n" + Arrays.toString(e.getStackTrace()));
-                    }
+                            List<String> h = new ArrayList<>();
+                            for (MetaDataDto i : metaDataDtos) {
+                                h.add(i.getDataDisplay());
+                            }
+                            requestAreas = h.toArray(new String[h.size()]);
 
-                    @Override
-                    public void onComplete() {
-                        Log.e(TAG, "onComplete");
-                    }
-                }, 2);
+                            showCoresPopupWindow(requestAreas, 3);
+                            Log.e(TAG, "onNext");
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            Log.e(TAG, "onError: " + e.getMessage()
+                                    + "\n" + e.getCause()
+                                    + "\n" + e.getLocalizedMessage()
+                                    + "\n" + Arrays.toString(e.getStackTrace()));
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            Log.e(TAG, "onComplete");
+                        }
+                    }, 2);
+                }
                 break;
             case R.id.other_rlyt:
 

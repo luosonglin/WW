@@ -30,10 +30,9 @@
 
                 <TextView
                     android:id="@+id/cancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
                     android:gravity="center"
                     android:text="取消"
                     android:textColor="@color/deepskyblue"
@@ -51,13 +50,12 @@
 
                 <TextView
                     android:id="@+id/purchase_time_confirm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="16dp"
-                    android:padding="10dp"
+                    android:gravity="center"
                     android:text="确定"
                     android:textColor="@color/deepskyblue"
                     android:textStyle="bold" />
@@ -65,8 +63,9 @@
 
             <NumberPicker
                 android:id="@+id/schools_picker"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
