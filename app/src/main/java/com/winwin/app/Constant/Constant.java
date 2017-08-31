@@ -12,6 +12,7 @@ public class Constant {
     //服务器路径
     public static final String API_SERVER_TEST = "http://106.14.0.72:8888";
     public static final String API_SERVER_RELEASE = "http://106.15.198.247:8888";
+    public static final String API_SERVER_PRODUCTION = "http://106.14.47.190:8888";
 
     public static final String FIRST_OPEN = "first_open";
 
