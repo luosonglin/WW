@@ -22,6 +22,7 @@ import android.webkit.WebViewClient;
 
 import com.github.lzyzsd.jsbridge.BridgeWebView;
 import com.snappydb.SnappydbException;
+import com.winwin.app.Constant.Constant;
 import com.winwin.app.R;
 import com.winwin.app.Util.DBUtils;
 
@@ -52,7 +53,7 @@ public class IndexFragment extends Fragment {
 
     private static final String TAG = IndexFragment.class.getSimpleName();
     private Toolbar toolbar;
-    private static String URL = "http://winwin.jidichong.com/#/workbench?token=";//+ Data.getUserToken();
+    private static String URL = Constant.H5_SERVER + "/#/workbench?token=";//+ Data.getUserToken();
 
     public IndexFragment() {
         // Required empty public constructor

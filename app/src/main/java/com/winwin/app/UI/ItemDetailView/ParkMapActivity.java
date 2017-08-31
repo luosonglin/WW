@@ -17,6 +17,7 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.github.lzyzsd.jsbridge.BridgeWebView;
+import com.winwin.app.Constant.Constant;
 import com.winwin.app.R;
 
 /**
@@ -28,7 +29,7 @@ public class ParkMapActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView title;
     private BridgeWebView mWebView;
-    private String URL = "http://winwin.jidichong.com/#/homeParkDetailMap?longitude=";
+    private String URL = Constant.H5_SERVER + "/#/homeParkDetailMap?longitude=";
     private double latitude;
     private double longitude;
 

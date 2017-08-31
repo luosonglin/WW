@@ -14,6 +14,9 @@ public class Constant {
     public static final String API_SERVER_RELEASE = "http://106.15.198.247:8888";
     public static final String API_SERVER_PRODUCTION = "http://106.14.47.190:8888";
 
+    //h5页面
+    public static final String H5_SERVER = "http://106.14.47.190:8000";
+
     public static final String FIRST_OPEN = "first_open";
 
     //sdk appid 由腾讯分配
