@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.winwin.app.MainActivity">
+    tools:context="com.winwin.android.MainActivity">
 
     <FrameLayout
         android:id="@+id/container"

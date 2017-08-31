@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.winwin.app.UI.SignView.SignUpActivity$SignUpPlaceholderFirstFragment">
+    tools:context="com.winwin.android.UI.SignView.SignUpActivity$SignUpPlaceholderFirstFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

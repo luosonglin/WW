@@ -131,7 +131,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <com.winwin.app.UI.CustomView.TCHorizontalScrollView
+        <com.winwin.android.UI.CustomView.TCHorizontalScrollView
             android:id="@+id/filterPicker"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -147,7 +147,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center" />
-        </com.winwin.app.UI.CustomView.TCHorizontalScrollView>
+        </com.winwin.android.UI.CustomView.TCHorizontalScrollView>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/material_recycler_view"

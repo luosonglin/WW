@@ -6,7 +6,7 @@
     android:padding="5dp"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context="com.winwin.app.UI.CustomView.DialogActivity">
+    tools:context="com.winwin.android.UI.CustomView.DialogActivity">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.winwin.app">
+    package="com.winwin.android">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -26,7 +26,7 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
     <application
-        android:name=".BaseApplication"
+        android:name="com.winwin.android.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -34,7 +34,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".UI.OtherView.SplashActivity"
+            android:name="com.winwin.android.UI.OtherView.SplashActivity"
             android:theme="@style/WelcomeTheme"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait">
@@ -44,11 +44,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
+        <activity android:name="com.winwin.android.MainActivity"
             android:label="@string/app_name"/>
 
         <activity
-            android:name=".UI.OtherView.WelcomeGuideActivity"
+            android:name="com.winwin.android.UI.OtherView.WelcomeGuideActivity"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" />
 
         <!--服务参数配置-->
@@ -67,89 +67,89 @@
         </provider>
 
         <activity
-            android:name=".UI.SignView.LoginActivity"
-            android:label="@string/title_activity_login"
+            android:name="com.winwin.android.UI.SignView.LoginActivity"
+            android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
-            android:name=".UI.SignView.SignUpActivity"
+            android:name="com.winwin.android.UI.SignView.SignUpActivity"
             android:label="@string/title_activity_sign_up2"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".UI.SignView.ForgetPasswordActivity"
+            android:name="com.winwin.android.UI.SignView.ForgetPasswordActivity"
             android:label="@string/title_activity_forget_password"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".UI.ListvView.ListvViewActivity"
+            android:name="com.winwin.android.UI.ListvView.ListvViewActivity"
             android:label="ListvView模式" />
 
         <activity
-            android:name=".UI.ItemDetailView.ParkDetailActivity"
+            android:name="com.winwin.android.UI.ItemDetailView.ParkDetailActivity"
             android:label=""/>
         <activity
-            android:name=".UI.ItemDetailView.MapParkDetailActivity"
+            android:name="com.winwin.android.UI.ItemDetailView.MapParkDetailActivity"
             android:label=""
             android:theme="@style/AppTheme.Animation"/>
 
         <!--我的-->
         <activity
-            android:name=".UI.MineView.MyInfoActivity"
+            android:name="com.winwin.android.UI.MineView.MyInfoActivity"
             android:label="" />
 
         <activity
-            android:name=".UI.MineView.MyCreditActivity"
+            android:name="com.winwin.android.UI.MineView.MyCreditActivity"
             android:label="" />
 
         <activity
-            android:name=".UI.MineView.MyRecommendActivity"
+            android:name="com.winwin.android.UI.MineView.MyRecommendActivity"
             android:label="" />
 
         <activity
-            android:name=".UI.MineView.MySendActivity"
+            android:name="com.winwin.android.UI.MineView.MySendActivity"
             android:label="" />
 
         <activity
-            android:name=".UI.MineView.MyCollectActivity"
+            android:name="com.winwin.android.UI.MineView.MyCollectActivity"
             android:label="" />
 
         <activity
-            android:name=".UI.MineView.MyMoreActivity"
+            android:name="com.winwin.android.UI.MineView.MyMoreActivity"
             android:label="" />
 
         <activity
-            android:name=".UI.EarnMoneyView.EarnMoneyActivity"
+            android:name="com.winwin.android.UI.EarnMoneyView.EarnMoneyActivity"
             android:label="" />
 
         <activity
-            android:name=".UI.WebView.MyWinwinActivity"
+            android:name="com.winwin.android.UI.WebView.MyWinwinActivity"
             android:label="" />
 
         <activity
-            android:name=".UI.ItemDetailView.RequireDetailActivity"
+            android:name="com.winwin.android.UI.ItemDetailView.RequireDetailActivity"
             android:label="" />
         <activity
-            android:name=".UI.SearchView.SearchParkActivity"
+            android:name="com.winwin.android.UI.SearchView.SearchParkActivity"
             android:label="" />
         <activity
-            android:name=".UI.SendView.SendRequireActivity"
+            android:name="com.winwin.android.UI.SendView.SendRequireActivity"
             android:label=""
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
-            android:name=".UI.SendView.SendParkActivity"
+            android:name="com.winwin.android.UI.SendView.SendParkActivity"
             android:label=""
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
-            android:name=".UI.SearchView.ParkListActivity"
+            android:name="com.winwin.android.UI.SearchView.ParkListActivity"
             android:label="" />
         <activity
-            android:name=".UI.SearchView.ParkNameListActivity"
+            android:name="com.winwin.android.UI.SearchView.ParkNameListActivity"
             android:label="" />
         <activity
-            android:name=".UI.RecommendView.SelectedParkActivity"
+            android:name="com.winwin.android.UI.RecommendView.SelectedParkActivity"
             android:label="" />
 
         <!-- ****** Im ******-->
@@ -191,26 +191,26 @@
         </receiver>
 
         <activity
-            android:name=".UI.ImView.ConversationActivity"
+            android:name="com.winwin.android.UI.ImView.ConversationActivity"
             android:label="" />
         <activity
-            android:name=".UI.ImView.SystemMessageActivity"
+            android:name="com.winwin.android.UI.ImView.SystemMessageActivity"
             android:label="" />
-        <activity android:name=".UI.ImView.ImageViewActivity" />
-        <activity android:name=".UI.ImView.ImagePreviewActivity" />
-        <activity android:name=".UI.ImView.TCVideoRecordActivity"
+        <activity android:name="com.winwin.android.UI.ImView.ImageViewActivity" />
+        <activity android:name="com.winwin.android.UI.ImView.ImagePreviewActivity" />
+        <activity android:name="com.winwin.android.UI.ImView.TCVideoRecordActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".UI.ImView.TCVideoPreviewActivity"
+        <activity android:name="com.winwin.android.UI.ImView.TCVideoPreviewActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".UI.ImView.VideoActivity"
+        <activity android:name="com.winwin.android.UI.ImView.VideoActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".UI.ImView.ChatActivity"
+            android:name="com.winwin.android.UI.ImView.ChatActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".UI.ImView.FriendshipManageMessageActivity" />
-        <activity android:name=".UI.ImView.FriendshipHandleActivity" />
+        <activity android:name="com.winwin.android.UI.ImView.FriendshipManageMessageActivity" />
+        <activity android:name="com.winwin.android.UI.ImView.FriendshipHandleActivity" />
 
         <!--umeng-->
         <meta-data
@@ -218,7 +218,7 @@
             android:value="561cae6ae0f55abd990035bf" >
         </meta-data>
         <activity
-            android:name=".wxapi.WXEntryActivity"
+            android:name="com.winwin.android.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:launchMode="singleTop"
@@ -244,7 +244,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
-            android:name=".UI.ItemDetailView.ParkMapActivity"
+            android:name="com.winwin.android.UI.ItemDetailView.ParkMapActivity"
             android:label="" />
 
     </application>

@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.winwin.app.UI.ImView.ChatActivity">
-    <com.winwin.app.im.ui.TemplateTitle
+    tools:context="com.winwin.android.UI.ImView.ChatActivity">
+    <com.winwin.android.im.ui.TemplateTitle
         android:id="@+id/chat_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         app:canBack="true" />
-    <com.winwin.app.im.ui.ChatInput
+    <com.winwin.android.im.ui.ChatInput
         android:id="@+id/input_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
         android:layout_below="@id/chat_title">
 
     </ListView>
-    <com.winwin.app.im.ui.VoiceSendingView
+    <com.winwin.android.im.ui.VoiceSendingView
         android:id="@+id/voice_sending"
         android:layout_width="130dp"
         android:layout_height="130dp"

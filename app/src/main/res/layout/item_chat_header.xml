@@ -9,7 +9,7 @@
     android:paddingLeft="10dp"
     android:background="@color/white">
 
-    <com.winwin.app.im.ui.CircleImageView
+    <com.winwin.android.im.ui.CircleImageView
         android:id="@id/avatar"
         android:layout_width="45dp"
         android:layout_height="45dp"
