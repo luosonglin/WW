@@ -16,6 +16,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.github.lzyzsd.jsbridge.BridgeWebView;
+import com.winwin.android.Constant.Constant;
 import com.winwin.android.Constant.Data;
 import com.winwin.android.R;
 
@@ -24,7 +25,7 @@ public class SystemMessageActivity extends AppCompatActivity {
     private static final String TAG = SystemMessageActivity.class.getSimpleName();
     private Toolbar toolbar;
     private BridgeWebView mWebView;
-    private static final String URL = "http://winwin.jidichong.com/#/message?token=" + Data.getUserToken();
+    private static final String URL = Constant.H5_SERVER + "/#/message?token=" + Data.getUserToken();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

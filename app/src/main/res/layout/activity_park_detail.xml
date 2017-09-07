@@ -66,7 +66,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="16dp"
-                            android:text="¥4.5"
+                            android:text="¥"
                             android:textColor="@color/dodgerblue"
                             android:textSize="26sp"
                             android:textStyle="bold" />
@@ -100,7 +100,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
                         android:layout_marginLeft="16dp"
-                        android:text="国贸商业大厦"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
@@ -123,7 +123,7 @@
                             android:layout_height="25dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
-                            android:text="距离9号线徐家汇站500米"
+                            android:text=""
                             android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -162,7 +162,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginLeft="10dp"
-                                    android:text="租赁统计（28.42）"
+                                    android:text="租赁统计（）"
                                     android:textColor="@color/black"
                                     android:textSize="14sp" />
                             </LinearLayout>
@@ -200,7 +200,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginLeft="10dp"
-                                    android:text="入驻企业（18家）"
+                                    android:text="入驻企业（家）"
                                     android:textColor="@color/black"
                                     android:textSize="14sp" />
                             </LinearLayout>
@@ -228,7 +228,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginTop="6dp"
-                        android:text="今日柳浪闻莺，经过近四十多年不断的开发和建设由当年帝王享受的御花园，演变为普通老百姓的大乐园。她仍以青翠柳色和婉啭莺鸣作为公园景观基调在沿湖长达千米的堤岸上和园路主干道路沿途栽种垂柳及狮柳，醉柳，浣沙柳等特色柳树。"
+                        android:text=""
                         android:textColor="@color/grey"
                         android:textSize="14sp" />
 
@@ -257,7 +257,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="28dp"
-                            android:text="10 元/平米/月"
+                            android:text=" 元/平米/月"
                             android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -281,7 +281,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="28dp"
-                            android:text="1.25元/度"
+                            android:text="元/度"
                             android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -305,7 +305,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="28dp"
-                            android:text="5.5元/吨"
+                            android:text="元/吨"
                             android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -329,7 +329,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="28dp"
-                            android:text="145335.3平方米"
+                            android:text="平方米"
                             android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -370,7 +370,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginTop="6dp"
-                        android:text="徐家汇时代天街路233号，距离2号线、11号线200米"
+                        android:text=""
                         android:textColor="@color/grey"
                         android:textSize="14sp" />
 
@@ -444,8 +444,7 @@
                             android:layout_height="20dp"
                             android:layout_alignParentTop="true"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="6dp"
-                            android:src="@mipmap/parkdetailactivity_fravorite" />
+                            android:layout_marginTop="6dp" />
 
                         <TextView
                             android:layout_width="20dp"

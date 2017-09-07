@@ -53,7 +53,7 @@ public class IndexFragment extends Fragment {
 
     private static final String TAG = IndexFragment.class.getSimpleName();
     private Toolbar toolbar;
-    private static String URL = Constant.H5_SERVER + "/#/workbench?token=";//+ Data.getUserToken();
+    private static String URL = Constant.H5_SERVER + "/#/workbench?token=";
 
     public IndexFragment() {
         // Required empty public constructor
@@ -176,7 +176,6 @@ public class IndexFragment extends Fragment {
             settings.setPluginState(WebSettings.PluginState.ON_DEMAND);
         }
 
-        Log.e(TAG, "URL "+URL);
         try {
             mWebView.loadUrl(URL + DBUtils.get(getActivity(), "userToken"));
         } catch (SnappydbException e) {

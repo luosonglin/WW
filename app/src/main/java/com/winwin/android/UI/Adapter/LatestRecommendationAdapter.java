@@ -48,6 +48,5 @@ public class LatestRecommendationAdapter extends BaseQuickAdapter<IndexRecommand
                 mContext.startActivity(intent);
             }
         });
-
     }
 }

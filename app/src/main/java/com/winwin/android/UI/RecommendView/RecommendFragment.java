@@ -293,8 +293,10 @@ public class RecommendFragment extends Fragment {
 
             @Override
             public void onNext(HttpResult<List<IndexRecommandParkDto>> indexRecommandParkDtoHttpResult) {
-                mLatestRecommendationAdapter.addData(indexRecommandParkDtoHttpResult.getData());
-                Log.e(TAG, "onNext");
+                if (indexRecommandParkDtoHttpResult.getData().size() != 0) {
+                    mLatestRecommendationAdapter.addData(indexRecommandParkDtoHttpResult.getData());
+                    Log.e(TAG, "onNext");
+                }
             }
         });
 
