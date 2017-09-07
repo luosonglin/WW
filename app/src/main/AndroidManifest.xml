@@ -123,6 +123,10 @@
             android:label="" />
 
         <activity
+            android:name="com.winwin.android.UI.RecommendView.IndexBannerWebActivity"
+            android:label="" />
+
+        <activity
             android:name="com.winwin.android.UI.ItemDetailView.RequireDetailActivity"
             android:label="" />
         <activity

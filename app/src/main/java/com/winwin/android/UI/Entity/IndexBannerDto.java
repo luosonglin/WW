@@ -11,17 +11,23 @@ public class IndexBannerDto {
      * bannerType : 1
      * bannerOrder : 0
      * bannerPath : http://106.14.47.190:89/2017-02-28/481488291874917.jpg
+     *  "isGravity": 1,
+     "bannerActionType": 1,
+     "bannerActionVal": "http://www.shlingang.com/"
      */
 
     private Object createId;
     private long createTime;
     private int isDel;
     private Object updaterId;
-    private Object updateTime;
+    private long updateTime;
     private int id;
     private int bannerType;
     private int bannerOrder;
     private String bannerPath;
+    private int isGravity;
+    private int bannerActionType;
+    private String bannerActionVal;
 
     public Object getCreateId() {
         return createId;
@@ -55,11 +61,11 @@ public class IndexBannerDto {
         this.updaterId = updaterId;
     }
 
-    public Object getUpdateTime() {
+    public long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Object updateTime) {
+    public void setUpdateTime(long updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -93,5 +99,29 @@ public class IndexBannerDto {
 
     public void setBannerPath(String bannerPath) {
         this.bannerPath = bannerPath;
+    }
+
+    public int getIsGravity() {
+        return isGravity;
+    }
+
+    public void setIsGravity(int isGravity) {
+        this.isGravity = isGravity;
+    }
+
+    public int getBannerActionType() {
+        return bannerActionType;
+    }
+
+    public void setBannerActionType(int bannerActionType) {
+        this.bannerActionType = bannerActionType;
+    }
+
+    public String getBannerActionVal() {
+        return bannerActionVal;
+    }
+
+    public void setBannerActionVal(String bannerActionVal) {
+        this.bannerActionVal = bannerActionVal;
     }
 }

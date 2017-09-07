@@ -28,6 +28,7 @@ import com.winwin.android.UI.Entity.IndexBannerDto;
 import com.winwin.android.UI.Entity.IndexRecommandParkDto;
 import com.winwin.android.UI.Entity.IndexStaticDateDto;
 import com.winwin.android.UI.ImView.ConversationActivity;
+import com.winwin.android.UI.ItemDetailView.ParkDetailActivity;
 import com.winwin.android.UI.MineView.MyCreditActivity;
 import com.winwin.android.UI.SearchView.SearchParkActivity;
 import com.winwin.android.Widget.GlideImageLoader;
@@ -159,21 +160,36 @@ public class RecommendFragment extends Fragment {
             }
 
             @Override
-            public void onNext(HttpResult<List<IndexBannerDto>> indexBannerDto) {
+            public void onNext(final HttpResult<List<IndexBannerDto>> indexBannerDto) {
 
                 for (IndexBannerDto i : indexBannerDto.getData()) {
                     bannerImages.add(i.getBannerPath());
                 }
-                mBanner.setImages(bannerImages != null ? bannerImages : null)
-                        .setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
-                        .setBannerAnimation(Transformer.Tablet)
-                        .setImageLoader(new GlideImageLoader()).start();
                 mBanner.setOnBannerClickListener(new OnBannerClickListener() {
                     @Override
                     public void OnBannerClick(int position) {
                         Log.e("--", "点击：" + position + "");
+                        Intent intent;
+                        switch (indexBannerDto.getData().get(position - 1).getBannerType()) {
+                            case 0:     //0：表示无动作
+                                break;
+                            case 1:     //1：跳转页面
+                                intent = new Intent(getActivity(), IndexBannerWebActivity.class);
+                                intent.putExtra("url", indexBannerDto.getData().get(position - 1).getBannerActionVal() + "");
+                                startActivity(intent);
+                                break;
+                            case 2:     //2：进入详情页面
+                                intent = new Intent(getActivity(), ParkDetailActivity.class);
+                                intent.putExtra("parkId", indexBannerDto.getData().get(position - 1).getBannerActionVal() + "");
+                                startActivity(intent);
+                                break;
+                        }
                     }
                 });
+                mBanner.setImages(bannerImages != null ? bannerImages : null)
+                        .setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
+                        .setBannerAnimation(Transformer.Tablet)
+                        .setImageLoader(new GlideImageLoader()).start();
 
                 Log.e(TAG, "onNext");
             }
